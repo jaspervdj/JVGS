@@ -71,8 +71,9 @@ namespace jvgs
             return f;
         }
 
-        Color StyleParser::parseColor(const string &value)
+        Color StyleParser::getValueAsColor(const string &key)
         {
+            string value = getValue(key);
             if(value.length() == 7) {
                 if(value[0] == '#') {
                     stringstream redStream(value.substr(1,2));

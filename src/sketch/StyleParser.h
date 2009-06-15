@@ -24,8 +24,7 @@ namespace jvgs
                 virtual bool hasValue(const std::string &key);
                 virtual std::string getValue(const std::string &key);
                 virtual float getValueAsFloat(const std::string &key);
-
-                video::Color parseColor(const std::string &value);
+                virtual video::Color getValueAsColor(const std::string &key);
         };
     }
 }

@@ -38,16 +38,14 @@ namespace jvgs
                 primitive->setFill(false);
             } else {
                 primitive->setFill(true);
-                string color = styleParser->getValue("fill");
-                primitive->setFillColor(styleParser->parseColor(color));
+                primitive->setFillColor(styleParser->getValueAsColor("fill"));
             }
 
             if(styleParser->getValue("stroke") == "none") {
                 primitive->setStroke(false);
             } else {
                 primitive->setStroke(true);
-                string color = styleParser->getValue("stroke");
-                primitive->setStrokeColor(styleParser->parseColor(color));
+                primitive->setStrokeColor(styleParser->getValueAsColor("stroke"));
             }
 
             delete styleParser;
