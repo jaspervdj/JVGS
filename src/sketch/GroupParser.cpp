@@ -32,7 +32,6 @@ namespace jvgs
             while (child) {
 
                 string value = child->ValueStr();
-                LogManager::getInstance()->message("Child with value %s.", value.c_str());
                 PrimitiveParser *primitiveParser = getParser()->getPrimitiveParser(value);
 
                 if (primitiveParser) {

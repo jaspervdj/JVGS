@@ -1,5 +1,6 @@
 #include "TransformParser.h"
 #include "TransformCommand.h"
+#include "RotateTransformCommand.h"
 #include "MatrixTransformCommand.h"
 
 #include <iostream>
@@ -17,6 +18,7 @@ namespace jvgs
     {
         TransformParser::TransformParser()
         {
+            commands["rotate"] = new RotateTransformCommand();
             commands["matrix"] = new MatrixTransformCommand();
         }
 
@@ -36,10 +38,7 @@ namespace jvgs
             while(position < data.size() && position != string::npos) {
                 string::size_type opening = data.find_first_of('(', position);
                 string command = trim(data.substr(position, opening - position));
-                cout << command << endl;
                 position = data.find_first_of(')', opening);
-
-                cout << "Splitting \"" << data.substr(opening + 1, position - opening - 1) << "\"." << endl;
 
                 string argumentString = data.substr(opening + 1, position - opening - 1);
                 vector<string> arguments;

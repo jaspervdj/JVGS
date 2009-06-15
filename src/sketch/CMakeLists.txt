@@ -12,6 +12,7 @@ ADD_LIBRARY(
     Rectangle.cpp
     RectangleParser.cpp
     RectangleRenderer.cpp
+    RotateTransformCommand.cpp
     Sketch.cpp
     StyleParser.cpp
     TransformParser.cpp

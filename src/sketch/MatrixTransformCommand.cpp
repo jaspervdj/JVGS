@@ -26,9 +26,6 @@ namespace jvgs
                         arguments.size());
             }
 
-            LogManager::getInstance()->message("Matrix transform:\n------\n%f   %f   %f\n%f   %f   %f\n-----",
-            arguments[0], arguments[2], arguments[4], arguments[1], arguments[3], arguments[5]);
-
             matrix *= AffineTransformationMatrix(arguments[0], arguments[2], arguments[4],
                                                  arguments[1], arguments[3], arguments[5]);
         }

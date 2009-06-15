@@ -36,8 +36,6 @@ namespace jvgs
             rectangle->setPosition(Vector2D(x,y));
             rectangle->setSize(Vector2D(width,height));
 
-            LogManager::getInstance()->message("Created a rectangle: position: (%f, %f), size: (%f, %f).", x, y, width, height);
-
             if(element->Attribute("style"))
                 parseStyle(rectangle, element->Attribute("style"));
             if(element->Attribute("transform"))

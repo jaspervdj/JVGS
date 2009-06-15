@@ -138,6 +138,17 @@ namespace jvgs
         {
             float *glMatrix = new float[16];
 
+            /* Our AffineTransformationMatrix
+             *     / a b c \
+             *     | d e f |
+             *     \ 0 0 1 /
+             * becomes a matrix we can use with OpenGL:
+             *     / a b 0 c \
+             *     | d e 0 f |
+             *     | 0 0 1 0 |
+             *     \ 0 0 0 1 /
+             */
+
             /* Intialize to 0. */
             for(int i = 0; i < 16; i++)
                 glMatrix[i] = 0.0f;
@@ -155,26 +166,6 @@ namespace jvgs
 
             glMatrix[3 * 4 + 0] = matrix.getValue(0, 2);
             glMatrix[3 * 4 + 1] = matrix.getValue(1, 2);
-
-            cout << "----- AffineTransformationMatrix ------" << endl;
-
-            for(int row = 0; row < 3; row++) {
-                for(int column = 0; column < 3; column++) {
-                    cout << matrix.getValue(row, column) << "   ";
-                }
-                cout << endl;
-            }
-
-            cout << "----- glMatrix ------" << endl;
-
-            for(int row = 0; row < 4; row++) {
-                for(int column = 0; column < 4; column++) {
-                    cout << glMatrix[column * 4 + row] << "   ";
-                }
-                cout << endl;
-            }
-
-            cout << "-----------" << endl;
 
             glMultMatrixf(glMatrix);
             delete[] glMatrix;

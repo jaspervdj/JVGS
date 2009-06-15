@@ -63,7 +63,6 @@ namespace jvgs
             root->QueryFloatAttribute("width", &width);
             root->QueryFloatAttribute("height", &height);
             sketch->setSize(Vector2D(width, height));
-            LogManager::getInstance()->message("Loaded file, size: (%f, %f).", width, height);
 
             GroupParser *groupParser = new GroupParser(this);
             sketch->setRoot((Group*)groupParser->parse(root));

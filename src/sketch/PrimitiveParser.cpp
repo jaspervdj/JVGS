@@ -34,20 +34,12 @@ namespace jvgs
         {
             StyleParser *styleParser = new StyleParser(data);
             
-            LogManager::getInstance()->message("stroke: %s",
-                    styleParser->getValue("stroke").c_str());
-
             if(styleParser->getValue("fill") == "none") {
                 primitive->setFill(false);
             } else {
                 primitive->setFill(true);
                 string color = styleParser->getValue("fill");
                 primitive->setFillColor(styleParser->parseColor(color));
-                LogManager::getInstance()->message("Color: %f, %f, %f.",
-                                                   primitive->getFillColor().getRed(),
-                                                   primitive->getFillColor().getGreen(),
-                                                   primitive->getFillColor().getBlue());
-
             }
 
             if(styleParser->getValue("stroke") == "none") {

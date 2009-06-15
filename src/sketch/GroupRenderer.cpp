@@ -30,14 +30,10 @@ namespace jvgs
                 videoManager->push();
                 videoManager->transform(primitive->getMatrix());
 
-                LogManager::getInstance()->message("Pushing...");
-
                 PrimitiveRenderer *renderer = primitive->createPrimitiveRenderer();
                 renderer->render();
 
                 videoManager->pop();
-
-                LogManager::getInstance()->message("Popping...");
 
                 delete renderer;
             }
