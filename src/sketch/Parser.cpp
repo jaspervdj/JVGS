@@ -65,7 +65,7 @@ namespace jvgs
             sketch->setSize(Vector2D(width, height));
 
             GroupParser *groupParser = new GroupParser(this);
-            sketch->setRoot((Group*)groupParser->parse(root));
+            sketch->setRoot((Group*)groupParser->parse(0, root));
             delete groupParser;
         }
     };

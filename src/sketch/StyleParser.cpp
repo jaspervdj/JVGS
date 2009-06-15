@@ -49,6 +49,11 @@ namespace jvgs
             delete in;
         }
 
+        bool StyleParser::hasValue(const string &key)
+        {
+            return values.find(key) != values.end();
+        }
+
         string StyleParser::getValue(const string &key)
         {
             map<string,string>::iterator iterator = values.find(key);
@@ -56,6 +61,14 @@ namespace jvgs
                 return "";
             else
                 return iterator->second;
+        }
+
+        float StyleParser::getValueAsFloat(const string &key)
+        {
+            stringstream converter(getValue(key));
+            float f;
+            converter >> f;
+            return f;
         }
 
         Color StyleParser::parseColor(const string &value)

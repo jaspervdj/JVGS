@@ -23,9 +23,9 @@ namespace jvgs
         {
         }
 
-        Primitive *RectangleParser::parse(TiXmlElement *element)
+        Primitive *RectangleParser::parse(Primitive *parent, TiXmlElement *element)
         {
-            Rectangle *rectangle = new Rectangle();
+            Rectangle *rectangle = new Rectangle(parent);
             
             float x, y, width, height;
             element->QueryFloatAttribute("x", &x); 

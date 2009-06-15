@@ -12,7 +12,7 @@ namespace jvgs
             private:
 
             public:
-                Path();
+                Path(Primitive *parent);
                 virtual ~Path();
 
                 virtual int getNumberOfPoints();

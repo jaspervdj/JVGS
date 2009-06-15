@@ -21,7 +21,9 @@ namespace jvgs
                 StyleParser(const std::string &data);
                 virtual ~StyleParser();
 
+                virtual bool hasValue(const std::string &key);
                 virtual std::string getValue(const std::string &key);
+                virtual float getValueAsFloat(const std::string &key);
 
                 video::Color parseColor(const std::string &value);
         };

@@ -7,7 +7,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        Path::Path()
+        Path::Path(Primitive *parent): Primitive(parent)
         {
         }
 

@@ -16,7 +16,7 @@ namespace jvgs
                 math::Vector2D size;
 
             public:
-                Rectangle();
+                Rectangle(Primitive *parent);
                 virtual ~Rectangle();
 
                 virtual void setPosition(const math::Vector2D &position);

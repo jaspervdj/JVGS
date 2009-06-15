@@ -14,7 +14,8 @@ namespace jvgs
                 GroupParser(Parser *parser);
                 virtual ~GroupParser();
 
-                virtual Primitive *parse(TiXmlElement *element);
+                virtual Primitive *parse(Primitive *parser,
+                        TiXmlElement *element);
         };
     }
 }

@@ -14,7 +14,7 @@ namespace jvgs
                 std::vector<Primitive*> primitives;
 
             public:
-                Group();
+                Group(Primitive *parent);
                 virtual ~Group();
 
                 virtual void addPrimitive(Primitive *primitive);

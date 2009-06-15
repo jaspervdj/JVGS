@@ -7,8 +7,9 @@ namespace jvgs
 {
     namespace sketch
     {
-        Primitive::Primitive()
+        Primitive::Primitive(Primitive *parent)
         {
+            this->parent = parent;
             stroke = false;
             strokeColor = Color(0.0f,0.0f,0.0f);
             fill = false;
@@ -18,6 +19,11 @@ namespace jvgs
 
         Primitive::~Primitive()
         {
+        }
+
+        Primitive *Primitive::getParent() const
+        {
+            return parent;
         }
 
         void Primitive::setStroke(bool stroke)
@@ -35,7 +41,7 @@ namespace jvgs
             this->strokeColor = color;
         }
 
-        Color Primitive::getStrokeColor() const
+        const Color &Primitive::getStrokeColor() const
         {
             return strokeColor;
         }
@@ -55,7 +61,7 @@ namespace jvgs
             this->fillColor = color;
         }
 
-        Color Primitive::getFillColor() const
+        const Color &Primitive::getFillColor() const
         {
             return fillColor;
         }

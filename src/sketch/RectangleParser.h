@@ -15,7 +15,8 @@ namespace jvgs
                 RectangleParser(Parser *parser);
                 virtual ~RectangleParser();
 
-                virtual Primitive *parse(TiXmlElement *element);
+                virtual Primitive *parse(Primitive *parent,
+                        TiXmlElement *element);
         };
     }
 }

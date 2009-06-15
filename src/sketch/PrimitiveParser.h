@@ -25,7 +25,8 @@ namespace jvgs
 
                 virtual void parseStyle(Primitive *primitive, const std::string &data);
                 virtual void parseTransform(Primitive *primitive, const std::string &data);
-                virtual Primitive *parse(TiXmlElement *element) = 0;
+                virtual Primitive *parse(Primitive *parent,
+                        TiXmlElement *element) = 0;
         };
     }
 }

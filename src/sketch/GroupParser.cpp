@@ -22,9 +22,9 @@ namespace jvgs
         {
         }
 
-        Primitive *GroupParser::parse(TiXmlElement *element)
+        Primitive *GroupParser::parse(Primitive *parent, TiXmlElement *element)
         {
-            Group *group = new Group();
+            Group *group = new Group(parent);
 
             /* Recurse on children. */
             TiXmlElement *child = element->FirstChildElement();
@@ -35,7 +35,7 @@ namespace jvgs
                 PrimitiveParser *primitiveParser = getParser()->getPrimitiveParser(value);
 
                 if (primitiveParser) {
-                    Primitive *primitive = primitiveParser->parse(child);
+                    Primitive *primitive = primitiveParser->parse(group, child);
                     group->addPrimitive(primitive);
                 }
 

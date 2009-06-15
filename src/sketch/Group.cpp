@@ -7,7 +7,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        Group::Group()
+        Group::Group(Primitive *parent): Primitive(parent)
         {
         }
 

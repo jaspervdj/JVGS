@@ -14,6 +14,8 @@ namespace jvgs
         class Primitive
         {
             private:
+                Primitive *parent;
+
                 bool stroke;
                 video::Color strokeColor;
 
@@ -23,20 +25,22 @@ namespace jvgs
                 math::AffineTransformationMatrix matrix;
 
             public:
-                Primitive();
+                Primitive(Primitive *parent);
                 virtual ~Primitive();
+
+                virtual Primitive *getParent() const;
 
                 virtual void setStroke(bool stroke);
                 virtual bool hasStroke() const;
 
                 virtual void setStrokeColor(const video::Color &color);
-                virtual video::Color getStrokeColor() const;
+                virtual const video::Color &getStrokeColor() const;
 
                 virtual void setFill(bool fill);
                 virtual bool hasFill() const;
 
                 virtual void setFillColor(const video::Color &color);
-                virtual video::Color getFillColor() const;
+                virtual const video::Color &getFillColor() const;
 
                 virtual void setMatrix(const math::AffineTransformationMatrix &matrix);
                 virtual const math::AffineTransformationMatrix &getMatrix() const;
