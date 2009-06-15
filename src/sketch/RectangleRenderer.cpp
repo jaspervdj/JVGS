@@ -33,7 +33,7 @@ namespace jvgs
             if(rectangle->hasFill()) {
                 videoManager->setColor(rectangle->getFillColor());
 
-                renderer->begin(GL_QUADS);
+                renderer->begin(Renderer::QUADS);
                 renderer->vector(position);
                 renderer->vector(Vector2D(position.getX(),position.getY()+size.getY()));
                 renderer->vector(position+size);
@@ -44,7 +44,7 @@ namespace jvgs
             if(rectangle->hasStroke()) {
                 videoManager->setColor(rectangle->getStrokeColor());
 
-                renderer->begin(GL_LINE_LOOP);
+                renderer->begin(Renderer::LINE_LOOP);
                 renderer->vector(position);
                 renderer->vector(Vector2D(position.getX(),position.getY()+size.getY()));
                 renderer->vector(position+size);

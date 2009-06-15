@@ -13,10 +13,14 @@ ADD_LIBRARY(
     RectangleParser.cpp
     RectangleRenderer.cpp
     RotateTransformCommand.cpp
+    ScaleTransformCommand.cpp
     Sketch.cpp
+    SkewXTransformCommand.cpp
+    SkewYTransformCommand.cpp
     StyleParser.cpp
     TransformParser.cpp
     TransformCommand.cpp
+    TranslateTransformCommand.cpp
     TextParser.cpp
 )
 

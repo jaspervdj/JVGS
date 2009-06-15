@@ -20,7 +20,7 @@ namespace jvgs
         {
         }
 
-        void Renderer::begin(GLuint type) const
+        void Renderer::begin(Type type) const
         {
             glBegin(type);
         }

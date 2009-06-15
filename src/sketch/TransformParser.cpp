@@ -1,7 +1,11 @@
 #include "TransformParser.h"
 #include "TransformCommand.h"
 #include "RotateTransformCommand.h"
+#include "ScaleTransformCommand.h"
+#include "TranslateTransformCommand.h"
 #include "MatrixTransformCommand.h"
+#include "SkewXTransformCommand.h"
+#include "SkewYTransformCommand.h"
 
 #include <iostream>
 #include <vector>
@@ -19,7 +23,11 @@ namespace jvgs
         TransformParser::TransformParser()
         {
             commands["rotate"] = new RotateTransformCommand();
+            commands["scale"] = new ScaleTransformCommand();
+            commands["translate"] = new TranslateTransformCommand();
             commands["matrix"] = new MatrixTransformCommand();
+            commands["skewX"] = new SkewXTransformCommand();
+            commands["skewY"] = new SkewYTransformCommand();
         }
 
         TransformParser::~TransformParser()

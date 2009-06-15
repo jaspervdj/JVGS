@@ -10,17 +10,41 @@ namespace jvgs
     {
         class VideoManager;
 
+        /** A class to draw primitives fast.
+         */
         class Renderer
         {
             protected:
 
             public:
+                /** Types of primives that can be rendered.
+                 */
+                enum Type
+                {
+                    LINE_LOOP = GL_LINE_LOOP,
+                    QUADS = GL_QUADS
+                };
+
+                /** Constructor.
+                 */
                 Renderer();
+
+                /** Destructor.
+                 */
                 virtual ~Renderer();
 
-                virtual void begin(GLuint type) const;
+                /** Start rendering a certain type of primitive.
+                 *  @param type Type of the primitive to be rendered.
+                 */
+                virtual void begin(Type type) const;
+
+                /** End the primitive currently being rendered.
+                 */
                 virtual void end() const;
 
+                /** Add a vector to the primitive.
+                 *  @param vector Vector to add to the primitive.
+                 */
                 virtual void vector(const math::Vector2D &vector) const;
         };
     };

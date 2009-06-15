@@ -28,16 +28,16 @@ namespace jvgs
         {
         }
 
-        void AffineTransformationMatrix::translate(float x, float y)
+        void AffineTransformationMatrix::translate(const Vector2D &vector)
         {
-            *this *= AffineTransformationMatrix(1.0f, 0.0f, x,
-                                                0.0f, 1.0f, y);
+            *this *= AffineTransformationMatrix(1.0f, 0.0f, vector.getX(),
+                                                0.0f, 1.0f, vector.getY());
         }
 
-        void AffineTransformationMatrix::scale(float x, float y)
+        void AffineTransformationMatrix::scale(const Vector2D &vector)
         {
-            *this *= AffineTransformationMatrix(   x, 0.0f, 0.0f,
-                                                0.0f,    y, 0.0f);
+            *this *= AffineTransformationMatrix(vector.getX(),          0.0f, 0.0f,
+                                                         0.0f, vector.getY(), 0.0f);
         }
 
         void AffineTransformationMatrix::rotate(float degrees)
@@ -47,11 +47,11 @@ namespace jvgs
                                                 sin(radians),  cos(radians), 0.0f);
         }
 
-        void AffineTransformationMatrix::rotate(float degrees, float x, float y)
+        void AffineTransformationMatrix::rotate(float degrees, const Vector2D &point)
         {
-            translate(x, y);
+            translate(point);
             rotate(degrees);
-            translate(-x, -y);
+            translate(point);
         }
 
         void AffineTransformationMatrix::skewX(float degrees)
