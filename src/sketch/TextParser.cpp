@@ -26,14 +26,15 @@ namespace jvgs
                 vector<string> &destination) const
         {
             string::size_type start = str.find_first_not_of(characters);
-            string::size_type end = str.find_first_of(characters);
-            while(end != string::npos) {
+            string::size_type end = str.find_first_of(characters, start + 1);
+            while(start != string::npos && end != string::npos) {
                 destination.push_back(str.substr(start, end - start));
                 start = str.find_first_not_of(characters, end + 1);
                 end = str.find_first_of(characters, start);
             }
 
-            destination.push_back(str.substr(start));
+            if(start != string::npos)
+                destination.push_back(str.substr(start));
         }
     }
 }

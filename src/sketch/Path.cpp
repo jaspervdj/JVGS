@@ -1,4 +1,5 @@
 #include "Path.h"
+#include "PathSegment.h"
 
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
@@ -15,14 +16,19 @@ namespace jvgs
         {
         }
 
-        int Path::getNumberOfPoints()
+        int Path::getNumberOfSegments() const
         {
-            return 42;
+            return segments.size();
         }
 
-        Vector2D Path::getPoint(int index)
+        PathSegment *Path::getSegment(int index) const
         {
-            return Vector2D();
+            return segments[index];
+        }
+
+        void Path::addSegment(PathSegment *segment)
+        {
+            segments.push_back(segment);
         }
 
         SketchElementRenderer *Path::createSketchElementRenderer()

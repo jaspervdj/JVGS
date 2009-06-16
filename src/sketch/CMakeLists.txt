@@ -6,6 +6,7 @@ ADD_LIBRARY(
     MatrixTransformCommand.cpp
     Path.cpp
     PathParser.cpp
+    PathSegment.cpp
     Parser.cpp
     Primitive.cpp
     PrimitiveRenderer.cpp

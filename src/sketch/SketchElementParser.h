@@ -1,6 +1,7 @@
 #ifndef JVGS_SKETCH_SKETCHELEMENTPARSER_H
 #define JVGS_SKETCH_SKETCHELEMENTPARSER_H
 
+#include "TextParser.h"
 #include <string>
 
 class TiXmlElement;
@@ -12,7 +13,7 @@ namespace jvgs
         class SketchElement;
         class Parser;
 
-        class SketchElementParser
+        class SketchElementParser: public TextParser
         {
             private:
                 Parser *parser;
