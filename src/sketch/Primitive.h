@@ -10,17 +10,13 @@ namespace jvgs
     namespace sketch
     {
         class PrimitiveRenderer;
+        class StyleMap;
 
         class Primitive
         {
             private:
                 Primitive *parent;
-
-                bool stroke;
-                video::Color strokeColor;
-
-                bool fill;
-                video::Color fillColor;
+                StyleMap *styleMap;
 
                 math::AffineTransformationMatrix matrix;
 
@@ -29,18 +25,7 @@ namespace jvgs
                 virtual ~Primitive();
 
                 virtual Primitive *getParent() const;
-
-                virtual void setStroke(bool stroke);
-                virtual bool hasStroke() const;
-
-                virtual void setStrokeColor(const video::Color &color);
-                virtual const video::Color &getStrokeColor() const;
-
-                virtual void setFill(bool fill);
-                virtual bool hasFill() const;
-
-                virtual void setFillColor(const video::Color &color);
-                virtual const video::Color &getFillColor() const;
+                virtual StyleMap *getStyleMap() const;
 
                 virtual void setMatrix(
                         const math::AffineTransformationMatrix &matrix);

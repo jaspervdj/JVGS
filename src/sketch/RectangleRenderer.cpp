@@ -1,5 +1,6 @@
 #include "RectangleRenderer.h"
 #include "Rectangle.h"
+#include "StyleMap.h"
 
 #include "../video/Renderer.h"
 #include "../video/VideoManager.h"
@@ -27,11 +28,12 @@ namespace jvgs
 
             Vector2D position = rectangle->getPosition(),
                      size = rectangle->getSize();
+            StyleMap *styleMap = rectangle->getStyleMap();
 
             VideoManager *videoManager = VideoManager::getInstance();
 
-            if(rectangle->hasFill()) {
-                videoManager->setColor(rectangle->getFillColor());
+            if(styleMap->getValue("fill") != "none") {
+                videoManager->setColor(styleMap->getValueAsColor("fill"));
 
                 renderer->begin(Renderer::QUADS);
                 /* Left top. */
@@ -47,8 +49,8 @@ namespace jvgs
                 renderer->end();
             }
 
-            if(rectangle->hasStroke()) {
-                videoManager->setColor(rectangle->getStrokeColor());
+            if(styleMap->getValue("stroke") != "none") {
+                videoManager->setColor(styleMap->getValueAsColor("stroke"));
 
                 renderer->begin(Renderer::LINE_LOOP);
                 /* Left top. */

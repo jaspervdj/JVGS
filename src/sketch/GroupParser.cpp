@@ -2,6 +2,7 @@
 #include "Parser.h"
 #include "Group.h"
 #include "Primitive.h"
+#include "StyleMap.h"
 
 #include "../tinyxml/tinyxml.h"
 
@@ -24,7 +25,16 @@ namespace jvgs
 
         Primitive *GroupParser::parse(Primitive *parent, TiXmlElement *element)
         {
+
             Group *group = new Group(parent);
+
+            if( element->Attribute("style") ) {
+                StyleMap *styleMap = group->getStyleMap();
+                styleMap->load(element->Attribute("style"));
+            }
+
+            if(element->Attribute("transform"))
+                parseTransform(group, element->Attribute("transform"));
 
             /* Recurse on children. */
             TiXmlElement *child = element->FirstChildElement();
@@ -42,9 +52,6 @@ namespace jvgs
 
                 child = child->NextSiblingElement();
             }
-
-            if(element->Attribute("transform"))
-                parseTransform(group, element->Attribute("transform"));
 
             return group;
         }

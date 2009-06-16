@@ -1,4 +1,4 @@
-#include "StyleParser.h"
+#include "StyleMap.h"
 
 using namespace jvgs::video;
 
@@ -6,19 +6,27 @@ using namespace jvgs::video;
 using namespace jvgs::core;
 
 #include <sstream>
-#include <iostream>
 using namespace std;
 
 namespace jvgs
 {
     namespace sketch
     {
-        StyleParser::StyleParser(const string &data)
+        StyleMap::StyleMap(StyleMap *parent)
         {
-            in = new stringstream(data);
+            this->parent = parent;
+        }
+
+        StyleMap::~StyleMap()
+        {
+        }
+
+        void StyleMap::load(const string &data)
+        {
+            stringstream in(data);
 
             string line;
-            while((*in) >> line) {
+            while(in >> line) {
 
                 string::size_type colon = line.find_first_of(':');
                 while(colon != string::npos) {
@@ -45,26 +53,27 @@ namespace jvgs
             }
         }
 
-        StyleParser::~StyleParser()
+        bool StyleMap::hasValue(const string &key)
         {
-            delete in;
+            if(values.find(key) != values.end())
+                return true;
+            else if(parent)
+                return parent->hasValue(key);
+            else
+                return false;
         }
 
-        bool StyleParser::hasValue(const string &key)
-        {
-            return values.find(key) != values.end();
-        }
-
-        string StyleParser::getValue(const string &key)
+        string StyleMap::getValue(const string &key)
         {
             map<string,string>::iterator iterator = values.find(key);
-            if(iterator == values.end())
-                return "";
-            else
+            if(iterator == values.end()) {
+                cout << "Asking parent for " << key << endl;
+                return parent ? parent->getValue(key) : "";
+            } else
                 return iterator->second;
         }
 
-        float StyleParser::getValueAsFloat(const string &key)
+        float StyleMap::getValueAsFloat(const string &key)
         {
             stringstream converter(getValue(key));
             float f;
@@ -72,7 +81,7 @@ namespace jvgs
             return f;
         }
 
-        Color StyleParser::getValueAsColor(const string &key)
+        Color StyleMap::getValueAsColor(const string &key)
         {
             string value = getValue(key);
             if(value.length() == 7) {

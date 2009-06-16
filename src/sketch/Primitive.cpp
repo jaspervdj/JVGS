@@ -1,4 +1,5 @@
 #include "Primitive.h"
+#include "StyleMap.h"
 
 using namespace jvgs::video;
 using namespace jvgs::math;
@@ -10,15 +11,15 @@ namespace jvgs
         Primitive::Primitive(Primitive *parent)
         {
             this->parent = parent;
-            stroke = false;
-            strokeColor = Color(0.0f,0.0f,0.0f);
-            fill = false;
-            fillColor = Color(0.0f,0.0f,0.0f);
+            styleMap = new StyleMap(parent ? parent->getStyleMap() : 0 );
+
+
             matrix = AffineTransformationMatrix();
         }
 
         Primitive::~Primitive()
         {
+            delete styleMap;
         }
 
         Primitive *Primitive::getParent() const
@@ -26,44 +27,9 @@ namespace jvgs
             return parent;
         }
 
-        void Primitive::setStroke(bool stroke)
+        StyleMap *Primitive::getStyleMap() const
         {
-            this->stroke = stroke;
-        }
-
-        bool Primitive::hasStroke() const
-        {
-            return stroke;
-        }
-
-        void Primitive::setStrokeColor(const Color &color)
-        {
-            this->strokeColor = color;
-        }
-
-        const Color &Primitive::getStrokeColor() const
-        {
-            return strokeColor;
-        }
-
-        void Primitive::setFill(bool fill)
-        {
-            this->fill = fill;
-        }
-
-        bool Primitive::hasFill() const
-        {
-            return fill;
-        }
-
-        void Primitive::setFillColor(const Color &color)
-        {
-            this->fillColor = color;
-        }
-
-        const Color &Primitive::getFillColor() const
-        {
-            return fillColor;
+            return styleMap;
         }
 
         void Primitive::setMatrix(const AffineTransformationMatrix &matrix)

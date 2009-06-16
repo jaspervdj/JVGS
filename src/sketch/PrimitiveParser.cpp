@@ -1,5 +1,5 @@
 #include "PrimitiveParser.h"
-#include "StyleParser.h"
+#include "StyleMap.h"
 #include "TransformParser.h"
 #include "Primitive.h"
 #include "Parser.h"
@@ -28,29 +28,6 @@ namespace jvgs
         Parser *PrimitiveParser::getParser() const
         {
             return parser;
-        }
-
-        void PrimitiveParser::parseStyle(Primitive *primitive,
-                const string &data)
-        {
-            StyleParser *styleParser = new StyleParser(data);
-            
-            if(styleParser->getValue("fill") == "none") {
-                primitive->setFill(false);
-            } else {
-                primitive->setFill(true);
-                primitive->setFillColor(styleParser->getValueAsColor("fill"));
-            }
-
-            if(styleParser->getValue("stroke") == "none") {
-                primitive->setStroke(false);
-            } else {
-                primitive->setStroke(true);
-                primitive->setStrokeColor(
-                        styleParser->getValueAsColor("stroke"));
-            }
-
-            delete styleParser;
         }
 
         void PrimitiveParser::parseTransform(Primitive *primitive,

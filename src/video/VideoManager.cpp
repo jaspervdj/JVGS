@@ -4,9 +4,6 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 
-#include <iostream>
-using namespace std;
-
 using namespace jvgs::math;
 
 namespace jvgs

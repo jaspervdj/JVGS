@@ -8,6 +8,8 @@ namespace jvgs
 {
     namespace sketch
     {
+        class StyleMap;
+
         class Group: public Primitive
         {
             private:

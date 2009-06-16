@@ -5,7 +5,6 @@
 #include "../math/MathManager.h"
 using namespace jvgs::math;
 
-#include <iostream>
 #include <cmath>
 
 namespace jvgs

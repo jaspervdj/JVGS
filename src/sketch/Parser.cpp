@@ -1,8 +1,5 @@
 #include "Parser.h"
 
-#include <iostream>
-using namespace std;
-
 #include "../core/LogManager.h"
 using namespace jvgs::core;
 
@@ -38,7 +35,7 @@ namespace jvgs
         {
             for( map<string,PrimitiveParser*>::iterator iterator =
                     primitiveParsers.begin();
-                    iterator != primitiveParsers.end(); iterator++ )
+                    iterator != primitiveParsers.end(); iterator++ ) {
                 delete iterator->second;
             }
 

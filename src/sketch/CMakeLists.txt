@@ -17,7 +17,7 @@ ADD_LIBRARY(
     Sketch.cpp
     SkewXTransformCommand.cpp
     SkewYTransformCommand.cpp
-    StyleParser.cpp
+    StyleMap.cpp
     TransformParser.cpp
     TransformCommand.cpp
     TranslateTransformCommand.cpp

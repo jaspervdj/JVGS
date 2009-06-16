@@ -1,5 +1,5 @@
-#ifndef JVGS_SKETCH_STYLEPARSER_H
-#define JVGS_SKETCH_STYLEPARSER_H
+#ifndef JVGS_SKETCH_STYLEMAP_H
+#define JVGS_SKETCH_STYLEMAP_H
 
 #include <istream>
 #include <string>
@@ -11,15 +11,17 @@ namespace jvgs
 {
     namespace sketch
     {
-        class StyleParser: public TextParser
+        class StyleMap: public TextParser
         {
             private:
-                std::istream *in;
+                StyleMap *parent;
                 std::map<std::string,std::string> values;
 
             public:
-                StyleParser(const std::string &data);
-                virtual ~StyleParser();
+                StyleMap(StyleMap *parent);
+                virtual ~StyleMap();
+
+                virtual void load(const std::string &data);
 
                 virtual bool hasValue(const std::string &key);
                 virtual std::string getValue(const std::string &key);

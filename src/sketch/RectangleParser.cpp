@@ -1,6 +1,7 @@
 #include "RectangleParser.h"
 #include "Parser.h"
 #include "Rectangle.h"
+#include "StyleMap.h"
 
 #include "../tinyxml/tinyxml.h"
 
@@ -38,7 +39,7 @@ namespace jvgs
             rectangle->setSize(Vector2D(width,height));
 
             if(element->Attribute("style"))
-                parseStyle(rectangle, element->Attribute("style"));
+                rectangle->getStyleMap()->load(element->Attribute("style"));
             if(element->Attribute("transform"))
                 parseTransform(rectangle, element->Attribute("transform"));
 
