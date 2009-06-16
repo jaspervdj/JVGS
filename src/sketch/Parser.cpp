@@ -1,4 +1,12 @@
 #include "Parser.h"
+#include "Sketch.h"
+#include "PrimitiveParser.h"
+#include "GroupParser.h"
+#include "RectangleParser.h"
+#include "StyleMap.h"
+#include "Group.h"
+
+using namespace std;
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -7,11 +15,6 @@ using namespace jvgs::core;
 using namespace jvgs::math;
 
 #include "../tinyxml/tinyxml.h"
-
-#include "Sketch.h"
-#include "PrimitiveParser.h"
-#include "GroupParser.h"
-#include "RectangleParser.h"
 
 namespace jvgs
 {
@@ -55,15 +58,23 @@ namespace jvgs
 
         void Parser::parse()
         {
-            TiXmlElement *root = document->RootElement();
+            TiXmlElement *rootElement = document->RootElement();
 
             float width, height;
-            root->QueryFloatAttribute("width", &width);
-            root->QueryFloatAttribute("height", &height);
+            rootElement->QueryFloatAttribute("width", &width);
+            rootElement->QueryFloatAttribute("height", &height);
             sketch->setSize(Vector2D(width, height));
 
             GroupParser *groupParser = new GroupParser(this);
-            sketch->setRoot((Group*)groupParser->parse(0, root));
+
+            Group *root = (Group*) groupParser->parse(0, rootElement);
+            sketch->setRoot(root);
+
+            /* Set a number of defaults. */
+            StyleMap *styleMap = root->getStyleMap();
+            styleMap->load(string("opacity:1; stroke-opacity:1;") +
+                    "fill-opacity:1;");
+
             delete groupParser;
         }
     };

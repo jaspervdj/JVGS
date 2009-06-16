@@ -67,7 +67,6 @@ namespace jvgs
         {
             map<string,string>::iterator iterator = values.find(key);
             if(iterator == values.end()) {
-                cout << "Asking parent for " << key << endl;
                 return parent ? parent->getValue(key) : "";
             } else
                 return iterator->second;

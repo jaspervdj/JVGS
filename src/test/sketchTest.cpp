@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     videoManager->clear();
     long start = SDL_GetTicks();
     sketch->render();
-    while (SDL_GetTicks() < start + 5000) {
+    while (SDL_GetTicks() < start + 25000) {
         videoManager->flip();
         SDL_Delay(10);
     }

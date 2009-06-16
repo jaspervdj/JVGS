@@ -33,7 +33,10 @@ namespace jvgs
             VideoManager *videoManager = VideoManager::getInstance();
 
             if(styleMap->getValue("fill") != "none") {
-                videoManager->setColor(styleMap->getValueAsColor("fill"));
+                Color color = styleMap->getValueAsColor("fill");
+                color.setAlpha(styleMap->getValueAsFloat("opacity") *
+                        styleMap->getValueAsFloat("fill-opacity"));
+                videoManager->setColor(color);
 
                 renderer->begin(Renderer::QUADS);
                 /* Left top. */
@@ -50,7 +53,10 @@ namespace jvgs
             }
 
             if(styleMap->getValue("stroke") != "none") {
-                videoManager->setColor(styleMap->getValueAsColor("stroke"));
+                Color color = styleMap->getValueAsColor("stroke");
+                color.setAlpha(styleMap->getValueAsFloat("opacity") *
+                        styleMap->getValueAsFloat("stroke-opacity"));
+                videoManager->setColor(color);
 
                 renderer->begin(Renderer::LINE_LOOP);
                 /* Left top. */
