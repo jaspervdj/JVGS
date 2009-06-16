@@ -22,15 +22,15 @@ namespace jvgs
                     pos2 == string::npos ? str.length() - 1 : pos2 - pos1 + 1);
         }
 
-        void TextParser::split(const string &str, char c,
+        void TextParser::split(const string &str, const string &characters,
                 vector<string> &destination) const
         {
-            string::size_type start = 0;
-            string::size_type end = str.find_first_of(c);
+            string::size_type start = str.find_first_not_of(characters);
+            string::size_type end = str.find_first_of(characters);
             while(end != string::npos) {
                 destination.push_back(str.substr(start, end - start));
-                start = end + 1;
-                end = str.find_first_of(c, start);
+                start = str.find_first_not_of(characters, end + 1);
+                end = str.find_first_of(characters, start);
             }
 
             destination.push_back(str.substr(start));

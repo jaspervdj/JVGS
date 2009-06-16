@@ -16,7 +16,8 @@ namespace jvgs
                 virtual ~TextParser();
 
                 std::string trim(const std::string &str) const;
-                void split(const std::string &str, char c,
+                void split(const std::string &str,
+                        const std::string &characters,
                         std::vector<std::string> &destination) const;
         };
     }

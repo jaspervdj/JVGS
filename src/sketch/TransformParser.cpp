@@ -51,7 +51,7 @@ namespace jvgs
                 string argumentString = data.substr(opening + 1,
                         position - opening - 1);
                 vector<string> arguments;
-                split(argumentString, ',', arguments);
+                split(argumentString, ", ", arguments);
 
                 vector<float> floatArguments;
 
