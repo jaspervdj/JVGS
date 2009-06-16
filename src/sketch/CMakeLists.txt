@@ -5,6 +5,7 @@ ADD_LIBRARY(
     GroupRenderer.cpp
     MatrixTransformCommand.cpp
     Path.cpp
+    PathParser.cpp
     Parser.cpp
     Primitive.cpp
     PrimitiveRenderer.cpp

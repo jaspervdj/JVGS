@@ -16,7 +16,7 @@ namespace jvgs
     namespace sketch
     {
         RectangleParser::RectangleParser(Parser *parser):
-            SketchElementParser(parser)
+                SketchElementParser(parser)
         {
         }
 

@@ -7,7 +7,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        Path::Path(Primitive *parent): Primitive(parent)
+        Path::Path(SketchElement *parent): Primitive(parent)
         {
         }
 
@@ -23,6 +23,11 @@ namespace jvgs
         Vector2D Path::getPoint(int index)
         {
             return Vector2D();
+        }
+
+        SketchElementRenderer *Path::createSketchElementRenderer()
+        {
+            return 0;
         }
     }
 }

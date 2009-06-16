@@ -3,6 +3,7 @@
 #include "SketchElementParser.h"
 #include "GroupParser.h"
 #include "RectangleParser.h"
+#include "PathParser.h"
 #include "StyleMap.h"
 #include "Group.h"
 
@@ -32,6 +33,7 @@ namespace jvgs
 
             sketchElementParsers["rect"] = new RectangleParser(this);
             sketchElementParsers["g"] = new GroupParser(this);
+            sketchElementParsers["path"] = new PathParser(this);
         }
 
         Parser::~Parser()

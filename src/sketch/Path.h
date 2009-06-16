@@ -12,11 +12,13 @@ namespace jvgs
             private:
 
             public:
-                Path(Primitive *parent);
+                Path(SketchElement *parent);
                 virtual ~Path();
 
                 virtual int getNumberOfPoints();
                 virtual math::Vector2D getPoint(int index);
+
+                virtual SketchElementRenderer *createSketchElementRenderer();
         };
     }
 }
