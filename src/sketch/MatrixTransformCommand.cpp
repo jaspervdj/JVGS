@@ -22,12 +22,14 @@ namespace jvgs
                                            const vector<float> &arguments) const
         {
             if(arguments.size() != 6) {
-                LogManager::getInstance()->error("Matrix transform command needs 6 arguments, %d given.",
+                LogManager::getInstance()->error(
+                        "Matrix transform command needs 6 arguments, %d given.",
                         arguments.size());
             }
 
-            matrix *= AffineTransformationMatrix(arguments[0], arguments[2], arguments[4],
-                                                 arguments[1], arguments[3], arguments[5]);
+            matrix *= AffineTransformationMatrix(
+                    arguments[0], arguments[2], arguments[4],
+                    arguments[1], arguments[3], arguments[5]);
         }
     }
 }

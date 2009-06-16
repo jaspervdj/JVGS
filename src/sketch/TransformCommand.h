@@ -16,7 +16,7 @@ namespace jvgs
                 virtual ~TransformCommand();
 
                 virtual void apply(math::AffineTransformationMatrix &matrix,
-                                   const std::vector<float> &arguments) const = 0;
+                        const std::vector<float> &arguments) const = 0;
         };
     }
 }

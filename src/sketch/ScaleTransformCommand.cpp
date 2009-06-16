@@ -28,7 +28,8 @@ namespace jvgs
             } else if(arguments.size() == 2) {
                 matrix.scale(Vector2D(arguments[0], arguments[1]));
             } else {
-                LogManager::getInstance()->error("Scale transformation needs 1 or 2 arguments, %d given.",
+                LogManager::getInstance()->error(
+                        "Scale transform needs 1 or 2 arguments, %d given.",
                         arguments.size());
             }
         }

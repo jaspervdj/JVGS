@@ -42,8 +42,11 @@ namespace jvgs
                 virtual void setFillColor(const video::Color &color);
                 virtual const video::Color &getFillColor() const;
 
-                virtual void setMatrix(const math::AffineTransformationMatrix &matrix);
-                virtual const math::AffineTransformationMatrix &getMatrix() const;
+                virtual void setMatrix(
+                        const math::AffineTransformationMatrix &matrix);
+
+                virtual const math::AffineTransformationMatrix &getMatrix()
+                        const;
 
                 virtual PrimitiveRenderer *createPrimitiveRenderer() = 0;
         };

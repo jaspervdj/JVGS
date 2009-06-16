@@ -34,10 +34,16 @@ namespace jvgs
                 videoManager->setColor(rectangle->getFillColor());
 
                 renderer->begin(Renderer::QUADS);
+                /* Left top. */
                 renderer->vector(position);
-                renderer->vector(Vector2D(position.getX(),position.getY()+size.getY()));
-                renderer->vector(position+size);
-                renderer->vector(Vector2D(position.getX()+size.getX(),position.getY()));
+                /* Left bottom. */
+                renderer->vector(Vector2D(position.getX(),
+                            position.getY() + size.getY()));
+                /* Right bottom */
+                renderer->vector(position + size);
+                /* Right top. */
+                renderer->vector(Vector2D(position.getX() + size.getX(),
+                            position.getY()));
                 renderer->end();
             }
 
@@ -45,10 +51,16 @@ namespace jvgs
                 videoManager->setColor(rectangle->getStrokeColor());
 
                 renderer->begin(Renderer::LINE_LOOP);
+                /* Left top. */
                 renderer->vector(position);
-                renderer->vector(Vector2D(position.getX(),position.getY()+size.getY()));
+                /* Left bottom. */
+                renderer->vector(Vector2D(position.getX(),
+                            position.getY() + size.getY()));
+                /* Right bottom */
                 renderer->vector(position+size);
-                renderer->vector(Vector2D(position.getX()+size.getX(),position.getY()));
+                /* Right top. */
+                renderer->vector(Vector2D(position.getX() + size.getX(),
+                            position.getY()));
                 renderer->end();
             }
 

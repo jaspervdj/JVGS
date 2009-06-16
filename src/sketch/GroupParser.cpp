@@ -32,7 +32,8 @@ namespace jvgs
             while (child) {
 
                 string value = child->ValueStr();
-                PrimitiveParser *primitiveParser = getParser()->getPrimitiveParser(value);
+                PrimitiveParser *primitiveParser =
+                        getParser()->getPrimitiveParser(value);
 
                 if (primitiveParser) {
                     Primitive *primitive = primitiveParser->parse(group, child);

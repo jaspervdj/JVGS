@@ -50,7 +50,8 @@ namespace jvgs
         void Sketch::setRoot(Group *root)
         {
             if(this->root)
-                LogManager::getInstance()->warning("You are setting the root for a sketch that already has a root!");
+                LogManager::getInstance()->warning(
+                        "Setting root for a sketch that already has a root!");
             this->root = root;
         }
 

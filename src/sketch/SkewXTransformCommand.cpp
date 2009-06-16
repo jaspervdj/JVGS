@@ -26,7 +26,8 @@ namespace jvgs
             if(arguments.size() == 1) {
                 matrix.skewX(arguments[0]);
             } else {
-                LogManager::getInstance()->error("SkewX transformation needs 1 argument, %d given.",
+                LogManager::getInstance()->error(
+                        "SkewX transformation needs 1 argument, %d given.",
                         arguments.size());
             }
         }

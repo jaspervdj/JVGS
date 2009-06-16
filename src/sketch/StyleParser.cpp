@@ -23,7 +23,8 @@ namespace jvgs
                 string::size_type colon = line.find_first_of(':');
                 while(colon != string::npos) {
 
-                    string::size_type statementEnd = line.find_first_of(';', colon);
+                    string::size_type statementEnd =
+                            line.find_first_of(';', colon);
 
                     string statement;
                     if(statementEnd == string::npos) {

@@ -107,7 +107,8 @@ namespace jvgs
                 /** Tranforms with a tranformation matrix.
                  *  @param matrix The tranformation matrix.
                  */
-                void transform(const math::AffineTransformationMatrix &matrix) const;
+                void transform(const math::AffineTransformationMatrix &matrix)
+                        const;
 
                 /** Select a color for drawing.
                  *  @param color Color to be used.

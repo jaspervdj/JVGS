@@ -30,7 +30,8 @@ namespace jvgs
             return parser;
         }
 
-        void PrimitiveParser::parseStyle(Primitive *primitive, const string &data)
+        void PrimitiveParser::parseStyle(Primitive *primitive,
+                const string &data)
         {
             StyleParser *styleParser = new StyleParser(data);
             
@@ -45,13 +46,15 @@ namespace jvgs
                 primitive->setStroke(false);
             } else {
                 primitive->setStroke(true);
-                primitive->setStrokeColor(styleParser->getValueAsColor("stroke"));
+                primitive->setStrokeColor(
+                        styleParser->getValueAsColor("stroke"));
             }
 
             delete styleParser;
         }
 
-        void PrimitiveParser::parseTransform(Primitive *primitive, const std::string &data)
+        void PrimitiveParser::parseTransform(Primitive *primitive,
+                const std::string &data)
         {
             TransformParser *tranformParser = new TransformParser();
             AffineTransformationMatrix matrix = tranformParser->parse(data);

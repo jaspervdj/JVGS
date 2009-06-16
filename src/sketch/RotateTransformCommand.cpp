@@ -26,9 +26,11 @@ namespace jvgs
             if(arguments.size() == 1) {
                 matrix.rotate(arguments[0]);
             } else if(arguments.size() == 3) {
-                matrix.rotate(arguments[0], Vector2D(arguments[1], arguments[2]));
+                matrix.rotate(arguments[0],
+                        Vector2D(arguments[1], arguments[2]));
             } else {
-                LogManager::getInstance()->error("Rotate transformation needs 1 or 3 arguments, %d given.",
+                LogManager::getInstance()->error(
+                        "Rotate transform needs 1 or 3 arguments, %d given.",
                         arguments.size());
             }
         }

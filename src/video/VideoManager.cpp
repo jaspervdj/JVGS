@@ -15,13 +15,13 @@ namespace jvgs
     {
         VideoManager::VideoManager()
         {
-            SDL_InitSubSystem( SDL_INIT_VIDEO );
+            SDL_InitSubSystem(SDL_INIT_VIDEO);
             flags = SDL_DOUBLEBUF | SDL_HWSURFACE | SDL_HWACCEL | SDL_OPENGL;
         }
 
         VideoManager::~VideoManager()
         {
-            SDL_QuitSubSystem( SDL_INIT_VIDEO );
+            SDL_QuitSubSystem(SDL_INIT_VIDEO);
         }
 
         VideoManager *VideoManager::getInstance()
@@ -30,58 +30,59 @@ namespace jvgs
             return &instance;
         }
 
-        void VideoManager::setVideoMode( std::string title )
+        void VideoManager::setVideoMode(std::string title)
         {
-            SDL_Rect **modes = SDL_ListModes( NULL, flags | SDL_FULLSCREEN );
+            SDL_Rect **modes = SDL_ListModes(NULL, flags | SDL_FULLSCREEN);
 
             /* Auto-select video mode. */
             width = 800, height = 600;
-            if( modes!=NULL ) {
+            if(modes!=NULL) {
                 width = modes[0]->w;
                 height = modes[0]->h;
             }
 
-            SDL_SetVideoMode( width, height, 0, flags | SDL_FULLSCREEN );
-            SDL_ShowCursor( 0 );
-            SDL_WM_SetCaption( title.c_str(), NULL );
+            SDL_SetVideoMode(width, height, 0, flags | SDL_FULLSCREEN);
+            SDL_ShowCursor(0);
+            SDL_WM_SetCaption(title.c_str(), NULL);
 
             setVideoDefaults();
         }
 
-        void VideoManager::setVideoMode( int width, int height, std::string title )
+        void VideoManager::setVideoMode(int width, int height,
+                                        std::string title)
         {
             this->width = width;
             this->height = height;
 
-            SDL_SetVideoMode( width, height, 0, flags );
-            SDL_ShowCursor( 0 );
-            SDL_WM_SetCaption( title.c_str(), NULL );
+            SDL_SetVideoMode(width, height, 0, flags);
+            SDL_ShowCursor(0);
+            SDL_WM_SetCaption(title.c_str(), NULL);
             
             setVideoDefaults();
         }
 
         void VideoManager::setVideoDefaults() const
         {
-            glMatrixMode( GL_PROJECTION );
+            glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            glOrtho( 0.0f, (GLfloat)width, (GLfloat)height, 0.0f, -1.0f, 1.0f );
+            glOrtho(0.0f, (GLfloat)width, (GLfloat)height, 0.0f, -1.0f, 1.0f);
 
-            glMatrixMode( GL_MODELVIEW );
+            glMatrixMode(GL_MODELVIEW);
 
-            glEnable( GL_TEXTURE_2D );
-            glBindTexture( GL_TEXTURE_2D, 0 );
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, 0);
 
-            glEnable( GL_BLEND );
-            glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-            glEnable( GL_LINE_SMOOTH );
-            glHint( GL_LINE_SMOOTH_HINT, GL_NICEST );
-            //glHint( GL_LINE_SMOOTH_HINT, GL_DONT_CARE );
+            glEnable(GL_LINE_SMOOTH);
+            glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+            //glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
 
-            glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );
-            glColor4f( 0.0f, 0.0f, 0.0f, 1.0f );
+            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+            glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 
-            glLineWidth( 1.5f );
+            glLineWidth(1.5f);
         }
 
         int VideoManager::getWidth() const
@@ -96,7 +97,7 @@ namespace jvgs
 
         void VideoManager::clear() const
         {
-            glClear( GL_COLOR_BUFFER_BIT );
+            glClear(GL_COLOR_BUFFER_BIT);
         }
 
         void VideoManager::flip() const
@@ -119,22 +120,23 @@ namespace jvgs
             glPopMatrix();
         }
 
-        void VideoManager::translate( const float &x, const float &y ) const
+        void VideoManager::translate(const float &x, const float &y) const
         {
-            glTranslatef( x, y, 0.0f );
+            glTranslatef(x, y, 0.0f);
         }
 
-        void VideoManager::scale( const float &x, const float &y ) const
+        void VideoManager::scale(const float &x, const float &y) const
         {
-            glScalef( x, y, 1.0f );
+            glScalef(x, y, 1.0f);
         }
 
-        void VideoManager::rotate( const float &degrees ) const
+        void VideoManager::rotate(const float &degrees) const
         {
-            glRotatef( degrees, 0.0f, 0.0f, 1.0f );
+            glRotatef(degrees, 0.0f, 0.0f, 1.0f);
         }
 
-        void VideoManager::transform(const AffineTransformationMatrix &matrix) const
+        void VideoManager::transform(const AffineTransformationMatrix &matrix)
+                const
         {
             float *glMatrix = new float[16];
 
@@ -156,7 +158,8 @@ namespace jvgs
             for(int row = 0; row < matrix.getHeight(); row++) {
                 for(int column = 0; column < matrix.getWidth(); column++) {
                     if(column < 2 && row < 2) {
-                        glMatrix[column * 4 + row] = matrix.getValue(row, column);
+                        glMatrix[column * 4 + row] =
+                                matrix.getValue(row, column);
                     }
                 }
             }
@@ -171,16 +174,16 @@ namespace jvgs
             delete[] glMatrix;
         }
 
-        void VideoManager::setColor( Color color ) const
+        void VideoManager::setColor(Color color) const
         {
-            glColor4f( color.getRed(), color.getGreen(),
-                       color.getBlue(), color.getAlpha() );
+            glColor4f(color.getRed(), color.getGreen(),
+                      color.getBlue(), color.getAlpha());
         }
 
-        void VideoManager::setClearColor( Color color ) const
+        void VideoManager::setClearColor(Color color) const
         {
-            glClearColor( color.getRed(), color.getGreen(),
-                          color.getBlue(), color.getAlpha() );
+            glClearColor(color.getRed(), color.getGreen(),
+                         color.getBlue(), color.getAlpha());
         }
     };
 };

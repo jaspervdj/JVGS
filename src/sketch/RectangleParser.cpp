@@ -23,7 +23,8 @@ namespace jvgs
         {
         }
 
-        Primitive *RectangleParser::parse(Primitive *parent, TiXmlElement *element)
+        Primitive *RectangleParser::parse(Primitive *parent,
+                TiXmlElement *element)
         {
             Rectangle *rectangle = new Rectangle(parent);
             

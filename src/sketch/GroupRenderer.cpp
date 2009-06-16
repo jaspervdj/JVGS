@@ -30,7 +30,8 @@ namespace jvgs
                 videoManager->push();
                 videoManager->transform(primitive->getMatrix());
 
-                PrimitiveRenderer *renderer = primitive->createPrimitiveRenderer();
+                PrimitiveRenderer *renderer =
+                        primitive->createPrimitiveRenderer();
                 renderer->render();
 
                 videoManager->pop();

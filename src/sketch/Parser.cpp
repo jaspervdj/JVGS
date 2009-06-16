@@ -24,8 +24,8 @@ namespace jvgs
         {
             document = new TiXmlDocument( fileName.c_str() );
             if (!document->LoadFile()) {
-                LogManager::getInstance()->error("Could not load xml document: %s",
-                        fileName.c_str());
+                LogManager::getInstance()->error(
+                        "Could not load xml document: %s", fileName.c_str());
             }
 
             this->sketch = sketch;
@@ -36,10 +36,10 @@ namespace jvgs
 
         Parser::~Parser()
         {
-            map<string,PrimitiveParser*>::iterator iterator = primitiveParsers.begin();
-            while (iterator != primitiveParsers.end()) {
+            for( map<string,PrimitiveParser*>::iterator iterator =
+                    primitiveParsers.begin();
+                    iterator != primitiveParsers.end(); iterator++ )
                 delete iterator->second;
-                iterator++;
             }
 
             delete document;
@@ -48,7 +48,8 @@ namespace jvgs
         PrimitiveParser *Parser::getPrimitiveParser(string tag)
         {
 
-            map<string, PrimitiveParser*>::iterator iterator = primitiveParsers.find(tag);
+            map<string, PrimitiveParser*>::iterator iterator =
+                    primitiveParsers.find(tag);
             if (iterator != primitiveParsers.end())
                 return iterator->second;
             else

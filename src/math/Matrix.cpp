@@ -14,7 +14,8 @@ namespace jvgs
             values = new float[height * width];
             for(int row = 0; row < height; row++) {
                 for(int column = 0; column < width; column++) {
-                    values[width * row + column] = (column == row ? 1.0f : 0.0f);
+                    values[width * row + column] =
+                            (column == row ? 1.0f : 0.0f);
                 }
             }
         }
@@ -26,7 +27,8 @@ namespace jvgs
             values = new float[height * width];
             for(int row = 0; row < height; row++) {
                 for(int column = 0; column < width; column++) {
-                    values[width * row + column] = other.values[width * row + column];
+                    values[width * row + column] =
+                            other.values[width * row + column];
                 }
             }
         }
@@ -59,11 +61,13 @@ namespace jvgs
         const Matrix &Matrix::operator=(const Matrix &other)
         {
             if(height != other.height || width != other.width)
-                LogManager::getInstance()->error("Cannot assign a %dx%d matrix to a %dx%d matrix.",
+                LogManager::getInstance()->error(
+                        "Cannot assign a %dx%d matrix to a %dx%d matrix.",
                         other.height, other.width, height, width);
             for(int row = 0; row < height; row++)
                 for(int column = 0; column < width; column++)
-                    values[row * width + column] = other.values[row * width + column];
+                    values[row * width + column] =
+                            other.values[row * width + column];
 
             return *this;
         }
@@ -71,11 +75,13 @@ namespace jvgs
         const Matrix &Matrix::operator+=(const Matrix &other)
         {
             if(height != other.height || width != other.width)
-                LogManager::getInstance()->error("Cannot add a %dx%d matrix to a %dx%d matrix.",
+                LogManager::getInstance()->error(
+                        "Cannot add a %dx%d matrix to a %dx%d matrix.",
                         other.height, other.width, height, width);
             for(int row = 0; row < height; row++)
                 for(int column = 0; column < width; column++)
-                    values[row * width + column] += other.values[row * width + column];
+                    values[row * width + column] +=
+                            other.values[row * width + column];
 
             return *this;
         }
@@ -83,11 +89,13 @@ namespace jvgs
         const Matrix &Matrix::operator-=(const Matrix &other)
         {
             if(height != other.height || width != other.width)
-                LogManager::getInstance()->error("Cannot subtract a %dx%d matrix from a %dx%d matrix.",
+                LogManager::getInstance()->error(
+                        "Cannot subtract a %dx%d matrix from a %dx%d matrix.",
                         other.height, other.width, height, width);
             for(int row = 0; row < height; row++)
                 for(int column = 0; column < width; column++)
-                    values[row * width + column] -= other.values[row * width + column];
+                    values[row * width + column] -=
+                            other.values[row * width + column];
 
             return *this;
         }
@@ -150,7 +158,8 @@ namespace jvgs
         Matrix Matrix::operator*(const Matrix &other) const
         {
             if(width != other.height)
-                LogManager::getInstance()->error("Cannot multiply a %dx%d matrix with a %dx%d matrix.",
+                LogManager::getInstance()->error(
+                        "Cannot multiply a %dx%d matrix with a %dx%d matrix.",
                         other.height, other.width, height, width);
 
             Matrix result(height, other.width);

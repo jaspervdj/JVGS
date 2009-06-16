@@ -32,8 +32,8 @@ namespace jvgs
 
         TransformParser::~TransformParser()
         {
-            for(map<string, TransformCommand*>::iterator iterator = commands.begin();
-                    iterator != commands.end(); iterator++) {
+            for(map<string, TransformCommand*>::iterator iterator =
+                    commands.begin(); iterator != commands.end(); iterator++) {
                 delete iterator->second;
             }
         }
@@ -45,10 +45,12 @@ namespace jvgs
             string::size_type position = 0;
             while(position < data.size() && position != string::npos) {
                 string::size_type opening = data.find_first_of('(', position);
-                string command = trim(data.substr(position, opening - position));
+                string command = data.substr(position, opening - position);
+                command = trim(command);
                 position = data.find_first_of(')', opening);
 
-                string argumentString = data.substr(opening + 1, position - opening - 1);
+                string argumentString = data.substr(opening + 1,
+                        position - opening - 1);
                 vector<string> arguments;
                 split(argumentString, ',', arguments);
 
@@ -63,12 +65,14 @@ namespace jvgs
                     floatArguments.push_back(f);
                 }
 
-                map<string, TransformCommand*>::iterator iterator = commands.find(command);
+                map<string, TransformCommand*>::iterator iterator =
+                        commands.find(command);
 
                 if(iterator != commands.end()) {
                     iterator->second->apply(matrix, floatArguments);
                 } else {
-                    LogManager::getInstance()->warning("Unknown tranform command \"%s\"", command.c_str());
+                    LogManager::getInstance()->warning(
+                            "Unknown tranform command \"%s\"", command.c_str());
                 }
 
                 position++;
