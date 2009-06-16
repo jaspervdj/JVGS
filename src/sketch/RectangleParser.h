@@ -1,13 +1,13 @@
 #ifndef JVGS_SKETCH_RECTANGLEPARSER_H
 #define JVGS_SKETCH_RECTANGLEPARSER_H
 
-#include "PrimitiveParser.h"
+#include "SketchElementParser.h"
 
 namespace jvgs
 {
     namespace sketch
     {
-        class RectangleParser: public PrimitiveParser
+        class RectangleParser: public SketchElementParser
         {
             private:
 
@@ -15,7 +15,7 @@ namespace jvgs
                 RectangleParser(Parser *parser);
                 virtual ~RectangleParser();
 
-                virtual Primitive *parse(Primitive *parent,
+                virtual SketchElement *parse(SketchElement *parent,
                         TiXmlElement *element);
         };
     }

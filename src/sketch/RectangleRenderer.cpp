@@ -13,7 +13,8 @@ namespace jvgs
 {
     namespace sketch
     {
-        RectangleRenderer::RectangleRenderer(Rectangle *rectangle)
+        RectangleRenderer::RectangleRenderer(Rectangle *rectangle):
+                PrimitiveRenderer(rectangle)
         {
             this->rectangle = rectangle;
         }
@@ -22,57 +23,35 @@ namespace jvgs
         {
         }
 
-        void RectangleRenderer::render()
+        void RectangleRenderer::fill(Renderer *renderer)
         {
-            Renderer *renderer = new Renderer();
+            renderer->begin(Renderer::QUADS);
+            vectors(renderer);
+            renderer->end();
+        }
 
+        void RectangleRenderer::stroke(Renderer *renderer)
+        {
+            renderer->begin(Renderer::LINE_LOOP);
+            vectors(renderer);
+            renderer->end();
+        }
+
+        void RectangleRenderer::vectors(Renderer *renderer) const
+        {
             Vector2D position = rectangle->getPosition(),
                      size = rectangle->getSize();
-            StyleMap *styleMap = rectangle->getStyleMap();
 
-            VideoManager *videoManager = VideoManager::getInstance();
-
-            if(styleMap->getValue("fill") != "none") {
-                Color color = styleMap->getValueAsColor("fill");
-                color.setAlpha(styleMap->getValueAsFloat("opacity") *
-                        styleMap->getValueAsFloat("fill-opacity"));
-                videoManager->setColor(color);
-
-                renderer->begin(Renderer::QUADS);
-                /* Left top. */
-                renderer->vector(position);
-                /* Left bottom. */
-                renderer->vector(Vector2D(position.getX(),
-                            position.getY() + size.getY()));
-                /* Right bottom */
-                renderer->vector(position + size);
-                /* Right top. */
-                renderer->vector(Vector2D(position.getX() + size.getX(),
-                            position.getY()));
-                renderer->end();
-            }
-
-            if(styleMap->getValue("stroke") != "none") {
-                Color color = styleMap->getValueAsColor("stroke");
-                color.setAlpha(styleMap->getValueAsFloat("opacity") *
-                        styleMap->getValueAsFloat("stroke-opacity"));
-                videoManager->setColor(color);
-
-                renderer->begin(Renderer::LINE_LOOP);
-                /* Left top. */
-                renderer->vector(position);
-                /* Left bottom. */
-                renderer->vector(Vector2D(position.getX(),
-                            position.getY() + size.getY()));
-                /* Right bottom */
-                renderer->vector(position+size);
-                /* Right top. */
-                renderer->vector(Vector2D(position.getX() + size.getX(),
-                            position.getY()));
-                renderer->end();
-            }
-
-            delete renderer;
+            /* Left top. */
+            renderer->vector(position);
+            /* Left bottom. */
+            renderer->vector(Vector2D(position.getX(),
+                        position.getY() + size.getY()));
+            /* Right bottom */
+            renderer->vector(position + size);
+            /* Right top. */
+            renderer->vector(Vector2D(position.getX() + size.getX(),
+                        position.getY()));
         }
     }
 }

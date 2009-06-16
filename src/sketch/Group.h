@@ -1,7 +1,7 @@
 #ifndef JVGS_SKETCH_GROUP_H
 #define JVGS_SKETCH_GROUP_H
 
-#include "Primitive.h"
+#include "SketchElement.h"
 #include <vector>
 
 namespace jvgs
@@ -10,20 +10,20 @@ namespace jvgs
     {
         class StyleMap;
 
-        class Group: public Primitive
+        class Group: public SketchElement
         {
             private:
-                std::vector<Primitive*> primitives;
+                std::vector<SketchElement*> sketchElements;
 
             public:
-                Group(Primitive *parent);
+                Group(SketchElement *parent);
                 virtual ~Group();
 
-                virtual void addPrimitive(Primitive *primitive);
-                virtual int getNumberOfPrimitives() const;
-                virtual Primitive *getPrimitive(int index) const;
+                virtual void addSketchElement(SketchElement *sketchElement);
+                virtual int getNumberOfSketchElements() const;
+                virtual SketchElement *getSketchElement(int index) const;
 
-                virtual PrimitiveRenderer *createPrimitiveRenderer();
+                virtual SketchElementRenderer *createSketchElementRenderer();
         };
     }
 }

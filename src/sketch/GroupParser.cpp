@@ -1,7 +1,7 @@
 #include "GroupParser.h"
 #include "Parser.h"
 #include "Group.h"
-#include "Primitive.h"
+#include "SketchElement.h"
 #include "StyleMap.h"
 
 #include "../tinyxml/tinyxml.h"
@@ -15,7 +15,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        GroupParser::GroupParser(Parser *parser): PrimitiveParser(parser)
+        GroupParser::GroupParser(Parser *parser): SketchElementParser(parser)
         {
         }
 
@@ -23,7 +23,8 @@ namespace jvgs
         {
         }
 
-        Primitive *GroupParser::parse(Primitive *parent, TiXmlElement *element)
+        SketchElement *GroupParser::parse(SketchElement *parent,
+                TiXmlElement *element)
         {
 
             Group *group = new Group(parent);
@@ -42,12 +43,13 @@ namespace jvgs
             while (child) {
 
                 string value = child->ValueStr();
-                PrimitiveParser *primitiveParser =
-                        getParser()->getPrimitiveParser(value);
+                SketchElementParser *sketchElementParser =
+                        getParser()->getSketchElementParser(value);
 
-                if (primitiveParser) {
-                    Primitive *primitive = primitiveParser->parse(group, child);
-                    group->addPrimitive(primitive);
+                if (sketchElementParser) {
+                    SketchElement *sketchElement =
+                            sketchElementParser->parse(group, child);
+                    group->addSketchElement(sketchElement);
                 }
 
                 child = child->NextSiblingElement();

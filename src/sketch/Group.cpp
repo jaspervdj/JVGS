@@ -7,35 +7,35 @@ namespace jvgs
 {
     namespace sketch
     {
-        Group::Group(Primitive *parent): Primitive(parent)
+        Group::Group(SketchElement *parent): SketchElement(parent)
         {
         }
 
         Group::~Group()
         {
-            vector<Primitive*>::iterator iterator = primitives.begin();
-            while (iterator != primitives.end()) {
+            vector<SketchElement*>::iterator iterator = sketchElements.begin();
+            while (iterator != sketchElements.end()) {
                 delete (*iterator);
                 iterator++;
             }
         }
 
-        void Group::addPrimitive(Primitive *primitive)
+        void Group::addSketchElement(SketchElement *sketchElement)
         {
-            primitives.push_back(primitive);
+            sketchElements.push_back(sketchElement);
         }
 
-        int Group::getNumberOfPrimitives() const
+        int Group::getNumberOfSketchElements() const
         {
-            return primitives.size();
+            return sketchElements.size();
         }
 
-        Primitive *Group::getPrimitive(int index) const
+        SketchElement *Group::getSketchElement(int index) const
         {
-            return primitives[index];
+            return sketchElements[index];
         }
 
-        PrimitiveRenderer *Group::createPrimitiveRenderer()
+        SketchElementRenderer *Group::createSketchElementRenderer()
         {
             return new GroupRenderer(this);
         }

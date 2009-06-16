@@ -1,20 +1,20 @@
 #ifndef JVGS_SKETCH_GROUPPARSER_H
 #define JVGS_SKETCH_GROUPPARSER_H
 
-#include "PrimitiveParser.h"
+#include "SketchElementParser.h"
 
 namespace jvgs
 {
     namespace sketch
     {
-        class GroupParser: public PrimitiveParser
+        class GroupParser: public SketchElementParser
         {
             private:
             public:
                 GroupParser(Parser *parser);
                 virtual ~GroupParser();
 
-                virtual Primitive *parse(Primitive *parser,
+                virtual SketchElement *parse(SketchElement *parent,
                         TiXmlElement *element);
         };
     }

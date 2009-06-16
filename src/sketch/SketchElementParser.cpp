@@ -1,7 +1,7 @@
-#include "PrimitiveParser.h"
+#include "SketchElementParser.h"
 #include "StyleMap.h"
 #include "TransformParser.h"
-#include "Primitive.h"
+#include "SketchElement.h"
 #include "Parser.h"
 
 #include "../core/LogManager.h"
@@ -16,26 +16,26 @@ namespace jvgs
 {
     namespace sketch
     {
-        PrimitiveParser::PrimitiveParser(Parser *parser)
+        SketchElementParser::SketchElementParser(Parser *parser)
         {
             this->parser = parser;
         }
 
-        PrimitiveParser::~PrimitiveParser()
+        SketchElementParser::~SketchElementParser()
         {
         }
 
-        Parser *PrimitiveParser::getParser() const
+        Parser *SketchElementParser::getParser() const
         {
             return parser;
         }
 
-        void PrimitiveParser::parseTransform(Primitive *primitive,
+        void SketchElementParser::parseTransform(SketchElement *sketchElement,
                 const std::string &data)
         {
             TransformParser *tranformParser = new TransformParser();
             AffineTransformationMatrix matrix = tranformParser->parse(data);
-            primitive->setMatrix(matrix);
+            sketchElement->setMatrix(matrix);
             delete tranformParser;
         }
     }

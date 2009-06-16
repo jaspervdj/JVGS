@@ -16,7 +16,7 @@ namespace jvgs
     namespace sketch
     {
         RectangleParser::RectangleParser(Parser *parser):
-            PrimitiveParser(parser)
+            SketchElementParser(parser)
         {
         }
 
@@ -24,7 +24,7 @@ namespace jvgs
         {
         }
 
-        Primitive *RectangleParser::parse(Primitive *parent,
+        SketchElement *RectangleParser::parse(SketchElement *parent,
                 TiXmlElement *element)
         {
             Rectangle *rectangle = new Rectangle(parent);

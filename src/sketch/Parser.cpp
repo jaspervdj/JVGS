@@ -1,6 +1,6 @@
 #include "Parser.h"
 #include "Sketch.h"
-#include "PrimitiveParser.h"
+#include "SketchElementParser.h"
 #include "GroupParser.h"
 #include "RectangleParser.h"
 #include "StyleMap.h"
@@ -30,27 +30,27 @@ namespace jvgs
 
             this->sketch = sketch;
 
-            primitiveParsers["rect"] = new RectangleParser(this);
-            primitiveParsers["g"] = new GroupParser(this);
+            sketchElementParsers["rect"] = new RectangleParser(this);
+            sketchElementParsers["g"] = new GroupParser(this);
         }
 
         Parser::~Parser()
         {
-            for( map<string,PrimitiveParser*>::iterator iterator =
-                    primitiveParsers.begin();
-                    iterator != primitiveParsers.end(); iterator++ ) {
+            for( map<string,SketchElementParser*>::iterator iterator =
+                    sketchElementParsers.begin();
+                    iterator != sketchElementParsers.end(); iterator++ ) {
                 delete iterator->second;
             }
 
             delete document;
         }
 
-        PrimitiveParser *Parser::getPrimitiveParser(string tag)
+        SketchElementParser *Parser::getSketchElementParser(string tag)
         {
 
-            map<string, PrimitiveParser*>::iterator iterator =
-                    primitiveParsers.find(tag);
-            if (iterator != primitiveParsers.end())
+            map<string, SketchElementParser*>::iterator iterator =
+                    sketchElementParsers.find(tag);
+            if (iterator != sketchElementParsers.end())
                 return iterator->second;
             else
                 return 0;

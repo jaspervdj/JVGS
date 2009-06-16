@@ -8,7 +8,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        Rectangle::Rectangle(Primitive *parent): Primitive(parent)
+        Rectangle::Rectangle(SketchElement *parent): Primitive(parent)
         {
             position = Vector2D();
             size = Vector2D();
@@ -38,7 +38,7 @@ namespace jvgs
             return size;
         }
 
-        PrimitiveRenderer *Rectangle::createPrimitiveRenderer()
+        SketchElementRenderer *Rectangle::createSketchElementRenderer()
         {
             return new RectangleRenderer(this);
         }

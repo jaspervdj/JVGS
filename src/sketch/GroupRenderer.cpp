@@ -11,7 +11,8 @@ namespace jvgs
 {
     namespace sketch
     {
-        GroupRenderer::GroupRenderer(Group *group)
+        GroupRenderer::GroupRenderer(Group *group):
+                SketchElementRenderer(group)
         {
             this->group = group;
         }
@@ -24,14 +25,14 @@ namespace jvgs
         {
             VideoManager *videoManager = VideoManager::getInstance();
 
-            for(int i=0; i<group->getNumberOfPrimitives(); i++) {
-                Primitive *primitive = group->getPrimitive(i);
+            for(int i=0; i<group->getNumberOfSketchElements(); i++) {
+                SketchElement *sketchElement = group->getSketchElement(i);
 
                 videoManager->push();
-                videoManager->transform(primitive->getMatrix());
+                videoManager->transform(sketchElement->getMatrix());
 
-                PrimitiveRenderer *renderer =
-                        primitive->createPrimitiveRenderer();
+                SketchElementRenderer *renderer =
+                        sketchElement->createSketchElementRenderer();
                 renderer->render();
 
                 videoManager->pop();

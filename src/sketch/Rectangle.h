@@ -16,7 +16,7 @@ namespace jvgs
                 math::Vector2D size;
 
             public:
-                Rectangle(Primitive *parent);
+                Rectangle(SketchElement *parent);
                 virtual ~Rectangle();
 
                 virtual void setPosition(const math::Vector2D &position);
@@ -25,7 +25,7 @@ namespace jvgs
                 virtual void setSize(const math::Vector2D &size);
                 virtual const math::Vector2D &getSize() const;
 
-                virtual PrimitiveRenderer *createPrimitiveRenderer();
+                virtual SketchElementRenderer *createSketchElementRenderer();
         };
     }
 }

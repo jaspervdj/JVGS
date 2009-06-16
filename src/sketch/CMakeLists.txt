@@ -7,7 +7,6 @@ ADD_LIBRARY(
     Path.cpp
     Parser.cpp
     Primitive.cpp
-    PrimitiveParser.cpp
     PrimitiveRenderer.cpp
     Rectangle.cpp
     RectangleParser.cpp
@@ -15,6 +14,9 @@ ADD_LIBRARY(
     RotateTransformCommand.cpp
     ScaleTransformCommand.cpp
     Sketch.cpp
+    SketchElement.cpp
+    SketchElementParser.cpp
+    SketchElementRenderer.cpp
     SkewXTransformCommand.cpp
     SkewYTransformCommand.cpp
     StyleMap.cpp

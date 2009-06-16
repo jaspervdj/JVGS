@@ -1,7 +1,7 @@
 #ifndef JVGS_SKETCH_GROUPRENDERER_H
 #define JVGS_SKETCH_GROUPRENDERER_H
 
-#include "PrimitiveRenderer.h"
+#include "SketchElementRenderer.h"
 
 namespace jvgs
 {
@@ -9,7 +9,7 @@ namespace jvgs
     {
         class Group;
 
-        class GroupRenderer: public PrimitiveRenderer
+        class GroupRenderer: public SketchElementRenderer
         {
             private:
                 Group *group;

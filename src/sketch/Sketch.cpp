@@ -1,7 +1,7 @@
 #include "Sketch.h"
 #include "Parser.h"
-#include "Primitive.h"
-#include "PrimitiveRenderer.h"
+#include "SketchElement.h"
+#include "SketchElementRenderer.h"
 #include "Group.h"
 
 #include "../core/LogManager.h"
@@ -62,7 +62,8 @@ namespace jvgs
 
         void Sketch::render() const
         {
-            PrimitiveRenderer *renderer = root->createPrimitiveRenderer();
+            SketchElementRenderer *renderer =
+                    root->createSketchElementRenderer();
             renderer->render();
             delete renderer;
         }

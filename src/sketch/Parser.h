@@ -10,7 +10,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        class PrimitiveParser;
+        class SketchElementParser;
         class Sketch;
 
         class Parser
@@ -18,7 +18,7 @@ namespace jvgs
             private:
                 Sketch *sketch;
                 TiXmlDocument *document;
-                std::map<std::string,PrimitiveParser*> primitiveParsers;
+                std::map<std::string,SketchElementParser*> sketchElementParsers;
 
             public:
                 /** Constructor.
@@ -28,7 +28,7 @@ namespace jvgs
                 Parser(std::string fileName, Sketch *sketch);
                 virtual ~Parser();
 
-                PrimitiveParser *getPrimitiveParser(std::string tag);
+                SketchElementParser *getSketchElementParser(std::string tag);
 
                 void parse();
         };
