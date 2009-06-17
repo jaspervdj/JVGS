@@ -23,12 +23,12 @@ namespace jvgs
 
         bool PathSegment::isRelativeCommand() const
         {
-            return command >= 'A' && command <= 'Z';
+            return command >= 'a' && command <= 'z';
         }
 
         char PathSegment::getLowerCaseCommand() const
         {
-            if(isRelativeCommand())
+            if(!isRelativeCommand())
                 return command - 'A' + 'a';
             else
                 return command;

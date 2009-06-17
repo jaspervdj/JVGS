@@ -1,5 +1,6 @@
 #include "Path.h"
 #include "PathSegment.h"
+#include "PathRenderer.h"
 
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
@@ -33,7 +34,7 @@ namespace jvgs
 
         SketchElementRenderer *Path::createSketchElementRenderer()
         {
-            return 0;
+            return new PathRenderer(this);
         }
     }
 }

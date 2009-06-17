@@ -21,8 +21,10 @@ namespace jvgs
                  */
                 enum Type
                 {
+                    LINES = GL_LINES,
                     LINE_LOOP = GL_LINE_LOOP,
-                    QUADS = GL_QUADS
+                    QUADS = GL_QUADS,
+                    POLYGON = GL_POLYGON
                 };
 
                 /** Constructor.

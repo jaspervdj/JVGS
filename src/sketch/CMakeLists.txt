@@ -3,10 +3,13 @@ ADD_LIBRARY(
     Group.cpp
     GroupParser.cpp
     GroupRenderer.cpp
+    LPathSegmentRenderer.cpp
     MatrixTransformCommand.cpp
     Path.cpp
     PathParser.cpp
+    PathRenderer.cpp
     PathSegment.cpp
+    PathSegmentRenderer.cpp
     Parser.cpp
     Primitive.cpp
     PrimitiveRenderer.cpp
