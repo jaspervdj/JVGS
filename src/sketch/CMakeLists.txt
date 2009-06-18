@@ -5,6 +5,7 @@ ADD_LIBRARY(
     GroupRenderer.cpp
     LPathSegmentRenderer.cpp
     MatrixTransformCommand.cpp
+    MPathSegmentRenderer.cpp
     Path.cpp
     PathParser.cpp
     PathRenderer.cpp

@@ -17,6 +17,7 @@ namespace jvgs
                 PathSegmentRenderer(PathRenderer *pathRenderer);
                 virtual ~PathSegmentRenderer();
 
+                virtual PathRenderer *getPathRenderer() const;
                 virtual void render(PathSegment *segment) = 0;
         };
     }

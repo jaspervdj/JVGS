@@ -33,5 +33,15 @@ namespace jvgs
             else
                 return command;
         }
+
+        int PathSegment::getNumberOfArguments() const
+        {
+            return arguments.size();
+        }
+
+        float PathSegment::getArgument(int index) const
+        {
+            return arguments[index];
+        }
     }
 }

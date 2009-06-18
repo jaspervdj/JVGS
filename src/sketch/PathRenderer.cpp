@@ -4,6 +4,9 @@
 #include "PathSegmentRenderer.h"
 #include "LPathSegmentRenderer.h"
 
+#include "../core/LogManager.h"
+using namespace jvgs::core;
+
 using namespace jvgs::video;
 using namespace jvgs::math;
 using namespace std;
@@ -26,6 +29,26 @@ namespace jvgs
                     iterator != segmentRenderers.end(); iterator++) {
                 delete iterator->second;
             }
+        }
+
+        bool PathRenderer::isFirstSegment() const
+        {
+            return firstSegment;
+        }
+
+        void PathRenderer::setFirstSegment(bool firstSegment)
+        {
+            this->firstSegment = firstSegment;
+        }
+
+        const Vector2D &PathRenderer::getStartingPoint() const
+        {
+            return startingPoint;
+        }
+
+        void PathRenderer::setStartingPoint(const Vector2D &startingPoint)
+        {
+            this->startingPoint = startingPoint;
         }
 
         const Vector2D &PathRenderer::getCurrentPoint() const
@@ -55,13 +78,19 @@ namespace jvgs
         void PathRenderer::vectors(Renderer *renderer)
         {
             for(int i = 0; i < path->getNumberOfSegments(); i++) {
+
                 PathSegment *segment = path->getSegment(i);
 
                 map<char, PathSegmentRenderer*>::iterator iterator =
                         segmentRenderers.find(segment->getLowerCaseCommand());
+
                 if(iterator != segmentRenderers.end()) {
                     PathSegmentRenderer *segmentRenderer = iterator->second;
                     segmentRenderer->render(segment);
+                } else {
+                    LogManager::getInstance()->warning(
+                            "%c command for paths is not (yet) implemented.",
+                            segment->getLowerCaseCommand());
                 }
             }
         }

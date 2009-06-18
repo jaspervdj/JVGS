@@ -16,12 +16,20 @@ namespace jvgs
         {
             private:
                 Path *path;
+                bool firstSegment;
+                math::Vector2D startingPoint;
                 math::Vector2D currentPoint;
                 std::map<char, PathSegmentRenderer*> segmentRenderers;
 
             public:
                 PathRenderer(Path *path);
                 virtual ~PathRenderer();
+
+                virtual bool isFirstSegment() const;
+                virtual void setFirstSegment(bool firstSegment);
+
+                virtual const math::Vector2D &getStartingPoint() const;
+                virtual void setStartingPoint(const math::Vector2D &point);
 
                 virtual const math::Vector2D &getCurrentPoint() const;
                 virtual void setCurrentPoint(const math::Vector2D &point);

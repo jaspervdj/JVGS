@@ -13,5 +13,10 @@ namespace jvgs
         PathSegmentRenderer::~PathSegmentRenderer()
         {
         }
+
+        PathRenderer *PathSegmentRenderer::getPathRenderer() const
+        {
+            return pathRenderer;
+        }
     }
 }

@@ -1,5 +1,6 @@
 #include "LPathSegmentRenderer.h"
 #include "PathSegment.h"
+#include "PathRenderer.h"
 
 namespace jvgs
 {
@@ -16,7 +17,9 @@ namespace jvgs
 
         void LPathSegmentRenderer::render(PathSegment *segment)
         {
+            PathRenderer *pathRenderer = getPathRenderer();
 
+            pathRenderer->setFirstSegment(false);
         }
     }
 }

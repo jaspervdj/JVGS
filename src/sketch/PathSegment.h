@@ -20,6 +20,9 @@ namespace jvgs
                 char getCommand() const;
                 bool isRelativeCommand() const;
                 char getLowerCaseCommand() const;
+
+                int getNumberOfArguments() const;
+                float getArgument(int index) const;
         };
     }
 }
