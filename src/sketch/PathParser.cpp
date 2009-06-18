@@ -2,6 +2,7 @@
 #include "Parser.h"
 #include "Path.h"
 #include "PathSegment.h"
+#include "StyleMap.h"
 
 #include "../tinyxml/tinyxml.h"
 
@@ -67,6 +68,11 @@ namespace jvgs
 
             /* Add last command. */
             command(path, data.substr(start));
+
+            if(element->Attribute("style"))
+                path->getStyleMap()->load(element->Attribute("style"));
+            if(element->Attribute("transform"))
+                parseTransform(path, element->Attribute("transform"));
 
             return path;
         }

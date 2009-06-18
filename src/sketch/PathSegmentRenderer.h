@@ -1,6 +1,8 @@
 #ifndef JVGS_SKETCH_PATHSEGMENTRENDERER_H
 #define JVGS_SKETCH_PATHSEGMENTRENDERER_H
 
+#include "../video/Renderer.h"
+
 namespace jvgs
 {
     namespace sketch
@@ -18,7 +20,8 @@ namespace jvgs
                 virtual ~PathSegmentRenderer();
 
                 virtual PathRenderer *getPathRenderer() const;
-                virtual void render(PathSegment *segment) = 0;
+                virtual void vectors(video::Renderer *renderer,
+                        PathSegment *segment) = 0;
         };
     }
 }

@@ -4,6 +4,7 @@
 
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
+using namespace jvgs::video;
 
 namespace jvgs
 {
@@ -18,7 +19,8 @@ namespace jvgs
         {
         }
 
-        void MPathSegmentRenderer::render(PathSegment *segment)
+        void MPathSegmentRenderer::vectors(Renderer *renderer,
+                PathSegment *segment)
         {
             PathRenderer *pathRenderer = getPathRenderer();
 

@@ -3,6 +3,7 @@
 #include "PathSegment.h"
 #include "PathSegmentRenderer.h"
 #include "LPathSegmentRenderer.h"
+#include "MPathSegmentRenderer.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -19,6 +20,7 @@ namespace jvgs
         {
             this->path = path;
 
+            segmentRenderers['m'] = new MPathSegmentRenderer(this);
             segmentRenderers['l'] = new LPathSegmentRenderer(this);
         }
 
@@ -86,7 +88,7 @@ namespace jvgs
 
                 if(iterator != segmentRenderers.end()) {
                     PathSegmentRenderer *segmentRenderer = iterator->second;
-                    segmentRenderer->render(segment);
+                    segmentRenderer->vectors(renderer, segment);
                 } else {
                     LogManager::getInstance()->warning(
                             "%c command for paths is not (yet) implemented.",
