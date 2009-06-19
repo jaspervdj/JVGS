@@ -3,6 +3,7 @@
 
 #include "../math/Vector2D.h"
 #include <SDL/SDL_opengl.h>
+#include <vector>
 
 namespace jvgs
 {
@@ -38,7 +39,7 @@ namespace jvgs
 
                 /** List used for concave polygons.
                  */
-                GLuint concavePolygonList;
+                std::vector<math::Vector2D> concavePolygonList;
                 math::Vector2D *concavePolygonTopLeft;
                 math::Vector2D *concavePolygonBottomRight;
 

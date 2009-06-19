@@ -9,7 +9,6 @@ using namespace jvgs::math;
 
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 namespace jvgs
 {
@@ -17,15 +16,10 @@ namespace jvgs
     {
         void Renderer::beginConcavePolygon()
         {
-            if(!concavePolygonList)
-                concavePolygonList = glGenLists(1);
-            glNewList(concavePolygonList, GL_COMPILE);
         }
 
         void Renderer::endConcavePolygon()
         {
-            glEndList();
-
             if(!concavePolygonTopLeft) {
                 LogManager::getInstance()->warning("Drawing empty polygon...");
                 return;
@@ -44,14 +38,36 @@ namespace jvgs
 
             glColor4f (1.0, 1.0, 1.0, 1.0);
             glBegin (GL_TRIANGLE_FAN);
-            glVertex3f (0, 0, 0);
-            glCallList(concavePolygonList);
+            /* To figure out: will this always work? */
+            glVertex2f(concavePolygonTopLeft->getX(),
+                    concavePolygonTopLeft->getY());
+
+            for(std::vector<Vector2D>::iterator iterator =
+                    concavePolygonList.begin();
+                    iterator != concavePolygonList.end(); iterator++) {
+                glVertex2f((*iterator).getX(), (*iterator).getY());
+            }
             glEnd();
+
+            glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            glStencilFunc (GL_EQUAL, 0x00, 0x01);
+            glStencilOp (GL_KEEP, GL_KEEP, GL_KEEP);
+
+            videoManager->setColor(color);
+            glBegin (GL_LINES);
+            for(std::vector<Vector2D>::iterator iterator =
+                    concavePolygonList.begin();
+                    iterator != concavePolygonList.end(); iterator++) {
+                glVertex2f((*iterator).getX(), (*iterator).getY());
+            }
+            glEnd ();
 
             glStencilFunc (GL_EQUAL, 0x01, 0x01);
             glStencilOp (GL_ZERO, GL_ZERO, GL_ZERO);
 
-            glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
             videoManager->setVideoDefaults();
             videoManager->setColor(color);
 
@@ -71,20 +87,19 @@ namespace jvgs
             delete concavePolygonTopLeft;
             delete concavePolygonBottomRight;
             concavePolygonTopLeft = concavePolygonBottomRight = 0;
+
+            concavePolygonList.clear();
         }
 
         Renderer::Renderer()
         {
             busy = false;
-            concavePolygonList = 0;
             concavePolygonTopLeft = 0;
             concavePolygonBottomRight = 0;
         }
 
         Renderer::~Renderer()
         {
-            if(concavePolygonList)
-                glDeleteLists(concavePolygonList, 1);
         }
 
         void Renderer::begin(Type type)
@@ -113,11 +128,13 @@ namespace jvgs
 
         void Renderer::vector(const Vector2D &vector)
         {
-            glVertex2f(vector.getX(), vector.getY());
+            /* Regular. */
+            if(rendering != CONCAVE_POLYGON) {
+                glVertex2f(vector.getX(), vector.getY());
 
             /* We need to determine the max span area. */
-            if(rendering == CONCAVE_POLYGON) {
-
+            } else {
+                concavePolygonList.push_back(Vector2D(vector));
                 /* First vector. */
                 if(!concavePolygonTopLeft) {
                     concavePolygonTopLeft = new Vector2D(vector);

@@ -8,6 +8,8 @@ using namespace jvgs::video;
 #include "../math/AffineTransformationMatrix.h"
 using namespace jvgs::math;
 
+#include <GL/gl.h>
+
 #include <string>
 #include <iostream>
 using namespace std;
@@ -32,8 +34,25 @@ int main(int argc, char **argv)
     start = SDL_GetTicks();
     sketch->render();
     cout << "Rendered sketch in " << (SDL_GetTicks() - start) << "ms." << endl;
+    
+    videoManager->flip();
 
-    while (SDL_GetTicks() < start + 5000) {
+    start = SDL_GetTicks();
+    GLuint list = glGenLists(1);
+    glNewList(list, GL_COMPILE);
+    sketch->render();
+    glEndList();
+    cout << "Compiled list in " << (SDL_GetTicks() - start) << "ms." << endl;
+
+    videoManager->clear();
+
+    start = SDL_GetTicks();
+    glCallList(list);
+    cout << "Called list in " << (SDL_GetTicks() - start) << "ms." << endl;
+
+    glDeleteLists(list, 1);
+
+    while (SDL_GetTicks() < start + 15000) {
         videoManager->flip();
         SDL_Delay(10);
     }
