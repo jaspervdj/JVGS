@@ -43,7 +43,7 @@ namespace jvgs
 
             /* Start the new line. */
             if(fill)
-                renderer->begin(Renderer::POLYGON);
+                renderer->begin(Renderer::CONCAVE_POLYGON);
             else
                 renderer->begin(Renderer::LINE_STRIP);
 

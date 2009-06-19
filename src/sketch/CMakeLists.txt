@@ -1,5 +1,6 @@
 ADD_LIBRARY( 
     sketch SHARED 
+    CPathSegmentRenderer.cpp
     Group.cpp
     GroupParser.cpp
     GroupRenderer.cpp

@@ -74,8 +74,8 @@ namespace jvgs
 
             /* Set a number of defaults. */
             StyleMap *styleMap = root->getStyleMap();
-            styleMap->load(string("opacity:1; stroke-opacity:1;") +
-                    "fill-opacity:1;");
+            styleMap->load(string("opacity:1; stroke-opacity:1; stroke:none;") +
+                    "fill-opacity:1; fill:none;");
 
             delete groupParser;
         }

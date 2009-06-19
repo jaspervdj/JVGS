@@ -58,7 +58,7 @@ namespace jvgs
             setVideoDefaults();
         }
 
-        void VideoManager::setVideoDefaults() const
+        void VideoManager::setVideoDefaults()
         {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
@@ -77,6 +77,8 @@ namespace jvgs
             //glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
 
             glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+            color = Color(0.0f, 0.0f, 0.0f);
             glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 
             glLineWidth(1.5f);
@@ -94,7 +96,7 @@ namespace jvgs
 
         void VideoManager::clear() const
         {
-            glClear(GL_COLOR_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         }
 
         void VideoManager::flip() const
@@ -171,10 +173,16 @@ namespace jvgs
             delete[] glMatrix;
         }
 
-        void VideoManager::setColor(Color color) const
+        void VideoManager::setColor(Color color)
         {
+            this->color = color;
             glColor4f(color.getRed(), color.getGreen(),
                       color.getBlue(), color.getAlpha());
+        }
+
+        const Color &VideoManager::getColor() const
+        {
+            return color;
         }
 
         void VideoManager::setClearColor(Color color) const

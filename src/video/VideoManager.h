@@ -25,6 +25,9 @@ namespace jvgs
                 /* Video dimensions. */
                 int width, height;
 
+                /* Drawing color. */
+                Color color;
+
                 /** Constructor.
                  */
                 VideoManager();
@@ -41,21 +44,21 @@ namespace jvgs
                  *  screen resolution.
                  *  \param title Title to be fed to the window manager.
                  */
-                void setVideoMode( std::string title );
+                void setVideoMode(std::string title);
 
                 /** Sets a windowed video mode with the given dimensions.
                  *  \param width The screen width.
                  *  \param height The screen height.
                  *  \param title Title to be fed to the window manager.
                  */
-                void setVideoMode( int width, int height, std::string title );
+                void setVideoMode(int width, int height, std::string title);
 
                 /** Sets a number of (good!) default flags. This includes
                  *  blending mode, textures enabled, the correct projection
                  *  matrix, the identity modelview matrix... for the full
                  *  list, well, see the source code.
                  */
-                void setVideoDefaults() const;
+                void setVideoDefaults();
 
                 /** Get the screen width.
                  *  \return The screen width.
@@ -91,18 +94,18 @@ namespace jvgs
                  *  @param x X axis translation.
                  *  @param y Y axis translation.
                  */
-                void translate( const float &x, const float &y ) const;
+                void translate(const float &x, const float &y) const;
 
                 /** Scales the current matrix.
                  *  @param x X axis scale.
                  *  @param y Y axis scale.
                  */
-                void scale( const float &x, const float &y ) const;
+                void scale(const float &x, const float &y) const;
 
                 /** Rotates the current matrix.
                  *  @param degrees Rotation degrees.
                  */
-                void rotate( const float &degrees ) const;
+                void rotate(const float &degrees) const;
 
                 /** Tranforms with a tranformation matrix.
                  *  @param matrix The tranformation matrix.
@@ -113,12 +116,17 @@ namespace jvgs
                 /** Select a color for drawing.
                  *  @param color Color to be used.
                  */
-                virtual void setColor( Color color ) const;
+                virtual void setColor(Color color); 
+
+                /** Get the drawing color.
+                 *  @return The current drawing color.
+                 */
+                virtual const Color &getColor() const;
 
                 /** Select a color for clearing the screen.
                  *  @param color Color to be used.
                  */
-                virtual void setClearColor( Color color ) const;
+                virtual void setClearColor(Color color) const;
         };
     };
 };
