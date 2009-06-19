@@ -52,6 +52,13 @@ namespace jvgs
                 float dotProduct() const;
                 float length() const;
                 float distance( const Vector2D &other ) const;
+
+                /** Reflects the other vector around this vector and
+                 *  return the result.
+                 *  @param other Vector to be reflected.
+                 *  @return The reflection of the parameter around this vector.
+                 */
+                Vector2D reflect(const Vector2D &other) const;
         };
     };
 };

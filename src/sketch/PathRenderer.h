@@ -18,6 +18,7 @@ namespace jvgs
                 Path *path;
                 math::Vector2D startingPoint;
                 math::Vector2D currentPoint;
+                math::Vector2D lastControlPoint;
                 std::map<char, PathSegmentRenderer*> segmentRenderers;
 
             public:
@@ -29,6 +30,9 @@ namespace jvgs
 
                 virtual const math::Vector2D &getCurrentPoint() const;
                 virtual void setCurrentPoint(const math::Vector2D &point);
+
+                virtual const math::Vector2D &getLastControlPoint() const;
+                virtual void setLastControlPoint(const math::Vector2D &point);
 
                 virtual void fill(video::Renderer *renderer);
                 virtual void stroke(video::Renderer *renderer);

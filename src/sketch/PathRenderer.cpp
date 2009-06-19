@@ -5,6 +5,7 @@
 #include "LPathSegmentRenderer.h"
 #include "MPathSegmentRenderer.h"
 #include "QPathSegmentRenderer.h"
+#include "TPathSegmentRenderer.h"
 #include "ZPathSegmentRenderer.h"
 
 #include "../core/LogManager.h"
@@ -25,6 +26,7 @@ namespace jvgs
             segmentRenderers['l'] = new LPathSegmentRenderer(this);
             segmentRenderers['m'] = new MPathSegmentRenderer(this);
             segmentRenderers['q'] = new QPathSegmentRenderer(this);
+            segmentRenderers['t'] = new TPathSegmentRenderer(this);
             segmentRenderers['z'] = new ZPathSegmentRenderer(this);
         }
 
@@ -55,6 +57,16 @@ namespace jvgs
         void PathRenderer::setCurrentPoint(const Vector2D &currentPoint)
         {
             this->currentPoint = currentPoint;
+        }
+
+        const Vector2D &PathRenderer::getLastControlPoint() const
+        {
+            return lastControlPoint;
+        }
+
+        void PathRenderer::setLastControlPoint(const Vector2D &lastControlPoint)
+        {
+            this->lastControlPoint = lastControlPoint;
         }
 
         void PathRenderer::fill(Renderer *renderer)

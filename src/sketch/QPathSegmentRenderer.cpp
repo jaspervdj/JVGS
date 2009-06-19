@@ -53,6 +53,7 @@ namespace jvgs
                 }
 
                 last = destination;
+                pathRenderer->setLastControlPoint(control);
             }
 
             pathRenderer->setCurrentPoint(last);

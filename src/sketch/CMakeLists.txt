@@ -30,6 +30,7 @@ ADD_LIBRARY(
     TransformCommand.cpp
     TranslateTransformCommand.cpp
     TextParser.cpp
+    TPathSegmentRenderer.cpp
     QPathSegmentRenderer.cpp
     ZPathSegmentRenderer.cpp
 )
