@@ -40,8 +40,6 @@ namespace jvgs
             }
 
             pathRenderer->setCurrentPoint(last);
-
-            pathRenderer->setFirstSegment(false);
         }
     }
 }

@@ -4,6 +4,7 @@
 #include "PathSegmentRenderer.h"
 #include "LPathSegmentRenderer.h"
 #include "MPathSegmentRenderer.h"
+#include "QPathSegmentRenderer.h"
 #include "ZPathSegmentRenderer.h"
 
 #include "../core/LogManager.h"
@@ -23,6 +24,7 @@ namespace jvgs
 
             segmentRenderers['l'] = new LPathSegmentRenderer(this);
             segmentRenderers['m'] = new MPathSegmentRenderer(this);
+            segmentRenderers['q'] = new QPathSegmentRenderer(this);
             segmentRenderers['z'] = new ZPathSegmentRenderer(this);
         }
 
@@ -33,16 +35,6 @@ namespace jvgs
                     iterator != segmentRenderers.end(); iterator++) {
                 delete iterator->second;
             }
-        }
-
-        bool PathRenderer::isFirstSegment() const
-        {
-            return firstSegment;
-        }
-
-        void PathRenderer::setFirstSegment(bool firstSegment)
-        {
-            this->firstSegment = firstSegment;
         }
 
         const Vector2D &PathRenderer::getStartingPoint() const
