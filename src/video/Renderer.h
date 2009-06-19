@@ -15,6 +15,9 @@ namespace jvgs
         class Renderer
         {
             protected:
+                /** If we are between a begin() and an end() call.
+                 */
+                bool busy;
 
             public:
                 /** Types of primives that can be rendered.
@@ -22,6 +25,7 @@ namespace jvgs
                 enum Type
                 {
                     LINES = GL_LINES,
+                    LINE_STRIP = GL_LINE_STRIP,
                     LINE_LOOP = GL_LINE_LOOP,
                     QUADS = GL_QUADS,
                     POLYGON = GL_POLYGON
@@ -38,11 +42,15 @@ namespace jvgs
                 /** Start rendering a certain type of primitive.
                  *  @param type Type of the primitive to be rendered.
                  */
-                virtual void begin(Type type) const;
+                virtual void begin(Type type);
 
                 /** End the primitive currently being rendered.
                  */
-                virtual void end() const;
+                virtual void end();
+
+                /** Check if we are between a begin() and an end() call.
+                 */
+                virtual bool isBusy() const;
 
                 /** Add a vector to the primitive.
                  *  @param vector Vector to add to the primitive.

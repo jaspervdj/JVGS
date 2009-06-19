@@ -65,19 +65,15 @@ namespace jvgs
 
         void PathRenderer::fill(Renderer *renderer)
         {
-            renderer->begin(Renderer::POLYGON);
-            vectors(renderer);
-            renderer->end();
+            vectors(renderer, true);
         }
 
         void PathRenderer::stroke(Renderer *renderer)
         {
-            renderer->begin(Renderer::LINES);
-            vectors(renderer);
-            renderer->end();
+            vectors(renderer, false);
         }
 
-        void PathRenderer::vectors(Renderer *renderer)
+        void PathRenderer::vectors(Renderer *renderer, bool fill)
         {
             for(int i = 0; i < path->getNumberOfSegments(); i++) {
 
@@ -88,13 +84,17 @@ namespace jvgs
 
                 if(iterator != segmentRenderers.end()) {
                     PathSegmentRenderer *segmentRenderer = iterator->second;
-                    segmentRenderer->vectors(renderer, segment);
+                    segmentRenderer->vectors(renderer, segment, fill);
                 } else {
                     LogManager::getInstance()->warning(
                             "%c command for paths is not (yet) implemented.",
                             segment->getLowerCaseCommand());
                 }
             }
+
+            /* Stop the renderer if left unclosed. */
+            if(renderer->isBusy())
+                renderer->end();
         }
     }
 }

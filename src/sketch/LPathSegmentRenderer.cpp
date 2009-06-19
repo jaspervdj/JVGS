@@ -21,7 +21,7 @@ namespace jvgs
         }
 
         void LPathSegmentRenderer::vectors(Renderer *renderer,
-                PathSegment *segment)
+                PathSegment *segment, bool fill)
         {
             PathRenderer *pathRenderer = getPathRenderer();
             Vector2D last;
@@ -30,13 +30,12 @@ namespace jvgs
             for(int i = 0; i + 1 < segment->getNumberOfArguments(); i += 2) {
                 Vector2D vector(segment->getArgument(i),
                                 segment->getArgument(i + 1));
+
                 if(segment->isRelativeCommand())
                     vector += pathRenderer->getCurrentPoint();
                 
+                /* Save the last vector. */
                 renderer->vector(vector);
-                if(i + 3 < segment->getNumberOfArguments())
-                    renderer->vector(vector);
-
                 last = vector;
             }
 

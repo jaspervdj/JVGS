@@ -9,6 +9,7 @@ using namespace jvgs::video;
 using namespace jvgs::math;
 
 #include <string>
+#include <iostream>
 using namespace std;
 
 int main(int argc, char **argv)
@@ -16,7 +17,10 @@ int main(int argc, char **argv)
     string fileName = argc < 2 ? string("resources/drawing.svg") :
                                  string(argv[1]);
 
+    long start = SDL_GetTicks();
     Sketch *sketch = new Sketch(fileName);
+    cout << "Parsed sketch in " << (SDL_GetTicks() - start) << "ms." << endl;
+
     Vector2D size = sketch->getSize();
 
     VideoManager *videoManager = VideoManager::getInstance();
@@ -24,9 +28,12 @@ int main(int argc, char **argv)
             string("(OpenGL window)") );
 
     videoManager->clear();
-    long start = SDL_GetTicks();
+
+    start = SDL_GetTicks();
     sketch->render();
-    while (SDL_GetTicks() < start + 25000) {
+    cout << "Rendered sketch in " << (SDL_GetTicks() - start) << "ms." << endl;
+
+    while (SDL_GetTicks() < start + 5000) {
         videoManager->flip();
         SDL_Delay(10);
     }

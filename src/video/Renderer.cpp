@@ -13,20 +13,28 @@ namespace jvgs
     {
         Renderer::Renderer()
         {
+            busy = false;
         }
 
         Renderer::~Renderer()
         {
         }
 
-        void Renderer::begin(Type type) const
+        void Renderer::begin(Type type)
         {
             glBegin(type);
+            busy = true;
         }
 
-        void Renderer::end() const
+        void Renderer::end()
         {
             glEnd();
+            busy = false;
+        }
+
+        bool Renderer::isBusy() const
+        {
+            return busy;
         }
 
         void Renderer::vector(const Vector2D &vector) const
