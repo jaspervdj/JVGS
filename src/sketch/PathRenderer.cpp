@@ -4,6 +4,7 @@
 #include "PathSegmentRenderer.h"
 #include "LPathSegmentRenderer.h"
 #include "MPathSegmentRenderer.h"
+#include "ZPathSegmentRenderer.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -20,8 +21,9 @@ namespace jvgs
         {
             this->path = path;
 
-            segmentRenderers['m'] = new MPathSegmentRenderer(this);
             segmentRenderers['l'] = new LPathSegmentRenderer(this);
+            segmentRenderers['m'] = new MPathSegmentRenderer(this);
+            segmentRenderers['z'] = new ZPathSegmentRenderer(this);
         }
 
         PathRenderer::~PathRenderer()
