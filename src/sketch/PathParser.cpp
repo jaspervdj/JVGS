@@ -34,7 +34,7 @@ namespace jvgs
             char command = data[0];
             vector<string> splitted;
             vector<float> arguments;
-            split(data.substr(1), ", -", splitted);
+            split(data.substr(1), ", ", splitted);
             for(vector<string>::iterator iterator = splitted.begin();
                     iterator != splitted.end(); iterator++) {
                 stringstream converter(*iterator);
