@@ -22,6 +22,7 @@ namespace jvgs
         {
             PathRenderer *pathRenderer = getPathRenderer();
             renderer->vector(pathRenderer->getStartingPoint());
+            pathRenderer->setCurrentPoint(pathRenderer->getStartingPoint());
             renderer->end();
         }
     }

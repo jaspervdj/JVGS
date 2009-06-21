@@ -12,6 +12,7 @@ using namespace jvgs::core;
 #include <sstream>
 #include <string>
 #include <vector>
+#include <iostream>
 using namespace std;
 
 namespace jvgs
@@ -34,7 +35,11 @@ namespace jvgs
             char command = data[0];
             vector<string> splitted;
             vector<float> arguments;
-            split(data.substr(1), ", ", splitted);
+            string argumentsData = data.substr(1);
+            cout << argumentsData << endl;
+            replaceAll(argumentsData, "-", " -");
+            cout << argumentsData << endl;
+            split(argumentsData, ", ", splitted);
             for(vector<string>::iterator iterator = splitted.begin();
                     iterator != splitted.end(); iterator++) {
                 stringstream converter(*iterator);

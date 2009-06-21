@@ -21,6 +21,8 @@ namespace jvgs
                 void split(const std::string &str,
                         const std::string &characters,
                         std::vector<std::string> &destination) const;
+                void replaceAll(std::string &text, const std::string &from,
+                        const std::string &to) const;
                 video::Color parseColor(const std::string &str) const;
         };
     }

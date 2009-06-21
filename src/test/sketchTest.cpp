@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     Vector2D size = sketch->getSize();
 
     VideoManager *videoManager = VideoManager::getInstance();
-    videoManager->setVideoMode(size.getX(), size.getY(),
+    videoManager->setVideoMode(800, 600,
             string("(OpenGL window)") );
 
     videoManager->clear();

@@ -41,6 +41,17 @@ namespace jvgs
                 destination.push_back(str.substr(start));
         }
 
+        void TextParser::replaceAll(string &text, const string &from,
+                const string &to) const
+        {
+            size_t lookHere = 0;
+            size_t foundHere;
+            while((foundHere = text.find(from, lookHere)) != string::npos) {
+                text.replace(foundHere, from.size(), to);
+                lookHere = foundHere + to.size();
+            }
+        }
+
         Color TextParser::parseColor(const string &str) const
         {
             if(str.length() == 7) {

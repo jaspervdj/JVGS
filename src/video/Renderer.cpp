@@ -134,8 +134,6 @@ namespace jvgs
             if(rendering != CONCAVE_POLYGON) {
                 glVertex2f(vector.getX(), vector.getY());
 
-                LogManager::getInstance()->message("(%f, %f)", vector.getX(), vector.getY());
-
             /* We need to determine the max span area. */
             } else {
                 concavePolygonList.push_back(Vector2D(vector));
