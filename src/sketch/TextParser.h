@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "../video/Color.h"
+
 namespace jvgs
 {
     namespace sketch
@@ -19,6 +21,7 @@ namespace jvgs
                 void split(const std::string &str,
                         const std::string &characters,
                         std::vector<std::string> &destination) const;
+                video::Color parseColor(const std::string &str) const;
         };
     }
 }

@@ -22,8 +22,9 @@ namespace jvgs
                 virtual ~StyleMap();
 
                 virtual void load(const std::string &data);
-
                 virtual bool hasValue(const std::string &key);
+                virtual void setValue(const std::string &key,
+                        const std::string &value);
                 virtual std::string getValue(const std::string &key);
                 virtual float getValueAsFloat(const std::string &key);
                 virtual video::Color getValueAsColor(const std::string &key);

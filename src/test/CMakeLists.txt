@@ -4,6 +4,14 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_EXECUTABLE(
+    performanceTest performanceTest.cpp
+)
+
+TARGET_LINK_LIBRARIES(
+    performanceTest sketch
+)
+
+ADD_EXECUTABLE(
     sketchTest sketchTest.cpp
 )
 

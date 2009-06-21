@@ -42,6 +42,7 @@ namespace jvgs
                 rectangle->getStyleMap()->load(element->Attribute("style"));
             if(element->Attribute("transform"))
                 parseTransform(rectangle, element->Attribute("transform"));
+            parseStyle(rectangle, element);
 
             return rectangle;
         }

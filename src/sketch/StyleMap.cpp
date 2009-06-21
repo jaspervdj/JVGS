@@ -63,6 +63,11 @@ namespace jvgs
                 return false;
         }
 
+        void StyleMap::setValue(const string &key, const string &value)
+        {
+            values[key] = value;
+        }
+
         string StyleMap::getValue(const string &key)
         {
             map<string,string>::iterator iterator = values.find(key);
@@ -83,22 +88,7 @@ namespace jvgs
         Color StyleMap::getValueAsColor(const string &key)
         {
             string value = getValue(key);
-            if(value.length() == 7) {
-                if(value[0] == '#') {
-                    stringstream redStream(value.substr(1,2));
-                    stringstream greenStream(value.substr(3,2));
-                    stringstream blueStream(value.substr(5,2));
-                    int red, green, blue;
-                    redStream >> hex >> red;
-                    greenStream >> hex >> green;
-                    blueStream >> hex >> blue;
-                    return Color( (float)red / (float)0xff,
-                                  (float)green / (float)0xff,
-                                  (float)blue / (float)0xff );
-                }
-            }
-
-            return Color();
+            return parseColor(value);
         }
     }
 }

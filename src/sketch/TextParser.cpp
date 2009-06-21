@@ -1,5 +1,9 @@
 #include "TextParser.h"
 
+#include "../video/Color.h"
+using namespace jvgs::video;
+
+#include <sstream>
 using namespace std;
 
 namespace jvgs
@@ -35,6 +39,26 @@ namespace jvgs
 
             if(start != string::npos)
                 destination.push_back(str.substr(start));
+        }
+
+        Color TextParser::parseColor(const string &str) const
+        {
+            if(str.length() == 7) {
+                if(str[0] == '#') {
+                    stringstream redStream(str.substr(1,2));
+                    stringstream greenStream(str.substr(3,2));
+                    stringstream blueStream(str.substr(5,2));
+                    int red, green, blue;
+                    redStream >> hex >> red;
+                    greenStream >> hex >> green;
+                    blueStream >> hex >> blue;
+                    return Color( (float)red / (float)0xff,
+                                  (float)green / (float)0xff,
+                                  (float)blue / (float)0xff );
+                }
+            }
+
+            return Color();
         }
     }
 }

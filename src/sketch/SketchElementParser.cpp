@@ -4,6 +4,8 @@
 #include "SketchElement.h"
 #include "Parser.h"
 
+#include "../tinyxml/tinyxml.h"
+
 #include "../core/LogManager.h"
 using namespace jvgs::core;
 
@@ -28,6 +30,16 @@ namespace jvgs
         Parser *SketchElementParser::getParser() const
         {
             return parser;
+        }
+
+        void SketchElementParser::parseStyle(SketchElement *sketchElement,
+                TiXmlElement *element)
+        {
+            StyleMap *styleMap = sketchElement->getStyleMap();
+            if(element->Attribute("fill"))
+                styleMap->setValue("fill", element->Attribute("fill"));
+            if(element->Attribute("stroke"))
+                styleMap->setValue("stroke", element->Attribute("stroke"));
         }
 
         void SketchElementParser::parseTransform(SketchElement *sketchElement,

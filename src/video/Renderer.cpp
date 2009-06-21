@@ -39,8 +39,10 @@ namespace jvgs
             glColor4f (1.0, 1.0, 1.0, 1.0);
             glBegin (GL_TRIANGLE_FAN);
             /* To figure out: will this always work? */
-            glVertex2f(concavePolygonTopLeft->getX(),
-                    concavePolygonTopLeft->getY());
+            Vector2D center = ((*concavePolygonTopLeft) +
+                    (*concavePolygonBottomRight)) * 0.5f;
+            glVertex2f(center.getX(),
+                       center.getY());
 
             for(std::vector<Vector2D>::iterator iterator =
                     concavePolygonList.begin();
@@ -53,7 +55,7 @@ namespace jvgs
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-            glStencilFunc (GL_EQUAL, 0x00, 0x01);
+            /* glStencilFunc (GL_EQUAL, 0x00, 0x01);
             glStencilOp (GL_KEEP, GL_KEEP, GL_KEEP);
 
             videoManager->setColor(color);
@@ -63,7 +65,7 @@ namespace jvgs
                     iterator != concavePolygonList.end(); iterator++) {
                 glVertex2f((*iterator).getX(), (*iterator).getY());
             }
-            glEnd ();
+            glEnd (); */
 
             glStencilFunc (GL_EQUAL, 0x01, 0x01);
             glStencilOp (GL_ZERO, GL_ZERO, GL_ZERO);
@@ -131,6 +133,8 @@ namespace jvgs
             /* Regular. */
             if(rendering != CONCAVE_POLYGON) {
                 glVertex2f(vector.getX(), vector.getY());
+
+                LogManager::getInstance()->message("(%f, %f)", vector.getX(), vector.getY());
 
             /* We need to determine the max span area. */
             } else {

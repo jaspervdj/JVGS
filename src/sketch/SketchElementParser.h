@@ -26,6 +26,9 @@ namespace jvgs
 
                 virtual void parseTransform(SketchElement *sketchElement,
                         const std::string &data);
+                /* Parses fill= en stroke= style. */
+                virtual void parseStyle(SketchElement *sketchElement,
+                        TiXmlElement *element);
 
                 virtual SketchElement *parse(SketchElement *parent,
                         TiXmlElement *element) = 0;

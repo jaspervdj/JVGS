@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 
     glDeleteLists(list, 1);
 
-    while (SDL_GetTicks() < start + 15000) {
+    while (SDL_GetTicks() < start + 5000) {
         videoManager->flip();
         SDL_Delay(10);
     }

@@ -6,6 +6,7 @@
 #include "LPathSegmentRenderer.h"
 #include "MPathSegmentRenderer.h"
 #include "QPathSegmentRenderer.h"
+#include "SPathSegmentRenderer.h"
 #include "TPathSegmentRenderer.h"
 #include "ZPathSegmentRenderer.h"
 
@@ -28,6 +29,7 @@ namespace jvgs
             segmentRenderers['l'] = new LPathSegmentRenderer(this);
             segmentRenderers['m'] = new MPathSegmentRenderer(this);
             segmentRenderers['q'] = new QPathSegmentRenderer(this);
+            segmentRenderers['s'] = new SPathSegmentRenderer(this);
             segmentRenderers['t'] = new TPathSegmentRenderer(this);
             segmentRenderers['z'] = new ZPathSegmentRenderer(this);
         }
@@ -93,6 +95,9 @@ namespace jvgs
                 if(iterator != segmentRenderers.end()) {
                     PathSegmentRenderer *segmentRenderer = iterator->second;
                     segmentRenderer->vectors(renderer, segment, fill);
+                    LogManager::getInstance()->message(
+                            "%c rendering.",
+                            segment->getCommand());
                 } else {
                     LogManager::getInstance()->warning(
                             "%c command for paths is not (yet) implemented.",
@@ -101,8 +106,10 @@ namespace jvgs
             }
 
             /* Stop the renderer if left unclosed. */
-            if(renderer->isBusy())
+            if(renderer->isBusy()) {
+                LogManager::getInstance()->message("Closed renderer.");
                 renderer->end();
+            }
         }
     }
 }
