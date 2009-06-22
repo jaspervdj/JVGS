@@ -3,11 +3,13 @@
 #include "PathSegment.h"
 #include "PathSegmentRenderer.h"
 #include "CPathSegmentRenderer.h"
+#include "HPathSegmentRenderer.h"
 #include "LPathSegmentRenderer.h"
 #include "MPathSegmentRenderer.h"
 #include "QPathSegmentRenderer.h"
 #include "SPathSegmentRenderer.h"
 #include "TPathSegmentRenderer.h"
+#include "VPathSegmentRenderer.h"
 #include "ZPathSegmentRenderer.h"
 
 #include "../core/LogManager.h"
@@ -26,11 +28,13 @@ namespace jvgs
             this->path = path;
 
             segmentRenderers['c'] = new CPathSegmentRenderer(this);
+            segmentRenderers['h'] = new HPathSegmentRenderer(this);
             segmentRenderers['l'] = new LPathSegmentRenderer(this);
             segmentRenderers['m'] = new MPathSegmentRenderer(this);
             segmentRenderers['q'] = new QPathSegmentRenderer(this);
             segmentRenderers['s'] = new SPathSegmentRenderer(this);
             segmentRenderers['t'] = new TPathSegmentRenderer(this);
+            segmentRenderers['v'] = new VPathSegmentRenderer(this);
             segmentRenderers['z'] = new ZPathSegmentRenderer(this);
         }
 

@@ -4,6 +4,7 @@ ADD_LIBRARY(
     Group.cpp
     GroupParser.cpp
     GroupRenderer.cpp
+    HPathSegmentRenderer.cpp
     LPathSegmentRenderer.cpp
     MatrixTransformCommand.cpp
     MPathSegmentRenderer.cpp
@@ -33,6 +34,7 @@ ADD_LIBRARY(
     TranslateTransformCommand.cpp
     TextParser.cpp
     TPathSegmentRenderer.cpp
+    VPathSegmentRenderer.cpp
     QPathSegmentRenderer.cpp
     ZPathSegmentRenderer.cpp
 )
