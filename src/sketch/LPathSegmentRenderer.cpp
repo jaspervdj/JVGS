@@ -2,6 +2,9 @@
 #include "PathSegment.h"
 #include "PathRenderer.h"
 
+#include <iostream>
+using namespace std;
+
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
 

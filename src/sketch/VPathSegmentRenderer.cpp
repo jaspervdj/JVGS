@@ -35,9 +35,11 @@ namespace jvgs
             char command = segment->isRelativeCommand() ? 'l' : 'L';
             vector<float> arguments;
 
-            arguments.push_back(segment->isRelativeCommand() ?
-                    0.0f : current.getX());
-            arguments.push_back(segment->getArgument(0));
+            for(int i = 0; i < segment->getNumberOfArguments(); i++) {
+                arguments.push_back(segment->isRelativeCommand() ?
+                        0.0f : current.getX());
+                arguments.push_back(segment->getArgument(0));
+            }
 
             PathSegment *lPathSegment = new PathSegment(command, arguments);
             PathSegmentRenderer *lPathRenderer =

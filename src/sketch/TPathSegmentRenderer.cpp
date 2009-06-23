@@ -30,8 +30,17 @@ namespace jvgs
                 PathSegment *segment, bool fill)
         {
             PathRenderer *pathRenderer = getPathRenderer();
-            Vector2D control = pathRenderer->getLastControlPoint();
-            control = pathRenderer->getCurrentPoint().reflect(control);
+            char lastCommand = 
+                    pathRenderer->getLastSegment()->getLowerCaseCommand();
+
+
+            Vector2D control;
+            if(lastCommand == 'q' || lastCommand == 't') {
+                control = pathRenderer->getLastControlPoint();
+                control = pathRenderer->getCurrentPoint().reflect(control);
+            } else {
+                control = pathRenderer->getCurrentPoint();
+            }
 
             if(segment->isRelativeCommand())
                 control -= pathRenderer->getCurrentPoint();
@@ -44,6 +53,10 @@ namespace jvgs
                 arguments.push_back(control.getY());
                 arguments.push_back(segment->getArgument(i));
                 arguments.push_back(segment->getArgument(i + 1));
+
+                /* New control point now. */
+                control = Vector2D(segment->getArgument(i),
+                        segment->getArgument(i + 3)).reflect(control);
             }
 
             PathSegment *qPathSegment = new PathSegment(command, arguments);
