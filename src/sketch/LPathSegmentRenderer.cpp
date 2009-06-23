@@ -24,7 +24,6 @@ namespace jvgs
                 PathSegment *segment, bool fill)
         {
             PathRenderer *pathRenderer = getPathRenderer();
-            Vector2D last;
 
             renderer->vector(pathRenderer->getCurrentPoint());
             for(int i = 0; i + 1 < segment->getNumberOfArguments(); i += 2) {
@@ -36,10 +35,8 @@ namespace jvgs
                 
                 /* Save the last vector. */
                 renderer->vector(vector);
-                last = vector;
+                pathRenderer->setCurrentPoint(vector);
             }
-
-            pathRenderer->setCurrentPoint(last);
         }
     }
 }

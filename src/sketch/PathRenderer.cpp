@@ -79,11 +79,19 @@ namespace jvgs
 
         void PathRenderer::fill(Renderer *renderer)
         {
+            startingPoint = Vector2D(0.0f, 0.0f);
+            currentPoint = Vector2D(0.0f, 0.0f);
+            lastControlPoint = Vector2D(0.0f, 0.0f);
+
             vectors(renderer, true);
         }
 
         void PathRenderer::stroke(Renderer *renderer)
         {
+            startingPoint = Vector2D(0.0f, 0.0f);
+            currentPoint = Vector2D(0.0f, 0.0f);
+            lastControlPoint = Vector2D(0.0f, 0.0f);
+
             vectors(renderer, false);
         }
 

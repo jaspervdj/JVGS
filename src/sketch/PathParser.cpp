@@ -36,9 +36,7 @@ namespace jvgs
             vector<string> splitted;
             vector<float> arguments;
             string argumentsData = data.substr(1);
-            cout << argumentsData << endl;
             replaceAll(argumentsData, "-", " -");
-            cout << argumentsData << endl;
             split(argumentsData, ", ", splitted);
             for(vector<string>::iterator iterator = splitted.begin();
                     iterator != splitted.end(); iterator++) {

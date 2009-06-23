@@ -4,6 +4,7 @@
 #include "LPathSegmentRenderer.h"
 
 #include <vector>
+#include <iostream>
 using namespace std;
 
 #include "../math/Vector2D.h"
@@ -37,6 +38,10 @@ namespace jvgs
 
             if(segment->isRelativeCommand())
                 translation += pathRenderer->getCurrentPoint();
+
+            cout << "Total translation: (" << translation.getX() << ", " << translation.getY() << ")" << endl; 
+            cout << "Current point: (" << pathRenderer->getCurrentPoint().getX() <<
+                ", " << pathRenderer->getCurrentPoint().getY() << ")" << endl; 
 
             pathRenderer->setCurrentPoint(translation);
             pathRenderer->setStartingPoint(translation);
