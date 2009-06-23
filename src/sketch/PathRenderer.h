@@ -10,12 +10,14 @@ namespace jvgs
     namespace sketch
     {
         class Path;
+        class PathSegment;
         class PathSegmentRenderer;
 
         class PathRenderer: public PrimitiveRenderer
         {
             private:
                 Path *path;
+                PathSegment *lastSegment;
                 math::Vector2D startingPoint;
                 math::Vector2D currentPoint;
                 math::Vector2D lastControlPoint;
@@ -24,6 +26,8 @@ namespace jvgs
             public:
                 PathRenderer(Path *path);
                 virtual ~PathRenderer();
+
+                virtual PathSegment *getLastSegment() const;
 
                 virtual const math::Vector2D &getStartingPoint() const;
                 virtual void setStartingPoint(const math::Vector2D &point);

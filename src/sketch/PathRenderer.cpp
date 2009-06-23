@@ -47,6 +47,11 @@ namespace jvgs
             }
         }
 
+        PathSegment *PathRenderer::getLastSegment() const
+        {
+            return lastSegment;
+        }
+
         const Vector2D &PathRenderer::getStartingPoint() const
         {
             return startingPoint;
@@ -79,24 +84,21 @@ namespace jvgs
 
         void PathRenderer::fill(Renderer *renderer)
         {
-            startingPoint = Vector2D(0.0f, 0.0f);
-            currentPoint = Vector2D(0.0f, 0.0f);
-            lastControlPoint = Vector2D(0.0f, 0.0f);
-
             vectors(renderer, true);
         }
 
         void PathRenderer::stroke(Renderer *renderer)
         {
-            startingPoint = Vector2D(0.0f, 0.0f);
-            currentPoint = Vector2D(0.0f, 0.0f);
-            lastControlPoint = Vector2D(0.0f, 0.0f);
-
             vectors(renderer, false);
         }
 
         void PathRenderer::vectors(Renderer *renderer, bool fill)
         {
+            lastSegment = 0;
+            startingPoint = Vector2D(0.0f, 0.0f);
+            currentPoint = Vector2D(0.0f, 0.0f);
+            lastControlPoint = Vector2D(0.0f, 0.0f);
+
             for(int i = 0; i < path->getNumberOfSegments(); i++) {
 
                 PathSegment *segment = path->getSegment(i);
@@ -115,6 +117,8 @@ namespace jvgs
                             "%c command for paths is not (yet) implemented.",
                             segment->getLowerCaseCommand());
                 }
+
+                lastSegment = segment;
             }
 
             /* Stop the renderer if left unclosed. */
