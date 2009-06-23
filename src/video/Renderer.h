@@ -2,6 +2,7 @@
 #define JVGS_VIDEO_RENDERER_H
 
 #include "../math/Vector2D.h"
+#include "../math/Noise.h"
 #include <SDL/SDL_opengl.h>
 #include <vector>
 
@@ -37,14 +38,12 @@ namespace jvgs
                  */
                 Type rendering;
 
-                /** List used for concave polygons.
+                /** List of vectors to render.
                  */
-                std::vector<math::Vector2D> concavePolygonList;
-                math::Vector2D *concavePolygonTopLeft;
-                math::Vector2D *concavePolygonBottomRight;
+                std::vector<math::Vector2D> vectorList;
 
-                void beginConcavePolygon();
-                void endConcavePolygon();
+                /** Noise source. */
+                math::Noise *noiseX, *noiseY;
 
             public:
                 /** Constructor.

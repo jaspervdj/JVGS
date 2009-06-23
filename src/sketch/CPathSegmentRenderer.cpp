@@ -25,16 +25,13 @@ namespace jvgs
         }
 
         void CPathSegmentRenderer::vectors(video::Renderer *renderer,
-                PathSegment *segment, bool fill)
+                PathSegment *segment)
         {
             PathRenderer *pathRenderer = getPathRenderer();
             Vector2D last = pathRenderer->getCurrentPoint();
 
             renderer->vector(last);
             for(int i = 0; i + 5 < segment->getNumberOfArguments(); i += 6) {
-                
-                cout << "C segment part." << endl;
-
                 Vector2D control1(segment->getArgument(i),
                                   segment->getArgument(i + 1));
                 Vector2D control2(segment->getArgument(i + 2),

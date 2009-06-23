@@ -25,7 +25,7 @@ namespace jvgs
         }
 
         void MPathSegmentRenderer::vectors(Renderer *renderer,
-                PathSegment *segment, bool fill)
+                PathSegment *segment)
         {
             PathRenderer *pathRenderer = getPathRenderer();
 
@@ -39,18 +39,11 @@ namespace jvgs
             if(segment->isRelativeCommand())
                 translation += pathRenderer->getCurrentPoint();
 
-            cout << "Total translation: (" << translation.getX() << ", " << translation.getY() << ")" << endl; 
-            cout << "Current point: (" << pathRenderer->getCurrentPoint().getX() <<
-                ", " << pathRenderer->getCurrentPoint().getY() << ")" << endl; 
-
             pathRenderer->setCurrentPoint(translation);
             pathRenderer->setStartingPoint(translation);
 
             /* Start the new line. */
-            if(fill)
-                renderer->begin(Renderer::CONCAVE_POLYGON);
-            else
-                renderer->begin(Renderer::LINE_STRIP);
+            renderer->begin(Renderer::LINE_STRIP);
 
             /* If a moveto is followed by multiple pairs of coordinates, the
              * subsequent pairs are treated as implicit lineto commands. (from
@@ -68,7 +61,7 @@ namespace jvgs
                 /* Render it. */
                 LPathSegmentRenderer *implicitLineRenderer =
                         new LPathSegmentRenderer(pathRenderer);
-                implicitLineRenderer->vectors(renderer, implicitLine, fill);
+                implicitLineRenderer->vectors(renderer, implicitLine);
 
                 /* Clean up. */
                 delete implicitLineRenderer;

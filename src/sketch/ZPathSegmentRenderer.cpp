@@ -18,7 +18,7 @@ namespace jvgs
         }
 
         void ZPathSegmentRenderer::vectors(Renderer *renderer,
-                PathSegment *segment, bool fill)
+                PathSegment *segment)
         {
             PathRenderer *pathRenderer = getPathRenderer();
             renderer->vector(pathRenderer->getStartingPoint());

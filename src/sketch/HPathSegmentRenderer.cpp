@@ -27,7 +27,7 @@ namespace jvgs
         }
 
         void HPathSegmentRenderer::vectors(video::Renderer *renderer,
-                PathSegment *segment, bool fill)
+                PathSegment *segment)
         {
             PathRenderer *pathRenderer = getPathRenderer();
             Vector2D current = pathRenderer->getCurrentPoint();
@@ -44,7 +44,7 @@ namespace jvgs
             PathSegment *lPathSegment = new PathSegment(command, arguments);
             PathSegmentRenderer *lPathRenderer =
                     new LPathSegmentRenderer(pathRenderer);
-            lPathRenderer->vectors(renderer, lPathSegment, fill);
+            lPathRenderer->vectors(renderer, lPathSegment);
             delete lPathSegment;
             delete lPathRenderer;
         }

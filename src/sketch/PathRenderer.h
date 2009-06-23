@@ -38,9 +38,8 @@ namespace jvgs
                 virtual const math::Vector2D &getLastControlPoint() const;
                 virtual void setLastControlPoint(const math::Vector2D &point);
 
-                virtual void fill(video::Renderer *renderer);
                 virtual void stroke(video::Renderer *renderer);
-                virtual void vectors(video::Renderer *renderer, bool fill);
+                virtual void vectors(video::Renderer *renderer);
         };
     }
 }

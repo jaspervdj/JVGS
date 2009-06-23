@@ -27,15 +27,6 @@ namespace jvgs
             VideoManager *videoManager = VideoManager::getInstance();
             StyleMap *styleMap = primitive->getStyleMap();
 
-            if(styleMap->getValue("fill") != "none") {
-                Color color = styleMap->getValueAsColor("fill");
-                color.setAlpha(styleMap->getValueAsFloat("opacity") *
-                        styleMap->getValueAsFloat("fill-opacity"));
-                videoManager->setColor(color);
-
-                fill(renderer);
-            }
-
             if(styleMap->getValue("stroke") != "none") {
                 Color color = styleMap->getValueAsColor("stroke");
                 color.setAlpha(styleMap->getValueAsFloat("opacity") *

@@ -24,21 +24,30 @@ namespace jvgs
         }
 
         void LPathSegmentRenderer::vectors(Renderer *renderer,
-                PathSegment *segment, bool fill)
+                PathSegment *segment)
         {
             PathRenderer *pathRenderer = getPathRenderer();
 
-            renderer->vector(pathRenderer->getCurrentPoint());
+            Vector2D current = pathRenderer->getCurrentPoint();
+            renderer->vector(current);
             for(int i = 0; i + 1 < segment->getNumberOfArguments(); i += 2) {
-                Vector2D vector(segment->getArgument(i),
-                                segment->getArgument(i + 1));
+                Vector2D destination(segment->getArgument(i),
+                        segment->getArgument(i + 1));
+
+                current = pathRenderer->getCurrentPoint();
 
                 if(segment->isRelativeCommand())
-                    vector += pathRenderer->getCurrentPoint();
-                
+                    destination += current;
+
+                float distance = current.distance(destination);
+
+                float increment = LINE_SEGMENT_SIZE / distance;
+                for(float t = increment; t <= 1.0f; t += increment) {
+                    renderer->vector(current * (1.0f - t) + destination * t);
+                }
+
                 /* Save the last vector. */
-                renderer->vector(vector);
-                pathRenderer->setCurrentPoint(vector);
+                pathRenderer->setCurrentPoint(destination);
             }
         }
     }

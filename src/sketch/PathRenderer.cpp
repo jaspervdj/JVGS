@@ -82,17 +82,12 @@ namespace jvgs
             this->lastControlPoint = lastControlPoint;
         }
 
-        void PathRenderer::fill(Renderer *renderer)
-        {
-            vectors(renderer, true);
-        }
-
         void PathRenderer::stroke(Renderer *renderer)
         {
-            vectors(renderer, false);
+            vectors(renderer);
         }
 
-        void PathRenderer::vectors(Renderer *renderer, bool fill)
+        void PathRenderer::vectors(Renderer *renderer)
         {
             lastSegment = 0;
             startingPoint = Vector2D(0.0f, 0.0f);
@@ -108,10 +103,7 @@ namespace jvgs
 
                 if(iterator != segmentRenderers.end()) {
                     PathSegmentRenderer *segmentRenderer = iterator->second;
-                    segmentRenderer->vectors(renderer, segment, fill);
-                    LogManager::getInstance()->message(
-                            "%c rendering.",
-                            segment->getCommand());
+                    segmentRenderer->vectors(renderer, segment);
                 } else {
                     LogManager::getInstance()->warning(
                             "%c command for paths is not (yet) implemented.",

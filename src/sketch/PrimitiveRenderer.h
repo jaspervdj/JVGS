@@ -21,7 +21,6 @@ namespace jvgs
 
                 virtual void render();
 
-                virtual void fill(video::Renderer *renderer) = 0;
                 virtual void stroke(video::Renderer *renderer) = 0;
         };
     }

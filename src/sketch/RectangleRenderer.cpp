@@ -23,13 +23,6 @@ namespace jvgs
         {
         }
 
-        void RectangleRenderer::fill(Renderer *renderer)
-        {
-            renderer->begin(Renderer::QUADS);
-            vectors(renderer);
-            renderer->end();
-        }
-
         void RectangleRenderer::stroke(Renderer *renderer)
         {
             renderer->begin(Renderer::LINE_LOOP);

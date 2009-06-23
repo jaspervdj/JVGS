@@ -15,7 +15,7 @@ namespace jvgs
                 virtual ~LPathSegmentRenderer();
 
                 virtual void vectors(video::Renderer *renderer,
-                        PathSegment *segment, bool fill);
+                        PathSegment *segment);
         };
     }
 }

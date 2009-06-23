@@ -18,7 +18,6 @@ namespace jvgs
                 RectangleRenderer(Rectangle *rectangle);
                 virtual ~RectangleRenderer();
 
-                virtual void fill(video::Renderer *renderer);
                 virtual void stroke(video::Renderer *renderer);
                 virtual void vectors(video::Renderer *renderer) const;
         };

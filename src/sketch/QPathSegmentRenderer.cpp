@@ -25,7 +25,7 @@ namespace jvgs
         }
 
         void QPathSegmentRenderer::vectors(video::Renderer *renderer,
-                PathSegment *segment, bool fill)
+                PathSegment *segment)
         {
             PathRenderer *pathRenderer = getPathRenderer();
             Vector2D last = pathRenderer->getCurrentPoint();

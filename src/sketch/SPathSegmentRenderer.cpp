@@ -27,7 +27,7 @@ namespace jvgs
         }
 
         void SPathSegmentRenderer::vectors(video::Renderer *renderer,
-                PathSegment *segment, bool fill)
+                PathSegment *segment)
         {
             PathRenderer *pathRenderer = getPathRenderer();
             char lastCommand = 
@@ -65,7 +65,7 @@ namespace jvgs
             PathSegment *cPathSegment = new PathSegment(command, arguments);
             PathSegmentRenderer *cPathRenderer =
                     new CPathSegmentRenderer(pathRenderer);
-            cPathRenderer->vectors(renderer, cPathSegment, fill);
+            cPathRenderer->vectors(renderer, cPathSegment);
             delete cPathSegment;
             delete cPathRenderer;
         }

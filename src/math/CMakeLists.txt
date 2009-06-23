@@ -4,4 +4,5 @@ ADD_LIBRARY(
     Vector2D.cpp
     MathManager.cpp
     Matrix.cpp
+    Noise.cpp
 )
