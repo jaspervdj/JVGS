@@ -12,6 +12,7 @@ using namespace jvgs::math;
 
 #include <string>
 #include <iostream>
+#include <exception>
 using namespace std;
 
 int main(int argc, char **argv)
@@ -37,9 +38,9 @@ int main(int argc, char **argv)
     
     videoManager->flip();
 
-    start = SDL_GetTicks();
-    GLuint list = glGenLists(1);
-    glNewList(list, GL_COMPILE);
+    /* start = SDL_GetTicks();
+    list = glGenLists(1);
+    glNewList(list, GL_COMPILE_AND_EXECUTE);
     sketch->render();
     glEndList();
     cout << "Compiled list in " << (SDL_GetTicks() - start) << "ms." << endl;
@@ -50,7 +51,7 @@ int main(int argc, char **argv)
     glCallList(list);
     cout << "Called list in " << (SDL_GetTicks() - start) << "ms." << endl;
 
-    glDeleteLists(list, 1);
+    glDeleteLists(list, 1); */
 
     while (SDL_GetTicks() < start + 5000) {
         videoManager->flip();

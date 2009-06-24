@@ -2,6 +2,8 @@
 #include "MathManager.h"
 
 #include <cmath>
+#include <iostream>
+using namespace std;
 
 namespace jvgs
 {
@@ -27,6 +29,9 @@ namespace jvgs
         {
             float t = (float) position / (float) waveLength;
 
+            float value = ((current + next) + (current - next) *
+                    (float) cos(M_PI * t)) * 0.5f; 
+
             position++;
             if(position >= waveLength) {
                 position = 0;
@@ -34,8 +39,7 @@ namespace jvgs
                 next = MathManager::getInstance()->randFloat(min, max);
             }
 
-            return ((current + next) + (current - next) *
-                    (float) cos(M_PI * t)) * 0.5f; 
+            return value;
         }
     }
 }

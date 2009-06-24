@@ -16,7 +16,7 @@ namespace jvgs
                 PathRenderer *pathRenderer;
 
             protected:
-                static const float LINE_SEGMENT_SIZE = 1.0f;
+                static const float LINE_SEGMENT_SIZE = 5.0f;
 
             public:
                 PathSegmentRenderer(PathRenderer *pathRenderer);

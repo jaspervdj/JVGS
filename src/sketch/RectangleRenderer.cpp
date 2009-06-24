@@ -25,7 +25,7 @@ namespace jvgs
 
         void RectangleRenderer::stroke(Renderer *renderer)
         {
-            renderer->begin(Renderer::LINE_LOOP);
+            renderer->begin(Renderer::LINE_STRIP);
             vectors(renderer);
             renderer->end();
         }
@@ -45,6 +45,8 @@ namespace jvgs
             /* Right top. */
             renderer->vector(Vector2D(position.getX() + size.getX(),
                         position.getY()));
+            /* Left top to close. */
+            renderer->vector(position);
         }
     }
 }

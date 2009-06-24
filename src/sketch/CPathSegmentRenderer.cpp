@@ -45,7 +45,7 @@ namespace jvgs
                     destination += pathRenderer->getCurrentPoint();
                 }
 
-                float distance = 2.5f * (last.distance(control1) +
+                float distance = 0.5f * (last.distance(control1) +
                         control1.distance(control2) +
                         control2.distance(destination));
 

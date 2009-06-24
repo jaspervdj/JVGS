@@ -42,7 +42,7 @@ namespace jvgs
                     destination += pathRenderer->getCurrentPoint();
                 }
 
-                float distance = 2.5f * (last.distance(control) +
+                float distance = 0.5f * (last.distance(control) +
                         control.distance(last));
 
                 float increment = LINE_SEGMENT_SIZE / distance;

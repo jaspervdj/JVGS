@@ -42,7 +42,10 @@ namespace jvgs
 
         int MathManager::randInt(const int &minimum, const int &maximum) const
         {
-            return minimum + rand()%(maximum-minimum);
+            if(minimum == maximum)
+                return minimum;
+            else
+                return minimum + rand()%(maximum-minimum);
         }
 
         float MathManager::randFloat() const
