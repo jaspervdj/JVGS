@@ -12,18 +12,28 @@ namespace jvgs
         {
             private:
                 /* The start and end of the line. */
-                Vector2D p1, p2;
+                Vector2D start, end;
 
             public:
                 /** Creates a new line.
-                 *  @param p1 Start point of the line.
-                 *  @param p2 End point of the line.
+                 *  @param start Start point of the line.
+                 *  @param end End point of the line.
                  */
-                LineSegment(const Vector2D &p1, const Vector2D &p2);
+                LineSegment(const Vector2D &start, const Vector2D &end);
 
                 /** Destructor.
                  */ 
                 virtual ~LineSegment();
+
+                /** Get the start point of this line segment.
+                 *  @return the start point of this line segment.
+                 */
+                virtual const Vector2D &getStart() const;
+
+                /** Get the end point of this line segment.
+                 *  @return the end point of this line segment.
+                 */
+                virtual const Vector2D &getEnd() const;
 
                 /** Get the line this segment is a part of.
                  *  @return The line this segment lays on.

@@ -6,12 +6,14 @@ using namespace jvgs::video;
 #include "../math/MathManager.h"
 #include "../math/LineSegment.h"
 #include "../math/Vector2D.h"
+#include "../math/AffineTransformationMatrix.h"
 using namespace jvgs::math;
 
 #include "../sketch/Sketch.h"
 using namespace jvgs::sketch;
 
 #include <vector>
+#include <iostream>
 using namespace std;
 
 class CollisionObject: public Ellipse
@@ -23,6 +25,23 @@ class CollisionObject: public Ellipse
         {
         }
 };
+
+bool collision(CollisionObject *object, LineSegment *lineSegment)
+{
+    AffineTransformationMatrix matrix;
+    matrix.scale(object->getRadius().inverted());
+
+    Line line = lineSegment->getLine();
+    Vector2D v = matrix * line.getVector(),
+             p1 = matrix * line.getPoint(),
+             pos = matrix * object->position;
+
+
+    float u = ((pos - p1) * v / (v * v));
+    Vector2D closest = p1 + v * u;
+
+    return closest.distance(pos) <= 1.0f;
+}
 
 int main(int argc, char **argv)
 {
@@ -46,7 +65,8 @@ int main(int argc, char **argv)
 
     /* Initialize collision object. */
     Sketch *sketch = new Sketch("resources/ellipse.svg");
-    CollisionObject *collisionObject = new CollisionObject(sketch->getSize());
+    CollisionObject *collisionObject =
+            new CollisionObject(sketch->getSize() * 0.5f);
 
     bool running = true;
     while(running) {
@@ -67,6 +87,10 @@ int main(int argc, char **argv)
 
         for(vector<LineSegment>::iterator iterator = lines.begin();
                 iterator != lines.end(); iterator++) {
+            if(collision(collisionObject, &(*iterator)))
+                videoManager->setColor(Color(1.0f, 0.0f, 0.0f));
+            else
+                videoManager->setColor(Color(0.0f, 0.0f, 0.0f));
             renderer->begin(Renderer::LINE_STRIP);
             renderer->vector(iterator->getPoint(0.0f));
             renderer->vector(iterator->getPoint(1.0f));
@@ -74,7 +98,8 @@ int main(int argc, char **argv)
         }
 
         videoManager->push();
-        videoManager->translate(collisionObject->position);
+        videoManager->translate(collisionObject->position -
+                sketch->getSize() * 0.5f);
         sketch->render();
         videoManager->pop();
 

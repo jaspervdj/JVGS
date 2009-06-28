@@ -18,41 +18,44 @@ namespace jvgs
                  *  @param x X value.
                  *  @param y Y value.
                  */
-                Vector2D( float x=0, float y=0 );
+                Vector2D(float x=0, float y=0);
 
                 /** Copy constructor.
                  *  @param other Object to copy.
                  */
-                Vector2D( const Vector2D &other );
+                Vector2D(const Vector2D &other);
 
                 /** Destructor.
                  */
                 ~Vector2D();
 
                 float getX() const;
-                void setX( const float &x );
+                void setX(const float &x);
 
                 float getY() const;
-                void setY( const float &x );
+                void setY(const float &x);
 
-                const Vector2D &operator=( const Vector2D &other );
+                const Vector2D &operator=(const Vector2D &other);
 
-                const Vector2D operator+( const Vector2D &other ) const;
-                const Vector2D &operator+=( const Vector2D &other );
+                const Vector2D operator+(const Vector2D &other) const;
+                const Vector2D &operator+=(const Vector2D &other);
 
-                const Vector2D operator-( const Vector2D &other ) const;
-                const Vector2D &operator-=( const Vector2D &other );
+                const Vector2D operator-(const Vector2D &other) const;
+                const Vector2D &operator-=(const Vector2D &other);
 
-                const Vector2D operator*( const float &scalar ) const;
-                const Vector2D &operator*=( const float &scalar );
+                const Vector2D operator*(const float &scalar) const;
+                const Vector2D &operator*=(const float &scalar);
 
-                const Vector2D operator/( const float &scalar ) const;
-                const Vector2D &operator/=( const float &scalar );
+                const Vector2D operator/(const float &scalar) const;
+                const Vector2D &operator/=(const float &scalar);
 
-                float dotProduct() const;
+                /** Dot product. */
+                float operator*(const Vector2D &other) const;
+
                 float length() const;
-                float distance( const Vector2D &other ) const;
+                float distance(const Vector2D &other) const;
                 Vector2D normalized() const;
+                Vector2D inverted() const;
 
                 /** Reflects the other vector around this vector and
                  *  return the result.

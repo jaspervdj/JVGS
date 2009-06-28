@@ -15,6 +15,7 @@ namespace jvgs
             public:
                 Ellipse(Vector2D radius);
                 virtual ~Ellipse();
+                virtual const Vector2D &getRadius() const;
         };
     }
 }

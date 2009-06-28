@@ -28,6 +28,17 @@ namespace jvgs
         {
         }
 
+        Vector2D AffineTransformationMatrix::operator*(const Vector2D &vector)
+                const
+        {
+            return Vector2D(getValue(0, 0) * vector.getX() +
+                            getValue(0, 1) * vector.getX() +
+                            getValue(0, 2) * vector.getX(),
+                            getValue(1, 0) * vector.getY() + 
+                            getValue(1, 1) * vector.getY() + 
+                            getValue(1, 2) * vector.getY());
+        }
+
         void AffineTransformationMatrix::translate(const Vector2D &vector)
         {
             *this *= AffineTransformationMatrix(1.0f, 0.0f, vector.getX(),

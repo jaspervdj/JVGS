@@ -12,5 +12,10 @@ namespace jvgs
         Ellipse::~Ellipse()
         {
         }
+
+        const Vector2D &Ellipse::getRadius() const
+        {
+            return radius;
+        }
     }
 }

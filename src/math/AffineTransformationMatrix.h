@@ -39,6 +39,12 @@ namespace jvgs
                  */
                 virtual ~AffineTransformationMatrix();
 
+                /** Applies this matrix to a vector.
+                 *  @param other Vector to alply this tranformation to.
+                 *  @return The transformed vector.
+                 */
+                virtual Vector2D operator*(const Vector2D &other) const;
+
                 /** Multiplies this object with a translation matrix.
                  *  @param vector Vector2D to translate over.
                  */

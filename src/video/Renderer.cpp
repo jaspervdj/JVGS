@@ -41,7 +41,8 @@ namespace jvgs
         {
             busy = false;
 
-            int repeat = MathManager::getInstance()->randInt(1, 10);
+            // int repeat = MathManager::getInstance()->randInt(1, 10);
+            int repeat = 1;
             int start = 0, end = vectorList.size();
             while(repeat > 0) {
                 glBegin(GL_LINE_STRIP);

@@ -23,6 +23,8 @@ namespace jvgs
                 Line(Vector2D point, Vector2D vector);
                 virtual ~Line();
 
+                virtual const Vector2D &getPoint() const;
+                virtual const Vector2D &getVector() const;
                 virtual Vector2D getNormal() const;
         };
     }

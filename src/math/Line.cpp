@@ -14,6 +14,16 @@ namespace jvgs
         {
         }
 
+        const Vector2D &Line::getPoint() const
+        {
+            return point;
+        }
+
+        const Vector2D &Line::getVector() const
+        {
+            return vector;
+        }
+
         Vector2D Line::getNormal() const
         {
             return Vector2D(-vector.getX(), vector.getY());
