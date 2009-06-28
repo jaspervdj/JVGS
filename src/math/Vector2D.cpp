@@ -108,6 +108,11 @@ namespace jvgs
                         (y - other.y) * (y - other.y));
         }
 
+        Vector2D Vector2D::normalized() const
+        {
+            return *this / length();
+        }
+
         Vector2D Vector2D::reflect(const Vector2D &other) const
         {
             return (*this) * 2.0f - other;

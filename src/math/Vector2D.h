@@ -52,6 +52,7 @@ namespace jvgs
                 float dotProduct() const;
                 float length() const;
                 float distance( const Vector2D &other ) const;
+                Vector2D normalized() const;
 
                 /** Reflects the other vector around this vector and
                  *  return the result.

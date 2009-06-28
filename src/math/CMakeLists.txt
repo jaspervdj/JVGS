@@ -1,8 +1,10 @@
 ADD_LIBRARY( 
     math SHARED 
     AffineTransformationMatrix.cpp
-    Vector2D.cpp
+    Line.cpp
+    LineSegment.cpp
     MathManager.cpp
     Matrix.cpp
     Noise.cpp
+    Vector2D.cpp
 )

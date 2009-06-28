@@ -33,7 +33,17 @@ int main(int argc, char **argv)
     videoManager->clear();
 
     start = SDL_GetTicks();
-    sketch->render();
+
+    for(int y = 0; y < 10; y++) {
+        for(int x = 0; x < 10; x++) {
+            videoManager->push();
+            videoManager->translate(Vector2D(x * sketch->getSize().getX(),
+                    y * sketch->getSize().getY()));
+            sketch->render();
+            videoManager->pop();
+        }
+    }
+
     cout << "Rendered sketch in " << (SDL_GetTicks() - start) << "ms." << endl;
     
     videoManager->flip();

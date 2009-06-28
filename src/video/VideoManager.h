@@ -3,6 +3,7 @@
 
 #include "Color.h"
 #include "../math/AffineTransformationMatrix.h"
+#include "../math/Vector2D.h"
 #include <string>
 #include <SDL/SDL.h>
 
@@ -91,16 +92,14 @@ namespace jvgs
                 void pop() const;
 
                 /** Translates the current matrix.
-                 *  @param x X axis translation.
-                 *  @param y Y axis translation.
+                 *  @param vector Vector to translate over.
                  */
-                void translate(const float &x, const float &y) const;
+                void translate(const math::Vector2D &vector) const;
 
                 /** Scales the current matrix.
-                 *  @param x X axis scale.
-                 *  @param y Y axis scale.
+                 *  @param vector Vector to be used as scale.
                  */
-                void scale(const float &x, const float &y) const;
+                void scale(const math::Vector2D &scale) const;
 
                 /** Rotates the current matrix.
                  *  @param degrees Rotation degrees.

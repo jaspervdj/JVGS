@@ -119,14 +119,14 @@ namespace jvgs
             glPopMatrix();
         }
 
-        void VideoManager::translate(const float &x, const float &y) const
+        void VideoManager::translate(const Vector2D &vector) const
         {
-            glTranslatef(x, y, 0.0f);
+            glTranslatef(vector.getX(), vector.getY(), 0.0f);
         }
 
-        void VideoManager::scale(const float &x, const float &y) const
+        void VideoManager::scale(const Vector2D &scale) const
         {
-            glScalef(x, y, 1.0f);
+            glScalef(scale.getX(), scale.getY(), 1.0f);
         }
 
         void VideoManager::rotate(const float &degrees) const
