@@ -1,6 +1,8 @@
 #ifndef JVGS_MATH_ELLIPSE_H
 #define JVGS_MATH_ELLIPSE_H
 
+#include "Vector2D.h"
+
 namespace jvgs
 {
     namespace math
@@ -8,9 +10,10 @@ namespace jvgs
         class Ellipse
         {
             private:
-                float xRadius, yRadius;
+                Vector2D radius;
+
             public:
-                Ellipse(float xRadius, float yRadius);
+                Ellipse(Vector2D radius);
                 virtual ~Ellipse();
         };
     }

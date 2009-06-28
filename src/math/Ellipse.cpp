@@ -4,10 +4,9 @@ namespace jvgs
 {
     namespace math
     {
-        Ellipse::Ellipse(float xRadius, float yRadius)
+        Ellipse::Ellipse(Vector2D radius)
         {
-            this->xRadius = xRadius;
-            this->yRadius = yRadius;
+            this->radius = radius;
         }
 
         Ellipse::~Ellipse()

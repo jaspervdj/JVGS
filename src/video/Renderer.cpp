@@ -18,8 +18,10 @@ namespace jvgs
         Renderer::Renderer()
         {
             busy = false;
-            noiseX = new Noise(-2.0f, 2.0f, 5);
-            noiseY = new Noise(-2.0f, 2.0f, 5);
+            // noiseX = new Noise(-2.0f, 2.0f, 5);
+            // noiseY = new Noise(-2.0f, 2.0f, 5);
+            noiseX = new Noise(-0.0f, 0.0f, 5);
+            noiseY = new Noise(-0.0f, 0.0f, 5);
         }
 
         Renderer::~Renderer()

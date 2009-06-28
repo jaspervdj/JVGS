@@ -1,6 +1,7 @@
 ADD_LIBRARY( 
     math SHARED 
     AffineTransformationMatrix.cpp
+    Ellipse.cpp
     Line.cpp
     LineSegment.cpp
     MathManager.cpp
