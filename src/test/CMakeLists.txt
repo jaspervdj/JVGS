@@ -4,6 +4,14 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_EXECUTABLE(
+    mathTest mathTest.cpp
+)
+
+TARGET_LINK_LIBRARIES(
+    mathTest math core
+)
+
+ADD_EXECUTABLE(
     collisionTest collisionTest.cpp
 )
 
