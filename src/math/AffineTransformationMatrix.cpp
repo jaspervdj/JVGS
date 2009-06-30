@@ -32,11 +32,11 @@ namespace jvgs
                 const
         {
             return Vector2D(getValue(0, 0) * vector.getX() +
-                            getValue(0, 1) * vector.getX() +
-                            getValue(0, 2) * vector.getX(),
-                            getValue(1, 0) * vector.getY() + 
+                            getValue(0, 1) * vector.getY() +
+                            getValue(0, 2) * 1.0f,
+                            getValue(1, 0) * vector.getX() + 
                             getValue(1, 1) * vector.getY() + 
-                            getValue(1, 2) * vector.getY());
+                            getValue(1, 2) * 1.0f);
         }
 
         void AffineTransformationMatrix::translate(const Vector2D &vector)

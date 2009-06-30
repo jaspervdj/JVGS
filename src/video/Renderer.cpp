@@ -18,10 +18,8 @@ namespace jvgs
         Renderer::Renderer()
         {
             busy = false;
-            // noiseX = new Noise(-2.0f, 2.0f, 5);
-            // noiseY = new Noise(-2.0f, 2.0f, 5);
-            noiseX = new Noise(-0.0f, 0.0f, 5);
-            noiseY = new Noise(-0.0f, 0.0f, 5);
+            noiseX = new Noise(-2.0f, 2.0f, 5);
+            noiseY = new Noise(-2.0f, 2.0f, 5);
         }
 
         Renderer::~Renderer()
@@ -35,14 +33,15 @@ namespace jvgs
             busy = true;
             rendering = type;
             vectorList.clear();
+            noiseX->seed();
+            noiseY->seed();
         }
 
         void Renderer::end()
         {
             busy = false;
 
-            // int repeat = MathManager::getInstance()->randInt(1, 10);
-            int repeat = 1;
+            int repeat = MathManager::getInstance()->randInt(1, 10);
             int start = 0, end = vectorList.size();
             while(repeat > 0) {
                 glBegin(GL_LINE_STRIP);

@@ -15,14 +15,19 @@ namespace jvgs
             this->max = max;
             this->waveLength = waveLength;
 
-            current = MathManager::getInstance()->randFloat(min, max);
-            next = MathManager::getInstance()->randFloat(min, max);
-
-            position = 0;
+            seed();
         }
 
         Noise::~Noise()
         {
+        }
+
+        void Noise::seed()
+        {
+            current = MathManager::getInstance()->randFloat(min, max);
+            next = MathManager::getInstance()->randFloat(min, max);
+
+            position = 0;
         }
 
         float Noise::nextValue()

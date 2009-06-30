@@ -2,9 +2,12 @@ ADD_LIBRARY(
     sketch SHARED 
     Group.cpp
     GroupParser.cpp
+    LPathCommandParser.cpp
     MatrixTransformCommand.cpp
+    MPathCommandParser.cpp
     Path.cpp
     PathComponent.cpp
+    PathCommandParser.cpp
     PathDataParser.cpp
     PathParser.cpp
     Parser.cpp
