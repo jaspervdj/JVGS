@@ -4,6 +4,14 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_EXECUTABLE(
+    pathTest pathTest.cpp
+)
+
+TARGET_LINK_LIBRARIES(
+    pathTest math core sketch
+)
+
+ADD_EXECUTABLE(
     mathTest mathTest.cpp
 )
 

@@ -14,12 +14,8 @@ namespace jvgs
         {
             private:
             public:
-                const static std::string COMMANDS;
-
                 PathParser(Parser *parser);
                 virtual ~PathParser();
-
-                virtual void command(Path *path, const std::string &data);
 
                 virtual SketchElement *parse(SketchElement *parent,
                         TiXmlElement *element);

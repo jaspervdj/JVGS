@@ -3,12 +3,13 @@
 
 #include "Line.h"
 #include "Vector2D.h"
+#include "PathSegment.h"
 
 namespace jvgs
 {
     namespace math
     {
-        class LineSegment
+        class LineSegment: public PathSegment
         {
             private:
                 /* The start and end of the line. */

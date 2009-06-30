@@ -32,5 +32,17 @@ namespace jvgs
         {
             return matrix;
         }
+
+        AffineTransformationMatrix SketchElement::getCompleteMatrix() const
+        {
+            AffineTransformationMatrix complete = matrix;
+            SketchElement *element = getParent();
+            while(element) {
+                complete *= element->getMatrix();
+                element = element->getParent();
+            }
+
+            return complete;
+        }
     }
 }

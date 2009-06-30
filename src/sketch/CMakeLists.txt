@@ -5,6 +5,7 @@ ADD_LIBRARY(
     MatrixTransformCommand.cpp
     Path.cpp
     PathComponent.cpp
+    PathDataParser.cpp
     PathParser.cpp
     Parser.cpp
     RotateTransformCommand.cpp

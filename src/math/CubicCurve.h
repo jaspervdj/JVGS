@@ -7,7 +7,7 @@ namespace jvgs
 {
     namespace math
     {
-        class CubicCurve
+        class CubicCurve: public PathSegment
         {
             private:
                 /** Defining points of the curve.

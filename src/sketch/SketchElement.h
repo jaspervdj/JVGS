@@ -30,6 +30,9 @@ namespace jvgs
                 virtual const math::AffineTransformationMatrix &getMatrix()
                         const;
 
+                virtual math::AffineTransformationMatrix getCompleteMatrix()
+                        const;
+
                 virtual void render(video::Renderer *renderer) const = 0;
         };
     }

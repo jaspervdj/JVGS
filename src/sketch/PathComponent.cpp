@@ -5,6 +5,7 @@
 using namespace jvgs::math;
 
 using namespace jvgs::video;
+using namespace std;
 
 namespace jvgs
 {
@@ -17,6 +18,9 @@ namespace jvgs
 
         PathComponent::~PathComponent()
         {
+            for(vector<PathSegment*>::iterator iterator = segments.begin();
+                    iterator != segments.end(); iterator++)
+                delete (*iterator);
         }
 
         Path *PathComponent::getPath() const
