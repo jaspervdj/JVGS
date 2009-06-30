@@ -1,26 +1,13 @@
 ADD_LIBRARY( 
     sketch SHARED 
-    CPathSegmentRenderer.cpp
     Group.cpp
     GroupParser.cpp
-    GroupRenderer.cpp
-    HPathSegmentRenderer.cpp
-    LPathSegmentRenderer.cpp
     MatrixTransformCommand.cpp
-    MPathSegmentRenderer.cpp
     Path.cpp
+    PathComponent.cpp
     PathParser.cpp
-    PathRenderer.cpp
-    PathSegment.cpp
-    PathSegmentRenderer.cpp
     Parser.cpp
-    Primitive.cpp
-    PrimitiveRenderer.cpp
-    Rectangle.cpp
-    RectangleParser.cpp
-    RectangleRenderer.cpp
     RotateTransformCommand.cpp
-    SPathSegmentRenderer.cpp
     ScaleTransformCommand.cpp
     Sketch.cpp
     SketchElement.cpp
@@ -28,15 +15,10 @@ ADD_LIBRARY(
     SketchElementRenderer.cpp
     SkewXTransformCommand.cpp
     SkewYTransformCommand.cpp
-    StyleMap.cpp
     TransformParser.cpp
     TransformCommand.cpp
     TranslateTransformCommand.cpp
     TextParser.cpp
-    TPathSegmentRenderer.cpp
-    VPathSegmentRenderer.cpp
-    QPathSegmentRenderer.cpp
-    ZPathSegmentRenderer.cpp
 )
 
 TARGET_LINK_LIBRARIES(

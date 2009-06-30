@@ -1,7 +1,8 @@
 #include "Group.h"
-#include "GroupRenderer.h"
+#include "../video/VideoManager.h"
 
 using namespace std;
+using namespace jvgs::video;
 
 namespace jvgs
 {
@@ -35,9 +36,16 @@ namespace jvgs
             return sketchElements[index];
         }
 
-        SketchElementRenderer *Group::createSketchElementRenderer()
+        void Group::render(Renderer *renderer) const
         {
-            return new GroupRenderer(this);
+            VideoManager *videoManager = VideoManager::getInstance();
+
+            for(int i = 0; i < getNumberOfSketchElements(); i++) {
+                videoManager->push();
+                videoManager->transform(sketchElements[i]->getMatrix());
+                sketchElements[i]->render(renderer);
+                videoManager->pop();
+            }
         }
     }
 }

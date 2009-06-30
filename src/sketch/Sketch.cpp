@@ -7,6 +7,9 @@
 #include "../core/LogManager.h"
 using namespace jvgs::core;
 
+#include "../video/Renderer.h"
+using namespace jvgs::video;
+
 using namespace jvgs::math;
 using namespace std;
 
@@ -62,9 +65,8 @@ namespace jvgs
 
         void Sketch::render() const
         {
-            SketchElementRenderer *renderer =
-                    root->createSketchElementRenderer();
-            renderer->render();
+            Renderer *renderer = new Renderer();
+            root->render(renderer);
             delete renderer;
         }
     }

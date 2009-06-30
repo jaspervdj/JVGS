@@ -1,9 +1,9 @@
 #ifndef JVGS_SKETCH_SKETCHELEMENT_H
 #define JVGS_SKETCH_SKETCHELEMENT_H
 
-#include "../video/Color.h"
 #include "../math/Vector2D.h"
 #include "../math/AffineTransformationMatrix.h"
+#include "../video/Renderer.h"
 
 namespace jvgs
 {
@@ -16,8 +16,6 @@ namespace jvgs
         {
             private:
                 SketchElement *parent;
-                StyleMap *styleMap;
-
                 math::AffineTransformationMatrix matrix;
 
             public:
@@ -25,7 +23,6 @@ namespace jvgs
                 virtual ~SketchElement();
 
                 virtual SketchElement *getParent() const;
-                virtual StyleMap *getStyleMap() const;
 
                 virtual void setMatrix(
                         const math::AffineTransformationMatrix &matrix);
@@ -33,8 +30,7 @@ namespace jvgs
                 virtual const math::AffineTransformationMatrix &getMatrix()
                         const;
 
-                virtual SketchElementRenderer *createSketchElementRenderer()
-                        = 0;
+                virtual void render(video::Renderer *renderer) const = 0;
         };
     }
 }

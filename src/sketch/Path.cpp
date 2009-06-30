@@ -1,15 +1,15 @@
 #include "Path.h"
-#include "PathSegment.h"
-#include "PathRenderer.h"
 
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
+
+using namespace jvgs::video;
 
 namespace jvgs
 {
     namespace sketch
     {
-        Path::Path(SketchElement *parent): Primitive(parent)
+        Path::Path(SketchElement *parent): SketchElement(parent)
         {
         }
 
@@ -17,24 +17,23 @@ namespace jvgs
         {
         }
 
-        int Path::getNumberOfSegments() const
+        int Path::getNumberOfComponents() const
         {
-            return segments.size();
+            return components.size();
         }
 
-        PathSegment *Path::getSegment(int index) const
+        PathComponent *Path::getComponent(int index) const
         {
-            return segments[index];
+            return components[index];
         }
 
-        void Path::addSegment(PathSegment *segment)
+        void Path::addComponent(PathComponent *component)
         {
-            segments.push_back(segment);
+            components.push_back(component);
         }
 
-        SketchElementRenderer *Path::createSketchElementRenderer()
+        void Path::render(Renderer *renderer) const
         {
-            return new PathRenderer(this);
         }
     }
 }

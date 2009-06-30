@@ -2,7 +2,6 @@
 #include "Parser.h"
 #include "Group.h"
 #include "SketchElement.h"
-#include "StyleMap.h"
 
 #include "../tinyxml/tinyxml.h"
 
@@ -28,11 +27,6 @@ namespace jvgs
         {
 
             Group *group = new Group(parent);
-
-            if( element->Attribute("style") ) {
-                StyleMap *styleMap = group->getStyleMap();
-                styleMap->load(element->Attribute("style"));
-            }
 
             if(element->Attribute("transform"))
                 parseTransform(group, element->Attribute("transform"));

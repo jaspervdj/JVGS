@@ -1,5 +1,4 @@
 #include "SketchElementParser.h"
-#include "StyleMap.h"
 #include "TransformParser.h"
 #include "SketchElement.h"
 #include "Parser.h"
@@ -30,16 +29,6 @@ namespace jvgs
         Parser *SketchElementParser::getParser() const
         {
             return parser;
-        }
-
-        void SketchElementParser::parseStyle(SketchElement *sketchElement,
-                TiXmlElement *element)
-        {
-            StyleMap *styleMap = sketchElement->getStyleMap();
-            if(element->Attribute("fill"))
-                styleMap->setValue("fill", element->Attribute("fill"));
-            if(element->Attribute("stroke"))
-                styleMap->setValue("stroke", element->Attribute("stroke"));
         }
 
         void SketchElementParser::parseTransform(SketchElement *sketchElement,

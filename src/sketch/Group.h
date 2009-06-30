@@ -23,7 +23,7 @@ namespace jvgs
                 virtual int getNumberOfSketchElements() const;
                 virtual SketchElement *getSketchElement(int index) const;
 
-                virtual SketchElementRenderer *createSketchElementRenderer();
+                virtual void render(video::Renderer *renderer) const;
         };
     }
 }

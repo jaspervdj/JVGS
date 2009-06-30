@@ -2,9 +2,7 @@
 #include "Sketch.h"
 #include "SketchElementParser.h"
 #include "GroupParser.h"
-#include "RectangleParser.h"
 #include "PathParser.h"
-#include "StyleMap.h"
 #include "Group.h"
 
 using namespace std;
@@ -31,7 +29,6 @@ namespace jvgs
 
             this->sketch = sketch;
 
-            sketchElementParsers["rect"] = new RectangleParser(this);
             sketchElementParsers["g"] = new GroupParser(this);
             sketchElementParsers["path"] = new PathParser(this);
         }
@@ -73,11 +70,6 @@ namespace jvgs
 
             Group *root = (Group*) groupParser->parse(0, rootElement);
             sketch->setRoot(root);
-
-            /* Set a number of defaults. */
-            StyleMap *styleMap = root->getStyleMap();
-            styleMap->load(string("opacity:1; stroke-opacity:1; stroke:none;") +
-                    "fill-opacity:1; fill:none;");
 
             delete groupParser;
         }
