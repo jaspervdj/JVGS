@@ -28,7 +28,6 @@ namespace jvgs
             /* We take the vectors two by two and add lines to the
              * path component. */
             for(int i = 0; i < arguments.size(); i += 2) {
-
                 Vector2D previous = dataParser->getCurrentPoint();
                 Vector2D current(arguments[i], arguments[i + 1]);
                 current = dataParser->toAbsoluteSpace(command, current);

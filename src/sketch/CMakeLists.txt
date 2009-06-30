@@ -23,6 +23,7 @@ ADD_LIBRARY(
     TransformCommand.cpp
     TranslateTransformCommand.cpp
     TextParser.cpp
+    ZPathCommandParser.cpp
 )
 
 TARGET_LINK_LIBRARIES(

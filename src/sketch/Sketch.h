@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include "../math/Vector2D.h"
+#include "../video/Renderer.h"
+#include "../video/ListManager.h"
 
 namespace jvgs
 {
@@ -18,6 +20,7 @@ namespace jvgs
                 math::Vector2D size;
 
                 Group *root;
+                video::ListManager::List list;
 
             public:
                 /** Constructor.

@@ -9,6 +9,7 @@ INCLUDE_DIRECTORIES(
 ADD_LIBRARY( 
     video SHARED 
     Color.cpp
+    ListManager.cpp
     Renderer.cpp
     VideoManager.cpp
 )

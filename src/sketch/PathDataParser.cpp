@@ -4,6 +4,7 @@
 #include "PathCommandParser.h"
 #include "LPathCommandParser.h"
 #include "MPathCommandParser.h"
+#include "ZPathCommandParser.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -30,6 +31,7 @@ namespace jvgs
 
             commandParsers['l'] = new LPathCommandParser(this);
             commandParsers['m'] = new MPathCommandParser(this);
+            commandParsers['z'] = new ZPathCommandParser(this);
 
             matrix = path->getCompleteMatrix();
         }

@@ -27,12 +27,23 @@ namespace jvgs
             Parser *parser = new Parser(fileName, this);
             parser->parse();
             delete parser;
+
+            ListManager *listManager = ListManager::getInstance();
+            list = listManager->beginList();
+
+            Renderer *renderer = new Renderer();
+            root->render(renderer);
+            delete renderer;
+
+            listManager->endList();
         }
 
         Sketch::~Sketch()
         {
             if(root)
                 delete root;
+
+            glDeleteLists(list, 1);
         }
 
         const string &Sketch::getFileName() const
@@ -65,9 +76,7 @@ namespace jvgs
 
         void Sketch::render() const
         {
-            Renderer *renderer = new Renderer();
-            root->render(renderer);
-            delete renderer;
+            ListManager::getInstance()->callList(list);
         }
     }
 }

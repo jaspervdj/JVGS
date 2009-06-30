@@ -20,15 +20,14 @@ int main(int argc, char **argv)
     string fileName = argc < 2 ? string("resources/drawing.svg") :
                                  string(argv[1]);
 
+    VideoManager *videoManager = VideoManager::getInstance();
+    videoManager->setVideoMode(400, 400, "(OpenGL window)");
+
     long start = SDL_GetTicks();
     Sketch *sketch = new Sketch(fileName);
     cout << "Parsed sketch in " << (SDL_GetTicks() - start) << "ms." << endl;
 
     Vector2D size = sketch->getSize();
-
-    VideoManager *videoManager = VideoManager::getInstance();
-    videoManager->setVideoMode(size.getX(), size.getY(),
-            string("(OpenGL window)") );
 
     videoManager->clear();
 
