@@ -39,6 +39,8 @@ namespace jvgs
 
                 dataParser->setCurrentPoint(current);
             }
+
+            dataParser->setLastControlPoint(dataParser->getCurrentPoint());
         }
     }
 }

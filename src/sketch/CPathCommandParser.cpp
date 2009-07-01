@@ -47,6 +47,7 @@ namespace jvgs
                         dataParser->toWorldSpace(current));
                 dataParser->getCurrentComponent()->addSegment(segment);
 
+                dataParser->setLastControlPoint(control2);
                 dataParser->setCurrentPoint(current);
             }
         }

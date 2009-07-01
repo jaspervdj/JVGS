@@ -14,6 +14,7 @@ ADD_LIBRARY(
     Parser.cpp
     RotateTransformCommand.cpp
     ScaleTransformCommand.cpp
+    SPathCommandParser.cpp
     Sketch.cpp
     SketchElement.cpp
     SketchElementParser.cpp

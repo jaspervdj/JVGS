@@ -5,6 +5,7 @@
 #include "CPathCommandParser.h"
 #include "LPathCommandParser.h"
 #include "MPathCommandParser.h"
+#include "SPathCommandParser.h"
 #include "ZPathCommandParser.h"
 
 #include "../core/LogManager.h"
@@ -33,6 +34,7 @@ namespace jvgs
             commandParsers['c'] = new CPathCommandParser(this);
             commandParsers['l'] = new LPathCommandParser(this);
             commandParsers['m'] = new MPathCommandParser(this);
+            commandParsers['s'] = new SPathCommandParser(this);
             commandParsers['z'] = new ZPathCommandParser(this);
 
             matrix = path->getCompleteMatrix();
@@ -127,8 +129,6 @@ namespace jvgs
                 arguments.push_back(f);
             }
 
-            //path->addSegment(new PathSegment(command, arguments));
-            /* DO SOMETHING WITH COMMAND AND ARGUMENTS. */
             map<char, PathCommandParser*>::iterator iterator =
                     commandParsers.find(lowerCommand(command));
 

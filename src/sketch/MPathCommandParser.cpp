@@ -27,8 +27,9 @@ namespace jvgs
             Vector2D translation(arguments[0], arguments[1]);
             translation = dataParser->toAbsoluteSpace(command, translation);
 
-            dataParser->setCurrentPoint(translation);
             dataParser->setStartingPoint(translation);
+            dataParser->setCurrentPoint(translation);
+            dataParser->setLastControlPoint(translation);
 
             PathComponent *component = new PathComponent(path);
             path->addComponent(component);
