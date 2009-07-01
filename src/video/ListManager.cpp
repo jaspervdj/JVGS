@@ -34,5 +34,10 @@ namespace jvgs
         {
             glCallList(list);
         }
+
+        void ListManager::deleteList(List list) const
+        {
+            glDeleteLists(list, 1);
+        }
     }
 }

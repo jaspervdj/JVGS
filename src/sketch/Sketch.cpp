@@ -43,7 +43,7 @@ namespace jvgs
             if(root)
                 delete root;
 
-            glDeleteLists(list, 1);
+            ListManager::getInstance()->deleteList(list);
         }
 
         const string &Sketch::getFileName() const
