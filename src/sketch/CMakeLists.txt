@@ -1,5 +1,6 @@
 ADD_LIBRARY( 
     sketch SHARED 
+    CPathCommandParser.cpp
     Group.cpp
     GroupParser.cpp
     LPathCommandParser.cpp

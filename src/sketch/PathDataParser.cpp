@@ -2,6 +2,7 @@
 #include "Path.h"
 #include "PathComponent.h"
 #include "PathCommandParser.h"
+#include "CPathCommandParser.h"
 #include "LPathCommandParser.h"
 #include "MPathCommandParser.h"
 #include "ZPathCommandParser.h"
@@ -29,6 +30,7 @@ namespace jvgs
             currentComponent = 0;
             lastSegment = 0;
 
+            commandParsers['c'] = new CPathCommandParser(this);
             commandParsers['l'] = new LPathCommandParser(this);
             commandParsers['m'] = new MPathCommandParser(this);
             commandParsers['z'] = new ZPathCommandParser(this);
