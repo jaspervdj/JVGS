@@ -4,18 +4,12 @@ namespace jvgs
 {
     namespace math
     {
-        Ellipse::Ellipse(Vector2D radius)
+        Ellipse::Ellipse(float x, float y): Vector2D(x, y)
         {
-            this->radius = radius;
         }
 
         Ellipse::~Ellipse()
         {
-        }
-
-        const Vector2D &Ellipse::getRadius() const
-        {
-            return radius;
         }
     }
 }

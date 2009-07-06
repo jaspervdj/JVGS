@@ -7,15 +7,11 @@ namespace jvgs
 {
     namespace math
     {
-        class Ellipse
+        class Ellipse: public Vector2D
         {
-            private:
-                Vector2D radius;
-
             public:
-                Ellipse(Vector2D radius);
+                Ellipse(float x = 0, float y = 0);
                 virtual ~Ellipse();
-                virtual const Vector2D &getRadius() const;
         };
     }
 }

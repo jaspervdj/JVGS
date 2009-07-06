@@ -1,4 +1,5 @@
 ADD_LIBRARY( 
     game SHARED 
-    LineSelector.cpp
+    CollisionResponder.cpp
+    Entity.cpp
 )

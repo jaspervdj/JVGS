@@ -1,25 +1,36 @@
-#include "LineSelector.h"
+#include "CollisionResponder.h"
+#include "Entity.h"
 
 #include <iostream>
+using namespace std;
+
 #include "../sketch/PathComponent.h"
+using namespace jvgs::sketch;
+
 #include "../math/PathSegment.h"
 #include "../math/Vector2D.h"
-using namespace jvgs::sketch;
 using namespace jvgs::math;
-using namespace std;
 
 namespace jvgs
 {
     namespace game
     {
-        LineSelector::LineSelector(Sketch *sketch)
+        CollisionResponder::CollisionResponder(Entity *entity, Sketch *sketch)
         {
+            this->entity = entity;
+
+            toEllipseSpace = AffineTransformationMatrix();
+            toEllipseSpace.scale(entity->getEllipse().inverted());
+
+            fromEllipseSpace = AffineTransformationMatrix();
+            fromEllipseSpace.scale(entity->getEllipse());
+
             Group *root = sketch->getRoot();
             addLinesFromGroup(root);
             cout << "Added " << segments.size() << " line segments." << endl;
         }
 
-        LineSelector::~LineSelector()
+        CollisionResponder::~CollisionResponder()
         {
             for(vector<LineSegment*>::iterator iterator = segments.begin();
                     iterator != segments.end(); iterator++) {
@@ -27,7 +38,7 @@ namespace jvgs
             }
         }
 
-        void LineSelector::addLinesFromGroup(Group *group)
+        void CollisionResponder::addLinesFromGroup(Group *group)
         {
             for(int i = 0; i < group->getNumberOfSketchElements(); i++) {
                 SketchElement *element = group->getSketchElement(i);
@@ -38,7 +49,7 @@ namespace jvgs
             }
         }
 
-        void LineSelector::addLinesFromPath(Path *path)
+        void CollisionResponder::addLinesFromPath(Path *path)
         {
             for(int i = 0; i < path->getNumberOfComponents(); i++) {
                 PathComponent *component = path->getComponent(i);
@@ -48,10 +59,30 @@ namespace jvgs
                     Vector2D previous = segment->getPoint(0.0f), current;
                     for(float t = increment; t <= 1.0f; t += increment) {
                         current = segment->getPoint(t);
-                        segments.push_back(new LineSegment(current, previous));
+
+                        /* Convert to ellipse space and add. */
+                        segments.push_back(new LineSegment(
+                                    toEllipseSpace * current,
+                                    toEllipseSpace * previous));
+
                         previous = current; 
                     }
                 }
+            }
+        }
+
+        void CollisionResponder::update(float ms)
+        {
+        }
+
+        LineSegment *CollisionResponder::closestCollision(float ms,
+                Vector2D &collision, float &time)
+        {
+            Vector2D position = toEllipseSpace * entity->getPosition(),
+                     velocity = toEllipseSpace * entity->getVelocity();
+
+            for(vector<LineSegment*>::iterator iterator = segments.begin();
+                    iterator != segments.end(); iterator++) {
             }
         }
     }
