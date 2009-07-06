@@ -19,8 +19,16 @@ namespace jvgs
                 math::AffineTransformationMatrix matrix;
 
             public:
+                enum Type
+                {
+                    GROUP,
+                    PATH
+                };
+
                 SketchElement(SketchElement *parent);
                 virtual ~SketchElement();
+
+                virtual Type getType() const = 0;
 
                 virtual SketchElement *getParent() const;
 

@@ -40,7 +40,7 @@ ADD_EXECUTABLE(
 )
 
 TARGET_LINK_LIBRARIES(
-    sketchTest sketch
+    sketchTest sketch game
 )
 
 ADD_EXECUTABLE(

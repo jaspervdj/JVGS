@@ -8,6 +8,9 @@ using namespace jvgs::video;
 #include "../math/AffineTransformationMatrix.h"
 using namespace jvgs::math;
 
+#include "../game/LineSelector.h"
+using namespace jvgs::game;
+
 #include <GL/gl.h>
 
 #include <string>
@@ -27,6 +30,8 @@ int main(int argc, char **argv)
     Sketch *sketch = new Sketch(fileName);
     cout << "Parsed sketch in " << (SDL_GetTicks() - start) << "ms." << endl;
 
+    LineSelector *lineSelector = new LineSelector(sketch);
+
     Vector2D size = sketch->getSize();
 
     videoManager->clear();
@@ -45,5 +50,6 @@ int main(int argc, char **argv)
     }
 
     delete sketch;
+    delete lineSelector;
     return 0;
 }

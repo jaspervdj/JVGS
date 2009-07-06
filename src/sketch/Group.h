@@ -19,6 +19,8 @@ namespace jvgs
                 Group(SketchElement *parent);
                 virtual ~Group();
 
+                virtual Type getType() const;
+
                 virtual void addSketchElement(SketchElement *sketchElement);
                 virtual int getNumberOfSketchElements() const;
                 virtual SketchElement *getSketchElement(int index) const;

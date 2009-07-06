@@ -22,6 +22,11 @@ namespace jvgs
                 delete (*iterator);
         }
 
+        Path::Type Path::getType() const
+        {
+            return PATH;
+        }
+
         int Path::getNumberOfComponents() const
         {
             return components.size();
