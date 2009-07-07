@@ -19,13 +19,13 @@ TARGET_LINK_LIBRARIES(
     mathTest math core
 )
 
-# ADD_EXECUTABLE(
-# collisionTest collisionTest.cpp
-# )
+ADD_EXECUTABLE(
+    collisionTest collisionTest.cpp
+)
 
-# TARGET_LINK_LIBRARIES(
-# collisionTest sketch math
-# )
+TARGET_LINK_LIBRARIES(
+    collisionTest sketch math game
+)
 
 ADD_EXECUTABLE(
     performanceTest performanceTest.cpp

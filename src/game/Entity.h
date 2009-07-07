@@ -2,7 +2,6 @@
 #define JVGS_GAME_ENTITY_H
 
 #include "../math/Vector2D.h"
-#include "../math/Ellipse.h"
 
 namespace jvgs
 {
@@ -21,7 +20,7 @@ namespace jvgs
 
                 /** Ellipse used for collision detection.
                  */
-                math::Ellipse ellipse;
+                math::Vector2D ellipse;
 
             public:
                 /** Constructor.
@@ -55,12 +54,12 @@ namespace jvgs
                 /** Get the ellipse used for collision detection.
                  *  @return The ellipse used for collision detection.
                  */
-                virtual const math::Ellipse &getEllipse() const;
+                virtual const math::Vector2D &getEllipse() const;
 
                 /** Set the ellipse used for collision detection.
                  *  @param ellipse The new ellipse.
                  */
-                virtual void setEllipse(const math::Ellipse &ellipse);
+                virtual void setEllipse(const math::Vector2D &ellipse);
 
         };
     }

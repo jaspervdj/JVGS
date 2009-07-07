@@ -8,7 +8,9 @@ using namespace std;
 using namespace jvgs::sketch;
 
 #include "../math/PathSegment.h"
+#include "../math/MathManager.h"
 #include "../math/Vector2D.h"
+#include "../math/Line.h"
 using namespace jvgs::math;
 
 namespace jvgs
@@ -78,12 +80,47 @@ namespace jvgs
         LineSegment *CollisionResponder::closestCollision(float ms,
                 Vector2D &collision, float &time)
         {
+            LineSegment *closest = 0;
+
             Vector2D position = toEllipseSpace * entity->getPosition(),
                      velocity = toEllipseSpace * entity->getVelocity();
 
             for(vector<LineSegment*>::iterator iterator = segments.begin();
                     iterator != segments.end(); iterator++) {
+
+                LineSegment *segment = *iterator;
+                Line line = segment->getLine();
+                float nvel = line.getNormal() * velocity;
+                
+                /* TODO: Special case: nvel == 0.0f */
+
+                /* Collision times. */
+                float t0 = (1.0f - line.getSignedDistance(position)) / nvel;
+                float t1 = (-1.0f - line.getSignedDistance(position)) / nvel;
+
+                /* Find first valid collision. */
+                if(t0 < 0.0f || t0 > ms)
+                    t0 = t1;
+                if(t1 < 0.0f || t1 > ms)
+                    t1 = t0;
+                float t = t1 < t0 ? t1 : t0;
+
+                Vector2D lineCollision = position - line.getNormal() +
+                        velocity * t;
+
+                /* A valid collision occurs, and is the first. */
+                if(t >= 0.0f && t <= ms &&
+                        segment->isInSegment(lineCollision)) {
+                //if(t >= 0.0f && t <= ms) {
+                    if(closest == 0 || time < t) {
+                        closest = segment;
+                        collision = fromEllipseSpace * lineCollision;
+                        time = t;
+                    }
+                }
             }
+
+            return closest;
         }
     }
 }

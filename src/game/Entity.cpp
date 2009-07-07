@@ -34,12 +34,12 @@ namespace jvgs
             this->velocity = velocity;
         }
 
-        const Ellipse &Entity::getEllipse() const
+        const Vector2D &Entity::getEllipse() const
         {
             return ellipse;
         }
 
-        void Entity::setEllipse(const Ellipse &ellipse)
+        void Entity::setEllipse(const Vector2D &ellipse)
         {
             this->ellipse = ellipse;
         }

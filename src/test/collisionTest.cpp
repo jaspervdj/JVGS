@@ -2,7 +2,6 @@
 #include "../video/Renderer.h"
 using namespace jvgs::video;
 
-#include "../math/Ellipse.h"
 #include "../math/MathManager.h"
 #include "../math/LineSegment.h"
 #include "../math/Vector2D.h"
@@ -12,61 +11,27 @@ using namespace jvgs::math;
 #include "../sketch/Sketch.h"
 using namespace jvgs::sketch;
 
+#include "../game/Entity.h"
+#include "../game/CollisionResponder.h"
+using namespace jvgs::game;
+
 #include <vector>
 #include <iostream>
 using namespace std;
 
-class CollisionObject: public Ellipse
-{
-    public:
-        Vector2D position;
-
-        CollisionObject(Vector2D radius): Ellipse(radius)
-        {
-        }
-};
-
-bool collision(CollisionObject *object, LineSegment *lineSegment)
-{
-    AffineTransformationMatrix matrix;
-    matrix.scale(object->getRadius().inverted());
-
-    Line line = lineSegment->getLine();
-    Vector2D v = matrix * line.getVector(),
-             p1 = matrix * line.getPoint(),
-             pos = matrix * object->position;
-
-
-    float u = ((pos - p1) * v / (v * v));
-    Vector2D closest = p1 + v * u;
-
-    return closest.distance(pos) <= 1.0f;
-}
-
 int main(int argc, char **argv)
 {
-    const static int width = 480, height = 380;
-
     VideoManager *videoManager = VideoManager::getInstance();
-    videoManager->setVideoMode(width, height, "Collision test.");
-    Renderer *renderer = new Renderer();
+    videoManager->setVideoMode(200, 200, "Collision test.");
 
-    MathManager *mathManager = MathManager::getInstance();
+    Sketch *sketch = new Sketch("resources/world.svg");
+    Sketch *ellipse = new Sketch("resources/ellipse.svg");
+    Entity *entity = new Entity();
+    entity->setEllipse(ellipse->getSize() / 2.0f);
+    entity->setPosition(Vector2D(0.0f, 0.0f));
+    entity->setVelocity(Vector2D(0.1f, 0.1f));
 
-    /* Initialize lines. */
-    vector<LineSegment> lines;
-    for(int i = 0; i < 20; i++) {
-        Vector2D p1 = Vector2D(mathManager->randFloat(width),
-                mathManager->randFloat(height));
-        Vector2D p2 = Vector2D(mathManager->randFloat(width),
-                mathManager->randFloat(height));
-        lines.push_back(LineSegment(p1, p2));
-    }
-
-    /* Initialize collision object. */
-    Sketch *sketch = new Sketch("resources/ellipse.svg");
-    CollisionObject *collisionObject =
-            new CollisionObject(sketch->getSize() * 0.5f);
+    CollisionResponder *responder = new CollisionResponder(entity, sketch);
 
     bool running = true;
     while(running) {
@@ -77,35 +42,44 @@ int main(int argc, char **argv)
                 running = false;
         }
 
-        int x, y;
-        SDL_GetMouseState(&x, &y);
-        Vector2D newPosition = Vector2D(x, y);
+        Vector2D collision;
+        float time;
+        LineSegment *segment = responder->closestCollision(1, collision, time);
 
-        collisionObject->position = newPosition;
+        if(!segment)
+            entity->setPosition(entity->getPosition() + entity->getVelocity());
 
         videoManager->clear();
 
-        for(vector<LineSegment>::iterator iterator = lines.begin();
-                iterator != lines.end(); iterator++) {
-            if(collision(collisionObject, &(*iterator)))
-                videoManager->setColor(Color(1.0f, 0.0f, 0.0f));
-            else
-                videoManager->setColor(Color(0.0f, 0.0f, 0.0f));
-            renderer->begin(Renderer::LINE_STRIP);
-            renderer->vector(iterator->getPoint(0.0f));
-            renderer->vector(iterator->getPoint(1.0f));
-            renderer->end();
-        }
+        sketch->render();
 
         videoManager->push();
-        videoManager->translate(collisionObject->position -
-                sketch->getSize() * 0.5f);
-        sketch->render();
+        videoManager->translate(entity->getPosition() -
+                ellipse->getSize() / 2.0f);
+        ellipse->render();
         videoManager->pop();
 
+        if(segment) {
+            glColor3f(1.0f, 0.0f, 0.0f);
+            glBegin(GL_POINTS);
+            glVertex2f(collision.getX(), collision.getY());
+            glEnd();
+            /*glBegin(GL_LINES);
+            glVertex2f(segment->getStart().getX() * entity->getEllipse().getX(),
+                    segment->getStart().getY() * entity->getEllipse().getY());
+            glVertex2f(segment->getEnd().getX() * entity->getEllipse().getX(),
+                    segment->getEnd().getY() * entity->getEllipse().getY());
+            glEnd();*/
+            glColor3f(0.0f, 0.0f, 0.0f);
+        }
+
         videoManager->flip();
+
+        SDL_Delay(10);
     }
 
-    delete collisionObject;
+    delete entity;
+    delete responder;
     delete sketch;
+    delete ellipse;
 }

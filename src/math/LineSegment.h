@@ -51,6 +51,14 @@ namespace jvgs
                  *  @return A point on the line.
                  */
                 virtual Vector2D getPoint(float t) const;
+
+                /** Checks is a given point lies in this segment.
+                 *  This function assumes the point lies in the line
+                 *  of the segment.
+                 *  @param point Point to be checked.
+                 *  @return If the point lies in this segment.
+                 */
+                virtual bool isInSegment(const Vector2D &point) const;
         };
     }
 }

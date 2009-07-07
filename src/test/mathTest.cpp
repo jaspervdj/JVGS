@@ -1,6 +1,7 @@
 #include "../math/CubicCurve.h"
 #include "../math/Vector2D.h"
 #include "../math/Line.h"
+#include "../math/LineSegment.h"
 #include "../math/MathManager.h"
 using namespace jvgs::math;
 
@@ -14,6 +15,9 @@ int main(int argc, char **argv)
     mathManager->newRandomSeed();
 
     Line line(Vector2D(3.0f, 2.0f), Vector2D(1.0f, 5.0f));
+
+    LineSegment segment(Vector2D(0.0f, 0.0f), Vector2D(1.0f, 1.0f));
+    cout << segment.isInSegment(Vector2D(0.0f, 0.0f)) << endl;
 
     Vector2D v(4.0f, 4.0f);
 

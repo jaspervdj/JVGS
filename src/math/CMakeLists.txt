@@ -3,7 +3,6 @@ ADD_LIBRARY(
     AffineTransformationMatrix.cpp
     BoundingBox.cpp
     CubicCurve.cpp
-    Ellipse.cpp
     Line.cpp
     LineSegment.cpp
     MathManager.cpp
