@@ -31,7 +31,7 @@ namespace jvgs
 
         float LineSegment::getLength() const
         {
-            return start.distance(end);
+            return start.getDistance(end);
         }
 
         Vector2D LineSegment::getPoint(float t) const

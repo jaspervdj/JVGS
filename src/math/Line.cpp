@@ -8,6 +8,7 @@ namespace jvgs
         {
             this->point = point;
             this->vector = vector.normalized();
+            signedDistanceConstant = - (getNormal() * point);
         }
 
         Line::~Line()
@@ -26,7 +27,24 @@ namespace jvgs
 
         Vector2D Line::getNormal() const
         {
-            return Vector2D(-vector.getX(), vector.getY());
+            return Vector2D(-vector.getY(), vector.getX());
+        }
+
+		Vector2D Line::getClosestPoint(const Vector2D& p) const
+		{
+            Vector2D c = p - point;
+			float t = vector * c;
+			return point + vector * t;
+		}
+
+        float Line::getDistance(const Vector2D &p) const
+        {
+            return p.getDistance(getClosestPoint(p));
+        }
+
+        float Line::getSignedDistance(const Vector2D &p) const
+        {
+            return (getNormal() * p) + signedDistanceConstant;
         }
     }
 }

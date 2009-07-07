@@ -97,12 +97,12 @@ namespace jvgs
             return x * other.x + y * other.y;
         }
 
-        float Vector2D::length() const
+        float Vector2D::getLength() const
         {
             return sqrt((*this) * (*this));
         }
 
-        float Vector2D::distance(const Vector2D &other) const
+        float Vector2D::getDistance(const Vector2D &other) const
         {
             return sqrt((x - other.x) * (x - other.x) +
                         (y - other.y) * (y - other.y));
@@ -110,7 +110,7 @@ namespace jvgs
 
         Vector2D Vector2D::normalized() const
         {
-            return *this / length();
+            return *this / getLength();
         }
 
         Vector2D Vector2D::inverted() const
