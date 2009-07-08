@@ -52,6 +52,7 @@ namespace jvgs
                 /** Dot product. */
                 float operator*(const Vector2D &other) const;
 
+                float getSquaredLength() const;
                 float getLength() const;
                 float getDistance(const Vector2D &other) const;
                 Vector2D normalized() const;

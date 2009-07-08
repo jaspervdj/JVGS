@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 namespace jvgs
 {
@@ -82,6 +83,44 @@ namespace jvgs
         float MathManager::abs(const float &value) const
         {
             return value>0?value:-value;
+        }
+
+        bool MathManager::getLowestPositiveRoot(float a, float b, float c,
+                float treshold, float *root) const
+        {
+            /* Calculate determinant. */
+            float d = b * b - 4.0f * a * c;
+
+            /* No solution. */
+            if(d < 0.0f)
+                return false;
+
+            /* Calculate the two roots. */
+            float sqrtD = sqrt(d);
+            float x1 = (-b - sqrtD) / (2.0f * a);
+            float x2 = (-b + sqrtD) / (2.0f * a);
+
+            /* Sort solutions. */
+            if(x1 > x2) {
+                float tmp = x1;
+                x1 = x2;
+                x2 = tmp;
+            }
+            
+            /* x1 is a solution. */
+            if(x1 > 0 && x1 < treshold) {
+                *root = x1;
+                return true;
+            }
+
+            /* When x1 < 0 */
+            if(x2 > 0 && x2 < treshold) {
+                *root = x2;
+                return true;
+            }
+            
+            /* No solution found. */
+            return false;
         }
     };
 };

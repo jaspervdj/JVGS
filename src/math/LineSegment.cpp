@@ -1,6 +1,7 @@
 #include "LineSegment.h"
 
-#include <cstdlib>
+#include <iostream>
+using namespace std;
 
 namespace jvgs
 {
@@ -39,20 +40,6 @@ namespace jvgs
         Vector2D LineSegment::getPoint(float t) const
         {
             return start * (1.0f - t) + end * t;
-        }
-
-        bool LineSegment::isInSegment(const Vector2D &point) const
-        {
-            float minX, maxX, minY, maxY;
-
-            minX = start.getX() < end.getX() ? start.getX() : end.getX();
-            maxX = start.getX() > end.getX() ? start.getX() : end.getX();
-
-            minY = start.getY() < end.getY() ? start.getY() : end.getY();
-            maxY = start.getY() > end.getY() ? start.getY() : end.getY();
-
-            return point.getX() >= minX && point.getX() <= maxX &&
-                    point.getY() >= minY && point.getY() <= maxY;
         }
     }
 }

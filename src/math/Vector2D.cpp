@@ -97,9 +97,14 @@ namespace jvgs
             return x * other.x + y * other.y;
         }
 
+        float Vector2D::getSquaredLength() const
+        {
+            return (*this) * (*this);
+        }
+
         float Vector2D::getLength() const
         {
-            return sqrt((*this) * (*this));
+            return sqrt(getSquaredLength());
         }
 
         float Vector2D::getDistance(const Vector2D &other) const

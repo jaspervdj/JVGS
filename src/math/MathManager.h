@@ -91,6 +91,18 @@ namespace jvgs
                  *  \return The absolute value of the input.
                  */
                 float abs(const float &value) const;
+
+                /** Returns the lowest positive root for a quadratic equation in
+                 *  the form of a * x^2 + b * x + c = 0.
+                 *  @param a A equation parameter.
+                 *  @param b B equation parameter.
+                 *  @param c C equation parameter.
+                 *  @param treshold The lowest root must be below this treshold.
+                 *  @param root This will contain the root.
+                 *  @return If a solution was found.
+                 */
+                bool getLowestPositiveRoot(float a, float b, float c,
+                        float treshold, float *root) const;
         };
     };
 };

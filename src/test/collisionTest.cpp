@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     Entity *entity = new Entity();
     entity->setEllipse(ellipse->getSize() / 2.0f);
     entity->setPosition(Vector2D(0.0f, 0.0f));
-    entity->setVelocity(Vector2D(0.1f, 0.1f));
+    entity->setVelocity(Vector2D(5.0f, 5.0f));
 
     CollisionResponder *responder = new CollisionResponder(entity, sketch);
 
@@ -43,8 +43,9 @@ int main(int argc, char **argv)
         }
 
         Vector2D collision;
-        float time;
-        LineSegment *segment = responder->closestCollision(1, collision, time);
+        float time = 100.0f;
+        LineSegment *segment =
+                responder->closestCollision(1, &collision, &time);
 
         if(!segment)
             entity->setPosition(entity->getPosition() + entity->getVelocity());
@@ -61,21 +62,21 @@ int main(int argc, char **argv)
 
         if(segment) {
             glColor3f(1.0f, 0.0f, 0.0f);
-            glBegin(GL_POINTS);
+            /*glBegin(GL_POINTS);
             glVertex2f(collision.getX(), collision.getY());
-            glEnd();
-            /*glBegin(GL_LINES);
+            glEnd();*/
+            glBegin(GL_LINES);
             glVertex2f(segment->getStart().getX() * entity->getEllipse().getX(),
                     segment->getStart().getY() * entity->getEllipse().getY());
             glVertex2f(segment->getEnd().getX() * entity->getEllipse().getX(),
                     segment->getEnd().getY() * entity->getEllipse().getY());
-            glEnd();*/
+            glEnd();
             glColor3f(0.0f, 0.0f, 0.0f);
         }
 
         videoManager->flip();
 
-        SDL_Delay(10);
+        SDL_Delay(1000);
     }
 
     delete entity;

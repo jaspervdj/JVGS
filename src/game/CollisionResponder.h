@@ -51,7 +51,7 @@ namespace jvgs
                  *  @return The LineSegment the entity collided with.
                  */
                 virtual math::LineSegment *closestCollision(float ms,
-                        math::Vector2D &collision, float &time);
+                        math::Vector2D *collision, float *time);
         };
     }
 }

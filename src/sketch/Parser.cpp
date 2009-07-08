@@ -60,11 +60,9 @@ namespace jvgs
             TiXmlElement *rootElement = document->RootElement();
 
             float width, height;
-            LogManager::getInstance()->message("Loading dimensions.");
             rootElement->QueryFloatAttribute("width", &width);
             rootElement->QueryFloatAttribute("height", &height);
             sketch->setSize(Vector2D(width, height));
-            LogManager::getInstance()->message("Loaded dimensions.");
 
             GroupParser *groupParser = new GroupParser(this);
 
