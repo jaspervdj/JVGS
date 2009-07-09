@@ -4,6 +4,7 @@
 #include "Line.h"
 #include "Vector2D.h"
 #include "PathSegment.h"
+#include "BoundingBox.h"
 
 namespace jvgs
 {
@@ -14,6 +15,9 @@ namespace jvgs
             private:
                 /* The start and end of the line. */
                 Vector2D start, end;
+
+                /** A bounding box. */
+                BoundingBox *boundingBox;
 
             public:
                 /** Creates a new line.
@@ -51,6 +55,11 @@ namespace jvgs
                  *  @return A point on the line.
                  */
                 virtual Vector2D getPoint(float t) const;
+
+                /** Get a bounding box for this line segment.
+                 *  @return A bounding box for this line segment.
+                 */
+                virtual BoundingBox *getBoundingBox();
         };
     }
 }

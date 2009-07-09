@@ -15,6 +15,16 @@ namespace jvgs
         {
         }
 
+        const Vector2D &BoundingBox::getTopLeft() const
+        {
+            return topLeft;
+        }
+
+        const Vector2D &BoundingBox::getBottomRight() const
+        {
+            return bottomRight;
+        }
+
         bool BoundingBox::intersectsWith(const BoundingBox &other) const
         {
             return !(topLeft.getX() > other.bottomRight.getX() ||

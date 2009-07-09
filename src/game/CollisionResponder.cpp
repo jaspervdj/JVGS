@@ -8,6 +8,7 @@ using namespace std;
 using namespace jvgs::sketch;
 
 #include "../math/PathSegment.h"
+#include "../math/BoundingBox.h"
 #include "../math/Vector2D.h"
 #include "../math/Line.h"
 using namespace jvgs::math;
@@ -89,34 +90,22 @@ namespace jvgs
             /* Loop over all lines to find closest collision. */
             for(vector<LineSegment*>::iterator iterator = segments.begin();
                     iterator != segments.end(); iterator++) {
+
+                /* Get the line segment and it's bounding box. */
                 LineSegment *segment = *iterator;
-
-                /* Calculate the segment bounding box x. */
-                float minX, maxX, minY, maxY;
-                if(segment->getStart().getX() < segment->getEnd().getX()) {
-                    minX = segment->getStart().getX();
-                    maxX = segment->getEnd().getX();
-                } else {
-                    minX = segment->getEnd().getX();
-                    maxX = segment->getStart().getX();
-                }
-
-                /* Calculate the segment bounding box x. */
-                if(segment->getStart().getY() < segment->getEnd().getY()) {
-                    minY = segment->getStart().getY();
-                    maxY = segment->getEnd().getY();
-                } else {
-                    minY = segment->getEnd().getY();
-                    maxY = segment->getStart().getY();
-                }
+                BoundingBox *boundingBox = segment->getBoundingBox();
+                const Vector2D *topLeft = &boundingBox->getTopLeft();
+                const Vector2D *bottomRight = &boundingBox->getTopLeft();
 
                 /* Maybe we can skip because of our bb check. */
-                if(position.getX() + 1.0f >= minX &&
-                        position.getX() - 1.0f <= maxX &&
-                        position.getY() + 1.0f >= minY &&
-                        position.getY() - 1.0f <= maxY) {
+                if(position.getX() + 1.0f >= topLeft->getX() &&
+                        position.getX() - 1.0f <= bottomRight->getX() &&
+                        position.getY() + 1.0f >= topLeft->getY() &&
+                        position.getY() - 1.0f <= bottomRight->getY()) {
+                    /* Temporary result variables. */
                     Vector2D tmpCollision;
                     float tmpTime;
+
                     /* Check against single segment. */
                     if(closestCollision(segment, ms, &tmpCollision, &tmpTime)) {
                         /* If this collision is the closest, store it, erasing
