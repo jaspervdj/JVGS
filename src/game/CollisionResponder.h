@@ -5,6 +5,7 @@
 #include "../sketch/Group.h"
 #include "../sketch/Path.h"
 #include "../math/LineSegment.h"
+#include "../math/MathManager.h"
 #include "../math/AffineTransformationMatrix.h"
 #include <vector>
 
@@ -25,6 +26,9 @@ namespace jvgs
 
                 /** Segments in ellipse space. */
                 std::vector<math::LineSegment*> segments;
+
+                /** MathManager to perform calculations. */
+                math::MathManager *mathManager;
 
             public:
                 CollisionResponder(Entity *entity, sketch::Sketch *sketch);
@@ -52,6 +56,22 @@ namespace jvgs
                  */
                 virtual math::LineSegment *closestCollision(float ms,
                         math::Vector2D *collision, float *time);
+
+            protected:
+                /** Checks if a collision occurs between a moving unit circle
+                 *  and a point.
+                 *  @param position Initial position of the unit circle.
+                 *  @param velocity Velocity of the unit circle.
+                 *  @param point Point to check collision against.
+                 *  @param treshold Check only the time frame before treshold.
+                 *  @param time Will contain the exact collision time.
+                 *  @param collision Will contain the exact collision point.
+                 *  @return If there was a collision.
+                 */
+                bool pointCollision(const math::Vector2D &position,
+                        const math::Vector2D &velocity,
+                        const math::Vector2D &point, float treshold,
+                        float *time, math::Vector2D *collision) const;
         };
     }
 }

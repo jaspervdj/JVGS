@@ -8,7 +8,6 @@ using namespace std;
 using namespace jvgs::sketch;
 
 #include "../math/PathSegment.h"
-#include "../math/MathManager.h"
 #include "../math/Vector2D.h"
 #include "../math/Line.h"
 using namespace jvgs::math;
@@ -29,7 +28,8 @@ namespace jvgs
 
             Group *root = sketch->getRoot();
             addLinesFromGroup(root);
-            cout << "Added " << segments.size() << " line segments." << endl;
+
+            mathManager = MathManager::getInstance();
         }
 
         CollisionResponder::~CollisionResponder()
@@ -80,26 +80,37 @@ namespace jvgs
         LineSegment *CollisionResponder::closestCollision(float ms,
                 Vector2D *collision, float *time)
         {
-            MathManager *mathManager = MathManager::getInstance();
             LineSegment *closest = 0;
 
+            /* Convert vectors to ellipse space. */
             Vector2D position = toEllipseSpace * entity->getPosition(),
                      velocity = toEllipseSpace * entity->getVelocity();
 
+            /* Loop over all lines to find closest collision. */
             for(vector<LineSegment*>::iterator iterator = segments.begin();
                     iterator != segments.end(); iterator++) {
 
                 LineSegment *segment = *iterator;
                 Line line = segment->getLine();
                 float normalDotVelocity = line.getNormal() * velocity;
-                
-                /* TODO: Special case: normalDotVelocity == 0.0f */
 
                 /* Collision times. */
-                float t0 = (1.0f - line.getSignedDistance(position)) /
-                        normalDotVelocity;
-                float t1 = (-1.0f - line.getSignedDistance(position)) /
-                        normalDotVelocity;
+                float t0, t1;
+                
+                /* Special case: normalDotVelocity == 0.0f */
+                if(normalDotVelocity == 0.0f) {
+                    /* Collision. */
+                    if(line.getDistance(position) < 1.0f) {
+                        t0 = 0.0f;
+                        t1 = ms;
+                    }
+                } else {
+                    /* Calculate times. */
+                    float t0 = (1.0f - line.getSignedDistance(position)) /
+                            normalDotVelocity;
+                    float t1 = (-1.0f - line.getSignedDistance(position)) /
+                            normalDotVelocity;
+                }
 
                 /* Sort. */
                 if(t0 > t1) {
@@ -125,28 +136,18 @@ namespace jvgs
                     float a, b, c, root;
 
                     /* Check start. */
-                    a = velocity.getSquaredLength();
-                    b = 2.0f * (velocity * (position - segment->getStart()));
-                    c = (segment->getStart() - position).getSquaredLength()
-                            - 1.0f;
-                    if(mathManager->getLowestPositiveRoot(a, b, c, t, &root)) {
+                    foundCollision = pointCollision(position, velocity,
+                            segment->getStart(), t, &root, &ellipseCollision);
+                    if(foundCollision)
                         t = root;
-                        foundCollision = true;
-                        ellipseCollision = segment->getStart();
-                    }
 
                     /* Check end. */
-                    a = velocity.getSquaredLength();
-                    b = 2.0f * (velocity * (position - segment->getEnd()));
-                    c = (segment->getEnd() - position).getSquaredLength()
-                            - 1.0f;
-                    if(mathManager->getLowestPositiveRoot(a, b, c, t, &root)) {
+                    foundCollision = pointCollision(position, velocity,
+                            segment->getEnd(), t, &root, &ellipseCollision);
+                    if(foundCollision)
                         t = root;
-                        foundCollision = true;
-                        ellipseCollision = segment->getEnd();
-                    }
 
-                    /* Check line. */
+                    /* Check line segment between start and end. */
                     Vector2D edge = segment->getEnd() - segment->getStart();
                     Vector2D posToStart = segment->getStart() - position;
                     float edgeSquaredLength = edge.getSquaredLength();
@@ -156,10 +157,12 @@ namespace jvgs
                     a = edgeSquaredLength * - velocity.getSquaredLength() +
                             edgeDotVelocity * edgeDotVelocity;
                     b = edgeSquaredLength * (2.0f * (velocity * posToStart)) -
-                        2.0f * edgeDotVelocity * edgeDotPosToStart;
-                    c = edgeSquaredLength * (1.0f - posToStart.getSquaredLength())
-                        + edgeDotPosToStart * edgeDotPosToStart;
+                            2.0f * edgeDotVelocity * edgeDotPosToStart;
+                    c = edgeSquaredLength *
+                            (1.0f - posToStart.getSquaredLength()) +
+                            edgeDotPosToStart * edgeDotPosToStart;
 
+                    /* If there is a lower solution... */
                     if(mathManager->getLowestPositiveRoot(a, b, c, t, &root)) {
                         float f = (edgeDotVelocity * root - edgeDotPosToStart) /
                             edgeSquaredLength;
@@ -173,17 +176,38 @@ namespace jvgs
                     }
                 }
 
-                /* Find first valid collision. */
+                /* If this collision is the closest, store it, erasing
+                 * the previously remembered collision. */
                 if(foundCollision) {
                     if(closest == 0 || t < *time) {
                         closest = segment;
-                        *collision = fromEllipseSpace * ellipseCollision;
+                        *collision = ellipseCollision;
                         *time = t;
                     }
                 }
             }
 
             return closest;
+        }
+
+        bool CollisionResponder::pointCollision(const Vector2D &position,
+                const Vector2D &velocity, const Vector2D &point, float treshold,
+                float *time, Vector2D *collision) const
+        {
+            float root;
+            bool found = mathManager->getLowestPositiveRoot(
+                    velocity.getSquaredLength(),
+                    2.0f * (velocity * (position - point)),
+                    (point - position).getSquaredLength() - 1.0f,
+                    treshold, &root);
+
+            if(found) {
+                *time = root;
+                *collision = point;
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
