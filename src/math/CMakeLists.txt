@@ -9,5 +9,7 @@ ADD_LIBRARY(
     Matrix.cpp
     Noise.cpp
     PathSegment.cpp
+    SegmentQuadTree.cpp
+    SegmentQuadTreeNode.cpp
     Vector2D.cpp
 )

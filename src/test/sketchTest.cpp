@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     
     videoManager->flip();
 
-    while (SDL_GetTicks() < start + 5000) {
+    while (SDL_GetTicks() < start + 25000) {
         videoManager->flip();
         SDL_Delay(10);
     }

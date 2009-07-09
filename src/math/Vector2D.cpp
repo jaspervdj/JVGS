@@ -97,6 +97,16 @@ namespace jvgs
             return x * other.x + y * other.y;
         }
 
+        Vector2D Vector2D::onlyX() const
+        {
+            return Vector2D(x, 0.0f);
+        }
+
+        Vector2D Vector2D::onlyY() const
+        {
+            return Vector2D(0.0f, y);
+        }
+
         float Vector2D::getSquaredLength() const
         {
             return (*this) * (*this);
