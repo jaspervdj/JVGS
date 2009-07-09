@@ -30,11 +30,13 @@ namespace jvgs
             Group *root = sketch->getRoot();
             addLinesFromGroup(root);
 
+            tree = new SegmentQuadTree(segments);
             mathManager = MathManager::getInstance();
         }
 
         CollisionResponder::~CollisionResponder()
         {
+            delete tree;
             for(vector<LineSegment*>::iterator iterator = segments.begin();
                     iterator != segments.end(); iterator++) {
                 delete (*iterator);
@@ -86,10 +88,16 @@ namespace jvgs
             /* Convert vectors to ellipse space. */
             position = toEllipseSpace * entity->getPosition();
             velocity = toEllipseSpace * entity->getVelocity();
+            BoundingBox boundingBox(position - Vector2D(1.0f, 1.0f),
+                    position + Vector2D(1.0f, 1.0f));
+
+            /* The result from the tree search. */
+            vector<LineSegment*> result;
+            tree->findSegments(&boundingBox, &result);
 
             /* Loop over all lines to find closest collision. */
-            for(vector<LineSegment*>::iterator iterator = segments.begin();
-                    iterator != segments.end(); iterator++) {
+            for(vector<LineSegment*>::iterator iterator = result.begin();
+                    iterator != result.end(); iterator++) {
 
                 /* Get the line segment and it's bounding box. */
                 LineSegment *segment = *iterator;

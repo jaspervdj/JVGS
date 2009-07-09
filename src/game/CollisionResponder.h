@@ -8,6 +8,7 @@
 #include "../math/Vector2D.h"
 #include "../math/MathManager.h"
 #include "../math/AffineTransformationMatrix.h"
+#include "../math/SegmentQuadTree.h"
 #include <vector>
 
 namespace jvgs
@@ -35,6 +36,9 @@ namespace jvgs
                 /** Segments in ellipse space. */
                 std::vector<math::LineSegment*> segments;
 
+                /** A tree to speed stuff up. */
+                math::SegmentQuadTree *tree;
+
                 /** MathManager to perform calculations. */
                 math::MathManager *mathManager;
 
@@ -51,6 +55,7 @@ namespace jvgs
                  *  to this selector.
                  *  @param path Path to add the lines from.
                  */
+                // TODO: private this
                 virtual void addLinesFromPath(sketch::Path *path);
 
                 virtual void update(float ms);

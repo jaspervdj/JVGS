@@ -1,8 +1,11 @@
 #include "SegmentQuadTreeNode.h"
+#include "LineSegment.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
 
+#include <iostream>
+#include <string>
 using namespace std;
 
 namespace jvgs
@@ -31,7 +34,28 @@ namespace jvgs
 
         void SegmentQuadTreeNode::addSegment(LineSegment *segment)
         {
-            segments.push_back(segment);
+            /* Children, try to add to them. */
+            if(children) {
+                bool added = false;
+                for(int i = 0; i < 4; i++) {
+                    /* Goes completely in it - added. */
+                    if(segment->getBoundingBox()->completelyIn(
+                            children[i]->getBoundingBox())) {
+                        children[i]->addSegment(segment);
+                        added = true;
+                    } 
+                }
+
+                /* Not added, add to root here. */
+                if(!added)
+                    segments.push_back(segment);
+
+            /* Add to root and maybe subdidivde. */
+            } else {
+                segments.push_back(segment);
+                if(segments.size() >= SUBDIVIDE_LIMIT)
+                    subdivide();
+            }
         }
 
         void SegmentQuadTreeNode::subdivide()
@@ -64,8 +88,8 @@ namespace jvgs
 
             /* Top right. */
             children[3] = new SegmentQuadTreeNode(BoundingBox(
-                    boundingBox.getTopLeft() + size.onlyY(),
-                    boundingBox.getTopLeft() + size.onlyY() + size));
+                    boundingBox.getTopLeft() + size.onlyX(),
+                    boundingBox.getTopLeft() + size.onlyX() + size));
 
             /* Clear contents. */
             vector<LineSegment*> original = segments;
@@ -73,19 +97,43 @@ namespace jvgs
 
             for(vector<LineSegment*>::iterator iterator = original.begin();
                     iterator != original.end(); iterator++) {
-                LineSegment *segment = *iterator;
-                bool added = false;
+                /* Will add it to the correct child. */
+                addSegment(*iterator);
+            }
+        }
+
+        void SegmentQuadTreeNode::dump(int indent) const
+        {
+            string edge = "";
+            for(int i = 0; i < indent; i++)
+                edge += " ";
+
+            cout << edge << "Node with " << segments.size() << " segments." <<
+                    endl;
+            if(children) {
                 for(int i = 0; i < 4; i++) {
-                    /* Goes completely in it - added. */
-                    if(segment->getBoundingBox()->completelyIn(
+                    children[i]->dump(indent + 2);
+                }
+            }
+        }
+
+        void SegmentQuadTreeNode::findSegments(BoundingBox *boundingBox,
+                std::vector<LineSegment*> *result) {
+
+            /* Add all segments. */
+            for(vector<LineSegment*>::iterator iterator = segments.begin();
+                    iterator != segments.end(); iterator++) {
+                result->push_back(*iterator);
+            }
+
+            /* Check children. */
+            if(children) {
+                for(int i = 0; i < 4; i++) {
+                    if(boundingBox->intersectsWith(
                             children[i]->getBoundingBox())) {
-                        children[i]->addSegment(segment);
-                        added = true;
+                        children[i]->findSegments(boundingBox, result);
                     }
                 }
-
-                /* Not added, add to root here. */
-                addSegment(segment);
             }
         }
     }

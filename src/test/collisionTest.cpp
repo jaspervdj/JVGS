@@ -46,7 +46,7 @@ int main(int argc, char **argv)
         float time = 100.0f;
         LineSegment *segment;
 
-        const int number = 100;
+        const int number = 500;
         long start = SDL_GetTicks();
         for(int i = 0; i < number; i++) {
             segment = responder->closestCollision(1, &collision, &time);
