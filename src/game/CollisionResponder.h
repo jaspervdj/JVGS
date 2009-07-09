@@ -43,20 +43,15 @@ namespace jvgs
                 math::MathManager *mathManager;
 
             public:
+                /** Constructor.
+                 *  @param entity Entity to respond to collisions.
+                 *  @param sketch Sketch width lines to collide against.
+                 */
                 CollisionResponder(Entity *entity, sketch::Sketch *sketch);
+
+                /** Destructor.
+                 */
                 virtual ~CollisionResponder();
-
-                /** Add lines from a sketch group.
-                 *  @param group Group to add the lines from.
-                 */
-                virtual void addLinesFromGroup(sketch::Group *group);
-
-                /** Divide a path into lines and add the lines
-                 *  to this selector.
-                 *  @param path Path to add the lines from.
-                 */
-                // TODO: private this
-                virtual void addLinesFromPath(sketch::Path *path);
 
                 virtual void update(float ms);
 
@@ -71,6 +66,17 @@ namespace jvgs
                         math::Vector2D *collision, float *time);
 
             protected:
+                /** Add lines from a sketch group.
+                 *  @param group Group to add the lines from.
+                 */
+                virtual void addLinesFromGroup(sketch::Group *group);
+
+                /** Divide a path into lines and add the lines
+                 *  to this selector.
+                 *  @param path Path to add the lines from.
+                 */
+                virtual void addLinesFromPath(sketch::Path *path);
+
                 /** Get the first point at which the entity will collide
                  *  with a segment. This function assumes position and
                  *  velocity are set correctly.

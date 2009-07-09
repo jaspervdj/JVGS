@@ -37,8 +37,6 @@ namespace jvgs
                     iterator++) {
                 root->addSegment(*iterator);
             }
-
-            root->dump(0);
         }
 
         SegmentQuadTree::~SegmentQuadTree()

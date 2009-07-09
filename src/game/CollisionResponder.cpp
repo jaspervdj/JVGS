@@ -43,39 +43,6 @@ namespace jvgs
             }
         }
 
-        void CollisionResponder::addLinesFromGroup(Group *group)
-        {
-            for(int i = 0; i < group->getNumberOfSketchElements(); i++) {
-                SketchElement *element = group->getSketchElement(i);
-                if(element->getType() == SketchElement::GROUP)
-                    addLinesFromGroup((Group*) element);
-                else if(element->getType() == SketchElement::PATH)
-                    addLinesFromPath((Path*) element);
-            }
-        }
-
-        void CollisionResponder::addLinesFromPath(Path *path)
-        {
-            for(int i = 0; i < path->getNumberOfComponents(); i++) {
-                PathComponent *component = path->getComponent(i);
-                for(int j = 0; j < component->getNumberOfSegments(); j++) {
-                    PathSegment *segment = component->getSegment(j);
-                    float increment = 5.0f / segment->getLength();
-                    Vector2D previous = segment->getPoint(0.0f), current;
-                    for(float t = increment; t <= 1.0f; t += increment) {
-                        current = segment->getPoint(t);
-
-                        /* Convert to ellipse space and add. */
-                        segments.push_back(new LineSegment(
-                                    toEllipseSpace * current,
-                                    toEllipseSpace * previous));
-
-                        previous = current; 
-                    }
-                }
-            }
-        }
-
         void CollisionResponder::update(float ms)
         {
         }
@@ -128,6 +95,39 @@ namespace jvgs
             }
 
             return closest;
+        }
+
+        void CollisionResponder::addLinesFromGroup(Group *group)
+        {
+            for(int i = 0; i < group->getNumberOfSketchElements(); i++) {
+                SketchElement *element = group->getSketchElement(i);
+                if(element->getType() == SketchElement::GROUP)
+                    addLinesFromGroup((Group*) element);
+                else if(element->getType() == SketchElement::PATH)
+                    addLinesFromPath((Path*) element);
+            }
+        }
+
+        void CollisionResponder::addLinesFromPath(Path *path)
+        {
+            for(int i = 0; i < path->getNumberOfComponents(); i++) {
+                PathComponent *component = path->getComponent(i);
+                for(int j = 0; j < component->getNumberOfSegments(); j++) {
+                    PathSegment *segment = component->getSegment(j);
+                    float increment = 5.0f / segment->getLength();
+                    Vector2D previous = segment->getPoint(0.0f), current;
+                    for(float t = increment; t <= 1.0f; t += increment) {
+                        current = segment->getPoint(t);
+
+                        /* Convert to ellipse space and add. */
+                        segments.push_back(new LineSegment(
+                                    toEllipseSpace * current,
+                                    toEllipseSpace * previous));
+
+                        previous = current; 
+                    }
+                }
+            }
         }
 
         bool CollisionResponder::closestCollision(LineSegment *segment,

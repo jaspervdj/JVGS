@@ -102,21 +102,6 @@ namespace jvgs
             }
         }
 
-        void SegmentQuadTreeNode::dump(int indent) const
-        {
-            string edge = "";
-            for(int i = 0; i < indent; i++)
-                edge += " ";
-
-            cout << edge << "Node with " << segments.size() << " segments." <<
-                    endl;
-            if(children) {
-                for(int i = 0; i < 4; i++) {
-                    children[i]->dump(indent + 2);
-                }
-            }
-        }
-
         void SegmentQuadTreeNode::findSegments(BoundingBox *boundingBox,
                 std::vector<LineSegment*> *result) {
 

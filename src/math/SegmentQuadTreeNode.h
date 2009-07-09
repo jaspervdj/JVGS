@@ -10,27 +10,50 @@ namespace jvgs
     {
         class LineSegment;
 
+        /** A node containing some line segments. This node is able to
+         *  subdivide aka. spawn children.
+         */
         class SegmentQuadTreeNode
         {
             private:
+                /** Nodes will subdivide when they have more segments than
+                 *  this limit. */
                 const static int SUBDIVIDE_LIMIT = 20;
 
+                /** Children of the node. 0 if no children yet. */
                 SegmentQuadTreeNode **children;
+
+                /** Bounding box of this node's area. */
                 BoundingBox boundingBox; 
 
+                /** The segments belonging to this node. */
                 std::vector<LineSegment*> segments;
 
             public:
+                /** Constructor.
+                 *  @param boundingBox Bounding box for this node's area.
+                 */
                 SegmentQuadTreeNode(const BoundingBox &boundingBox);
+
+                /** Destructor.
+                 */
                 virtual ~SegmentQuadTreeNode();
 
+                /** Get the bounding box for this node's area.
+                 *  @return The bounding box for this node's area.
+                 */
                 const BoundingBox &getBoundingBox() const;
 
+                /** Add a segment. This will automatically cause subdivision
+                 *  when a certain limit is reached.
+                 *  @param segment LineSegment to add.
+                 */
                 void addSegment(LineSegment *segment);
 
+                /** Force subdivision of this node. You better have a good
+                 *  fucking reason to use this.
+                 */
                 void subdivide();
-
-                virtual void dump(int indent) const;
 
                 /** Find segments that intersect with a certain bounding box.
                  *  @param boundingBox BoundingBox to check intersection with.
