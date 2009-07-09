@@ -29,6 +29,9 @@ namespace jvgs
                  *  @param waveLength The wavelength of the noise.
                  */
                 Noise(float min, float max, int waveLength);
+
+                /** Destructor.
+                 */
                 virtual ~Noise();
 
                 /** Resets the noise to a new random state, independent

@@ -31,8 +31,19 @@ namespace jvgs
             return parser;
         }
 
+        void SketchElementParser::parseAttributes(SketchElement *sketchElement,
+                TiXmlElement *xmlElement) const
+        {
+            if(xmlElement->Attribute("transform"))
+                parseTransform(sketchElement,
+                        xmlElement->Attribute("transform"));
+
+            if(xmlElement->Attribute("id"))
+                sketchElement->setId(xmlElement->Attribute("id"));
+        }
+
         void SketchElementParser::parseTransform(SketchElement *sketchElement,
-                const std::string &data)
+                const std::string &data) const
         {
             TransformParser *tranformParser = new TransformParser();
             AffineTransformationMatrix matrix = tranformParser->parse(data);

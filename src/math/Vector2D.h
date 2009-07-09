@@ -29,10 +29,24 @@ namespace jvgs
                  */
                 ~Vector2D();
 
+                /** Get the X element.
+                 *  @return The X element.
+                 */
                 float getX() const;
+
+                /** Set the X element.
+                 *  @param x The new X element.
+                 */
                 void setX(const float &x);
 
+                /** Get the Y element.
+                 *  @return The Y element.
+                 */
                 float getY() const;
+
+                /** Set the Y element.
+                 *  @param y The new Y element.
+                 */
                 void setY(const float &x);
 
                 const Vector2D &operator=(const Vector2D &other);
@@ -49,16 +63,47 @@ namespace jvgs
                 const Vector2D operator/(const float &scalar) const;
                 const Vector2D &operator/=(const float &scalar);
 
-                /** Dot product. */
+                /** Dot product.
+                 *  @param other Vector to perform the dot product with.
+                 *  @return The dot product.
+                 */
                 float operator*(const Vector2D &other) const;
 
+                /** Get this vector, but with the X element as 0.
+                 *  @param This vector without X element.
+                 */
                 Vector2D onlyX() const;
+
+                /** Get this vector, but with the Y element as 0.
+                 *  @param This vector without Y element.
+                 */
                 Vector2D onlyY() const;
 
+                /** Get the squared length of this vector.
+                 *  @return The squared length of this vector.
+                 */
                 float getSquaredLength() const;
+
+                /** Get the length of this vector.
+                 *  @return The length of this vector.
+                 */
                 float getLength() const;
+
+                /** Get the distance from this vector to another.
+                 *  @param other Vector to get the distance to.
+                 *  @return The distance to other.
+                 */
                 float getDistance(const Vector2D &other) const;
+
+                /** Return a normalized version of this vector.
+                 *  @return a normalized version of this vector.
+                 */
                 Vector2D normalized() const;
+
+                /** Return a vector with the X and Y elements inverted.
+                 *  That is: (x, y) -> (1/x, 1/y).
+                 *  @return A vector with inverted elements.
+                 */
                 Vector2D inverted() const;
 
                 /** Reflects the other vector around this vector and

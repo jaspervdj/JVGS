@@ -9,9 +9,13 @@ namespace jvgs
     {
         class PathSegment
         {
-            private:
             public:
+                /** Constructor.
+                 */
                 PathSegment();
+
+                /** Destructor.
+                 */
                 virtual ~PathSegment();
 
                 /** Get the length of this line segment.

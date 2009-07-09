@@ -36,14 +36,13 @@ namespace jvgs
                  */
                 virtual Parser *getParser() const;
 
-                /** Parse a transform="..." attribute for a certain
-                 *  SketchElement.
-                 *  @param sketchElement The SketchElement to parse the
-                 *         transform tag for.
-                 *  @param data The data in the transform attribute.
+                /** Parse a number of general attributes and apply them
+                 *  to the sketch element.
+                 *  @param sketchElement SketchElement to apply to.
+                 *  @param xmlElement XML element to get the attributes from.
                  */
-                virtual void parseTransform(SketchElement *sketchElement,
-                        const std::string &data);
+                virtual void parseAttributes(SketchElement *sketchElement,
+                        TiXmlElement *xmlElement) const;
 
                 /** Parse and create the element.
                  *  @param parent The parent of the new SketchElement.
@@ -52,6 +51,17 @@ namespace jvgs
                  */
                 virtual SketchElement *parse(SketchElement *parent,
                         TiXmlElement *element) = 0;
+
+            protected:
+                /** Parse a transform="..." attribute for a certain
+                 *  SketchElement.
+                 *  @param sketchElement The SketchElement to parse the
+                 *         transform tag for.
+                 *  @param data The data in the transform attribute.
+                 */
+                virtual void parseTransform(SketchElement *sketchElement,
+                        const std::string &data) const;
+
         };
     }
 }

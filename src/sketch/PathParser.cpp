@@ -31,9 +31,7 @@ namespace jvgs
                 TiXmlElement *element)
         {
             Path *path = new Path(parent);
-
-            if(element->Attribute("transform"))
-                parseTransform(path, element->Attribute("transform"));
+            parseAttributes(path, element);
 
             string data =
                     element->Attribute("d") ? element->Attribute("d") : "";

@@ -27,9 +27,7 @@ namespace jvgs
         {
 
             Group *group = new Group(parent);
-
-            if(element->Attribute("transform"))
-                parseTransform(group, element->Attribute("transform"));
+            parseAttributes(group, element);
 
             /* Recurse on children. */
             TiXmlElement *child = element->FirstChildElement();
