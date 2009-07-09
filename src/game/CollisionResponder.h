@@ -5,6 +5,7 @@
 #include "../sketch/Group.h"
 #include "../sketch/Path.h"
 #include "../math/LineSegment.h"
+#include "../math/Vector2D.h"
 #include "../math/MathManager.h"
 #include "../math/AffineTransformationMatrix.h"
 #include <vector>
@@ -16,6 +17,9 @@ namespace jvgs
         class LineSelector;
         class Entity;
 
+        /** This class is NOT THREAD SAFE AT ALL, due to some
+         *  optimizations.
+         */
         class CollisionResponder
         {
             private:
@@ -23,6 +27,10 @@ namespace jvgs
 
                 math::AffineTransformationMatrix toEllipseSpace,
                         fromEllipseSpace;
+
+                /** Keep the position and velocity of the entity in
+                 *  ellipse space. */
+                math::Vector2D position, velocity;
 
                 /** Segments in ellipse space. */
                 std::vector<math::LineSegment*> segments;
@@ -47,7 +55,7 @@ namespace jvgs
 
                 virtual void update(float ms);
 
-                /** Get the first point at which an entity will collide
+                /** Get the first point at which the entity will collide
                  *  with the world.
                  *  @param ms Milliseconds the entity can be moved.
                  *  @param collision Will contain the exact collision point.
@@ -58,6 +66,18 @@ namespace jvgs
                         math::Vector2D *collision, float *time);
 
             protected:
+                /** Get the first point at which the entity will collide
+                 *  with a segment. This function assumes position and
+                 *  velocity are set correctly.
+                 *  @param segment LineSegment to check collision against.
+                 *  @param ms Milliseconds the entity can be moved.
+                 *  @param collision Will contain the exact collision point.
+                 *  @param time Will contain the exact collision time.
+                 *  @return If the entity collided with the segment.
+                 */
+                virtual bool closestCollision(math::LineSegment *segment,
+                        float ms, math::Vector2D *collision, float *time) const;
+
                 /** Checks if a collision occurs between a moving unit circle
                  *  and a point.
                  *  @param position Initial position of the unit circle.

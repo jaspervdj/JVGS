@@ -83,111 +83,145 @@ namespace jvgs
             LineSegment *closest = 0;
 
             /* Convert vectors to ellipse space. */
-            Vector2D position = toEllipseSpace * entity->getPosition(),
-                     velocity = toEllipseSpace * entity->getVelocity();
+            position = toEllipseSpace * entity->getPosition();
+            velocity = toEllipseSpace * entity->getVelocity();
 
             /* Loop over all lines to find closest collision. */
             for(vector<LineSegment*>::iterator iterator = segments.begin();
                     iterator != segments.end(); iterator++) {
-
                 LineSegment *segment = *iterator;
-                Line line = segment->getLine();
-                float normalDotVelocity = line.getNormal() * velocity;
 
-                /* Collision times. */
-                float t0, t1;
-                
-                /* Special case: normalDotVelocity == 0.0f */
-                if(normalDotVelocity == 0.0f) {
-                    /* Collision. */
-                    if(line.getDistance(position) < 1.0f) {
-                        t0 = 0.0f;
-                        t1 = ms;
-                    }
+                /* Calculate the segment bounding box x. */
+                float minX, maxX, minY, maxY;
+                if(segment->getStart().getX() < segment->getEnd().getX()) {
+                    minX = segment->getStart().getX();
+                    maxX = segment->getEnd().getX();
                 } else {
-                    /* Calculate times. */
-                    float t0 = (1.0f - line.getSignedDistance(position)) /
-                            normalDotVelocity;
-                    float t1 = (-1.0f - line.getSignedDistance(position)) /
-                            normalDotVelocity;
+                    minX = segment->getEnd().getX();
+                    maxX = segment->getStart().getX();
                 }
 
-                /* Sort. */
-                if(t0 > t1) {
-                    float tmp = t0;
-                    t0 = t1;
-                    t1 = tmp;
+                /* Calculate the segment bounding box x. */
+                if(segment->getStart().getY() < segment->getEnd().getY()) {
+                    minY = segment->getStart().getY();
+                    maxY = segment->getEnd().getY();
+                } else {
+                    minY = segment->getEnd().getY();
+                    maxY = segment->getStart().getY();
                 }
 
-                bool foundCollision = false;
-                Vector2D ellipseCollision;
-                float t = ms;
-
-                /* At least one of them should be in the range. */
-                if(t0 > 0.0f || t1 < ms) {
-
-                    /* Clamp to [0.0f, ms]. */
-                    t0 = t0 < 0.0f ? 0.0f : t0;
-                    t1 = t1 < 0.0f ? 0.0f : t1;
-                    t0 = t0 > 1.0f ? 1.0f : t0;
-                    t1 = t1 > 1.0f ? 1.0f : t1;
-
-                    /* Parameters for the equation. */
-                    float a, b, c, root;
-
-                    /* Check start. */
-                    foundCollision = pointCollision(position, velocity,
-                            segment->getStart(), t, &root, &ellipseCollision);
-                    if(foundCollision)
-                        t = root;
-
-                    /* Check end. */
-                    foundCollision = pointCollision(position, velocity,
-                            segment->getEnd(), t, &root, &ellipseCollision);
-                    if(foundCollision)
-                        t = root;
-
-                    /* Check line segment between start and end. */
-                    Vector2D edge = segment->getEnd() - segment->getStart();
-                    Vector2D posToStart = segment->getStart() - position;
-                    float edgeSquaredLength = edge.getSquaredLength();
-                    float edgeDotVelocity = edge * velocity;
-                    float edgeDotPosToStart = edge * posToStart;
-
-                    a = edgeSquaredLength * - velocity.getSquaredLength() +
-                            edgeDotVelocity * edgeDotVelocity;
-                    b = edgeSquaredLength * (2.0f * (velocity * posToStart)) -
-                            2.0f * edgeDotVelocity * edgeDotPosToStart;
-                    c = edgeSquaredLength *
-                            (1.0f - posToStart.getSquaredLength()) +
-                            edgeDotPosToStart * edgeDotPosToStart;
-
-                    /* If there is a lower solution... */
-                    if(mathManager->getLowestPositiveRoot(a, b, c, t, &root)) {
-                        float f = (edgeDotVelocity * root - edgeDotPosToStart) /
-                            edgeSquaredLength;
-
-                        /* Within the segment. */
-                        if(f >= 0.0 && f <= 1.0) {
-                            t = root;
-                            foundCollision = true;
-                            ellipseCollision = segment->getStart() + edge * f;
+                /* Maybe we can skip because of our bb check. */
+                if(position.getX() + 1.0f >= minX &&
+                        position.getX() - 1.0f <= maxX &&
+                        position.getY() + 1.0f >= minY &&
+                        position.getY() - 1.0f <= maxY) {
+                    Vector2D tmpCollision;
+                    float tmpTime;
+                    /* Check against single segment. */
+                    if(closestCollision(segment, ms, &tmpCollision, &tmpTime)) {
+                        /* If this collision is the closest, store it, erasing
+                         * the previously remembered collision. */
+                        if(closest == 0 || tmpTime < *time) {
+                            closest = segment;
+                            *collision = tmpCollision;
+                            *time = tmpTime;
                         }
-                    }
-                }
-
-                /* If this collision is the closest, store it, erasing
-                 * the previously remembered collision. */
-                if(foundCollision) {
-                    if(closest == 0 || t < *time) {
-                        closest = segment;
-                        *collision = ellipseCollision;
-                        *time = t;
                     }
                 }
             }
 
             return closest;
+        }
+
+        bool CollisionResponder::closestCollision(LineSegment *segment,
+                float ms, Vector2D *collision, float *time) const
+        {
+            Line line = segment->getLine();
+            float normalDotVelocity = line.getNormal() * velocity;
+
+            /* Collision times. */
+            float t0, t1;
+            
+            /* Special case: normalDotVelocity == 0.0f */
+            if(normalDotVelocity == 0.0f) {
+                /* Collision. */
+                if(line.getDistance(position) < 1.0f) {
+                    t0 = 0.0f;
+                    t1 = ms;
+                }
+            } else {
+                /* Calculate times. */
+                float t0 = (1.0f - line.getSignedDistance(position)) /
+                        normalDotVelocity;
+                float t1 = (-1.0f - line.getSignedDistance(position)) /
+                        normalDotVelocity;
+            }
+
+            /* Sort. */
+            if(t0 > t1) {
+                float tmp = t0;
+                t0 = t1;
+                t1 = tmp;
+            }
+
+            bool foundCollision = false;
+            Vector2D ellipseCollision;
+            *time = ms;
+
+            /* At least one of them should be in the range. */
+            if(t0 > 0.0f || t1 < ms) {
+
+                /* Clamp to [0.0f, ms]. */
+                t0 = t0 < 0.0f ? 0.0f : t0;
+                t1 = t1 < 0.0f ? 0.0f : t1;
+                t0 = t0 > 1.0f ? 1.0f : t0;
+                t1 = t1 > 1.0f ? 1.0f : t1;
+
+                /* Parameters for the equation. */
+                float a, b, c, root;
+
+                /* Check start. */
+                foundCollision = pointCollision(position, velocity,
+                        segment->getStart(), *time, &root, collision);
+                if(foundCollision)
+                    *time = root;
+
+                /* Check end. */
+                foundCollision = pointCollision(position, velocity,
+                        segment->getEnd(), *time, &root, collision);
+                if(foundCollision)
+                    *time = root;
+
+                /* Check line segment between start and end. */
+                Vector2D edge = segment->getEnd() - segment->getStart();
+                Vector2D posToStart = segment->getStart() - position;
+                float edgeSquaredLength = edge.getSquaredLength();
+                float edgeDotVelocity = edge * velocity;
+                float edgeDotPosToStart = edge * posToStart;
+
+                a = edgeSquaredLength * - velocity.getSquaredLength() +
+                        edgeDotVelocity * edgeDotVelocity;
+                b = edgeSquaredLength * (2.0f * (velocity * posToStart)) -
+                        2.0f * edgeDotVelocity * edgeDotPosToStart;
+                c = edgeSquaredLength *
+                        (1.0f - posToStart.getSquaredLength()) +
+                        edgeDotPosToStart * edgeDotPosToStart;
+
+                /* If there is a lower solution... */
+                if(mathManager->getLowestPositiveRoot(a, b, c, *time, &root)) {
+                    float f = (edgeDotVelocity * root - edgeDotPosToStart) /
+                        edgeSquaredLength;
+
+                    /* Within the segment. */
+                    if(f >= 0.0 && f <= 1.0) {
+                        *time = root;
+                        foundCollision = true;
+                        *collision = segment->getStart() + edge * f;
+                    }
+                }
+            }
+
+            return foundCollision;
         }
 
         bool CollisionResponder::pointCollision(const Vector2D &position,

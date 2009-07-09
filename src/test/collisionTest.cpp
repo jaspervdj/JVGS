@@ -44,8 +44,15 @@ int main(int argc, char **argv)
 
         Vector2D collision;
         float time = 100.0f;
-        LineSegment *segment =
-                responder->closestCollision(1, &collision, &time);
+        LineSegment *segment;
+
+        const int number = 100;
+        long start = SDL_GetTicks();
+        for(int i = 0; i < number; i++) {
+            segment = responder->closestCollision(1, &collision, &time);
+        }
+        cout << number << " collision tests in " << SDL_GetTicks() - start <<
+                "ms." << endl;
 
         if(!segment)
             entity->setPosition(entity->getPosition() + entity->getVelocity());
