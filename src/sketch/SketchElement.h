@@ -1,6 +1,7 @@
 #ifndef JVGS_SKETCH_SKETCHELEMENT_H
 #define JVGS_SKETCH_SKETCHELEMENT_H
 
+#include <string>
 #include "../math/Vector2D.h"
 #include "../math/AffineTransformationMatrix.h"
 #include "../video/Renderer.h"
@@ -17,6 +18,7 @@ namespace jvgs
             private:
                 SketchElement *parent;
                 math::AffineTransformationMatrix matrix;
+                std::string id;
 
             public:
                 enum Type
@@ -40,6 +42,9 @@ namespace jvgs
 
                 virtual math::AffineTransformationMatrix getCompleteMatrix()
                         const;
+
+                virtual const std::string &getId() const;
+                virtual void setId(const std::string &id);
 
                 virtual void render(video::Renderer *renderer) const = 0;
         };

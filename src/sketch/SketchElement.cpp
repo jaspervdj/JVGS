@@ -14,8 +14,8 @@ namespace jvgs
         SketchElement::SketchElement(SketchElement *parent)
         {
             this->parent = parent;
-
             matrix = AffineTransformationMatrix();
+            id = "none";
         }
 
         SketchElement::~SketchElement()
@@ -47,6 +47,16 @@ namespace jvgs
             }
 
             return complete;
+        }
+
+        const string &SketchElement::getId() const
+        {
+            return id;
+        }
+
+        void SketchElement::setId(const string &id)
+        {
+            this->id = id;
         }
     }
 }

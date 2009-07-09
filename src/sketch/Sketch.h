@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include "../math/Vector2D.h"
 #include "../video/Renderer.h"
 #include "../video/ListManager.h"

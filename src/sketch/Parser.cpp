@@ -44,9 +44,8 @@ namespace jvgs
             delete document;
         }
 
-        SketchElementParser *Parser::getSketchElementParser(string tag)
+        SketchElementParser *Parser::getSketchElementParser(const string &tag)
         {
-
             map<string, SketchElementParser*>::iterator iterator =
                     sketchElementParsers.find(tag);
             if (iterator != sketchElementParsers.end())
