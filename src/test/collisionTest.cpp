@@ -4,6 +4,7 @@ using namespace jvgs::video;
 
 #include "../math/MathManager.h"
 #include "../math/LineSegment.h"
+#include "../math/Line.h"
 #include "../math/Vector2D.h"
 #include "../math/AffineTransformationMatrix.h"
 using namespace jvgs::math;
@@ -29,12 +30,14 @@ int main(int argc, char **argv)
     Entity *entity = new Entity();
     entity->setEllipse(ellipse->getSize() / 2.0f);
     entity->setPosition(Vector2D(0.0f, 0.0f));
-    entity->setVelocity(Vector2D(5.0f, 5.0f));
+    entity->setVelocity(Vector2D(.5f, .5f));
 
     CollisionResponder *responder = new CollisionResponder(entity, sketch);
 
     bool running = true;
     while(running) {
+
+        long start = SDL_GetTicks();
 
         SDL_Event event;
         while(SDL_PollEvent(&event)) {
@@ -42,22 +45,9 @@ int main(int argc, char **argv)
                 running = false;
         }
 
-        Vector2D collision;
-        float time = 100.0f;
-        LineSegment *segment;
-
-        const int number = 500;
-        long start = SDL_GetTicks();
-        for(int i = 0; i < number; i++) {
-            segment = responder->closestCollision(1, &collision, &time);
-        }
-        cout << number << " collision tests in " << SDL_GetTicks() - start <<
-                "ms." << endl;
-
-        if(!segment)
-            entity->setPosition(entity->getPosition() + entity->getVelocity());
-
         videoManager->clear();
+
+        responder->update(1);
 
         sketch->render();
 
@@ -67,23 +57,11 @@ int main(int argc, char **argv)
         ellipse->render();
         videoManager->pop();
 
-        if(segment) {
-            glColor3f(1.0f, 0.0f, 0.0f);
-            /*glBegin(GL_POINTS);
-            glVertex2f(collision.getX(), collision.getY());
-            glEnd();*/
-            glBegin(GL_LINES);
-            glVertex2f(segment->getStart().getX() * entity->getEllipse().getX(),
-                    segment->getStart().getY() * entity->getEllipse().getY());
-            glVertex2f(segment->getEnd().getX() * entity->getEllipse().getX(),
-                    segment->getEnd().getY() * entity->getEllipse().getY());
-            glEnd();
-            glColor3f(0.0f, 0.0f, 0.0f);
-        }
-
         videoManager->flip();
 
-        SDL_Delay(1000);
+        cout << "Frame in " << SDL_GetTicks() - start << "ms." << endl;
+
+        SDL_Delay(100);
     }
 
     delete entity;

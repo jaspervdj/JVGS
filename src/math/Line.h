@@ -23,12 +23,29 @@ namespace jvgs
                 float signedDistanceConstant;
 
             public:
-                /** vector will be normalized. */
+                /** Constructor.
+                 *  @param point A point on the line.
+                 *  @param vector Line direction vector, will be normalized.
+                 */
                 Line(Vector2D point, Vector2D vector);
+
+                /** Destructor.
+                 */
                 virtual ~Line();
 
+                /** Get the point on the line.
+                 *  @return The point on the line.
+                 */
                 virtual const Vector2D &getPoint() const;
+
+                /** Get the direction vector of the line.
+                 *  @return The direction vector of the line.
+                 */
                 virtual const Vector2D &getVector() const;
+
+                /** Get the normal vector of the line.
+                 *  @return The normal vector of the line.
+                 */
                 virtual Vector2D getNormal() const;
 
                 /** Get the closest point on this line to any point.

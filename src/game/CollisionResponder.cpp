@@ -1,9 +1,6 @@
 #include "CollisionResponder.h"
 #include "Entity.h"
 
-#include <iostream>
-using namespace std;
-
 #include "../sketch/PathComponent.h"
 using namespace jvgs::sketch;
 
@@ -13,10 +10,15 @@ using namespace jvgs::sketch;
 #include "../math/Line.h"
 using namespace jvgs::math;
 
+using namespace std;
+
 namespace jvgs
 {
     namespace game
     {
+        const float CollisionResponder::VERY_SMALL_FLOAT;
+        const int CollisionResponder::MAX_STEPS;
+
         CollisionResponder::CollisionResponder(Entity *entity, Sketch *sketch)
         {
             this->entity = entity;
@@ -45,6 +47,58 @@ namespace jvgs
 
         void CollisionResponder::update(float ms)
         {
+            /* Convert vectors to ellipse space. */
+            position = toEllipseSpace * entity->getPosition();
+            velocity = toEllipseSpace * entity->getVelocity();
+
+            int collisionSteps = 0;
+            while(collisionSteps < MAX_STEPS && ms > 0 ){
+                    //velocity.getSquaredLength() > VERY_SMALL_FLOAT) {
+
+                /* Convenience. */
+                Vector2D destination = position + velocity * ms;
+
+                Vector2D collision;
+                float time;
+                LineSegment *segment = closestCollision(ms, &collision, &time);
+
+                /* No collision, just update position. */
+                if(!segment) {
+                    position = destination;
+                    ms = 0;
+
+                /* A collision occurred. */
+                } else {
+                    /* Line going through the position and the collision point.
+                     * This line's normal determines the sliding line. */
+                    Line collisionLine(position, collision - position);
+                    Line slidingLine = Line(collision,
+                            collisionLine.getNormal());
+
+                    /* Sign function. */
+                    float sign =
+                            slidingLine.getSignedDistance(position) > 0.0f ?
+                            1.0f : -1.0f;
+
+                    /* Move the position a little away from the sliding line. */
+                    position = collision + slidingLine.getNormal() +
+                            sign * VERY_SMALL_FLOAT;
+
+                    /* Project velocity onto sliding pane. */
+                    velocity = slidingLine.getVector() * 
+                        (slidingLine.getVector() * velocity);
+
+                    /* Update the time */
+                    ms -= time;
+                }
+
+                /* Keep track of the steps. */
+                collisionSteps++;
+            }
+
+            /* Now set the entity's position. */
+            entity->setPosition(fromEllipseSpace * position);
+            entity->setVelocity(fromEllipseSpace * velocity);
         }
 
         LineSegment *CollisionResponder::closestCollision(float ms,
@@ -52,9 +106,6 @@ namespace jvgs
         {
             LineSegment *closest = 0;
 
-            /* Convert vectors to ellipse space. */
-            position = toEllipseSpace * entity->getPosition();
-            velocity = toEllipseSpace * entity->getVelocity();
             BoundingBox boundingBox(position - Vector2D(1.0f, 1.0f),
                     position + Vector2D(1.0f, 1.0f));
 

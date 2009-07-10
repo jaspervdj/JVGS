@@ -24,6 +24,9 @@ namespace jvgs
         class CollisionResponder
         {
             private:
+                const static float VERY_SMALL_FLOAT = 0.001f;
+                const static int MAX_STEPS = 200;
+
                 Entity *entity;
 
                 math::AffineTransformationMatrix toEllipseSpace,
@@ -53,6 +56,10 @@ namespace jvgs
                  */
                 virtual ~CollisionResponder();
 
+                /** This will update (move) the entity for a certain
+                 *  amount of time.
+                 *  @param ms Milliseconds to update the entity for.
+                 */
                 virtual void update(float ms);
 
                 /** Get the first point at which the entity will collide
