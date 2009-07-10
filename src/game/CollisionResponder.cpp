@@ -16,7 +16,7 @@ namespace jvgs
 {
     namespace game
     {
-        const float CollisionResponder::VERY_SMALL_FLOAT;
+        const float CollisionResponder::VERY_CLOSE;
         const int CollisionResponder::MAX_STEPS;
 
         CollisionResponder::CollisionResponder(Entity *entity, Sketch *sketch)
@@ -34,6 +34,7 @@ namespace jvgs
 
             tree = new SegmentQuadTree(segments);
             mathManager = MathManager::getInstance();
+            resting = 0;
         }
 
         CollisionResponder::~CollisionResponder()
@@ -52,15 +53,17 @@ namespace jvgs
             velocity = toEllipseSpace * entity->getVelocity();
 
             int collisionSteps = 0;
-            while(collisionSteps < MAX_STEPS && ms > 0 ){
-                    //velocity.getSquaredLength() > VERY_SMALL_FLOAT) {
+            while(collisionSteps < MAX_STEPS && ms > 0 &&
+                    velocity.getSquaredLength() > VERY_CLOSE) {
 
-                /* Convenience. */
-                Vector2D destination = position + velocity * ms;
+                /* Update destination. */
+                destination = position + velocity * ms;
 
                 Vector2D collision;
                 float time;
-                LineSegment *segment = closestCollision(ms, &collision, &time);
+                float distance;
+                LineSegment *segment = closestCollision(ms, &collision, &time,
+                        &distance);
 
                 /* No collision, just update position. */
                 if(!segment) {
@@ -69,27 +72,37 @@ namespace jvgs
 
                 /* A collision occurred. */
                 } else {
+
+                    Vector2D newPosition = position;
+
+                    /* Only update above a certain distance. */
+                    if(distance >= VERY_CLOSE) {
+                        Vector2D v = velocity;
+                        v.setLength(distance - VERY_CLOSE);
+                        newPosition = position + v;
+
+                        /* Adjust collision point a little. */
+                        collision -= v.normalized() * VERY_CLOSE;
+                    }
+
                     /* Line going through the position and the collision point.
                      * This line's normal determines the sliding line. */
                     Line collisionLine(position, collision - position);
                     Line slidingLine = Line(collision,
                             collisionLine.getNormal());
 
-                    /* Sign function. */
-                    float sign =
-                            slidingLine.getSignedDistance(position) > 0.0f ?
-                            1.0f : -1.0f;
+                    /* Calculate new velocity. */
+                    destination = destination - slidingLine.getNormal() * 
+                            slidingLine.getSignedDistance(destination);
+                    velocity  = destination - collision;
 
-                    /* Move the position a little away from the sliding line. */
-                    position = collision + slidingLine.getNormal() +
-                            sign * VERY_SMALL_FLOAT;
 
-                    /* Project velocity onto sliding pane. */
-                    velocity = slidingLine.getVector() * 
-                        (slidingLine.getVector() * velocity);
-
-                    /* Update the time */
+                    /* Update the time and position. */
+                    position = newPosition;
                     ms -= time;
+
+                    /* Set the resting segment. */
+                    resting = segment;
                 }
 
                 /* Keep track of the steps. */
@@ -101,13 +114,21 @@ namespace jvgs
             entity->setVelocity(fromEllipseSpace * velocity);
         }
 
+        LineSegment *CollisionResponder::getRestingLineSegment() const
+        {
+            return resting;
+        }
+
         LineSegment *CollisionResponder::closestCollision(float ms,
-                Vector2D *collision, float *time)
+                Vector2D *collision, float *time, float *distance)
         {
             LineSegment *closest = 0;
 
-            BoundingBox boundingBox(position - Vector2D(1.0f, 1.0f),
-                    position + Vector2D(1.0f, 1.0f));
+            BoundingBox boundingBox(
+                    BoundingBox(position - Vector2D(1.0f, 1.0f),
+                    position + Vector2D(1.0f, 1.0f)),
+                    BoundingBox(destination - Vector2D(1.0f, 1.0f),
+                    destination + Vector2D(1.0f, 1.0f)));
 
             /* The result from the tree search. */
             vector<LineSegment*> result;
@@ -117,17 +138,11 @@ namespace jvgs
             for(vector<LineSegment*>::iterator iterator = result.begin();
                     iterator != result.end(); iterator++) {
 
-                /* Get the line segment and it's bounding box. */
+                /* Get the line segment. */
                 LineSegment *segment = *iterator;
-                BoundingBox *boundingBox = segment->getBoundingBox();
-                const Vector2D *topLeft = &boundingBox->getTopLeft();
-                const Vector2D *bottomRight = &boundingBox->getTopLeft();
 
                 /* Maybe we can skip because of our bb check. */
-                if(position.getX() + 1.0f >= topLeft->getX() &&
-                        position.getX() - 1.0f <= bottomRight->getX() &&
-                        position.getY() + 1.0f >= topLeft->getY() &&
-                        position.getY() - 1.0f <= bottomRight->getY()) {
+                if(segment->getBoundingBox()->intersectsWith(boundingBox)) {
                     /* Temporary result variables. */
                     Vector2D tmpCollision;
                     float tmpTime;
@@ -140,6 +155,7 @@ namespace jvgs
                             closest = segment;
                             *collision = tmpCollision;
                             *time = tmpTime;
+                            *distance = (velocity * (*time)).getLength();
                         }
                     }
                 }

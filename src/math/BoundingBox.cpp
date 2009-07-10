@@ -11,6 +11,19 @@ namespace jvgs
             this->bottomRight = bottomRight;
         }
 
+        BoundingBox::BoundingBox(const BoundingBox &b1, const BoundingBox &b2)
+        {
+            topLeft.setX(b1.topLeft.getX() < b2.topLeft.getX() ?
+                    b1.topLeft.getX() : b2.topLeft.getX());
+            bottomRight.setX(b1.bottomRight.getX() > b2.bottomRight.getX() ?
+                    b1.bottomRight.getX() : b2.bottomRight.getX());
+
+            topLeft.setY(b1.topLeft.getY() < b2.topLeft.getY() ?
+                    b1.topLeft.getY() : b2.topLeft.getY());
+            bottomRight.setY(b1.bottomRight.getY() > b2.bottomRight.getY() ?
+                    b1.bottomRight.getY() : b2.bottomRight.getY());
+        }
+
         BoundingBox::~BoundingBox()
         {
         }

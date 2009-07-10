@@ -117,6 +117,12 @@ namespace jvgs
             return sqrt(getSquaredLength());
         }
 
+        void Vector2D::setLength(float length)
+        {
+            *this /= getLength();
+            *this *= length;
+        }
+
         float Vector2D::getDistance(const Vector2D &other) const
         {
             return sqrt((x - other.x) * (x - other.x) +

@@ -24,17 +24,17 @@ namespace jvgs
         class CollisionResponder
         {
             private:
-                const static float VERY_SMALL_FLOAT = 0.001f;
-                const static int MAX_STEPS = 200;
+                const static float VERY_CLOSE = 0.001;
+                const static int MAX_STEPS = 10;
 
                 Entity *entity;
 
                 math::AffineTransformationMatrix toEllipseSpace,
                         fromEllipseSpace;
 
-                /** Keep the position and velocity of the entity in
+                /** Keep the position, velocity and destination of the entity in
                  *  ellipse space. */
-                math::Vector2D position, velocity;
+                math::Vector2D position, velocity, destination;
 
                 /** Segments in ellipse space. */
                 std::vector<math::LineSegment*> segments;
@@ -44,6 +44,9 @@ namespace jvgs
 
                 /** MathManager to perform calculations. */
                 math::MathManager *mathManager;
+
+                /** The LineSegment the entity is resting on. */
+                math::LineSegment *resting;
 
             public:
                 /** Constructor.
@@ -67,10 +70,19 @@ namespace jvgs
                  *  @param ms Milliseconds the entity can be moved.
                  *  @param collision Will contain the exact collision point.
                  *  @param time Will contain the exact collision time.
+                 *  @param distance Will contain he distance to the collison.
                  *  @return The LineSegment the entity collided with.
                  */
                 virtual math::LineSegment *closestCollision(float ms,
-                        math::Vector2D *collision, float *time);
+                        math::Vector2D *collision, float *time,
+                        float *distance);
+
+                /** Obtain the LineSegment the entity is currently
+                 *  "resting on", or 0 if there is no such
+                 *  LineSegment.
+                 *  @return The LineSegment the entity is resting on.
+                 */
+                virtual math::LineSegment *getRestingLineSegment() const;
 
             protected:
                 /** Add lines from a sketch group.

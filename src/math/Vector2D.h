@@ -89,6 +89,11 @@ namespace jvgs
                  */
                 float getLength() const;
 
+                /** Set the length of this vector.
+                 *  @param length The new length for this vector.
+                 */
+                void setLength(float length);
+
                 /** Get the distance from this vector to another.
                  *  @param other Vector to get the distance to.
                  *  @return The distance to other.

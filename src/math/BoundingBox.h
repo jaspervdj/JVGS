@@ -20,6 +20,13 @@ namespace jvgs
                 BoundingBox(const Vector2D &topLeft = Vector2D(),
                         const Vector2D &bottomRight = Vector2D());
 
+                /** Constructor. Join two bounding boxes so we get a bounding
+                 *  box containing both bounding boxes.
+                 *  @param b1 First bounding box.
+                 *  @param b2 Second bounding box.
+                 */
+                BoundingBox(const BoundingBox &b1, const BoundingBox &b2);
+
                 /** Destructor.
                  */
                 virtual ~BoundingBox();

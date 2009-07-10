@@ -30,7 +30,7 @@ int main(int argc, char **argv)
     Entity *entity = new Entity();
     entity->setEllipse(ellipse->getSize() / 2.0f);
     entity->setPosition(Vector2D(0.0f, 0.0f));
-    entity->setVelocity(Vector2D(.5f, .5f));
+    entity->setVelocity(Vector2D(2.5f, 2.5f));
 
     CollisionResponder *responder = new CollisionResponder(entity, sketch);
 
