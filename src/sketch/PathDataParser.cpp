@@ -119,7 +119,19 @@ namespace jvgs
             vector<string> splitted;
             vector<float> arguments;
             string argumentsData = commandData.substr(1);
+
+            /* We have a little hacky solution here. We want to be able to
+             * parse arguments in the form of
+             * 123-456 as 123, -456
+             * but also
+             * 123e-456 as 123e-456
+             * This is why we replace "-" by " -", but first we remove the
+             * "e-" so those will not be affected.
+             */
+            replaceAll(argumentsData, "e-", "e#");
             replaceAll(argumentsData, "-", " -");
+            replaceAll(argumentsData, "e#", "e-");
+
             split(argumentsData, ", ", splitted);
             for(vector<string>::iterator iterator = splitted.begin();
                     iterator != splitted.end(); iterator++) {

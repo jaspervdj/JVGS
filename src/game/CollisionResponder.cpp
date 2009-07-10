@@ -10,6 +10,7 @@ using namespace jvgs::sketch;
 #include "../math/Line.h"
 using namespace jvgs::math;
 
+#include <iostream>
 using namespace std;
 
 namespace jvgs
@@ -134,6 +135,12 @@ namespace jvgs
             vector<LineSegment*> result;
             tree->findSegments(&boundingBox, &result);
 
+            cout << endl << "Testing against " << segments.size() <<
+                " segments." << endl;
+            cout << "SegmentQuadTree eliminated " <<
+                (segments.size() - result.size()) << " segments." << endl;
+            int testCounter = 0;
+
             /* Loop over all lines to find closest collision. */
             for(vector<LineSegment*>::iterator iterator = result.begin();
                     iterator != result.end(); iterator++) {
@@ -143,6 +150,10 @@ namespace jvgs
 
                 /* Maybe we can skip because of our bb check. */
                 if(segment->getBoundingBox()->intersectsWith(boundingBox)) {
+
+                    // TODO: remove
+                    testCounter++;
+
                     /* Temporary result variables. */
                     Vector2D tmpCollision;
                     float tmpTime;
@@ -160,6 +171,11 @@ namespace jvgs
                     }
                 }
             }
+
+            cout << "BoundingBox eliminated " <<
+                (result.size() - testCounter) << " segments." << endl;
+            cout << "-----> " << testCounter << " segments were checked." <<
+                endl;
 
             return closest;
         }
@@ -233,13 +249,13 @@ namespace jvgs
             *time = ms;
 
             /* At least one of them should be in the range. */
-            if(t0 > 0.0f || t1 < ms) {
+            if(t0 >= 0.0f || t1 < ms) {
 
                 /* Clamp to [0.0f, ms]. */
-                t0 = t0 < 0.0f ? 0.0f : t0;
-                t1 = t1 < 0.0f ? 0.0f : t1;
-                t0 = t0 > 1.0f ? 1.0f : t0;
-                t1 = t1 > 1.0f ? 1.0f : t1;
+                t0 = t0 <= 0.0f ? 0.0f : t0;
+                t1 = t1 <= 0.0f ? 0.0f : t1;
+                t0 = t0 >= 1.0f ? 1.0f : t0;
+                t1 = t1 >= 1.0f ? 1.0f : t1;
 
                 /* Parameters for the equation. */
                 float a, b, c, root;
