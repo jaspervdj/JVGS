@@ -59,8 +59,7 @@ namespace jvgs
             velocity = toEllipseSpace * getEntity()->getVelocity();
 
             int collisionSteps = 0;
-            while(collisionSteps < MAX_STEPS && ms > 0 &&
-                    velocity.getSquaredLength() > VERY_CLOSE) {
+            while(collisionSteps < MAX_STEPS && ms > 0) {
 
                 /* Update destination. */
                 destination = position + velocity * ms;
@@ -101,7 +100,7 @@ namespace jvgs
                     /* Calculate new velocity. */
                     destination = destination - slidingLine.getNormal() * 
                             slidingLine.getSignedDistance(destination);
-                    velocity  = destination - collision;
+                    velocity = destination - collision;
 
 
                     /* Update the time and position. */
@@ -118,7 +117,15 @@ namespace jvgs
 
             /* Now set the entity's position. */
             getEntity()->setPosition(fromEllipseSpace * position);
-            getEntity()->setVelocity(fromEllipseSpace * velocity);
+
+            if(collisionSteps >= MAX_STEPS)
+                /* When we go over MAX_STEPS chances are we're probably bouncing
+                 * against a wall, or getting stuck in some corner. Best is to
+                 * set velocity to 0 now. */
+                getEntity()->setVelocity(Vector2D(0.0f, 0.0f));
+            else
+                /* We keep our velocity. */
+                getEntity()->setVelocity(fromEllipseSpace * velocity);
 
             velocity = fromEllipseSpace * velocity;
             cout << "- collision affected the entity." << endl;
@@ -143,6 +150,8 @@ namespace jvgs
                     destination + Vector2D(1.0f, 1.0f)));
 
             /* The result from the tree search. */
+            /* TODO When there are multiple calls in one frame, it will
+             * calculate the result every time. We don't want that. */
             vector<LineSegment*> result;
             tree->findSegments(&boundingBox, &result);
 
