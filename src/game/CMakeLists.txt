@@ -3,4 +3,5 @@ ADD_LIBRARY(
     Affector.cpp
     CollisionResponseAffector.cpp
     Entity.cpp
+    GravityAffector.cpp
 )

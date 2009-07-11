@@ -14,6 +14,7 @@ using namespace jvgs::sketch;
 
 #include "../game/Entity.h"
 #include "../game/CollisionResponseAffector.h"
+#include "../game/GravityAffector.h"
 using namespace jvgs::game;
 
 #include <vector>
@@ -29,13 +30,15 @@ int main(int argc, char **argv)
     Sketch *ellipse = new Sketch("resources/ellipse.svg");
     Entity *entity = new Entity();
     entity->setEllipse(ellipse->getSize() / 2.0f);
-    entity->setPosition(Vector2D(0.0f, 0.0f));
-    entity->setVelocity(Vector2D(2.5f, 2.5f));
+    entity->setPosition(Vector2D(20.0f, 0.0f));
 
     CollisionResponseAffector *affector =
             new CollisionResponseAffector(entity, sketch);
-
     entity->addAffector(affector);
+
+    GravityAffector *gravity = new GravityAffector(entity, Vector2D(0.0f, 0.5f));
+    entity->addAffector(gravity);
+
     entity->prepare();
 
     bool running = true;
