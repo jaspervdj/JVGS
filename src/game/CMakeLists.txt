@@ -1,5 +1,6 @@
 ADD_LIBRARY( 
     game SHARED 
-    CollisionResponder.cpp
+    Affector.cpp
+    CollisionResponseAffector.cpp
     Entity.cpp
 )

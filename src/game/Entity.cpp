@@ -1,6 +1,23 @@
 #include "Entity.h"
+#include "Affector.h"
+
+#include "../core/LogManager.h"
+using namespace jvgs::core;
+
+#include <algorithm>
+using namespace std;
 
 using namespace jvgs::math;
+
+/** Function to sort affectors based on priority.
+ *  @param a1 First affector.
+ *  @param a2 Second affector.
+ *  @return If a1's priority is strictly higher than a2's priority.
+ */
+bool compareAffectors(jvgs::game::Affector *a1, jvgs::game::Affector *a2)
+{
+    return a1->getPriority() > a1->getPriority();
+}
 
 namespace jvgs
 {
@@ -12,6 +29,14 @@ namespace jvgs
 
         Entity::~Entity()
         {
+            for(vector<Affector*>::iterator iterator = affectors.begin();
+                    iterator != affectors.end(); iterator++)
+                delete *iterator;
+        }
+
+        void Entity::prepare()
+        {
+            sort(affectors.begin(), affectors.end(), compareAffectors);
         }
 
         const Vector2D &Entity::getPosition() const
@@ -42,6 +67,24 @@ namespace jvgs
         void Entity::setEllipse(const Vector2D &ellipse)
         {
             this->ellipse = ellipse;
+        }
+
+        void Entity::addAffector(Affector *affector)
+        {
+            if(affector->getEntity() != this)
+                LogManager::getInstance()->error(
+                        "Adding affector for entity a to entity b.");
+
+            affectors.push_back(affector);
+        }
+
+        void Entity::update(float ms)
+        {
+            /* Let the affectors affect this. */
+            for(vector<Affector*>::iterator iterator = affectors.begin();
+                    iterator != affectors.end(); iterator++) {
+                (*iterator)->affect(ms);
+            }
         }
     }
 }

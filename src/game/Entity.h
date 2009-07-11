@@ -2,11 +2,14 @@
 #define JVGS_GAME_ENTITY_H
 
 #include "../math/Vector2D.h"
+#include <vector>
 
 namespace jvgs
 {
     namespace game
     {
+        class Affector;
+
         class Entity
         {
             private:
@@ -22,6 +25,10 @@ namespace jvgs
                  */
                 math::Vector2D ellipse;
 
+                /** A list of affectors for this entity.
+                 */
+                std::vector<Affector*> affectors;
+
             public:
                 /** Constructor.
                  */
@@ -30,6 +37,11 @@ namespace jvgs
                 /** Destructor.
                  */
                 virtual ~Entity();
+
+                /** Prepare the entity to be launched into the game. This will
+                 *  do some things like sorting the affectors, ...
+                 */
+                virtual void prepare();
 
                 /** Get the entity position.
                  *  @return The entity position.
@@ -61,6 +73,16 @@ namespace jvgs
                  */
                 virtual void setEllipse(const math::Vector2D &ellipse);
 
+                /** Add an affector to this entity. The entity will now
+                 *  take care of the affector and delete it later.
+                 *  @param affector Affector to add.
+                 */
+                virtual void addAffector(Affector *affector);
+
+                /** Update this entity for a given time.
+                 *  @param ms Time to update for.
+                 */
+                virtual void update(float ms);
         };
     }
 }

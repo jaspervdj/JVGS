@@ -97,7 +97,7 @@ namespace jvgs
                 void translate(const math::Vector2D &vector) const;
 
                 /** Scales the current matrix.
-                 *  @param vector Vector to be used as scale.
+                 *  @param scale Vector to be used as scale.
                  */
                 void scale(const math::Vector2D &scale) const;
 

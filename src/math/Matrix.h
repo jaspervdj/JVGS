@@ -20,7 +20,7 @@ namespace jvgs
                 /** Constructor. Creates an matrix M with
                  *  m[i,j] = 1 when i = j, and 0 otherwise.
                  *  @param height The matrix height.
-                 *  @patam width The matrix width.
+                 *  @param width The matrix width.
                  */
                 Matrix(int height, int width);
 

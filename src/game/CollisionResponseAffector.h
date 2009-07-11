@@ -9,6 +9,7 @@
 #include "../math/MathManager.h"
 #include "../math/AffineTransformationMatrix.h"
 #include "../math/SegmentQuadTree.h"
+#include "Affector.h"
 #include <vector>
 
 namespace jvgs
@@ -21,7 +22,7 @@ namespace jvgs
         /** This class is NOT THREAD SAFE AT ALL, due to some
          *  optimizations.
          */
-        class CollisionResponder
+        class CollisionResponseAffector: public Affector
         {
             private:
                 const static float VERY_CLOSE = 0.001;
@@ -53,17 +54,20 @@ namespace jvgs
                  *  @param entity Entity to respond to collisions.
                  *  @param sketch Sketch width lines to collide against.
                  */
-                CollisionResponder(Entity *entity, sketch::Sketch *sketch);
+                CollisionResponseAffector(Entity *entity,
+                        sketch::Sketch *sketch);
 
                 /** Destructor.
                  */
-                virtual ~CollisionResponder();
+                virtual ~CollisionResponseAffector();
 
-                /** This will update (move) the entity for a certain
-                 *  amount of time.
-                 *  @param ms Milliseconds to update the entity for.
+                /* Override.
                  */
-                virtual void update(float ms);
+                int getPriority() const;
+
+                /* Override.
+                 */
+                virtual void affect(float ms);
 
                 /** Get the first point at which the entity will collide
                  *  with the world.

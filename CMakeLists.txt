@@ -35,3 +35,9 @@ ENDIF(OPENGL_INCLUDE_DIR)
 
 # Continue for subdirectories.
 ADD_SUBDIRECTORY(src)
+
+# Documentation
+ADD_CUSTOM_TARGET(
+    doxy
+    doxygen Doxyfile
+)

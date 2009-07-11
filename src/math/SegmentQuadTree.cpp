@@ -9,16 +9,16 @@ namespace jvgs
 {
     namespace math
     {
-        SegmentQuadTree::SegmentQuadTree(vector<LineSegment*> segments)
+        SegmentQuadTree::SegmentQuadTree(vector<LineSegment*> *segments)
         {
             /* Initialize bounding box. */
             Vector2D topLeft, bottomRight;
-            vector<LineSegment*>::iterator iterator = segments.begin();
+            vector<LineSegment*>::iterator iterator = segments->begin();
             topLeft = (*iterator)->getBoundingBox()->getTopLeft();
             bottomRight = (*iterator)->getBoundingBox()->getBottomRight();
             
             /* Expand bounding box. */
-            for(iterator++; iterator != segments.end(); iterator++) {
+            for(iterator++; iterator != segments->end(); iterator++) {
                 BoundingBox *boundingBox = (*iterator)->getBoundingBox();
 
                 if(boundingBox->getTopLeft().getX() < topLeft.getX())
@@ -33,7 +33,7 @@ namespace jvgs
             }
 
             root = new SegmentQuadTreeNode(BoundingBox(topLeft, bottomRight));
-            for(iterator = segments.begin(); iterator != segments.end();
+            for(iterator = segments->begin(); iterator != segments->end();
                     iterator++) {
                 root->addSegment(*iterator);
             }

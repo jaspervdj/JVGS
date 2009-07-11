@@ -21,7 +21,7 @@ namespace jvgs
                 /** Constructor.
                  *  @param segments Segments to add. These will not be deleted.
                  */
-                SegmentQuadTree(const std::vector<LineSegment*> segments);
+                SegmentQuadTree(std::vector<LineSegment*> *segments);
 
                 /** Destructor.
                  */

@@ -1,4 +1,4 @@
-#include "CollisionResponder.h"
+#include "CollisionResponseAffector.h"
 #include "Entity.h"
 
 #include "../sketch/PathComponent.h"
@@ -17,13 +17,12 @@ namespace jvgs
 {
     namespace game
     {
-        const float CollisionResponder::VERY_CLOSE;
-        const int CollisionResponder::MAX_STEPS;
+        const float CollisionResponseAffector::VERY_CLOSE;
+        const int CollisionResponseAffector::MAX_STEPS;
 
-        CollisionResponder::CollisionResponder(Entity *entity, Sketch *sketch)
+        CollisionResponseAffector::CollisionResponseAffector(Entity *entity,
+                Sketch *sketch): Affector(entity)
         {
-            this->entity = entity;
-
             toEllipseSpace = AffineTransformationMatrix();
             toEllipseSpace.scale(entity->getEllipse().inverted());
 
@@ -33,12 +32,12 @@ namespace jvgs
             Group *root = sketch->getRoot();
             addLinesFromGroup(root);
 
-            tree = new SegmentQuadTree(segments);
+            tree = new SegmentQuadTree(&segments);
             mathManager = MathManager::getInstance();
             resting = 0;
         }
 
-        CollisionResponder::~CollisionResponder()
+        CollisionResponseAffector::~CollisionResponseAffector()
         {
             delete tree;
             for(vector<LineSegment*>::iterator iterator = segments.begin();
@@ -47,11 +46,17 @@ namespace jvgs
             }
         }
 
-        void CollisionResponder::update(float ms)
+        int CollisionResponseAffector::getPriority() const
+        {
+            /* Very low priority. */
+            return 1;
+        }
+
+        void CollisionResponseAffector::affect(float ms)
         {
             /* Convert vectors to ellipse space. */
-            position = toEllipseSpace * entity->getPosition();
-            velocity = toEllipseSpace * entity->getVelocity();
+            position = toEllipseSpace * getEntity()->getPosition();
+            velocity = toEllipseSpace * getEntity()->getVelocity();
 
             int collisionSteps = 0;
             while(collisionSteps < MAX_STEPS && ms > 0 &&
@@ -111,16 +116,16 @@ namespace jvgs
             }
 
             /* Now set the entity's position. */
-            entity->setPosition(fromEllipseSpace * position);
-            entity->setVelocity(fromEllipseSpace * velocity);
+            getEntity()->setPosition(fromEllipseSpace * position);
+            getEntity()->setVelocity(fromEllipseSpace * velocity);
         }
 
-        LineSegment *CollisionResponder::getRestingLineSegment() const
+        LineSegment *CollisionResponseAffector::getRestingLineSegment() const
         {
             return resting;
         }
 
-        LineSegment *CollisionResponder::closestCollision(float ms,
+        LineSegment *CollisionResponseAffector::closestCollision(float ms,
                 Vector2D *collision, float *time, float *distance)
         {
             LineSegment *closest = 0;
@@ -180,7 +185,7 @@ namespace jvgs
             return closest;
         }
 
-        void CollisionResponder::addLinesFromGroup(Group *group)
+        void CollisionResponseAffector::addLinesFromGroup(Group *group)
         {
             for(int i = 0; i < group->getNumberOfSketchElements(); i++) {
                 SketchElement *element = group->getSketchElement(i);
@@ -191,7 +196,7 @@ namespace jvgs
             }
         }
 
-        void CollisionResponder::addLinesFromPath(Path *path)
+        void CollisionResponseAffector::addLinesFromPath(Path *path)
         {
             for(int i = 0; i < path->getNumberOfComponents(); i++) {
                 PathComponent *component = path->getComponent(i);
@@ -213,7 +218,7 @@ namespace jvgs
             }
         }
 
-        bool CollisionResponder::closestCollision(LineSegment *segment,
+        bool CollisionResponseAffector::closestCollision(LineSegment *segment,
                 float ms, Vector2D *collision, float *time) const
         {
             Line line = segment->getLine();
@@ -304,7 +309,7 @@ namespace jvgs
             return foundCollision;
         }
 
-        bool CollisionResponder::pointCollision(const Vector2D &position,
+        bool CollisionResponseAffector::pointCollision(const Vector2D &position,
                 const Vector2D &velocity, const Vector2D &point, float treshold,
                 float *time, Vector2D *collision) const
         {

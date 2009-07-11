@@ -13,7 +13,7 @@ using namespace jvgs::math;
 using namespace jvgs::sketch;
 
 #include "../game/Entity.h"
-#include "../game/CollisionResponder.h"
+#include "../game/CollisionResponseAffector.h"
 using namespace jvgs::game;
 
 #include <vector>
@@ -32,7 +32,11 @@ int main(int argc, char **argv)
     entity->setPosition(Vector2D(0.0f, 0.0f));
     entity->setVelocity(Vector2D(2.5f, 2.5f));
 
-    CollisionResponder *responder = new CollisionResponder(entity, sketch);
+    CollisionResponseAffector *affector =
+            new CollisionResponseAffector(entity, sketch);
+
+    entity->addAffector(affector);
+    entity->prepare();
 
     bool running = true;
     while(running) {
@@ -47,7 +51,7 @@ int main(int argc, char **argv)
 
         videoManager->clear();
 
-        responder->update(1);
+        entity->update(1);
 
         sketch->render();
 
@@ -65,7 +69,6 @@ int main(int argc, char **argv)
     }
 
     delete entity;
-    delete responder;
     delete sketch;
     delete ellipse;
 }

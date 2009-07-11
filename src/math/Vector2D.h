@@ -47,7 +47,7 @@ namespace jvgs
                 /** Set the Y element.
                  *  @param y The new Y element.
                  */
-                void setY(const float &x);
+                void setY(const float &y);
 
                 const Vector2D &operator=(const Vector2D &other);
 
@@ -70,12 +70,12 @@ namespace jvgs
                 float operator*(const Vector2D &other) const;
 
                 /** Get this vector, but with the X element as 0.
-                 *  @param This vector without X element.
+                 *  @return This vector without X element.
                  */
                 Vector2D onlyX() const;
 
                 /** Get this vector, but with the Y element as 0.
-                 *  @param This vector without Y element.
+                 *  @return This vector without Y element.
                  */
                 Vector2D onlyY() const;
 
