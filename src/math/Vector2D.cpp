@@ -119,8 +119,11 @@ namespace jvgs
 
         void Vector2D::setLength(float length)
         {
-            *this /= getLength();
-            *this *= length;
+            float l = getLength();
+            if(l != (float) 0) {
+                *this /= l;
+                *this *= length;
+            }
         }
 
         float Vector2D::getDistance(const Vector2D &other) const

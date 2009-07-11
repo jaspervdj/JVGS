@@ -3,6 +3,9 @@
 
 using namespace jvgs::math;
 
+#include <iostream>
+using namespace std;
+
 namespace jvgs
 {
     namespace game
@@ -28,6 +31,10 @@ namespace jvgs
             Vector2D velocity = getEntity()->getVelocity();
             velocity += gravity * ms;
             getEntity()->setVelocity(velocity);
+
+            cout << "- gravity affected the entity." << endl;
+            cout << "  -> (" << velocity.getX() << ", " << velocity.getY() <<
+                    ")" << endl;
         }
     }
 }

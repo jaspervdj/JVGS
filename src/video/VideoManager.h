@@ -29,6 +29,7 @@ namespace jvgs
                 /* Drawing color. */
                 Color color;
 
+            protected:
                 /** Constructor.
                  */
                 VideoManager();

@@ -11,8 +11,7 @@ namespace jvgs
          */
         class LogManager
         {
-            private:
-
+            protected:
                 /** Constructor.
                  */
                 LogManager();

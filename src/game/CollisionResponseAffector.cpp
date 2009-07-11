@@ -74,6 +74,7 @@ namespace jvgs
                 /* No collision, just update position. */
                 if(!segment) {
                     position = destination;
+                    velocity = Vector2D(0.0f, 0.0f);
                     ms = 0;
 
                 /* A collision occurred. */
@@ -118,6 +119,11 @@ namespace jvgs
             /* Now set the entity's position. */
             getEntity()->setPosition(fromEllipseSpace * position);
             getEntity()->setVelocity(fromEllipseSpace * velocity);
+
+            velocity = fromEllipseSpace * velocity;
+            cout << "- collision affected the entity." << endl;
+            cout << "  -> (" << velocity.getX() << ", " << velocity.getY() <<
+                    ")" << endl;
         }
 
         LineSegment *CollisionResponseAffector::getRestingLineSegment() const
@@ -140,12 +146,6 @@ namespace jvgs
             vector<LineSegment*> result;
             tree->findSegments(&boundingBox, &result);
 
-            cout << endl << "Testing against " << segments.size() <<
-                " segments." << endl;
-            cout << "SegmentQuadTree eliminated " <<
-                (segments.size() - result.size()) << " segments." << endl;
-            int testCounter = 0;
-
             /* Loop over all lines to find closest collision. */
             for(vector<LineSegment*>::iterator iterator = result.begin();
                     iterator != result.end(); iterator++) {
@@ -155,9 +155,6 @@ namespace jvgs
 
                 /* Maybe we can skip because of our bb check. */
                 if(segment->getBoundingBox()->intersectsWith(boundingBox)) {
-
-                    // TODO: remove
-                    testCounter++;
 
                     /* Temporary result variables. */
                     Vector2D tmpCollision;
@@ -176,11 +173,6 @@ namespace jvgs
                     }
                 }
             }
-
-            cout << "BoundingBox eliminated " <<
-                (result.size() - testCounter) << " segments." << endl;
-            cout << "-----> " << testCounter << " segments were checked." <<
-                endl;
 
             return closest;
         }

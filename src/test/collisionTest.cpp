@@ -15,6 +15,7 @@ using namespace jvgs::sketch;
 #include "../game/Entity.h"
 #include "../game/CollisionResponseAffector.h"
 #include "../game/GravityAffector.h"
+#include "../game/InputAffector.h"
 using namespace jvgs::game;
 
 #include <vector>
@@ -36,8 +37,12 @@ int main(int argc, char **argv)
             new CollisionResponseAffector(entity, sketch);
     entity->addAffector(affector);
 
-    GravityAffector *gravity = new GravityAffector(entity, Vector2D(0.0f, 0.5f));
+    GravityAffector *gravity =
+            new GravityAffector(entity, Vector2D(0.0f, 0.5f));
     entity->addAffector(gravity);
+
+    InputAffector *input = new InputAffector(entity);
+    entity->addAffector(input);
 
     entity->prepare();
 

@@ -9,7 +9,7 @@ namespace jvgs
          */
         class MathManager
         {
-            private:
+            protected:
                 /** Constructor.
                  */
                 MathManager();

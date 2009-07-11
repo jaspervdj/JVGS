@@ -11,7 +11,7 @@ namespace jvgs
          */
         class ListManager
         {
-            private:
+            protected:
                 /** Constructor.
                  */
                 ListManager();

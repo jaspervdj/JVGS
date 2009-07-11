@@ -5,6 +5,7 @@
 using namespace jvgs::core;
 
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
 using namespace jvgs::math;
@@ -16,7 +17,7 @@ using namespace jvgs::math;
  */
 bool compareAffectors(jvgs::game::Affector *a1, jvgs::game::Affector *a2)
 {
-    return a1->getPriority() > a1->getPriority();
+    return a1->getPriority() > a2->getPriority();
 }
 
 namespace jvgs
@@ -80,11 +81,15 @@ namespace jvgs
 
         void Entity::update(float ms)
         {
+            cout << "Updating entity:" << endl;
             /* Let the affectors affect this. */
             for(vector<Affector*>::iterator iterator = affectors.begin();
                     iterator != affectors.end(); iterator++) {
                 (*iterator)->affect(ms);
             }
+            cout << endl;
+
+            position += velocity * ms;
         }
     }
 }
