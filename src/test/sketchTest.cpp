@@ -27,6 +27,11 @@ int main(int argc, char **argv)
     Sketch *sketch = new Sketch(fileName);
     cout << "Parsed sketch in " << (SDL_GetTicks() - start) << "ms." << endl;
 
+    if(sketch->getElementById("foo"))
+        cout << "Found foo element." << endl;
+    else
+        cout << "Didn't find foo element." << endl;
+
     Vector2D size = sketch->getSize();
 
     videoManager->clear();

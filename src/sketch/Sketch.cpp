@@ -24,10 +24,12 @@ namespace jvgs
 
             root = 0;
 
+            /* Parse in everything. */
             Parser *parser = new Parser(fileName, this);
             parser->parse();
             delete parser;
 
+            /* Generate the display list. */
             ListManager *listManager = ListManager::getInstance();
             list = listManager->beginList();
 
@@ -36,6 +38,9 @@ namespace jvgs
             delete renderer;
 
             listManager->endList();
+
+            /* Collect the ids. */
+            collectIds(root);
         }
 
         Sketch::~Sketch()
@@ -74,9 +79,33 @@ namespace jvgs
             return root;
         }
 
+        SketchElement *Sketch::getElementById(const string &id)
+        {
+            map<string, SketchElement*>::iterator result = ids.find(id);
+            if(result != ids.end())
+                return result->second;
+            else
+                return 0;
+        }
+
         void Sketch::render() const
         {
             ListManager::getInstance()->callList(list);
+        }
+
+        void Sketch::collectIds(Group *group)
+        {
+            /* For all sketch elements in this group. */
+            for(int i = 0; i < group->getNumberOfSketchElements(); i++) {
+                SketchElement *element = group->getSketchElement(i);
+
+                /* Set the id. */
+                ids[element->getId()] = element;
+
+                /* Recurse if we are dealing with a group. */
+                if(element->getType() == SketchElement::GROUP)
+                    collectIds((Group*) element);
+            }
         }
     }
 }
