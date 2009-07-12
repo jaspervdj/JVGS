@@ -46,9 +46,6 @@ namespace jvgs
                 /** MathManager to perform calculations. */
                 math::MathManager *mathManager;
 
-                /** The LineSegment the entity is resting on. */
-                math::LineSegment *resting;
-
             public:
                 /** Constructor.
                  *  @param entity Entity to respond to collisions.
@@ -80,13 +77,6 @@ namespace jvgs
                 virtual math::LineSegment *closestCollision(float ms,
                         math::Vector2D *collision, float *time,
                         float *distance);
-
-                /** Obtain the LineSegment the entity is currently
-                 *  "resting on", or 0 if there is no such
-                 *  LineSegment.
-                 *  @return The LineSegment the entity is resting on.
-                 */
-                virtual math::LineSegment *getRestingLineSegment() const;
 
             protected:
                 /** Add lines from a sketch group.

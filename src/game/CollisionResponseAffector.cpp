@@ -34,7 +34,6 @@ namespace jvgs
 
             tree = new SegmentQuadTree(&segments);
             mathManager = MathManager::getInstance();
-            resting = 0;
         }
 
         CollisionResponseAffector::~CollisionResponseAffector()
@@ -106,9 +105,6 @@ namespace jvgs
                     /* Update the time and position. */
                     position = newPosition;
                     ms -= time;
-
-                    /* Set the resting segment. */
-                    resting = segment;
                 }
 
                 /* Keep track of the steps. */
@@ -131,11 +127,6 @@ namespace jvgs
             cout << "- collision affected the entity." << endl;
             cout << "  -> (" << velocity.getX() << ", " << velocity.getY() <<
                     ")" << endl;
-        }
-
-        LineSegment *CollisionResponseAffector::getRestingLineSegment() const
-        {
-            return resting;
         }
 
         LineSegment *CollisionResponseAffector::closestCollision(float ms,
