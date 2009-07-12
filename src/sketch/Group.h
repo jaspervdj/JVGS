@@ -30,7 +30,7 @@ namespace jvgs
                 /** Get the SketchElement type.
                  *  @return The SketchElement type.
                  */
-                virtual Type getType() const;
+                virtual SketchElementType getType() const;
 
                 /** Add a SketchElement to this group.
                  *  @param sketchElement element to be added.

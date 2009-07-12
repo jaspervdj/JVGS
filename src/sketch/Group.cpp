@@ -21,9 +21,9 @@ namespace jvgs
             }
         }
 
-        Group::Type Group::getType() const
+        SketchElementType Group::getType() const
         {
-            return GROUP;
+            return SKETCHELEMENTTYPE_GROUP;
         }
 
         void Group::addSketchElement(SketchElement *sketchElement)

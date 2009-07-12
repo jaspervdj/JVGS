@@ -27,7 +27,8 @@ namespace jvgs
                  *  @param point A point on the line.
                  *  @param vector Line direction vector, will be normalized.
                  */
-                Line(Vector2D point, Vector2D vector);
+                Line(Vector2D point = Vector2D(0.0f, 0.0f),
+                        Vector2D vector = Vector2D(1.0f, 1.0f));
 
                 /** Destructor.
                  */

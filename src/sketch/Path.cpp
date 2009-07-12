@@ -22,9 +22,9 @@ namespace jvgs
                 delete (*iterator);
         }
 
-        Path::Type Path::getType() const
+        SketchElementType Path::getType() const
         {
-            return PATH;
+            return SKETCHELEMENTTYPE_PATH;
         }
 
         int Path::getNumberOfComponents() const
@@ -47,7 +47,7 @@ namespace jvgs
             for(int i = 0; i < getNumberOfComponents(); i++) {
                 PathComponent *component = getComponent(i);
 
-                renderer->begin(Renderer::LINE_STRIP);
+                renderer->begin(RENDERTYPE_LINE_STRIP);
                 for(int j = 0; j < component->getNumberOfSegments(); j++) {
                     PathSegment *segment = component->getSegment(j);
                     float increment = 5.0f / segment->getLength();

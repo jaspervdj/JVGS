@@ -33,6 +33,20 @@ ELSE(OPENGL_INCLUDE_DIR)
     MESSAGE( STATUS "OpenGL is required" )
 ENDIF(OPENGL_INCLUDE_DIR)
 
+#######################
+# Lua
+#######################
+FIND_PACKAGE(Lua51)
+IF(LUA51_FOUND)
+    MESSAGE( STATUS "Lua has been found:" )
+    MESSAGE( STATUS "\tCFLAGS : ${LUA_INCLUDE_DIR}" )
+    MESSAGE( STATUS "\tLDFLAGS: ${LUA_LIBRARIES}" )
+ELSE(LUA51_FOUND)
+    SET( LUA_INCLUDE_DIR NOTFOUND )
+    SET( LUA_LIBRARIES NOTFOUND )
+    MESSAGE( STATUS "Lua is required" )
+ENDIF(LUA51_FOUND)
+
 # Continue for subdirectories.
 ADD_SUBDIRECTORY(src)
 

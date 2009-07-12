@@ -12,23 +12,22 @@ namespace jvgs
     {
         class VideoManager;
 
+        /** Types of primives that can be rendered.
+         */
+        enum RenderType
+        {
+            RENDERTYPE_LINES = GL_LINES,
+            RENDERTYPE_LINE_STRIP = GL_LINE_STRIP,
+            RENDERTYPE_LINE_LOOP = GL_LINE_LOOP,
+            RENDERTYPE_QUADS = GL_QUADS,
+            RENDERTYPE_POLYGON = GL_POLYGON,
+            RENDERTYPE_CONCAVE_POLYGON
+        };
+
         /** A class to draw primitives fast.
          */
         class Renderer
         {
-            public:
-                /** Types of primives that can be rendered.
-                 */
-                enum Type
-                {
-                    LINES = GL_LINES,
-                    LINE_STRIP = GL_LINE_STRIP,
-                    LINE_LOOP = GL_LINE_LOOP,
-                    QUADS = GL_QUADS,
-                    POLYGON = GL_POLYGON,
-                    CONCAVE_POLYGON
-                };
-
             protected:
                 /** If we are between a begin() and an end() call.
                  */
@@ -36,7 +35,7 @@ namespace jvgs
 
                 /** Type currently rendering.
                  */
-                Type rendering;
+                RenderType rendering;
 
                 /** List of vectors to render.
                  */
@@ -57,7 +56,7 @@ namespace jvgs
                 /** Start rendering a certain type of primitive.
                  *  @param type Type of the primitive to be rendered.
                  */
-                virtual void begin(Type type);
+                virtual void begin(RenderType type);
 
                 /** End the primitive currently being rendered.
                  */

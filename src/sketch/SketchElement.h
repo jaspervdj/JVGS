@@ -13,6 +13,12 @@ namespace jvgs
         class SketchElementRenderer;
         class StyleMap;
 
+        enum SketchElementType
+        {
+            SKETCHELEMENTTYPE_GROUP,
+            SKETCHELEMENTTYPE_PATH
+        };
+
         class SketchElement
         {
             private:
@@ -21,16 +27,10 @@ namespace jvgs
                 std::string id;
 
             public:
-                enum Type
-                {
-                    GROUP,
-                    PATH
-                };
-
                 SketchElement(SketchElement *parent);
                 virtual ~SketchElement();
 
-                virtual Type getType() const = 0;
+                virtual SketchElementType getType() const = 0;
 
                 virtual SketchElement *getParent() const;
 

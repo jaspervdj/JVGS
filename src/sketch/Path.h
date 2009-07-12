@@ -30,7 +30,7 @@ namespace jvgs
                 /** Get the sketch element type.
                  *  @return The type of sketch element.
                  */
-                virtual Type getType() const;
+                virtual SketchElementType getType() const;
 
                 /** Get the number of components in this path.
                  *  @return The number of components.

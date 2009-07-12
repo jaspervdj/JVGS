@@ -19,6 +19,12 @@ namespace jvgs
         class PathDataParser: public TextParser
         {
             private:
+#               ifndef SWIG
+                    const static std::string COMMANDS;
+#               else
+                    static std::string COMMANDS;
+#               endif
+
                 Path *path;
                 std::string data;
 
@@ -34,7 +40,6 @@ namespace jvgs
                 math::AffineTransformationMatrix matrix;
 
             public:
-                const static std::string COMMANDS;
 
                 PathDataParser(Path *path, const std::string &data);
                 virtual ~PathDataParser();

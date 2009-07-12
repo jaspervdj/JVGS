@@ -18,7 +18,11 @@ namespace jvgs
             private:
                 /** Nodes will subdivide when they have more segments than
                  *  this limit. */
-                const static int SUBDIVIDE_LIMIT = 20;
+#               ifndef SWIG
+                    const static int SUBDIVIDE_LIMIT = 20;
+#               else
+                    static int SUBDIVIDE_LIMIT = 20;
+#               endif
 
                 /** Children of the node. 0 if no children yet. */
                 SegmentQuadTreeNode **children;

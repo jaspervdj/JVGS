@@ -103,7 +103,7 @@ namespace jvgs
                 ids[element->getId()] = element;
 
                 /* Recurse if we are dealing with a group. */
-                if(element->getType() == SketchElement::GROUP)
+                if(element->getType() == SKETCHELEMENTTYPE_GROUP)
                     collectIds((Group*) element);
             }
         }

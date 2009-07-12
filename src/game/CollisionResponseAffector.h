@@ -25,8 +25,13 @@ namespace jvgs
         class CollisionResponseAffector: public Affector
         {
             private:
+#               ifndef SWIG
                 const static float VERY_CLOSE = 0.001;
                 const static int MAX_STEPS = 10;
+#               else
+                    static float VERY_CLOSE = 0.001;
+                    static int MAX_STEPS = 10;
+#               endif
 
                 Entity *entity;
 

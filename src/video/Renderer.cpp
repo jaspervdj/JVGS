@@ -28,7 +28,7 @@ namespace jvgs
             delete noiseY;
         }
 
-        void Renderer::begin(Type type)
+        void Renderer::begin(RenderType type)
         {
             busy = true;
             rendering = type;

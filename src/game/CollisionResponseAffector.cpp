@@ -181,9 +181,9 @@ namespace jvgs
         {
             for(int i = 0; i < group->getNumberOfSketchElements(); i++) {
                 SketchElement *element = group->getSketchElement(i);
-                if(element->getType() == SketchElement::GROUP)
+                if(element->getType() == SKETCHELEMENTTYPE_GROUP)
                     addLinesFromGroup((Group*) element);
-                else if(element->getType() == SketchElement::PATH)
+                else if(element->getType() == SKETCHELEMENTTYPE_PATH)
                     addLinesFromPath((Path*) element);
             }
         }
