@@ -33,19 +33,16 @@ namespace jvgs
 
             if(isKeyDown(KEY_DOWN))
                 velocity.setY(1.0f);
-            else if(isKeyDown(KEY_UP))
+            if(isKeyDown(KEY_UP))
                 velocity.setY(-1.0f);
-            else if(isKeyDown(KEY_LEFT))
+
+            if(isKeyDown(KEY_LEFT))
                 velocity.setX(-1.0f);
-            else if(isKeyDown(KEY_RIGHT))
+            if(isKeyDown(KEY_RIGHT))
                 velocity.setX(1.0f);
 
             velocity.setLength(speed);
             getEntity()->setVelocity(velocity);
-
-            cout << "- input affected the entity." << endl;
-            cout << "  -> (" << velocity.getX() << ", " << velocity.getY() <<
-                    ")" << endl;
         }
 
         void InputAffector::keyPressed(const Key &key)

@@ -122,11 +122,6 @@ namespace jvgs
             else
                 /* We keep our velocity. */
                 getEntity()->setVelocity(fromEllipseSpace * velocity);
-
-            velocity = fromEllipseSpace * velocity;
-            cout << "- collision affected the entity." << endl;
-            cout << "  -> (" << velocity.getX() << ", " << velocity.getY() <<
-                    ")" << endl;
         }
 
         LineSegment *CollisionResponseAffector::closestCollision(float ms,

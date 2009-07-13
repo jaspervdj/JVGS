@@ -81,13 +81,11 @@ namespace jvgs
 
         void Entity::update(float ms)
         {
-            cout << "Updating entity:" << endl;
             /* Let the affectors affect this. */
             for(vector<Affector*>::iterator iterator = affectors.begin();
                     iterator != affectors.end(); iterator++) {
                 (*iterator)->affect(ms);
             }
-            cout << endl;
 
             position += velocity * ms;
         }
