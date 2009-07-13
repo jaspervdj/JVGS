@@ -1,17 +1,30 @@
 #include "ScriptManager.h"
-#include "LogManager.h"
 #include <lua.hpp>
+
+#include "../core/LogManager.h"
+using namespace jvgs::core;
 
 using namespace std;
 
+/* The compiler/linker needs to know we're dealing with c and not c++. */
+extern "C"
+{
+    /* Header for the opening of the jvgs lua module. */
+    extern int luaopen_jvgslua(lua_State *L);
+}
+
 namespace jvgs
 {
-    namespace core
+    namespace bind
     {
         ScriptManager::ScriptManager()
         {
+            /* Create a new lua state. */
             luaState = lua_open();
+
+            /* Open the standard libs and our own module. */
             luaL_openlibs(luaState);
+            luaopen_jvgslua(luaState);
         }
 
         ScriptManager::~ScriptManager()

@@ -24,7 +24,7 @@ ADD_EXECUTABLE(
 )
 
 TARGET_LINK_LIBRARIES(
-    collisionTest sketch math game input
+    collisionTest sketch math game input bind
 )
 
 ADD_EXECUTABLE(

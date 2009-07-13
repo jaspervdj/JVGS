@@ -1,12 +1,12 @@
-#ifndef JVGS_CORE_SCRIPTMANAGER_H
-#define JVGS_CORE_SCRIPTMANAGER_H
+#ifndef JVGS_BIND_SCRIPTMANAGER_H
+#define JVGS_BIND_SCRIPTMANAGER_H
 
 #include <string>
 struct lua_State;
 
 namespace jvgs
 {
-    namespace core
+    namespace bind
     {
         /** A class to run scripts.
          */
@@ -24,6 +24,7 @@ namespace jvgs
                 /** Destructor.
                  */
                 virtual ~ScriptManager();
+
             public:
                 /** Get the ScriptManager instance.
                  *  @return The ScriptManager instance.

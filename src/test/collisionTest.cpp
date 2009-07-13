@@ -2,6 +2,9 @@
 #include "../video/Renderer.h"
 using namespace jvgs::video;
 
+#include "../bind/ScriptManager.h"
+using namespace jvgs::bind;
+
 #include "../math/MathManager.h"
 #include "../math/LineSegment.h"
 #include "../math/Line.h"
@@ -46,6 +49,9 @@ int main(int argc, char **argv)
     entity->addAffector(input);
 
     entity->prepare();
+
+    ScriptManager *scriptManager = ScriptManager::getInstance();
+    scriptManager->runCode("print(\"Hello world!\")");
 
     bool running = true;
     while(running) {

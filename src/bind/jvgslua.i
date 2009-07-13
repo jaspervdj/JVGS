@@ -1,4 +1,4 @@
-%module jvgs
+%module jvgslua
 
 %include <std_string.i>
 

@@ -1,20 +1,17 @@
 ADD_CUSTOM_TARGET(
      swig
-     swig -lua -c++ -o ${JVGS_BINARY_DIR}/src/bind/jvgs.cpp ${JVGS_BINARY_DIR}/src/bind/jvgs.i
+     swig -lua -c++ -o ${JVGS_BINARY_DIR}/src/bind/jvgslua.cpp ${JVGS_BINARY_DIR}/src/bind/jvgslua.i
 )
 
 
 ADD_LIBRARY(
-    jvgs SHARED
-    jvgs.cpp
-)
-
-SET_TARGET_PROPERTIES(
-    jvgs PROPERTIES PREFIX ""
+    bind SHARED
+    jvgslua.cpp
+    ScriptManager.cpp
 )
 
 TARGET_LINK_LIBRARIES(
-    jvgs
+    bind
     ${LUA_LIBRARIES}
     math
     core
