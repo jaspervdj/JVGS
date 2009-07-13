@@ -32,26 +32,25 @@ namespace jvgs
             SDL_Rect **modes = SDL_ListModes(NULL, flags | SDL_FULLSCREEN);
 
             /* Auto-select video mode. */
-            width = 800, height = 600;
+            size = Vector2D(800, 600);
             if(modes!=NULL) {
-                width = modes[0]->w;
-                height = modes[0]->h;
+                size = Vector2D(modes[0]->w, modes[0]->h);
             }
 
-            SDL_SetVideoMode(width, height, 0, flags | SDL_FULLSCREEN);
+            SDL_SetVideoMode((int) size.getX(), (int) size.getY(), 0,
+                    flags | SDL_FULLSCREEN);
             SDL_ShowCursor(0);
             SDL_WM_SetCaption(title.c_str(), NULL);
 
             setVideoDefaults();
         }
 
-        void VideoManager::setVideoMode(int width, int height,
+        void VideoManager::setVideoMode(const Vector2D &size,
                                         std::string title)
         {
-            this->width = width;
-            this->height = height;
+            this->size = Vector2D((int) size.getX(), (int) size.getY());
 
-            SDL_SetVideoMode(width, height, 0, flags);
+            SDL_SetVideoMode((int) size.getX(), (int) size.getY(), 0, flags);
             SDL_ShowCursor(0);
             SDL_WM_SetCaption(title.c_str(), NULL);
             
@@ -62,7 +61,8 @@ namespace jvgs
         {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
-            glOrtho(0.0f, (GLfloat)width, (GLfloat)height, 0.0f, -1.0f, 1.0f);
+            glOrtho(0.0f, (GLfloat) size.getX(), (GLfloat) size.getY(), 
+                    0.0f, -1.0f, 1.0f);
 
             glMatrixMode(GL_MODELVIEW);
 
@@ -84,14 +84,9 @@ namespace jvgs
             glLineWidth(1.5f);
         }
 
-        int VideoManager::getWidth() const
+        const Vector2D &VideoManager::getSize() const
         {
-            return width;
-        }
-
-        int VideoManager::getHeight() const
-        {
-            return height;
+            return size;
         }
 
         void VideoManager::clear() const

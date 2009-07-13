@@ -20,7 +20,7 @@ int main(int argc, char **argv)
             : string(argv[1]);
 
     VideoManager *videoManager = VideoManager::getInstance();
-    videoManager->setVideoMode(800, 600, "(OpenGL window)");
+    videoManager->setVideoMode(Vector2D(800, 600), "(OpenGL window)");
 
     Sketch *sketch = new Sketch(fileName);
     GLuint list = glGenLists(1);

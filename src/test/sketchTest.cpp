@@ -21,7 +21,7 @@ int main(int argc, char **argv)
                                  string(argv[1]);
 
     VideoManager *videoManager = VideoManager::getInstance();
-    videoManager->setVideoMode(400, 400, "(OpenGL window)");
+    videoManager->setVideoMode(Vector2D(400, 400), "(OpenGL window)");
 
     long start = SDL_GetTicks();
     Sketch *sketch = new Sketch(fileName);

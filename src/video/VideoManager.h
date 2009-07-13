@@ -24,7 +24,7 @@ namespace jvgs
                 Uint32 flags;
 
                 /* Video dimensions. */
-                int width, height;
+                math::Vector2D size;
 
                 /* Drawing color. */
                 Color color;
@@ -49,11 +49,11 @@ namespace jvgs
                 void setVideoMode(std::string title);
 
                 /** Sets a windowed video mode with the given dimensions.
-                 *  \param width The screen width.
-                 *  \param height The screen height.
+                 *  \param size The screen size.
                  *  \param title Title to be fed to the window manager.
                  */
-                void setVideoMode(int width, int height, std::string title);
+                void setVideoMode(const math::Vector2D &size,
+                        std::string title);
 
                 /** Sets a number of (good!) default flags. This includes
                  *  blending mode, textures enabled, the correct projection
@@ -62,15 +62,10 @@ namespace jvgs
                  */
                 void setVideoDefaults();
 
-                /** Get the screen width.
-                 *  \return The screen width.
+                /** Get the screen size.
+                 *  \return The screen size.
                  */
-                int getWidth() const;
-
-                /** Get the screen height.
-                 *  \return The screen height.
-                 */
-                int getHeight() const;
+                const math::Vector2D &getSize() const;
 
                 /** Clears the screen.
                  */

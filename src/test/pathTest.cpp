@@ -14,7 +14,7 @@ using namespace jvgs::video;
 int main(int argc, char **argv)
 {
     VideoManager *videoManager = VideoManager::getInstance();
-    videoManager->setVideoMode(400, 300, "Path test.");
+    videoManager->setVideoMode(Vector2D(400, 300), "Path test.");
 
     Path *path = new Path(0);
     PathComponent *component = new PathComponent(path);
