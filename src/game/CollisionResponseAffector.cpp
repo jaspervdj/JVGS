@@ -18,10 +18,11 @@ namespace jvgs
     namespace game
     {
         const float CollisionResponseAffector::VERY_CLOSE;
+        const float CollisionResponseAffector::SLIP_COSINE;
         const int CollisionResponseAffector::MAX_STEPS;
 
         CollisionResponseAffector::CollisionResponseAffector(Entity *entity,
-                Sketch *sketch): Affector(entity)
+                Sketch *sketch, const math::Vector2D &gravity): Affector(entity)
         {
             toEllipseSpace = AffineTransformationMatrix();
             toEllipseSpace.scale(entity->getEllipse().inverted());
@@ -34,6 +35,8 @@ namespace jvgs
 
             tree = new SegmentQuadTree(&segments);
             mathManager = MathManager::getInstance();
+
+            this->gravity = gravity;
         }
 
         CollisionResponseAffector::~CollisionResponseAffector()
@@ -53,9 +56,13 @@ namespace jvgs
 
         void CollisionResponseAffector::affect(float ms)
         {
+            /* Store the original ms. */
+            float originalMs = ms;
+
             /* Convert vectors to ellipse space. */
-            position = toEllipseSpace * getEntity()->getPosition();
-            velocity = toEllipseSpace * getEntity()->getVelocity();
+            Vector2D position = toEllipseSpace * getEntity()->getPosition();
+            Vector2D velocity = toEllipseSpace * getEntity()->getVelocity();
+            Vector2D destination;
 
             int collisionSteps = 0;
             while(collisionSteps < MAX_STEPS && ms > 0) {
@@ -66,13 +73,12 @@ namespace jvgs
                 Vector2D collision;
                 float time;
                 float distance;
-                LineSegment *segment = closestCollision(ms, &collision, &time,
-                        &distance);
+                LineSegment *segment = closestCollision(ms, position, velocity,
+                        &collision, &time, &distance);
 
                 /* No collision, just update position. */
                 if(!segment) {
                     position = destination;
-                    velocity = Vector2D(0.0f, 0.0f);
                     ms = 0;
 
                 /* A collision occurred. */
@@ -114,21 +120,49 @@ namespace jvgs
             /* Now set the entity's position. */
             getEntity()->setPosition(fromEllipseSpace * position);
 
-            if(collisionSteps >= MAX_STEPS)
+            if(collisionSteps >= MAX_STEPS) {
                 /* When we go over MAX_STEPS chances are we're probably bouncing
                  * against a wall, or getting stuck in some corner. Best is to
                  * set velocity to 0 now. */
-                getEntity()->setVelocity(Vector2D(0.0f, 0.0f));
-            else
-                /* We keep our velocity. */
-                getEntity()->setVelocity(fromEllipseSpace * velocity);
+                velocity = Vector2D(0.0f, 0.0f);
+            }
+
+            /* We check if we can fall down. */
+            Vector2D collision;
+            float time;
+            float distance;
+            float msToFall = 2.0f * VERY_CLOSE / gravity.getLength();
+            LineSegment *segment = closestCollision(msToFall, position, gravity,
+                        &collision, &time, &distance);
+            bool canFall = false;
+            /* We can fall if we aren't blocked. */
+            if(!segment) {
+                canFall = true;
+            /* Check if we can slip on the segment. */
+            } else {
+                /* segment->getLine().getVector.getLength() is 1 so we leave
+                 * that out. */
+                float cosine = segment->getLine().getVector() * gravity /
+                    gravity.getLength();
+                canFall = cosine > SLIP_COSINE || cosine < -SLIP_COSINE;
+            }
+
+            /* Fall. */
+            if(canFall)
+                velocity += gravity * originalMs;
+
+            /* Set the entity's velocity. */
+            getEntity()->setVelocity(fromEllipseSpace * velocity);
+            velocity = fromEllipseSpace * velocity;
         }
 
         LineSegment *CollisionResponseAffector::closestCollision(float ms,
+                const Vector2D &position, const Vector2D &velocity,
                 Vector2D *collision, float *time, float *distance)
         {
             LineSegment *closest = 0;
 
+            Vector2D destination = position + velocity * ms;
             BoundingBox boundingBox(
                     BoundingBox(position - Vector2D(1.0f, 1.0f),
                     position + Vector2D(1.0f, 1.0f)),
@@ -156,7 +190,8 @@ namespace jvgs
                     float tmpTime;
 
                     /* Check against single segment. */
-                    if(closestCollision(segment, ms, &tmpCollision, &tmpTime)) {
+                    if(closestCollision(segment, ms, position, velocity,
+                            &tmpCollision, &tmpTime)) {
                         /* If this collision is the closest, store it, erasing
                          * the previously remembered collision. */
                         if(closest == 0 || tmpTime < *time) {
@@ -206,7 +241,8 @@ namespace jvgs
         }
 
         bool CollisionResponseAffector::closestCollision(LineSegment *segment,
-                float ms, Vector2D *collision, float *time) const
+                float ms, const Vector2D &position, const Vector2D &velocity,
+                Vector2D *collision, float *time) const
         {
             Line line = segment->getLine();
             float normalDotVelocity = line.getNormal() * velocity;

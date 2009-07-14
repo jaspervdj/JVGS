@@ -86,8 +86,6 @@ namespace jvgs
                     iterator != affectors.end(); iterator++) {
                 (*iterator)->affect(ms);
             }
-
-            position += velocity * ms;
         }
     }
 }

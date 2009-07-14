@@ -27,17 +27,18 @@ using namespace std;
 int main(int argc, char **argv)
 {
     VideoManager *videoManager = VideoManager::getInstance();
-    videoManager->setVideoMode(Vector2D(730, 300), "Collision test.");
+    videoManager->setVideoMode(Vector2D(400, 300), "Collision test.");
 
     Sketch *sketch = new Sketch("resources/world.svg");
     Sketch *ellipse = new Sketch("resources/ellipse.svg");
 
     Entity *entity = new Entity();
     entity->setEllipse(ellipse->getSize() / 2.0f);
-    entity->setPosition(Vector2D(20.0f, 0.0f));
+    entity->setPosition(Vector2D(100.0f, 0.0f));
 
     CollisionResponseAffector *affector =
-            new CollisionResponseAffector(entity, sketch);
+            new CollisionResponseAffector(entity, sketch,
+                    Vector2D(0.0f, 0.03f));
     entity->addAffector(affector);
 
     InputAffector *input = new InputAffector(entity);
@@ -73,7 +74,7 @@ int main(int argc, char **argv)
 
         videoManager->flip();
 
-        cout << "Frame in " << SDL_GetTicks() - start << "ms." << endl;
+        //cout << "Frame in " << SDL_GetTicks() - start << "ms." << endl;
 
         SDL_Delay(100);
     }

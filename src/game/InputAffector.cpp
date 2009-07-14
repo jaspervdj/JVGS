@@ -13,7 +13,7 @@ namespace jvgs
     {
         InputAffector::InputAffector(Entity *entity): Affector(entity)
         {
-            speed = 2.0f;
+            speed = 3.0f;
         }
 
         InputAffector::~InputAffector()
@@ -29,19 +29,10 @@ namespace jvgs
         void InputAffector::affect(float ms)
         {
             Vector2D velocity = getEntity()->getVelocity();
-            velocity = Vector2D(0.0f, 0.0f);
 
-            if(isKeyDown(KEY_DOWN))
-                velocity.setY(1.0f);
-            if(isKeyDown(KEY_UP))
-                velocity.setY(-1.0f);
+            velocity.setX(isKeyDown(KEY_LEFT) ? -speed : 0.0f);
+            velocity.setX(isKeyDown(KEY_RIGHT) ? speed : velocity.getX());
 
-            if(isKeyDown(KEY_LEFT))
-                velocity.setX(-1.0f);
-            if(isKeyDown(KEY_RIGHT))
-                velocity.setX(1.0f);
-
-            velocity.setLength(speed);
             getEntity()->setVelocity(velocity);
         }
 
