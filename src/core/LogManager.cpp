@@ -21,43 +21,43 @@ namespace jvgs
             return &instance;
         }
 
-        void LogManager::message( const char *fmt, ... )
+        void LogManager::message(const char *fmt, ...)
         {
             va_list arg;
 
-            va_start( arg, fmt );
+            va_start(arg, fmt);
 
-            fprintf( stdout, "Message - " );
-            vfprintf( stdout, fmt, arg );
-            fprintf( stdout, "\n" );
+            fprintf(stdout, "Message - ");
+            vfprintf(stdout, fmt, arg);
+            fprintf(stdout, "\n");
 
-            va_end( arg );
+            va_end(arg);
         }
 
-        void LogManager::warning( const char *fmt, ... )
+        void LogManager::warning(const char *fmt, ...)
         {
             va_list arg;
 
-            va_start( arg, fmt );
+            va_start(arg, fmt);
 
-            fprintf( stderr, "Warning - " );
-            vfprintf( stderr, fmt, arg );
-            fprintf( stderr, "\n" );
+            fprintf(stderr, "Warning - ");
+            vfprintf(stderr, fmt, arg);
+            fprintf(stderr, "\n");
 
-            va_end( arg );
+            va_end(arg);
         }
 
-        void LogManager::error( const char *fmt, ... )
+        void LogManager::error(const char *fmt, ...)
         {
             va_list arg;
 
-            va_start( arg, fmt );
+            va_start(arg, fmt);
 
-            fprintf( stderr, "Error - " );
-            vfprintf( stderr, fmt, arg );
-            fprintf( stderr, "\n" );
+            fprintf(stderr, "Error - ");
+            vfprintf(stderr, fmt, arg);
+            fprintf(stderr, "\n");
 
-            va_end( arg );
+            va_end(arg);
 
             exit(1);
         }

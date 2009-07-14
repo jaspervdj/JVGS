@@ -29,6 +29,9 @@ namespace jvgs
                 /* Drawing color. */
                 Color color;
 
+                /* Clearing color. */
+                Color clearColor;
+
             protected:
                 /** Constructor.
                  */
@@ -111,7 +114,7 @@ namespace jvgs
                 /** Select a color for drawing.
                  *  @param color Color to be used.
                  */
-                virtual void setColor(Color color); 
+                virtual void setColor(const Color &color); 
 
                 /** Get the drawing color.
                  *  @return The current drawing color.
@@ -121,7 +124,7 @@ namespace jvgs
                 /** Select a color for clearing the screen.
                  *  @param color Color to be used.
                  */
-                virtual void setClearColor(Color color) const;
+                virtual void setClearColor(const Color &clearColor);
         };
     };
 };

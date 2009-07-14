@@ -182,24 +182,20 @@ namespace jvgs
                 /* Get the line segment. */
                 LineSegment *segment = *iterator;
 
-                /* Maybe we can skip because of our bb check. */
-                if(segment->getBoundingBox()->intersectsWith(boundingBox)) {
+                /* Temporary result variables. */
+                Vector2D tmpCollision;
+                float tmpTime;
 
-                    /* Temporary result variables. */
-                    Vector2D tmpCollision;
-                    float tmpTime;
-
-                    /* Check against single segment. */
-                    if(closestCollision(segment, ms, position, velocity,
-                            &tmpCollision, &tmpTime)) {
-                        /* If this collision is the closest, store it, erasing
-                         * the previously remembered collision. */
-                        if(closest == 0 || tmpTime < *time) {
-                            closest = segment;
-                            *collision = tmpCollision;
-                            *time = tmpTime;
-                            *distance = (velocity * (*time)).getLength();
-                        }
+                /* Check against single segment. */
+                if(closestCollision(segment, ms, position, velocity,
+                        &tmpCollision, &tmpTime)) {
+                    /* If this collision is the closest, store it, erasing
+                     * the previously remembered collision. */
+                    if(closest == 0 || tmpTime < *time) {
+                        closest = segment;
+                        *collision = tmpCollision;
+                        *time = tmpTime;
+                        *distance = (velocity * (*time)).getLength();
                     }
                 }
             }
@@ -256,6 +252,8 @@ namespace jvgs
                 if(line.getDistance(position) < 1.0f) {
                     t0 = 0.0f;
                     t1 = ms;
+                } else {
+                    return false;
                 }
             } else {
                 /* Calculate times. */
@@ -277,55 +275,55 @@ namespace jvgs
             *time = ms;
 
             /* At least one of them should be in the range. */
-            if(t0 >= 0.0f || t1 < ms) {
+            if(t0 > ms || t1 < 0.0f)
+                return false;
 
-                /* Clamp to [0.0f, ms]. */
-                t0 = t0 <= 0.0f ? 0.0f : t0;
-                t1 = t1 <= 0.0f ? 0.0f : t1;
-                t0 = t0 >= 1.0f ? 1.0f : t0;
-                t1 = t1 >= 1.0f ? 1.0f : t1;
+            /* Clamp to [0.0f, ms]. */
+            t0 = t0 <= 0.0f ? 0.0f : t0;
+            t1 = t1 <= 0.0f ? 0.0f : t1;
+            t0 = t0 >= ms ? ms : t0;
+            t1 = t1 >= ms ? ms : t1;
 
-                /* Parameters for the equation. */
-                float a, b, c, root;
+            /* Parameters for the equation. */
+            float a, b, c, root;
 
-                /* Check start. */
-                foundCollision = pointCollision(position, velocity,
-                        segment->getStart(), *time, &root, collision);
-                if(foundCollision)
+            /* Check start. */
+            foundCollision = pointCollision(position, velocity,
+                    segment->getStart(), *time, &root, collision);
+            if(foundCollision)
+                *time = root;
+
+            /* Check end. */
+            foundCollision = pointCollision(position, velocity,
+                    segment->getEnd(), *time, &root, collision);
+            if(foundCollision)
+                *time = root;
+
+            /* Check line segment between start and end. */
+            Vector2D edge = segment->getEnd() - segment->getStart();
+            Vector2D posToStart = segment->getStart() - position;
+            float edgeSquaredLength = edge.getSquaredLength();
+            float edgeDotVelocity = edge * velocity;
+            float edgeDotPosToStart = edge * posToStart;
+
+            a = edgeSquaredLength * - velocity.getSquaredLength() +
+                    edgeDotVelocity * edgeDotVelocity;
+            b = edgeSquaredLength * (2.0f * (velocity * posToStart)) -
+                    2.0f * edgeDotVelocity * edgeDotPosToStart;
+            c = edgeSquaredLength *
+                    (1.0f - posToStart.getSquaredLength()) +
+                    edgeDotPosToStart * edgeDotPosToStart;
+
+            /* If there is a lower solution... */
+            if(mathManager->getLowestPositiveRoot(a, b, c, *time, &root)) {
+                float f = (edgeDotVelocity * root - edgeDotPosToStart) /
+                    edgeSquaredLength;
+
+                /* Within the segment. */
+                if(f >= 0.0 && f <= 1.0) {
                     *time = root;
-
-                /* Check end. */
-                foundCollision = pointCollision(position, velocity,
-                        segment->getEnd(), *time, &root, collision);
-                if(foundCollision)
-                    *time = root;
-
-                /* Check line segment between start and end. */
-                Vector2D edge = segment->getEnd() - segment->getStart();
-                Vector2D posToStart = segment->getStart() - position;
-                float edgeSquaredLength = edge.getSquaredLength();
-                float edgeDotVelocity = edge * velocity;
-                float edgeDotPosToStart = edge * posToStart;
-
-                a = edgeSquaredLength * - velocity.getSquaredLength() +
-                        edgeDotVelocity * edgeDotVelocity;
-                b = edgeSquaredLength * (2.0f * (velocity * posToStart)) -
-                        2.0f * edgeDotVelocity * edgeDotPosToStart;
-                c = edgeSquaredLength *
-                        (1.0f - posToStart.getSquaredLength()) +
-                        edgeDotPosToStart * edgeDotPosToStart;
-
-                /* If there is a lower solution... */
-                if(mathManager->getLowestPositiveRoot(a, b, c, *time, &root)) {
-                    float f = (edgeDotVelocity * root - edgeDotPosToStart) /
-                        edgeSquaredLength;
-
-                    /* Within the segment. */
-                    if(f >= 0.0 && f <= 1.0) {
-                        *time = root;
-                        foundCollision = true;
-                        *collision = segment->getStart() + edge * f;
-                    }
+                    foundCollision = true;
+                    *collision = segment->getStart() + edge * f;
                 }
             }
 

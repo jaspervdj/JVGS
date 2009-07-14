@@ -40,9 +40,9 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="0.78219178"
-     inkscape:cx="365"
-     inkscape:cy="150"
+     inkscape:zoom="1.1061862"
+     inkscape:cx="175.56107"
+     inkscape:cy="159.55931"
      inkscape:window-x="187"
      inkscape:window-y="130"
      inkscape:current-layer="svg2" />
@@ -56,11 +56,12 @@
        inkscape:persp3d-origin="365 : 100 : 1"
        id="perspective2391" />
   </defs>
-  <g
-     id="layer1">
-    <path
-       d="M 20,276.6479 L 37.142857,275.21933 L 37.142857,265.21933 L 47.142857,265.21933 L 45.714286,252.36218 L 60,252.36218 L 60,239.50504 L 75.714286,240.93361 L 74.285714,228.07647 L 92.428958,228.58278 L 91.923882,213.43049 L 109.09647,214.44065 L 109.60155,201.81374 L 119.70308,200.80359 L 119.70308,189.69191 L 136.87567,190.19698 L 137.38075,178.58023 L 152.53303,178.58023 L 153.03811,165.95332 L 166.67517,165.95332 L 167.18025,155.8518 L 178.797,157.36703 L 178.797,147.77058 L 190.41375,146.25535 L 189.90868,133.62844 L 204.55589,134.13352 L 206.5762,121.00154 L 223.24371,121.00154 L 222.23356,108.37463 L 235.87062,107.36448 L 262.13459,107.36448 L 262.13459,154.84165 L 299.51023,161.91271 L 323.75389,201.81374"
-       id="path2383"
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-  </g>
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 24.408187,47.78207 C 24.408187,186.99914 245.88988,50.49409 245.88988,50.49409"
+     id="path2390" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 363.41078,136.37475 C 358.89075,262.03171 129.27299,226.77544 129.27299,226.77544"
+     id="path2392" />
 </svg>

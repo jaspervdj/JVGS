@@ -74,7 +74,6 @@ namespace jvgs
 
             glEnable(GL_LINE_SMOOTH);
             glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-            //glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
 
             glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -91,7 +90,7 @@ namespace jvgs
 
         void VideoManager::clear() const
         {
-            glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT);
         }
 
         void VideoManager::flip() const
@@ -168,7 +167,7 @@ namespace jvgs
             delete[] glMatrix;
         }
 
-        void VideoManager::setColor(Color color)
+        void VideoManager::setColor(const Color &color)
         {
             this->color = color;
             glColor4f(color.getRed(), color.getGreen(),
@@ -180,8 +179,9 @@ namespace jvgs
             return color;
         }
 
-        void VideoManager::setClearColor(Color color) const
+        void VideoManager::setClearColor(const Color &clearColor)
         {
+            this->clearColor = clearColor;
             glClearColor(color.getRed(), color.getGreen(),
                          color.getBlue(), color.getAlpha());
         }

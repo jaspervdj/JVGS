@@ -103,12 +103,13 @@ namespace jvgs
         }
 
         void SegmentQuadTreeNode::findSegments(BoundingBox *boundingBox,
-                std::vector<LineSegment*> *result) {
-
+                std::vector<LineSegment*> *result)
+        {
             /* Add all segments. */
             for(vector<LineSegment*>::iterator iterator = segments.begin();
                     iterator != segments.end(); iterator++) {
-                result->push_back(*iterator);
+                if((*iterator)->getBoundingBox()->intersectsWith(*boundingBox))
+                    result->push_back(*iterator);
             }
 
             /* Check children. */

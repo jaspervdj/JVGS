@@ -21,7 +21,6 @@ namespace jvgs
                 ~LogManager();
 
             public:
-
                 /** Obtain the singleton instance.
                  *  @return The LogManager instance.
                  */
@@ -30,18 +29,18 @@ namespace jvgs
                 /** Prints a message to the log file.
                  *  \param fmt Text, like passed to prinf in C.
                  */
-                void message( const char *fmt, ... );
+                void message(const char *fmt, ...);
 
                 /** Prints a warning to the log file.
                  *  \param fmt Text, like passed to prinf in C.
                  */
-                void warning( const char *fmt, ... );
+                void warning(const char *fmt, ...);
 
                 /** Prints an error to the log file. And stops
                  *  the engine.
                  *  \param fmt Text, like passed to prinf in C.
                  */
-                void error( const char *fmt, ... );
+                void error(const char *fmt, ...);
         };
     };
 };

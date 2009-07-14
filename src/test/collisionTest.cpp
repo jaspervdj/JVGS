@@ -34,14 +34,14 @@ int main(int argc, char **argv)
 
     Entity *entity = new Entity();
     entity->setEllipse(ellipse->getSize() / 2.0f);
-    entity->setPosition(Vector2D(100.0f, 0.0f));
+    entity->setPosition(Vector2D(200.0f, 150.0f));
 
     CollisionResponseAffector *affector =
             new CollisionResponseAffector(entity, sketch,
-                    Vector2D(0.0f, 0.03f));
+                    Vector2D(0.0f, 0.003f));
     entity->addAffector(affector);
 
-    InputAffector *input = new InputAffector(entity);
+    InputAffector *input = new InputAffector(entity, 0.5);
     entity->addAffector(input);
 
     entity->prepare();
@@ -50,9 +50,13 @@ int main(int argc, char **argv)
     scriptManager->runCode("print(\"Hello world!\")");
 
     bool running = true;
+    float ms = 0;
+    long lastUpdate = SDL_GetTicks();
     while(running) {
 
-        long start = SDL_GetTicks();
+        float now = SDL_GetTicks();
+        ms = now - lastUpdate;
+        long lastUpdate = SDL_GetTicks();
 
         SDL_Event event;
         while(SDL_PollEvent(&event)) {
@@ -62,7 +66,7 @@ int main(int argc, char **argv)
 
         videoManager->clear();
 
-        entity->update(1);
+        entity->update(ms * 0.0001);
 
         sketch->render();
 
@@ -74,9 +78,7 @@ int main(int argc, char **argv)
 
         videoManager->flip();
 
-        //cout << "Frame in " << SDL_GetTicks() - start << "ms." << endl;
-
-        SDL_Delay(100);
+        SDL_Delay(10);
     }
 
     delete entity;

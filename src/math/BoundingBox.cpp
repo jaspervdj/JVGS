@@ -40,10 +40,15 @@ namespace jvgs
 
         bool BoundingBox::intersectsWith(const BoundingBox &other) const
         {
-            return topLeft.getX() <= other.bottomRight.getX() &&
-                    bottomRight.getX() >= other.topLeft.getX() &&
-                    topLeft.getY() <= other.bottomRight.getY() &&
-                    bottomRight.getY() >= other.topLeft.getY();
+            if(topLeft.getX() > other.bottomRight.getX())
+                return false;
+            if(bottomRight.getX() < other.topLeft.getX())
+                return false;
+            if(topLeft.getY() > other.bottomRight.getY())
+                return false;
+            if(bottomRight.getY() < other.topLeft.getY())
+                return false;
+            return true;
         }
 
         bool BoundingBox::completelyIn(const BoundingBox &other) const

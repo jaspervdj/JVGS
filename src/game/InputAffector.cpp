@@ -11,9 +11,10 @@ namespace jvgs
 {
     namespace game
     {
-        InputAffector::InputAffector(Entity *entity): Affector(entity)
+        InputAffector::InputAffector(Entity *entity, float speed):
+                Affector(entity)
         {
-            speed = 3.0f;
+            this->speed = speed;
         }
 
         InputAffector::~InputAffector()
@@ -32,6 +33,9 @@ namespace jvgs
 
             velocity.setX(isKeyDown(KEY_LEFT) ? -speed : 0.0f);
             velocity.setX(isKeyDown(KEY_RIGHT) ? speed : velocity.getX());
+
+            if(isKeyDown(KEY_SPACE))
+                velocity.setY(-5.0f * speed);
 
             getEntity()->setVelocity(velocity);
         }

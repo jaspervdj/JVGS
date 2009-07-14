@@ -12,10 +12,17 @@ namespace jvgs
         class InputAffector: public Affector, jvgs::input::KeyListener
         {
             private:
+                /** Speed to move the entity with. */
                 float speed;
 
             public:
-                InputAffector(Entity *entity);
+                /** Constructor.
+                 *  @param speed Speed to move the entity with.
+                 */
+                InputAffector(Entity *entity, float speed);
+
+                /** Destructor.
+                 */
                 virtual ~InputAffector();
 
                 /* Override.
