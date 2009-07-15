@@ -1,6 +1,7 @@
 #include "PathComponent.h"
 #include "Path.h"
 
+#include "../math/PathSegment.h"
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
 
@@ -46,6 +47,18 @@ namespace jvgs
 
         void PathComponent::render(Renderer *renderer) const
         {
+            renderer->begin(RENDERTYPE_LINE_STRIP);
+
+            for(int i = 0; i < getNumberOfSegments(); i++) {
+                PathSegment *segment = getSegment(i);
+                float increment = Path::SUBDIVIDE_LENGTH / segment->getLength();
+
+                for(float t = 0.0f; t <= 1.0f; t += increment) {
+                    renderer->vector(segment->getPoint(t));
+                }
+            }
+
+            renderer->end();
         }
     }
 }

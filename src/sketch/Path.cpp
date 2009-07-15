@@ -11,6 +11,8 @@ namespace jvgs
 {
     namespace sketch
     {
+        const float Path::SUBDIVIDE_LENGTH;
+
         Path::Path(SketchElement *parent): SketchElement(parent)
         {
         }
@@ -45,19 +47,7 @@ namespace jvgs
         void Path::render(Renderer *renderer) const
         {
             for(int i = 0; i < getNumberOfComponents(); i++) {
-                PathComponent *component = getComponent(i);
-
-                renderer->begin(RENDERTYPE_LINE_STRIP);
-                for(int j = 0; j < component->getNumberOfSegments(); j++) {
-                    PathSegment *segment = component->getSegment(j);
-                    float increment = 5.0f / segment->getLength();
-
-                    for(float t = 0.0f; t <= 1.0f; t += increment) {
-                        renderer->vector(segment->getPoint(t));
-                    }
-                }
-
-                renderer->end();
+                getComponent(i)->render(renderer);
             }
         }
     }

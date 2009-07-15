@@ -18,6 +18,12 @@ namespace jvgs
                 std::vector<PathComponent*> components;
 
             public:
+#               ifndef SWIG
+                    const static float SUBDIVIDE_LENGTH = 5.0f;
+#               else
+                    static float SUBDIVIDE_LENGTH = 5.0f;
+#               endif
+
                 /** Constructor.
                  *  @param parent Parent of the path.
                  */

@@ -220,7 +220,8 @@ namespace jvgs
                 PathComponent *component = path->getComponent(i);
                 for(int j = 0; j < component->getNumberOfSegments(); j++) {
                     PathSegment *segment = component->getSegment(j);
-                    float increment = 5.0f / segment->getLength();
+                    float increment = Path::SUBDIVIDE_LENGTH /
+                            segment->getLength();
                     Vector2D previous = segment->getPoint(0.0f), current;
                     for(float t = increment; t <= 1.0f; t += increment) {
                         current = segment->getPoint(t);
