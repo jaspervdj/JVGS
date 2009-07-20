@@ -29,6 +29,11 @@ namespace jvgs
             return SKETCHELEMENTTYPE_PATH;
         }
 
+        const float &Path::getSubdivideLength()
+        {
+            return SUBDIVIDE_LENGTH;
+        }
+
         int Path::getNumberOfComponents() const
         {
             return components.size();

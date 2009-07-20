@@ -51,7 +51,8 @@ namespace jvgs
 
             for(int i = 0; i < getNumberOfSegments(); i++) {
                 PathSegment *segment = getSegment(i);
-                float increment = Path::SUBDIVIDE_LENGTH / segment->getLength();
+                float increment = Path::getSubdivideLength() /
+                        segment->getLength();
 
                 for(float t = 0.0f; t <= 1.0f; t += increment) {
                     renderer->vector(segment->getPoint(t));

@@ -15,15 +15,15 @@ namespace jvgs
         class Path: public SketchElement
         {
             private:
-                std::vector<PathComponent*> components;
-
-            public:
 #               ifndef SWIG
                     const static float SUBDIVIDE_LENGTH = 5.0f;
 #               else
                     static float SUBDIVIDE_LENGTH = 5.0f;
 #               endif
 
+                std::vector<PathComponent*> components;
+
+            public:
                 /** Constructor.
                  *  @param parent Parent of the path.
                  */
@@ -37,6 +37,11 @@ namespace jvgs
                  *  @return The type of sketch element.
                  */
                 virtual SketchElementType getType() const;
+
+                /** Get the length to subdivide the curves in.
+                 *  @return The subdivide length.
+                 */
+                static const float &getSubdivideLength();
 
                 /** Get the number of components in this path.
                  *  @return The number of components.
