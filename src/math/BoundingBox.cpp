@@ -38,6 +38,19 @@ namespace jvgs
             return bottomRight;
         }
 
+        bool BoundingBox::hasPoint(const Vector2D &point) const
+        {
+            if(point.getX() < topLeft.getX())
+                return false;
+            if(point.getX() > bottomRight.getX())
+                return false;
+            if(point.getY() < topLeft.getY())
+                return false;
+            if(point.getY() > bottomRight.getY())
+                return false;
+            return true;
+        }
+
         bool BoundingBox::intersectsWith(const BoundingBox &other) const
         {
             if(topLeft.getX() > other.bottomRight.getX())

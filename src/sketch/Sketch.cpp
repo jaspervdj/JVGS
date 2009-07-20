@@ -21,26 +21,19 @@ namespace jvgs
         {
             this->fileName = fileName;
             size = Vector2D();
-
             root = 0;
 
             /* Parse in everything. */
             Parser *parser = new Parser(fileName, this);
             parser->parse();
             delete parser;
+        }
 
-            /* Generate the display list. */
-            ListManager *listManager = ListManager::getInstance();
-            list = listManager->beginList();
-
-            Renderer *renderer = new Renderer();
-            root->render(renderer);
-            delete renderer;
-
-            listManager->endList();
-
-            /* Collect the ids. */
-            collectIds(root);
+        Sketch::Sketch(const Vector2D &size)
+        {
+            this->fileName = "not loaded from file";
+            this->size = size;
+            root = 0;
         }
 
         Sketch::~Sketch()
@@ -72,6 +65,19 @@ namespace jvgs
                 LogManager::getInstance()->warning(
                         "Setting root for a sketch that already has a root!");
             this->root = root;
+
+            /* Generate the display list. */
+            ListManager *listManager = ListManager::getInstance();
+            list = listManager->beginList();
+
+            Renderer *renderer = new Renderer();
+            root->render(renderer);
+            delete renderer;
+
+            listManager->endList();
+
+            /* Collect the ids. */
+            collectIds(root);
         }
 
         Group *Sketch::getRoot() const

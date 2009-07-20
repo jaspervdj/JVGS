@@ -39,6 +39,11 @@ namespace jvgs
                  */
                 Sketch(const std::string &fileName);
 
+                /** Constructor. Creates a sketch of the given size.
+                 *  @param size Size of the sketch.
+                 */
+                Sketch(const math::Vector2D &size);
+
                 /** Destructor.
                  */
                 virtual ~Sketch();
@@ -60,7 +65,8 @@ namespace jvgs
 
                 /** Set the root group for this sketch. This root group should
                  *  not have any tranformation, and just contain the actual
-                 *  contents of the sketch.
+                 *  contents of the sketch. This function should only be called
+                 *  once for this sketch.
                  *  @param root The new root group.
                  */
                 virtual void setRoot(Group *root);

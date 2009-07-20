@@ -41,6 +41,12 @@ namespace jvgs
                  */
                 virtual const Vector2D &getBottomRight() const;
 
+                /** Checks if a given point lies inside this bounding box.
+                 *  @param point Point to check.
+                 *  @return If this point lies inside this bounding box.
+                 */
+                virtual bool hasPoint(const Vector2D &point) const;
+
                 /** Check for intersection with another bounding box.
                  *  @param other BoundingBox to check intersection with.
                  *  @return If there is any intersection of the two boxes.
