@@ -5,7 +5,9 @@ INCLUDE_DIRECTORIES(
 ADD_LIBRARY( 
     game SHARED 
     Affector.cpp
-    CollisionResponseAffector.cpp
+    CollisionResponsePositioner.cpp
+    Controller.cpp
     Entity.cpp
-    InputAffector.cpp
+    InputController.cpp
+    Positioner.cpp
 )

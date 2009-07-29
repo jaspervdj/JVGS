@@ -1,5 +1,5 @@
-#ifndef JVGS_GAME_COLLISIONRESPONDER_H
-#define JVGS_GAME_COLLISIONRESPONDER_H
+#ifndef JVGS_GAME_COLLISIONRESPONSEPOSITIONER_H
+#define JVGS_GAME_COLLISIONRESPONSEPOSITIONER_H
 
 #include "../sketch/Sketch.h"
 #include "../sketch/Group.h"
@@ -9,7 +9,7 @@
 #include "../math/MathManager.h"
 #include "../math/AffineTransformationMatrix.h"
 #include "../math/SegmentQuadTree.h"
-#include "Affector.h"
+#include "Positioner.h"
 #include <vector>
 
 namespace jvgs
@@ -22,7 +22,7 @@ namespace jvgs
         /** This class is NOT THREAD SAFE AT ALL, due to some
          *  optimizations.
          */
-        class CollisionResponseAffector: public Affector
+        class CollisionResponsePositioner: public Positioner
         {
             private:
 #               ifndef SWIG
@@ -55,23 +55,22 @@ namespace jvgs
                 /** Gravity pulling the entity. */
                 math::Vector2D gravity;
 
+                /** Delay before we can jump again. */
+                float jumpDelay;
+
             public:
                 /** Constructor.
                  *  @param entity Entity to respond to collisions.
                  *  @param sketch Sketch width lines to collide against.
                  *  @param gravity Gravity pulling the entity.
                  */
-                CollisionResponseAffector(Entity *entity,
+                CollisionResponsePositioner(Entity *entity,
                         sketch::Sketch *sketch,
                         const math::Vector2D &gravity);
 
                 /** Destructor.
                  */
-                virtual ~CollisionResponseAffector();
-
-                /* Override.
-                 */
-                int getPriority() const;
+                virtual ~CollisionResponsePositioner();
 
                 /* Override.
                  */
@@ -92,6 +91,18 @@ namespace jvgs
                         const math::Vector2D &velocity,
                         math::Vector2D *collision, float *time,
                         float *distance);
+
+                /* Override
+                 */
+                virtual bool canJump(float ms);
+
+                /** Jump the entity if possible. If the entity cannot jump, this
+                 *  call will be ignored.
+                 *  @param ms Milliseconds the entity can be moved.
+                 *  @param force Force to jump with, relative to entity size.
+                 *  @param delay Delay before we can jump again.
+                 */
+                virtual void jump(float ms, float force, float delay);
 
             protected:
                 /** Add lines from a sketch group.

@@ -16,8 +16,8 @@ using namespace jvgs::math;
 using namespace jvgs::sketch;
 
 #include "../game/Entity.h"
-#include "../game/CollisionResponseAffector.h"
-#include "../game/InputAffector.h"
+#include "../game/CollisionResponsePositioner.h"
+#include "../game/InputController.h"
 using namespace jvgs::game;
 
 #include <vector>
@@ -35,16 +35,9 @@ int main(int argc, char **argv)
     Entity *entity = new Entity();
     entity->setEllipse(ellipse->getSize() / 2.0f);
     entity->setPosition(Vector2D(200.0f, 150.0f));
-
-    CollisionResponseAffector *affector =
-            new CollisionResponseAffector(entity, sketch,
-                    Vector2D(0.0f, 0.003f));
-    entity->addAffector(affector);
-
-    InputAffector *input = new InputAffector(entity, 0.5);
-    entity->addAffector(input);
-
-    entity->prepare();
+    entity->setController(new InputController(entity, 0.5f));
+    entity->setPositioner(new CollisionResponsePositioner(entity, sketch,
+            Vector2D(0.0f, 0.03f)));
 
     ScriptManager *scriptManager = ScriptManager::getInstance();
     scriptManager->runCode("print(\"Hello world!\")");

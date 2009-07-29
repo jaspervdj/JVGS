@@ -29,14 +29,8 @@ namespace jvgs
                  */
                 virtual Entity *getEntity() const;
 
-                /** Get the priority of this affector. The higher the priority,
-                 *  the sooner it will be executed.
-                 *  @return The priority of this affector.
-                 */
-                virtual int getPriority() const = 0;
-
-                /** Affect an entity for a certain time.
-                 *  @param ms The time to affect the entity for.
+                /** Affect then entity.
+                 *  @param ms Milliseconds to affect the entity.
                  */
                 virtual void affect(float ms) = 0;
         };

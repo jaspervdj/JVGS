@@ -1,24 +1,14 @@
 #include "Entity.h"
-#include "Affector.h"
+#include "Controller.h"
+#include "Positioner.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
 
-#include <algorithm>
 #include <iostream>
 using namespace std;
 
 using namespace jvgs::math;
-
-/** Function to sort affectors based on priority.
- *  @param a1 First affector.
- *  @param a2 Second affector.
- *  @return If a1's priority is strictly higher than a2's priority.
- */
-bool compareAffectors(jvgs::game::Affector *a1, jvgs::game::Affector *a2)
-{
-    return a1->getPriority() > a2->getPriority();
-}
 
 namespace jvgs
 {
@@ -26,18 +16,16 @@ namespace jvgs
     {
         Entity::Entity()
         {
+            controller = 0;
+            positioner = 0;
         }
 
         Entity::~Entity()
         {
-            for(vector<Affector*>::iterator iterator = affectors.begin();
-                    iterator != affectors.end(); iterator++)
-                delete *iterator;
-        }
-
-        void Entity::prepare()
-        {
-            sort(affectors.begin(), affectors.end(), compareAffectors);
+            if(controller)
+                delete controller;
+            if(positioner)
+                delete positioner;
         }
 
         const Vector2D &Entity::getPosition() const
@@ -70,22 +58,36 @@ namespace jvgs
             this->ellipse = ellipse;
         }
 
-        void Entity::addAffector(Affector *affector)
+        void Entity::setController(Controller *controller)
         {
-            if(affector->getEntity() != this)
-                LogManager::getInstance()->error(
-                        "Adding affector for entity a to entity b.");
+            if(this->controller)
+                delete this->controller;
+            this->controller = controller;
+        }
 
-            affectors.push_back(affector);
+        Controller *Entity::getController() const
+        {
+            return controller;
+        }
+
+        void Entity::setPositioner(Positioner *positioner)
+        {
+            if(this->positioner)
+                delete this->positioner;
+            this->positioner = positioner;
+        }
+
+        Positioner *Entity::getPositioner() const
+        {
+            return positioner;
         }
 
         void Entity::update(float ms)
         {
-            /* Let the affectors affect this. */
-            for(vector<Affector*>::iterator iterator = affectors.begin();
-                    iterator != affectors.end(); iterator++) {
-                (*iterator)->affect(ms);
-            }
+            if(controller)
+                controller->affect(ms);
+            if(positioner)
+                positioner->affect(ms);
         }
     }
 }

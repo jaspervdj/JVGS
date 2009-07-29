@@ -8,26 +8,26 @@ namespace jvgs
 {
     namespace game
     {
-        class Affector;
+        class Controller;
+        class Positioner;
 
         class Entity
         {
             private:
-                /** The entity position.
-                 */
+                /** The entity position. */
                 math::Vector2D position;
 
-                /** The entity velocity.
-                 */
+                /** The entity velocity. */
                 math::Vector2D velocity;
 
-                /** Ellipse used for collision detection.
-                 */
+                /** Ellipse used for collision detection. */
                 math::Vector2D ellipse;
 
-                /** A list of affectors for this entity.
-                 */
-                std::vector<Affector*> affectors;
+                /** Entity controller. */
+                Controller *controller;
+
+                /** Entity positioner. */
+                Positioner *positioner;
 
             public:
                 /** Constructor.
@@ -37,11 +37,6 @@ namespace jvgs
                 /** Destructor.
                  */
                 virtual ~Entity();
-
-                /** Prepare the entity to be launched into the game. This will
-                 *  do some things like sorting the affectors, ...
-                 */
-                virtual void prepare();
 
                 /** Get the entity position.
                  *  @return The entity position.
@@ -73,11 +68,25 @@ namespace jvgs
                  */
                 virtual void setEllipse(const math::Vector2D &ellipse);
 
-                /** Add an affector to this entity. The entity will now
-                 *  take care of the affector and delete it later.
-                 *  @param affector Affector to add.
+                /** Set the controller of this entity.
+                 *  @param controller The controller of this entity.
                  */
-                virtual void addAffector(Affector *affector);
+                virtual void setController(Controller *controller);
+
+                /** Get the controller of this entity.
+                 *  @return The controller of this entity.
+                 */
+                virtual Controller *getController() const;
+
+                /** Set the positioner of this entity.
+                 *  @param positioner The positioner of this entity.
+                 */
+                virtual void setPositioner(Positioner *positioner);
+
+                /** Get the positioner of this entity.
+                 *  @return The positioner of this entity.
+                 */
+                virtual Positioner *getPositioner() const;
 
                 /** Update this entity for a given time.
                  *  @param ms Time to update for.

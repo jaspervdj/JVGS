@@ -1,15 +1,15 @@
-#ifndef JVGS_GAME_INPUTAFFECTOR_H
-#define JVGS_GAME_INPUTAFFECTOR_H
+#ifndef JVGS_GAME_INPUTCONTROLLER_H
+#define JVGS_GAME_INPUTCONTROLLER_H
 
 #include "../math/Vector2D.h"
 #include "../input/KeyListener.h"
-#include "Affector.h"
+#include "Controller.h"
 
 namespace jvgs
 {
     namespace game
     {
-        class InputAffector: public Affector, jvgs::input::KeyListener
+        class InputController: public Controller, jvgs::input::KeyListener
         {
             private:
                 /** Speed to move the entity with. */
@@ -19,15 +19,11 @@ namespace jvgs
                 /** Constructor.
                  *  @param speed Speed to move the entity with.
                  */
-                InputAffector(Entity *entity, float speed);
+                InputController(Entity *entity, float speed);
 
                 /** Destructor.
                  */
-                virtual ~InputAffector();
-
-                /* Override.
-                 */
-                virtual int getPriority() const;
+                virtual ~InputController();
 
                 /* Override.
                  */
