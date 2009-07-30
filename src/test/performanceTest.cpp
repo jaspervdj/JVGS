@@ -32,7 +32,6 @@ int main(int argc, char **argv)
     long start = SDL_GetTicks();
     while (SDL_GetTicks() < start + 15000) {
 
-        long foo = SDL_GetTicks();
         videoManager->clear();
         glLoadIdentity();
         glTranslatef(200.0f, 200.0f, 0.0f);
@@ -41,7 +40,6 @@ int main(int argc, char **argv)
             glCallList(list);
         }
         videoManager->flip();
-        cout << (SDL_GetTicks() - foo) << endl;
         SDL_Delay(10);
         rotation += 0.1f;
     }

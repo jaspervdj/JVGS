@@ -41,7 +41,6 @@ namespace jvgs
             mathManager = MathManager::getInstance();
 
             this->gravity = gravity;
-            jumpDelay = 0.0f;
         }
 
         CollisionResponsePositioner::~CollisionResponsePositioner()
@@ -55,13 +54,6 @@ namespace jvgs
 
         void CollisionResponsePositioner::affect(float ms)
         {
-            if(InputManager::getInstance()->isKeyDown(KEY_SPACE))
-                jump(ms, 10.0f, 4.0f);
-
-            /* Update jump delay. */
-            if(jumpDelay > 0.0f)
-                jumpDelay -= ms;
-
             /* Store the original ms. */
             float originalMs = ms;
 
@@ -101,10 +93,9 @@ namespace jvgs
 
                     /* Add a normal force. */
                     Vector2D normalForce = position - collision;
-                    normalForce.setLength(velocity.getLength() / 2.0f);
                     normalForce.setLength(velocity.getLength());
                     velocity += normalForce;
-
+ 
                     /* Update the time and position. */
                     position = newPosition;
                     ms -= time;
@@ -116,17 +107,6 @@ namespace jvgs
 
             /* Now set the entity's position. */
             getEntity()->setPosition(fromEllipseSpace * position);
-
-            if(collisionSteps >= MAX_STEPS) {
-                /* When we go over MAX_STEPS chances are we're probably bouncing
-                 * against a wall, or getting stuck in some corner. Best is to
-                 * set velocity to 0 now. */
-                velocity = Vector2D(0.0f, 0.0f);
-            }
-
-            /* Set the entity's velocity. */
-            //velocity += gravity * originalMs;
-            //getEntity()->setVelocity(fromEllipseSpace * velocity);
         }
 
         LineSegment *CollisionResponsePositioner::closestCollision(float ms,
@@ -178,35 +158,18 @@ namespace jvgs
 
         bool CollisionResponsePositioner::canJump(float ms)
         {
-            return true;
-        }
-
-        void CollisionResponsePositioner::jump(float ms, float force,
-                float delay)
-        {
-            if(jumpDelay > 0.0f) {
-                cout << "No time to jump." << endl;
-                return;
-            }
-
             Vector2D collision;
             float time, distance;
             Vector2D position = toEllipseSpace * getEntity()->getPosition();
-            Vector2D velocity = toEllipseSpace * getEntity()->getVelocity();
-            Vector2D fall = gravity;
-            fall.setLength(VERY_CLOSE * 2.0f);
-            LineSegment *segment = closestCollision(ms, position, fall,
+            LineSegment *segment = closestCollision(ms, position, gravity,
                     &collision, &time, &distance);
 
-            if(segment) {
-                Vector2D jumpForce = (position - collision) - gravity;
-                jumpForce.setLength(force);
-                velocity += jumpForce;
-                getEntity()->setVelocity(fromEllipseSpace * velocity);
+            return segment != 0;
+        }
 
-                jumpDelay = delay;
-                cout << "No collision to jump." << endl;
-            }
+        Vector2D CollisionResponsePositioner::getJumpDirection() const
+        {
+            return gravity.normalized() * -1.0f;
         }
 
         void CollisionResponsePositioner::addLinesFromGroup(Group *group)

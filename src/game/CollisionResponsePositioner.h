@@ -55,9 +55,6 @@ namespace jvgs
                 /** Gravity pulling the entity. */
                 math::Vector2D gravity;
 
-                /** Delay before we can jump again. */
-                float jumpDelay;
-
             public:
                 /** Constructor.
                  *  @param entity Entity to respond to collisions.
@@ -96,13 +93,9 @@ namespace jvgs
                  */
                 virtual bool canJump(float ms);
 
-                /** Jump the entity if possible. If the entity cannot jump, this
-                 *  call will be ignored.
-                 *  @param ms Milliseconds the entity can be moved.
-                 *  @param force Force to jump with, relative to entity size.
-                 *  @param delay Delay before we can jump again.
+                /* Override
                  */
-                virtual void jump(float ms, float force, float delay);
+                virtual math::Vector2D getJumpDirection() const;
 
             protected:
                 /** Add lines from a sketch group.

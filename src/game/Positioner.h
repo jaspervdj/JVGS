@@ -2,6 +2,7 @@
 #define JVGS_GAME_POSITIONER_H
 
 #include "Affector.h"
+#include "../math/Vector2D.h"
 
 namespace jvgs
 {
@@ -22,13 +23,19 @@ namespace jvgs
                  */
                 virtual ~Positioner();
 
+                /* Override
+                 */
+                virtual void affect(float ms) = 0;
+
                 /** Check if the entity can jump in the current position.
                  */
                 virtual bool canJump(float ms) = 0;
 
-                /* Override
+                /** Get the direction the entity should jump. In most cases,
+                 *  this is determined by some kind of gravity.
+                 *  @return The direction to jump in.
                  */
-                virtual void affect(float ms) = 0;
+                virtual math::Vector2D getJumpDirection() const = 0;
         };
     }
 }
