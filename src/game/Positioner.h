@@ -31,11 +31,10 @@ namespace jvgs
                  */
                 virtual bool canJump(float ms) = 0;
 
-                /** Get the direction the entity should jump. In most cases,
-                 *  this is determined by some kind of gravity.
-                 *  @return The direction to jump in.
+                /** Get the gravity applied by the positioner.
+                 *  @return The gravity.
                  */
-                virtual math::Vector2D getJumpDirection() const = 0;
+                virtual math::Vector2D getGravity() const = 0;
         };
     }
 }

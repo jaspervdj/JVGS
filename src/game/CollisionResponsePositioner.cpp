@@ -40,7 +40,7 @@ namespace jvgs
             tree = new SegmentQuadTree(&segments);
             mathManager = MathManager::getInstance();
 
-            this->gravity = gravity;
+            this->gravity = toEllipseSpace * gravity;
         }
 
         CollisionResponsePositioner::~CollisionResponsePositioner()
@@ -167,9 +167,9 @@ namespace jvgs
             return segment != 0;
         }
 
-        Vector2D CollisionResponsePositioner::getJumpDirection() const
+        Vector2D CollisionResponsePositioner::getGravity() const
         {
-            return gravity.normalized() * -1.0f;
+            return fromEllipseSpace * gravity;
         }
 
         void CollisionResponsePositioner::addLinesFromGroup(Group *group)

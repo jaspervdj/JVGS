@@ -13,10 +13,11 @@ namespace jvgs
     namespace game
     {
         InputController::InputController(Entity *entity, float speed,
-                float jumpDuration): Controller(entity)
+                float jumpDuration, float jumpHeight): Controller(entity)
         {
             this->speed = speed;
             this->jumpDuration = jumpDuration;
+            this->jumpHeight = jumpHeight;
             jumpDelay = 0.0f;
         }
 
@@ -31,17 +32,15 @@ namespace jvgs
 
             /** Can start a jump. */
             if(positioner) {
-                if(jumpDelay <= 0.0f && isKeyDown(KEY_SPACE) &&
-                        positioner->canJump(ms)) {
-                    jumpDelay += jumpDuration;
+                if(isKeyDown(KEY_SPACE) && positioner->canJump(ms)) {
+                    jumpDelay = jumpDuration;
                 }
             }
 
             /** In a jump. */
             if(jumpDelay > 0.0f) {
-                float factor = 2.0f / jumpDuration * jumpDelay - 1.0f;
-                velocity = positioner->getJumpDirection() * factor * speed *
-                        5.0f;
+                float factor = jumpHeight / jumpDuration * jumpDelay;
+                velocity = positioner->getGravity() * -1.0f * factor;
                 jumpDelay -= ms;
             }
 

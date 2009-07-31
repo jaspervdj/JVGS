@@ -95,7 +95,7 @@ namespace jvgs
 
                 /* Override
                  */
-                virtual math::Vector2D getJumpDirection() const;
+                virtual math::Vector2D getGravity() const;
 
             protected:
                 /** Add lines from a sketch group.

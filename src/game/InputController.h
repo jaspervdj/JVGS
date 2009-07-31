@@ -21,13 +21,17 @@ namespace jvgs
                 /** General duration of a jump. */
                 float jumpDuration;
 
+                /** Height of a jump. */
+                float jumpHeight;
+
             public:
                 /** Constructor.
                  *  @param speed Speed to move the entity with.
                  *  @param jumpDuration General duration of a jump.
+                 *  @param jumpHeight Height of a jump relative to gravity.
                  */
                 InputController(Entity *entity, float speed,
-                         float jumpDuration);
+                         float jumpDuration, float jumpHeight = 2.5f);
 
                 /** Destructor.
                  */
