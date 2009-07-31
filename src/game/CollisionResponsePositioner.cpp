@@ -21,7 +21,6 @@ namespace jvgs
     namespace game
     {
         const float CollisionResponsePositioner::VERY_CLOSE;
-        const float CollisionResponsePositioner::SLIP_COSINE;
         const int CollisionResponsePositioner::MAX_STEPS;
 
         CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
@@ -55,30 +54,30 @@ namespace jvgs
         void CollisionResponsePositioner::affect(float ms)
         {
             /* Store the original ms. */
-            float originalMs = ms;
+            float timeLeft = 1.0f;
 
             /* Convert vectors to ellipse space. */
             Vector2D position = toEllipseSpace * getEntity()->getPosition();
-            Vector2D velocity = toEllipseSpace * getEntity()->getVelocity();
+            Vector2D velocity = (toEllipseSpace * getEntity()->getVelocity() +
+                    gravity) * ms;
             Vector2D destination;
-            velocity += gravity;
 
             int collisionSteps = 0;
-            while(collisionSteps < MAX_STEPS && ms > 0) {
+            while(collisionSteps < MAX_STEPS && timeLeft > 0) {
 
                 /* Update destination. */
-                destination = position + velocity * ms;
+                destination = position + velocity;
 
                 Vector2D collision;
                 float time;
                 float distance;
-                LineSegment *segment = closestCollision(ms, position, velocity,
+                LineSegment *segment = closestCollision(position, velocity,
                         &collision, &time, &distance);
 
                 /* No collision, just update position. */
                 if(!segment) {
                     position = destination;
-                    ms = 0;
+                    timeLeft = 0.0f;
 
                 /* A collision occurred. */
                 } else {
@@ -98,7 +97,7 @@ namespace jvgs
  
                     /* Update the time and position. */
                     position = newPosition;
-                    ms -= time;
+                    timeLeft -= time;
                 }
 
                 /* Keep track of the steps. */
@@ -109,13 +108,13 @@ namespace jvgs
             getEntity()->setPosition(fromEllipseSpace * position);
         }
 
-        LineSegment *CollisionResponsePositioner::closestCollision(float ms,
+        LineSegment *CollisionResponsePositioner::closestCollision(
                 const Vector2D &position, const Vector2D &velocity,
                 Vector2D *collision, float *time, float *distance)
         {
             LineSegment *closest = 0;
 
-            Vector2D destination = position + velocity * ms;
+            Vector2D destination = position + velocity;
             BoundingBox boundingBox(
                     BoundingBox(position - Vector2D(1.0f, 1.0f),
                     position + Vector2D(1.0f, 1.0f)),
@@ -140,7 +139,7 @@ namespace jvgs
                 float tmpTime;
 
                 /* Check against single segment. */
-                if(closestCollision(segment, ms, position, velocity,
+                if(closestCollision(segment, position, velocity,
                         &tmpCollision, &tmpTime)) {
                     /* If this collision is the closest, store it, erasing
                      * the previously remembered collision. */
@@ -161,7 +160,7 @@ namespace jvgs
             Vector2D collision;
             float time, distance;
             Vector2D position = toEllipseSpace * getEntity()->getPosition();
-            LineSegment *segment = closestCollision(ms, position, gravity,
+            LineSegment *segment = closestCollision(position, gravity * ms,
                     &collision, &time, &distance);
 
             return segment != 0;
@@ -212,7 +211,7 @@ namespace jvgs
         }
 
         bool CollisionResponsePositioner::closestCollision(LineSegment *segment,
-                float ms, const Vector2D &position, const Vector2D &velocity,
+                const Vector2D &position, const Vector2D &velocity,
                 Vector2D *collision, float *time) const
         {
             Line line = segment->getLine();
@@ -227,7 +226,7 @@ namespace jvgs
                 /* Collision. */
                 if(line.getDistance(position) < 1.0f) {
                     t0 = 0.0f;
-                    t1 = ms;
+                    t1 = 1.0f;
                 } else {
                     return false;
                 }
@@ -246,7 +245,7 @@ namespace jvgs
 
             bool foundCollision = false;
             Vector2D ellipseCollision;
-            *time = ms;
+            *time = 1.0f;
 
             /* Parameters for the equation. */
             float a, b, c, root;

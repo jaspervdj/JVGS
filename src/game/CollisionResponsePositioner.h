@@ -27,14 +27,9 @@ namespace jvgs
             private:
 #               ifndef SWIG
                     const static float VERY_CLOSE = 0.001;
-                    /** The entity will slip on a segment when the cosine of
-                     *  the angle between the gravity vector and the segment
-                     *  direction is larger than this. */
-                    const static float SLIP_COSINE = 0.154;
                     const static int MAX_STEPS = 10;
 #               else
                     static float VERY_CLOSE = 0.001;
-                    static float SLIP_COSINE = 0.154;
                     static int MAX_STEPS = 10;
 #               endif
 
@@ -75,15 +70,14 @@ namespace jvgs
 
                 /** Get the first point at which the entity will collide
                  *  with the world.
-                 *  @param ms Milliseconds the entity can be moved.
                  *  @param position Initial position of the entity.
-                 *  @param velocity Initial velocity of the entity.
+                 *  @param velocity Velocity of the entity.
                  *  @param collision Will contain the exact collision point.
                  *  @param time Will contain the exact collision time.
                  *  @param distance Will contain he distance to the collison.
                  *  @return The LineSegment the entity collided with.
                  */
-                virtual math::LineSegment *closestCollision(float ms,
+                virtual math::LineSegment *closestCollision(
                         const math::Vector2D &position,
                         const math::Vector2D &velocity,
                         math::Vector2D *collision, float *time,
@@ -113,7 +107,6 @@ namespace jvgs
                  *  with a segment. This function assumes position and
                  *  velocity are set correctly.
                  *  @param segment LineSegment to check collision against.
-                 *  @param ms Milliseconds the entity can be moved.
                  *  @param position Initial position of the entity.
                  *  @param velocity Initial velocity of the entity.
                  *  @param collision Will contain the exact collision point.
@@ -121,7 +114,7 @@ namespace jvgs
                  *  @return If the entity collided with the segment.
                  */
                 virtual bool closestCollision(math::LineSegment *segment,
-                        float ms, const math::Vector2D &position,
+                        const math::Vector2D &position,
                         const math::Vector2D &velocity,
                         math::Vector2D *collision, float *time) const;
 
