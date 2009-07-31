@@ -7,6 +7,8 @@
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
 
+using namespace std;
+
 namespace jvgs
 {
     namespace sketch
@@ -21,13 +23,13 @@ namespace jvgs
         }
 
         void LPathCommandParser::parse(Path *path, char command,
-                const std::vector<float> &arguments) const
+                const vector<float> &arguments) const
         {
             PathDataParser *dataParser = getDataParser();
 
             /* We take the vectors two by two and add lines to the
              * path component. */
-            for(int i = 0; i < arguments.size(); i += 2) {
+            for(vector<float>::size_type  i = 0; i < arguments.size(); i += 2) {
                 Vector2D previous = dataParser->getCurrentPoint();
                 Vector2D current(arguments[i], arguments[i + 1]);
                 current = dataParser->toAbsoluteSpace(command, current);

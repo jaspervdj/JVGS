@@ -53,7 +53,8 @@ namespace jvgs
             /* Add to root and maybe subdidivde. */
             } else {
                 segments.push_back(segment);
-                if(segments.size() >= SUBDIVIDE_LIMIT)
+                if(segments.size() >=
+                        (vector<LineSegment*>::size_type) SUBDIVIDE_LIMIT)
                     subdivide();
             }
         }

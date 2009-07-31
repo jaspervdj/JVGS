@@ -97,7 +97,7 @@ namespace jvgs
                  *  @param a A equation parameter.
                  *  @param b B equation parameter.
                  *  @param c C equation parameter.
-                 *  @param treshold The lowest root must be below this treshold.
+                 *  @param treshold The lowest root must be <= this treshold.
                  *  @param root This will contain the root.
                  *  @return If a solution was found.
                  */

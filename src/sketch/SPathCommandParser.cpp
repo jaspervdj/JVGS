@@ -30,7 +30,7 @@ namespace jvgs
             CPathCommandParser *cCommandParser =
                     new CPathCommandParser(dataParser);
 
-            for(int i = 0; i < arguments.size(); i += 4) {
+            for(vector<float>::size_type i = 0; i < arguments.size(); i += 4) {
 
                 Vector2D control1 = dataParser->getCurrentPoint().reflect(
                         dataParser->getLastControlPoint());

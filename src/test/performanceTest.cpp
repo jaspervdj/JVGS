@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     glEndList();
 
     float rotation = 0.0f;
-    long start = SDL_GetTicks();
+    unsigned long start = SDL_GetTicks();
     while (SDL_GetTicks() < start + 15000) {
 
         videoManager->clear();

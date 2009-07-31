@@ -26,7 +26,7 @@ namespace jvgs
         {
             PathDataParser *dataParser = getDataParser();
 
-            for(int i = 0; i < arguments.size(); i += 6) {
+            for(vector<float>::size_type i = 0; i < arguments.size(); i += 6) {
 
                 /* Get the defining points. */
                 Vector2D previous = dataParser->getCurrentPoint();

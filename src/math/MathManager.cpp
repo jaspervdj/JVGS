@@ -108,13 +108,13 @@ namespace jvgs
             }
             
             /* x1 is a solution. */
-            if(x1 >= 0 && x1 < treshold) {
+            if(x1 >= 0 && x1 <= treshold) {
                 *root = x1;
                 return true;
             }
 
             /* When x1 < 0 */
-            if(x2 >= 0 && x2 < treshold) {
+            if(x2 >= 0 && x2 <= treshold) {
                 *root = x2;
                 return true;
             }

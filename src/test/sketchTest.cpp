@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     VideoManager *videoManager = VideoManager::getInstance();
     videoManager->setVideoMode(Vector2D(400, 400), "(OpenGL window)");
 
-    long start = SDL_GetTicks();
+    unsigned long start = SDL_GetTicks();
     Sketch *sketch = new Sketch(fileName);
     cout << "Parsed sketch in " << (SDL_GetTicks() - start) << "ms." << endl;
 

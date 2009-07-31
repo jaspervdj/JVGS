@@ -248,7 +248,7 @@ namespace jvgs
             *time = 1.0f;
 
             /* Parameters for the equation. */
-            float a, b, c, root;
+            float root;
 
             /* Check start. */
             if(pointCollision(position, velocity, segment->getStart(), *time,
@@ -268,7 +268,7 @@ namespace jvgs
             BoundingBox *segmentBox = segment->getBoundingBox();
             Vector2D collisionPoint =
                     line.getClosestPoint(position + velocity * t0);
-            if(segmentBox->hasPoint(collisionPoint) && t0 < *time
+            if(segmentBox->hasPoint(collisionPoint) && t0 <= *time
                     && t0 >= 0.0f) {
                 *time = t0;
                 foundCollision = true;
@@ -276,7 +276,7 @@ namespace jvgs
             } else {
                 collisionPoint =
                         line.getClosestPoint(position + velocity * t1);
-                if(segmentBox->hasPoint(collisionPoint) && t1 < *time
+                if(segmentBox->hasPoint(collisionPoint) && t1 <= *time
                     && t1 >= 0.0f) {
                     *time = t1;
                     foundCollision = true;
