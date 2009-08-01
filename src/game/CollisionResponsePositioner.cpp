@@ -63,7 +63,8 @@ namespace jvgs
             Vector2D destination;
 
             int collisionSteps = 0;
-            while(collisionSteps < MAX_STEPS && timeLeft > 0) {
+            while(collisionSteps < MAX_STEPS && timeLeft > 0 &&
+                    velocity.getLength() > VERY_CLOSE) {
 
                 /* Update destination. */
                 destination = position + velocity;
@@ -89,6 +90,9 @@ namespace jvgs
                         v.setLength(distance - VERY_CLOSE);
                         newPosition = position + v;
                     }
+
+                    /* Subtract used velocity. */
+                    velocity -= (position - collision);
 
                     /* Add a normal force. */
                     Vector2D normalForce = position - collision;
@@ -147,7 +151,7 @@ namespace jvgs
                         closest = segment;
                         *collision = tmpCollision;
                         *time = tmpTime;
-                        *distance = (velocity * (*time)).getLength();
+                        *distance = (*time) * velocity.getLength();
                     }
                 }
             }
@@ -220,6 +224,7 @@ namespace jvgs
 
             /* Collision times. */
             float t0, t1;
+            bool embeddedInLine = false;
             
             /* Special case: normalDotVelocity == 0.0f */
             if(normalDotVelocity == 0.0f) {
@@ -227,6 +232,7 @@ namespace jvgs
                 if(line.getDistance(position) < 1.0f) {
                     t0 = 0.0f;
                     t1 = 1.0f;
+                    embeddedInLine = true;
                 } else {
                     return false;
                 }
@@ -234,20 +240,26 @@ namespace jvgs
                 /* Calculate times. */
                 t0 = (1.0f - signedDistanceToLine) / normalDotVelocity;
                 t1 = (-1.0f - signedDistanceToLine) / normalDotVelocity;
+
+                /* Sort. */
+                if(t0 > t1) {
+                    float tmp = t0;
+                    t0 = t1;
+                    t1 = tmp;
+                }
+
+                /* Check that at least one result is within range. */
+                if(t0 > 1.0f || t1 < 0.0f)
+                    return false;
+
+                /* Clamp to [0, 1] */
+                t0 = mathManager->clamp(t0, 0.0f, 1.0f);
+                t1 = mathManager->clamp(t1, 0.0f, 1.0f);
             }
 
-            /* Sort. */
-            if(t0 > t1) {
-                float tmp = t0;
-                t0 = t1;
-                t1 = tmp;
-            }
-
+            /* Will contain the solution of the equation. */
             bool foundCollision = false;
-            Vector2D ellipseCollision;
             *time = 1.0f;
-
-            /* Parameters for the equation. */
             float root;
 
             /* Check start. */
@@ -293,13 +305,10 @@ namespace jvgs
                 Vector2D *collision) const
         {
             float root;
-            bool found = mathManager->getLowestPositiveRoot(
-                    velocity.getSquaredLength(),
+            if(mathManager->getLowestPositiveRoot(velocity.getSquaredLength(),
                     2.0f * (velocity * (position - point)),
-                    (point - position).getSquaredLength() - 1.0f,
-                    treshold, &root);
-
-            if(found) {
+                    (point - position).getSquaredLength() - 1.0f, treshold,
+                    &root)) {
                 *time = root;
                 *collision = point;
                 return true;

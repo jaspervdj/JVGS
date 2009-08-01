@@ -26,10 +26,10 @@ namespace jvgs
         {
             private:
 #               ifndef SWIG
-                    const static float VERY_CLOSE = 0.001;
+                    const static float VERY_CLOSE = 0.0001;
                     const static int MAX_STEPS = 10;
 #               else
-                    static float VERY_CLOSE = 0.001;
+                    static float VERY_CLOSE = 0.0001;
                     static int MAX_STEPS = 10;
 #               endif
 

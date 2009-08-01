@@ -122,5 +122,14 @@ namespace jvgs
             /* No solution found. */
             return false;
         }
+
+        float MathManager::clamp(float a, float lower, float upper) const
+        {
+            if(a < lower)
+                return lower;
+            if(a > upper)
+                return upper;
+            return a;
+        }
     };
 };

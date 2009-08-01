@@ -103,6 +103,14 @@ namespace jvgs
                  */
                 bool getLowestPositiveRoot(float a, float b, float c,
                         float treshold, float *root) const;
+
+                /** Clamp a to [lower, upper].
+                 *  @param a Value to clamp.
+                 *  @param lower Lower clamp boundary.
+                 *  @param upper Upper clamp boundary.
+                 *  @return Clamped value.
+                 */
+                float clamp(float a, float lower, float upper) const;
         };
     };
 };
