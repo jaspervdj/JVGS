@@ -270,7 +270,7 @@ namespace jvgs
             }
 
             /* Check end. */
-            if(pointCollision(position, velocity, segment->getStart(), *time,
+            if(pointCollision(position, velocity, segment->getEnd(), *time,
                     &root, collision)) {
                 foundCollision = true;
                 *time = root;
