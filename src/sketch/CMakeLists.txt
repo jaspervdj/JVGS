@@ -12,6 +12,7 @@ ADD_LIBRARY(
     PathDataParser.cpp
     PathParser.cpp
     Parser.cpp
+    QPathCommandParser.cpp
     RotateTransformCommand.cpp
     ScaleTransformCommand.cpp
     SPathCommandParser.cpp
@@ -21,6 +22,7 @@ ADD_LIBRARY(
     SketchElementRenderer.cpp
     SkewXTransformCommand.cpp
     SkewYTransformCommand.cpp
+    TPathCommandParser.cpp
     TransformParser.cpp
     TransformCommand.cpp
     TranslateTransformCommand.cpp
