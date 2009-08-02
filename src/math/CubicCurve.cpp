@@ -12,31 +12,11 @@ namespace jvgs
             this->control2 = control2;
             this->end = end;
 
-            /* Calculate length. First, take a simple guess. The real length
-             * will probably be smaller. */
-            float simpleGuess = start.getDistance(control1) +
-                    control1.getDistance(control2) + control2.getDistance(end);
-            float increment = 1.0f / simpleGuess;
-
-            /* Now approximate the real length. */
-            length = 0.0f;
-
-            /* getPoint(0.0f) equals start, so... */
-            Vector2D previous = start, current; 
-            for(float t = increment; t <= 1.0f; t += increment) {
-                current = getPoint(t);
-                length += previous.getDistance(current);
-                previous = current;
-            }
+            calculateLength();
         }
 
         CubicCurve::~CubicCurve()
         {
-        }
-
-        float CubicCurve::getLength() const
-        {
-            return length;
         }
 
         Vector2D CubicCurve::getPoint(float t) const
@@ -52,6 +32,12 @@ namespace jvgs
 
             /* Find the point. */
             return v1 * (1.0f - t) + v2 * t;
+        }
+
+        float CubicCurve::getLengthGuess() const
+        {
+            return start.getDistance(control1) +
+                    control1.getDistance(control2) + control2.getDistance(end);
         }
     }
 }
