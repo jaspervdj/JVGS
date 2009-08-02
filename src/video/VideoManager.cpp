@@ -6,6 +6,9 @@
 
 using namespace jvgs::math;
 
+#include <iostream>
+using namespace std;
+
 namespace jvgs
 {
     namespace video
@@ -75,10 +78,8 @@ namespace jvgs
             glEnable(GL_LINE_SMOOTH);
             glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 
-            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
-            color = Color(0.0f, 0.0f, 0.0f);
-            glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+            setClearColor(Color(1.0f, 1.0f, 1.0f));
+            setColor(Color(0.0f, 0.0f, 0.0f));
 
             glLineWidth(1.5f);
         }
@@ -182,8 +183,20 @@ namespace jvgs
         void VideoManager::setClearColor(const Color &clearColor)
         {
             this->clearColor = clearColor;
-            glClearColor(color.getRed(), color.getGreen(),
-                         color.getBlue(), color.getAlpha());
+            glClearColor(clearColor.getRed(), clearColor.getGreen(),
+                         clearColor.getBlue(), clearColor.getAlpha());
+        }
+
+        const Color &VideoManager::getClearColor() const
+        {
+            return clearColor;
+        }
+
+        void VideoManager::invert()
+        {
+            Color tmp = color;
+            setColor(clearColor);
+            setClearColor(tmp);
         }
     };
 };

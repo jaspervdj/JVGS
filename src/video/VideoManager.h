@@ -125,6 +125,15 @@ namespace jvgs
                  *  @param color Color to be used.
                  */
                 virtual void setClearColor(const Color &clearColor);
+
+                /** Get the clearing color.
+                 *  @return The clearing color.
+                 */
+                virtual const Color &getClearColor() const;
+
+                /** Swaps drawing and clearing color.
+                 */
+                virtual void invert();
         };
     };
 };

@@ -5,6 +5,9 @@ using namespace jvgs::video;
 #include "../bind/ScriptManager.h"
 using namespace jvgs::bind;
 
+#include "../input/InputManager.h"
+using namespace jvgs::input;
+
 #include "../math/MathManager.h"
 #include "../math/LineSegment.h"
 #include "../math/Line.h"
@@ -28,6 +31,8 @@ int main(int argc, char **argv)
 {
     VideoManager *videoManager = VideoManager::getInstance();
     videoManager->setVideoMode(Vector2D(400, 300), "Collision test.");
+
+    InputManager *inputManager = InputManager::getInstance();
 
     Sketch *sketch = new Sketch("resources/world.svg");
     Sketch *ellipse = new Sketch("resources/ellipse.svg");
@@ -56,6 +61,9 @@ int main(int argc, char **argv)
             if(event.type == SDL_QUIT)
                 running = false;
         }
+
+        if(inputManager->isKeyDown(KEY_RETURN))
+            videoManager->invert();
 
         videoManager->clear();
 
