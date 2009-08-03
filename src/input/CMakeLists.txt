@@ -4,7 +4,7 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY( 
-    input SHARED 
+    input STATIC 
     InputManager.cpp
     KeyListener.cpp
 )

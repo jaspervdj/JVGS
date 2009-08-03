@@ -5,7 +5,7 @@ ADD_CUSTOM_TARGET(
 
 
 ADD_LIBRARY(
-    bind SHARED
+    bind STATIC
     jvgslua.cpp
     ScriptManager.cpp
 )

@@ -16,6 +16,11 @@ namespace jvgs
     {
         Entity::Entity()
         {
+            position = Vector2D(0.0f, 0.0f);
+            velocity = Vector2D(0.0f, 0.0f);
+            ellipse = Vector2D(0.0f, 0.0f);
+            falling = true;
+            slipping = false;
             controller = 0;
             positioner = 0;
         }
@@ -56,6 +61,26 @@ namespace jvgs
         void Entity::setEllipse(const Vector2D &ellipse)
         {
             this->ellipse = ellipse;
+        }
+
+        bool Entity::isFalling() const
+        {
+            return falling;
+        }
+
+        void Entity::setFalling(bool falling)
+        {
+            this->falling = falling;
+        }
+
+        bool Entity::isSlipping() const
+        {
+            return slipping;
+        }
+
+        void Entity::setSlipping(bool slipping)
+        {
+            this->slipping = slipping;
         }
 
         void Entity::setController(Controller *controller)

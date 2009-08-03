@@ -39,10 +39,10 @@ int main(int argc, char **argv)
 
     Entity *entity = new Entity();
     entity->setEllipse(ellipse->getSize() / 2.0f);
-    entity->setPosition(Vector2D(200.0f, 150.0f));
-    entity->setController(new InputController(entity, 0.1f, 500.0f));
+    entity->setPosition(Vector2D(200.0f, 140.0f));
+    entity->setController(new InputController(entity, 0.2f, 100.0f));
     entity->setPositioner(new CollisionResponsePositioner(entity, sketch,
-            Vector2D(0.0f, 0.25f)));
+            Vector2D(0.0f, 0.004f)));
 
     ScriptManager *scriptManager = ScriptManager::getInstance();
     scriptManager->runCode("print(\"Hello world!\")");

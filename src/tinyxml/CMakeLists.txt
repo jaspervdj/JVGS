@@ -1,5 +1,5 @@
 ADD_LIBRARY( 
-    tinyxml SHARED 
+    tinyxml STATIC 
     tinystr.cpp
     tinyxml.cpp
     tinyxmlerror.cpp

@@ -15,23 +15,23 @@ namespace jvgs
                 /** Speed to move the entity with. */
                 float speed;
 
+                /** Minimum delay between jumps. */
+                float minJumpDelay;
+
+                /** Force to jump with. */
+                float jumpForce;
+
                 /** Delay to next jump. */
                 float jumpDelay;
-
-                /** General duration of a jump. */
-                float jumpDuration;
-
-                /** Height of a jump. */
-                float jumpHeight;
 
             public:
                 /** Constructor.
                  *  @param speed Speed to move the entity with.
-                 *  @param jumpDuration General duration of a jump.
-                 *  @param jumpHeight Height of a jump relative to gravity.
+                 *  @param minJumpDelay Minimum delay between jumps.
+                 *  @param jumpForce Force to jump with.
                  */
                 InputController(Entity *entity, float speed,
-                         float jumpDuration, float jumpHeight = 2.5f);
+                         float minJumpDelay, float jumpForce = 200.0f);
 
                 /** Destructor.
                  */

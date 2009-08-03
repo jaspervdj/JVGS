@@ -1,4 +1,4 @@
 ADD_LIBRARY( 
-    core SHARED 
+    core STATIC 
     LogManager.cpp
 )

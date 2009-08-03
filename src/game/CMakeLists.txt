@@ -3,7 +3,7 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY( 
-    game SHARED 
+    game STATIC 
     Affector.cpp
     CollisionResponsePositioner.cpp
     Controller.cpp

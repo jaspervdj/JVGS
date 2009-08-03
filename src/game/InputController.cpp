@@ -13,11 +13,11 @@ namespace jvgs
     namespace game
     {
         InputController::InputController(Entity *entity, float speed,
-                float jumpDuration, float jumpHeight): Controller(entity)
+                float minJumpDelay, float jumpForce): Controller(entity)
         {
             this->speed = speed;
-            this->jumpDuration = jumpDuration;
-            this->jumpHeight = jumpHeight;
+            this->minJumpDelay = minJumpDelay;
+            this->jumpForce = jumpForce;
             jumpDelay = 0.0f;
         }
 
@@ -27,29 +27,26 @@ namespace jvgs
 
         void InputController::affect(float ms)
         {
-            Vector2D velocity(0.0f, 0.0f);
-            Positioner *positioner = getEntity()->getPositioner();
-
-            /** Can start a jump. */
-            Vector2D collision;
-            if(positioner) {
-                if(isKeyDown(KEY_SPACE) &&
-                        positioner->hasNearCollision(ms, &collision)) {
-                    jumpDelay = jumpDuration;
-                }
-            }
+            Entity *entity = getEntity();
+            Vector2D velocity = entity->getVelocity();
+            Positioner *positioner = entity->getPositioner();
 
             /** In a jump. */
-            if(jumpDelay > 0.0f) {
-                float factor = jumpHeight / jumpDuration * jumpDelay;
-                velocity = positioner->getGravity() * -1.0f * factor;
+            if(jumpDelay > 0.0f)
                 jumpDelay -= ms;
+
+            /** Can start a jump. */
+            if(!entity->isFalling() && isKeyDown(KEY_SPACE) &&
+                    jumpDelay <= 0.0f) {
+                jumpDelay = minJumpDelay;
+                if(positioner)
+                    velocity += positioner->getGravity() * -1.0f * jumpForce;
             }
 
             velocity.setX(isKeyDown(KEY_LEFT) ? -speed : 0.0f);
             velocity.setX(isKeyDown(KEY_RIGHT) ? speed : velocity.getX());
 
-            getEntity()->setVelocity(velocity);
+            entity->setVelocity(velocity);
         }
 
         void InputController::keyPressed(const Key &key)

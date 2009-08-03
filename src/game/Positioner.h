@@ -27,16 +27,10 @@ namespace jvgs
                  */
                 virtual void affect(float ms) = 0;
 
-                /** Check if there is going to be a collision soon caused by
-                 *  external factors like gravity.
-                 */
-                virtual bool hasNearCollision(float ms,
-                        math::Vector2D *collision) = 0;
-
                 /** Get the gravity applied by the positioner.
                  *  @return The gravity.
                  */
-                virtual math::Vector2D getGravity() const = 0;
+                virtual const math::Vector2D &getGravity() const = 0;
         };
     }
 }

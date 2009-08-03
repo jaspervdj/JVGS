@@ -1,10 +1,11 @@
 ADD_LIBRARY( 
-    math SHARED 
+    math STATIC 
     AffineTransformationMatrix.cpp
     BoundedObject.cpp
     BoundingBox.cpp
     CubicCurve.cpp
     Curve.cpp
+    CollisionDetector.cpp
     Line.cpp
     LineSegment.cpp
     MathManager.cpp
@@ -15,4 +16,8 @@ ADD_LIBRARY(
     QuadTree.cpp
     QuadTreeNode.cpp
     Vector2D.cpp
+)
+
+TARGET_LINK_LIBRARIES(
+    math sketch
 )

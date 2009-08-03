@@ -5,7 +5,7 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY( 
-    video SHARED 
+    video STATIC 
     Color.cpp
     ListManager.cpp
     Renderer.cpp

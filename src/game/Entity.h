@@ -23,6 +23,12 @@ namespace jvgs
                 /** Ellipse used for collision detection. */
                 math::Vector2D ellipse;
 
+                /** If the entity is falling. */
+                bool falling;
+
+                /** If the entity is slipping. */
+                bool slipping;
+
                 /** Entity controller. */
                 Controller *controller;
 
@@ -67,6 +73,26 @@ namespace jvgs
                  *  @param ellipse The new ellipse.
                  */
                 virtual void setEllipse(const math::Vector2D &ellipse);
+
+                /** Check if the entity is falling.
+                 *  @return If the entity is falling.
+                 */
+                virtual bool isFalling() const;
+
+                /** Set the falling state.
+                 *  @param falling If the entity is falling.
+                 */
+                virtual void setFalling(bool falling);
+
+                /** Check if the entity is slipping.
+                 *  @return If the entity is slipping.
+                 */
+                virtual bool isSlipping() const;
+
+                /** Set the slipping state.
+                 *  @param slipping If the entity is slipping.
+                 */
+                virtual void setSlipping(bool slipping);
 
                 /** Set the controller of this entity.
                  *  @param controller The controller of this entity.
