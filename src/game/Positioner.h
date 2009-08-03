@@ -27,9 +27,11 @@ namespace jvgs
                  */
                 virtual void affect(float ms) = 0;
 
-                /** Check if the entity can jump in the current position.
+                /** Check if there is going to be a collision soon caused by
+                 *  external factors like gravity.
                  */
-                virtual bool canJump(float ms) = 0;
+                virtual bool hasNearCollision(float ms,
+                        math::Vector2D *collision) = 0;
 
                 /** Get the gravity applied by the positioner.
                  *  @return The gravity.

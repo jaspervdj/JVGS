@@ -51,25 +51,25 @@ namespace jvgs
             return true;
         }
 
-        bool BoundingBox::intersectsWith(const BoundingBox &other) const
+        bool BoundingBox::intersectsWith(BoundingBox *other) const
         {
-            if(topLeft.getX() > other.bottomRight.getX())
+            if(topLeft.getX() > other->bottomRight.getX())
                 return false;
-            if(bottomRight.getX() < other.topLeft.getX())
+            if(bottomRight.getX() < other->topLeft.getX())
                 return false;
-            if(topLeft.getY() > other.bottomRight.getY())
+            if(topLeft.getY() > other->bottomRight.getY())
                 return false;
-            if(bottomRight.getY() < other.topLeft.getY())
+            if(bottomRight.getY() < other->topLeft.getY())
                 return false;
             return true;
         }
 
-        bool BoundingBox::completelyIn(const BoundingBox &other) const
+        bool BoundingBox::completelyIn(BoundingBox *other) const
         {
-            return topLeft.getX() >= other.topLeft.getX() &&
-                    bottomRight.getX() <= other.bottomRight.getX() &&
-                    topLeft.getY() >= other.topLeft.getY() &&
-                    bottomRight.getY() <= other.bottomRight.getY();
+            return topLeft.getX() >= other->topLeft.getX() &&
+                    bottomRight.getX() <= other->bottomRight.getX() &&
+                    topLeft.getY() >= other->topLeft.getY() &&
+                    bottomRight.getY() <= other->bottomRight.getY();
         }
     }
 }

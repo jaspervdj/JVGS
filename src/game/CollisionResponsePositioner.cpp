@@ -11,6 +11,7 @@ using namespace jvgs::sketch;
 #include "../math/BoundingBox.h"
 #include "../math/Vector2D.h"
 #include "../math/Line.h"
+#include "../math/QuadTree.h"
 using namespace jvgs::math;
 
 #include <iostream>
@@ -22,6 +23,7 @@ namespace jvgs
     {
         const float CollisionResponsePositioner::VERY_CLOSE;
         const int CollisionResponsePositioner::MAX_STEPS;
+        const float CollisionResponsePositioner::SLIP_LIMIT;
 
         CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
                 Sketch *sketch, const math::Vector2D &gravity):
@@ -36,7 +38,7 @@ namespace jvgs
             Group *root = sketch->getRoot();
             addLinesFromGroup(root);
 
-            tree = new SegmentQuadTree(&segments);
+            tree = new QuadTree(&objects);
             mathManager = MathManager::getInstance();
 
             this->gravity = toEllipseSpace * gravity;
@@ -45,8 +47,8 @@ namespace jvgs
         CollisionResponsePositioner::~CollisionResponsePositioner()
         {
             delete tree;
-            for(vector<LineSegment*>::iterator iterator = segments.begin();
-                    iterator != segments.end(); iterator++) {
+            for(vector<BoundedObject*>::iterator iterator = objects.begin();
+                    iterator != objects.end(); iterator++) {
                 delete (*iterator);
             }
         }
@@ -58,9 +60,20 @@ namespace jvgs
 
             /* Convert vectors to ellipse space. */
             Vector2D position = toEllipseSpace * getEntity()->getPosition();
-            Vector2D velocity = (toEllipseSpace * getEntity()->getVelocity() +
-                    gravity) * ms;
+            Vector2D velocity = (toEllipseSpace * getEntity()->getVelocity()) *
+                    ms;
             Vector2D destination;
+
+            Vector2D collision;
+            if(hasNearCollision(ms, &collision)) {
+                Vector2D fall = collision - position;
+                float cosine = (gravity * fall) /
+                        (gravity.getLength() * fall.getLength());
+                if(cosine < 1.0f - SLIP_LIMIT || cosine > 1.0f + SLIP_LIMIT)
+                    velocity += gravity * ms;
+            } else {
+                velocity += gravity * ms;
+            }
 
             int collisionSteps = 0;
             while(collisionSteps < MAX_STEPS && timeLeft > 0 &&
@@ -69,7 +82,6 @@ namespace jvgs
                 /* Update destination. */
                 destination = position + velocity;
 
-                Vector2D collision;
                 float time;
                 float distance;
                 LineSegment *segment = closestCollision(position, velocity,
@@ -128,15 +140,15 @@ namespace jvgs
             /* The result from the tree search. */
             /* TODO When there are multiple calls in one frame, it will
              * calculate the result every time. We don't want that. */
-            vector<LineSegment*> result;
-            tree->findSegments(&boundingBox, &result);
+            vector<BoundedObject*> result;
+            tree->findObjects(&boundingBox, &result);
 
             /* Loop over all lines to find closest collision. */
-            for(vector<LineSegment*>::iterator iterator = result.begin();
+            for(vector<BoundedObject*>::iterator iterator = result.begin();
                     iterator != result.end(); iterator++) {
 
                 /* Get the line segment. */
-                LineSegment *segment = *iterator;
+                LineSegment *segment = (LineSegment*) *iterator;
 
                 /* Temporary result variables. */
                 Vector2D tmpCollision;
@@ -159,13 +171,13 @@ namespace jvgs
             return closest;
         }
 
-        bool CollisionResponsePositioner::canJump(float ms)
+        bool CollisionResponsePositioner::hasNearCollision(float ms,
+                Vector2D *collision)
         {
-            Vector2D collision;
             float time, distance;
             Vector2D position = toEllipseSpace * getEntity()->getPosition();
             LineSegment *segment = closestCollision(position, gravity * ms,
-                    &collision, &time, &distance);
+                    collision, &time, &distance);
 
             return segment != 0;
         }
@@ -199,7 +211,7 @@ namespace jvgs
                         current = segment->getPoint(t);
 
                         /* Convert to ellipse space and add. */
-                        segments.push_back(new LineSegment(
+                        objects.push_back(new LineSegment(
                                     toEllipseSpace * current,
                                     toEllipseSpace * previous));
 
@@ -207,7 +219,7 @@ namespace jvgs
                     }
 
                     /* Last segment for sure. */
-                    segments.push_back(new LineSegment(
+                    objects.push_back(new LineSegment(
                                 toEllipseSpace * previous,
                                 toEllipseSpace * segment->getPoint(1.0f)));
                 }

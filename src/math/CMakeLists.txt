@@ -1,6 +1,7 @@
 ADD_LIBRARY( 
     math SHARED 
     AffineTransformationMatrix.cpp
+    BoundedObject.cpp
     BoundingBox.cpp
     CubicCurve.cpp
     Curve.cpp
@@ -11,7 +12,7 @@ ADD_LIBRARY(
     Noise.cpp
     PathSegment.cpp
     QuadraticCurve.cpp
-    SegmentQuadTree.cpp
-    SegmentQuadTreeNode.cpp
+    QuadTree.cpp
+    QuadTreeNode.cpp
     Vector2D.cpp
 )

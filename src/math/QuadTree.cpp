@@ -1,6 +1,7 @@
-#include "SegmentQuadTree.h"
-#include "SegmentQuadTreeNode.h"
-#include "LineSegment.h"
+#include "QuadTree.h"
+#include "QuadTreeNode.h"
+#include "BoundedObject.h"
+#include "BoundingBox.h"
 #include "Vector2D.h"
 
 using namespace std;
@@ -9,16 +10,16 @@ namespace jvgs
 {
     namespace math
     {
-        SegmentQuadTree::SegmentQuadTree(vector<LineSegment*> *segments)
+        QuadTree::QuadTree(vector<BoundedObject*> *objects)
         {
             /* Initialize bounding box. */
             Vector2D topLeft, bottomRight;
-            vector<LineSegment*>::iterator iterator = segments->begin();
+            vector<BoundedObject*>::iterator iterator = objects->begin();
             topLeft = (*iterator)->getBoundingBox()->getTopLeft();
             bottomRight = (*iterator)->getBoundingBox()->getBottomRight();
             
             /* Expand bounding box. */
-            for(iterator++; iterator != segments->end(); iterator++) {
+            for(iterator++; iterator != objects->end(); iterator++) {
                 BoundingBox *boundingBox = (*iterator)->getBoundingBox();
 
                 if(boundingBox->getTopLeft().getX() < topLeft.getX())
@@ -32,22 +33,22 @@ namespace jvgs
                     bottomRight.setY(boundingBox->getBottomRight().getY());
             }
 
-            root = new SegmentQuadTreeNode(BoundingBox(topLeft, bottomRight));
-            for(iterator = segments->begin(); iterator != segments->end();
+            root = new QuadTreeNode(new BoundingBox(topLeft, bottomRight));
+            for(iterator = objects->begin(); iterator != objects->end();
                     iterator++) {
-                root->addSegment(*iterator);
+                root->addObject(*iterator);
             }
         }
 
-        SegmentQuadTree::~SegmentQuadTree()
+        QuadTree::~QuadTree()
         {
             delete root;
         }
 
-        void SegmentQuadTree::findSegments(BoundingBox *boundingBox,
-                std::vector<LineSegment*> *result) const
+        void QuadTree::findObjects(BoundingBox *boundingBox,
+                std::vector<BoundedObject*> *result) const
         {
-            root->findSegments(boundingBox, result);
+            root->findObjects(boundingBox, result);
         }
     }
 }

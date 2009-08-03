@@ -4,13 +4,13 @@
 #include "Line.h"
 #include "Vector2D.h"
 #include "PathSegment.h"
-#include "BoundingBox.h"
+#include "BoundedObject.h"
 
 namespace jvgs
 {
     namespace math
     {
-        class LineSegment: public PathSegment
+        class LineSegment: public PathSegment, public BoundedObject
         {
             private:
                 /* The start and end of the line. */
@@ -56,8 +56,7 @@ namespace jvgs
                  */
                 virtual Vector2D getPoint(float t) const;
 
-                /** Get a bounding box for this line segment.
-                 *  @return A bounding box for this line segment.
+                /* Override
                  */
                 virtual BoundingBox *getBoundingBox();
         };

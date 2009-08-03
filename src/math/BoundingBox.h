@@ -51,14 +51,14 @@ namespace jvgs
                  *  @param other BoundingBox to check intersection with.
                  *  @return If there is any intersection of the two boxes.
                  */
-                virtual bool intersectsWith(const BoundingBox &other) const;
+                virtual bool intersectsWith(BoundingBox *other) const;
 
                 /** Check if this bounding box lays completely in another
                  *  bounding box.
                  *  @param other BoundingBox to lay in.
                  *  @return If this BoundingBox lays completely in the other.
                  */
-                virtual bool completelyIn(const BoundingBox &other) const;
+                virtual bool completelyIn(BoundingBox *other) const;
         };
     }
 }

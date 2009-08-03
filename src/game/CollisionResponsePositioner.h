@@ -5,10 +5,11 @@
 #include "../sketch/Group.h"
 #include "../sketch/Path.h"
 #include "../math/LineSegment.h"
+#include "../math/BoundedObject.h"
 #include "../math/Vector2D.h"
 #include "../math/MathManager.h"
 #include "../math/AffineTransformationMatrix.h"
-#include "../math/SegmentQuadTree.h"
+#include "../math/QuadTree.h"
 #include "Positioner.h"
 #include <vector>
 
@@ -16,7 +17,6 @@ namespace jvgs
 {
     namespace game
     {
-        class LineSelector;
         class Entity;
 
         /** This class is NOT THREAD SAFE AT ALL, due to some
@@ -26,11 +26,13 @@ namespace jvgs
         {
             private:
 #               ifndef SWIG
-                    const static float VERY_CLOSE = 0.001;
+                    const static float VERY_CLOSE = 0.001f;
                     const static int MAX_STEPS = 10;
+                    const static float SLIP_LIMIT = 0.1f;
 #               else
-                    static float VERY_CLOSE = 0.001;
+                    static float VERY_CLOSE = 0.001f;
                     static int MAX_STEPS = 10;
+                    static float SLIP_LIMIT = 0.1f;
 #               endif
 
                 Entity *entity;
@@ -38,11 +40,11 @@ namespace jvgs
                 math::AffineTransformationMatrix toEllipseSpace,
                         fromEllipseSpace;
 
-                /** The segments in ellpise space. */
-                std::vector<math::LineSegment*> segments;
+                /** The objects in ellpise space. */
+                std::vector<math::BoundedObject*> objects;
 
                 /** Tree to speed stuff up. */
-                math::SegmentQuadTree *tree;
+                math::QuadTree *tree;
 
                 /** MathManager to perform calculations. */
                 math::MathManager *mathManager;
@@ -85,7 +87,8 @@ namespace jvgs
 
                 /* Override
                  */
-                virtual bool canJump(float ms);
+                virtual bool hasNearCollision(float ms,
+                        math::Vector2D *collision);
 
                 /* Override
                  */

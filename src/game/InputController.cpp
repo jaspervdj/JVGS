@@ -31,8 +31,10 @@ namespace jvgs
             Positioner *positioner = getEntity()->getPositioner();
 
             /** Can start a jump. */
+            Vector2D collision;
             if(positioner) {
-                if(isKeyDown(KEY_SPACE) && positioner->canJump(ms)) {
+                if(isKeyDown(KEY_SPACE) &&
+                        positioner->hasNearCollision(ms, &collision)) {
                     jumpDelay = jumpDuration;
                 }
             }
