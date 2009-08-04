@@ -118,6 +118,10 @@ namespace jvgs
                  *  @param ms Time to update for.
                  */
                 virtual void update(float ms);
+
+                /** Render this entity to the screen.
+                 */
+                virtual void render();
         };
     }
 }

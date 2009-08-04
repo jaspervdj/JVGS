@@ -67,7 +67,8 @@ int main(int argc, char **argv)
 
         videoManager->clear();
 
-        entity->update(ms);
+        if(ms > 0.0f)
+            entity->update(ms);
 
         sketch->render();
 

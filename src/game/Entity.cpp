@@ -114,5 +114,10 @@ namespace jvgs
             if(positioner)
                 positioner->affect(ms);
         }
+
+        void Entity::render()
+        {
+            // TODO
+        }
     }
 }

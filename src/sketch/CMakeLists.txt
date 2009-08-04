@@ -20,6 +20,7 @@ ADD_LIBRARY(
     SketchElement.cpp
     SketchElementParser.cpp
     SketchElementRenderer.cpp
+    SketchManager.cpp
     SkewXTransformCommand.cpp
     SkewYTransformCommand.cpp
     TPathCommandParser.cpp

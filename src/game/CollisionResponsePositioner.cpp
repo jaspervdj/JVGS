@@ -99,9 +99,9 @@ namespace jvgs
 
             if(collisionSteps >= MAX_STEPS)
                 velocity = Vector2D(0.0f, 0.0f);
-            else if(ms > 0.0f)
-                /* Convert velocity back to original scale. */
-                velocity *= (1.0f / ms);
+
+            /* Convert velocity back to original scale. */
+            velocity *= (1.0f / ms);
 
             /* Determine slipping/falling state. */
             entity->setFalling(false);

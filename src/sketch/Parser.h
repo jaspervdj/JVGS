@@ -43,12 +43,12 @@ namespace jvgs
                  *  @param tag Tag to find a SketchElementParser for.
                  *  @return An appropriate SketchElementParser.
                  */
-                SketchElementParser *getSketchElementParser(
+                virtual SketchElementParser *getSketchElementParser(
                     const std::string &tag);
 
                 /** Start parsing, load everything.
                  */
-                void parse();
+                virtual void parse();
         };
     };
 };
