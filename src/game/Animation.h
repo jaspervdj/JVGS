@@ -2,6 +2,9 @@
 #define JVGS_GAME_ANIMATION_H
 
 #include <vector>
+#include <string>
+
+class TiXmlElement;
 
 namespace jvgs
 {
@@ -30,9 +33,22 @@ namespace jvgs
                  */
                 Animation();
 
+                /** Constructor. Create an animation from the data in the
+                 *  element.
+                 *  @param element XML element containing animation data.
+                 */
+                Animation(TiXmlElement *element);
+
                 /** Destructor.
                  */
                 virtual ~Animation();
+
+                /** Add a frame with a given sketch and duration.
+                 *  @param fileName File name of the frame.
+                 *  @param duration Duration of the frame.
+                 */
+                virtual void addFrame(const std::string &fileName,
+                        float duration);
 
                 /** Update the animation.
                  *  @param ms Milliseconds to update for.
