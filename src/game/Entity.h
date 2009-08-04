@@ -10,6 +10,7 @@ namespace jvgs
     {
         class Controller;
         class Positioner;
+        class Sprite;
 
         class Entity
         {
@@ -34,6 +35,9 @@ namespace jvgs
 
                 /** Entity positioner. */
                 Positioner *positioner;
+
+                /** Entity sprite. */
+                Sprite *sprite;
 
             public:
                 /** Constructor.
@@ -113,6 +117,16 @@ namespace jvgs
                  *  @return The positioner of this entity.
                  */
                 virtual Positioner *getPositioner() const;
+
+                /** Set the sprite of this entity.
+                 *  @param sprite The sprite of this entity.
+                 */
+                virtual void setSprite(Sprite *sprite);
+
+                /** Get the sprite of this entity.
+                 *  @return The sprite of this entity.
+                 */
+                virtual Sprite *getSprite() const;
 
                 /** Update this entity for a given time.
                  *  @param ms Time to update for.

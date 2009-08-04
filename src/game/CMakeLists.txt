@@ -11,5 +11,6 @@ ADD_LIBRARY(
     Entity.cpp
     InputController.cpp
     Positioner.cpp
+    Sprite.cpp
     Level.cpp
 )

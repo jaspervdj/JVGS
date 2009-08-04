@@ -1,6 +1,7 @@
 #include "Entity.h"
 #include "Controller.h"
 #include "Positioner.h"
+#include "Sprite.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -23,6 +24,7 @@ namespace jvgs
             slipping = false;
             controller = 0;
             positioner = 0;
+            sprite = 0;
         }
 
         Entity::~Entity()
@@ -31,6 +33,8 @@ namespace jvgs
                 delete controller;
             if(positioner)
                 delete positioner;
+            if(sprite)
+                delete sprite;
         }
 
         const Vector2D &Entity::getPosition() const
@@ -107,17 +111,32 @@ namespace jvgs
             return positioner;
         }
 
+        void Entity::setSprite(Sprite *sprite)
+        {
+            if(this->sprite)
+                delete this->sprite;
+            this->sprite = sprite;
+        }
+
+        Sprite *Entity::getSprite() const
+        {
+            return sprite;
+        }
+
         void Entity::update(float ms)
         {
             if(controller)
                 controller->affect(ms);
             if(positioner)
                 positioner->affect(ms);
+            if(sprite)
+                sprite->update(ms);
         }
 
         void Entity::render()
         {
-            // TODO
+            if(sprite)
+                sprite->render();
         }
     }
 }

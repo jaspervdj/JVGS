@@ -19,6 +19,9 @@ namespace jvgs
         class Animation
         {
             private:
+                /** Id of the animation. */
+                std::string id;
+
                 /** The frames of the animation. */
                 std::vector<AnimationFrame*> frames;
 
@@ -30,8 +33,9 @@ namespace jvgs
 
             public:
                 /** Constructor. Create an empty animation.
+                 *  @param id Id for the animation.
                  */
-                Animation();
+                Animation(const std::string &id);
 
                 /** Constructor. Create an animation from the data in the
                  *  element.
@@ -42,6 +46,11 @@ namespace jvgs
                 /** Destructor.
                  */
                 virtual ~Animation();
+
+                /** Get the animation id.
+                 *  @return The animation id.
+                 */
+                virtual const std::string &getId() const;
 
                 /** Add a frame with a given sketch and duration.
                  *  @param fileName File name of the frame.
