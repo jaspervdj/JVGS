@@ -18,8 +18,9 @@ namespace jvgs
 {
     namespace game
     {
-        Entity::Entity()
+        Entity::Entity(const std::string &id)
         {
+            this->id = id;
             position = Vector2D(0.0f, 0.0f);
             velocity = Vector2D(0.0f, 0.0f);
             radius = Vector2D(0.0f, 0.0f);
@@ -35,15 +36,21 @@ namespace jvgs
         Entity::Entity(TiXmlElement *element)
         {
             /* Load basic data. */
+            id = element->Attribute("id");
             position = Vector2D(element->FirstChildElement("position"));
+            velocity = Vector2D(element->FirstChildElement("velocity"));
             radius = Vector2D(element->FirstChildElement("radius"));
             element->QueryFloatAttribute("speed", &speed);
 
             /* TODO: load positioner and controller. */
+            controller = 0;
+            positioner = 0;
 
             /* Load sprite. */
             TiXmlElement *spriteElement = element->FirstChildElement("sprite");
             sprite = spriteElement ? new Sprite(spriteElement) : 0;
+
+            facingRight = true;
         }
 
         Entity::~Entity()
@@ -54,6 +61,11 @@ namespace jvgs
                 delete positioner;
             if(sprite)
                 delete sprite;
+        }
+
+        const string &Entity::getId() const
+        {
+            return id;
         }
 
         const Vector2D &Entity::getPosition() const

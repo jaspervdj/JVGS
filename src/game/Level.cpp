@@ -20,17 +20,21 @@ namespace jvgs
 
         Level::Level(TiXmlElement *element)
         {
-            world = 0;
-        }
+            /* Load the world. */
+            if(element->Attribute("world")) {
+                string worldFileName = element->Attribute("world");
+                world = new Sketch(worldFileName);
+            } else {
+                world = 0;
+            }
 
-        Level::Level(const string &fileName)
-        {
-            DataManager *dataManager = DataManager::getInstance();
-            TiXmlDocument *document =
-                    new TiXmlDocument(dataManager->expand(fileName));
-            document->LoadFile();
-            Level::Level(document->RootElement());
-            delete document;
+            /* Walk through the file, adding entities. */
+            TiXmlElement *entityElement = element->FirstChildElement("entity");
+            while(entityElement) {
+                Entity *entity = new Entity(entityElement);
+                addEntity(entity);
+                entityElement = entityElement->NextSiblingElement("entity");
+            }
         }
 
         Level::~Level()
@@ -42,6 +46,21 @@ namespace jvgs
                 delete (*iterator);
         }
 
+        void Level::addEntity(Entity *entity)
+        {
+            entities.push_back(entity);
+            entitiesById[entity->getId()] = entity;
+        }
+
+        Entity *Level::getEntityById(const string &id)
+        {
+            map<string, Entity*>::iterator result = entitiesById.find(id);
+            if(result != entitiesById.end())
+                return result->second;
+            else
+                return 0;
+        }
+
         void Level::update(float ms)
         {
             for(vector<Entity*>::iterator iterator = entities.begin();
@@ -51,6 +70,7 @@ namespace jvgs
 
         void Level::render()
         {
+            world->getSize();
             if(world)
                 world->render();
 

@@ -20,6 +20,14 @@ TARGET_LINK_LIBRARIES(
 )
 
 ADD_EXECUTABLE(
+    levelTest levelTest.cpp
+)
+
+TARGET_LINK_LIBRARIES(
+    levelTest sketch math game input bind
+)
+
+ADD_EXECUTABLE(
     collisionTest collisionTest.cpp
 )
 

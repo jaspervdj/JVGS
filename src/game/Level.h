@@ -5,6 +5,7 @@
 #include "../video/Renderer.h"
 #include <vector>
 #include <string>
+#include <map>
 
 class TiXmlElement;
 
@@ -25,6 +26,9 @@ namespace jvgs
                 /** The entities in the game world. */
                 std::vector<Entity*> entities;
 
+                /** Entities by id. */
+                std::map<std::string, Entity*> entitiesById;
+
             public:
                 /** Constructor.
                  */
@@ -35,14 +39,20 @@ namespace jvgs
                  */
                 Level(TiXmlElement *element);
 
-                /** Constructor
-                 *  @param fileName XML file to load the data from.
-                 */
-                Level(const std::string &fileName);
-
                 /** Detructor.
                  */
                 virtual ~Level();
+
+                /** Add an entity to the level.
+                 *  @param entity Entity to add.
+                 */
+                virtual void addEntity(Entity *entity);
+
+                /** Get an entity by id.
+                 *  @param id Id of the entity to retrieve.
+                 *  @return The requested entity.
+                 */
+                virtual Entity *getEntityById(const std::string &id);
 
                 /** Update the level and everything in it.
                  *  @param ms Milliseconds to update for.

@@ -2,7 +2,7 @@
 #define JVGS_GAME_ENTITY_H
 
 #include "../math/Vector2D.h"
-#include <vector>
+#include <string>
 
 class TiXmlElement;
 
@@ -17,6 +17,9 @@ namespace jvgs
         class Entity
         {
             private:
+                /** Entity id. */
+                std::string id;
+
                 /** The entity position. */
                 math::Vector2D position;
 
@@ -49,8 +52,9 @@ namespace jvgs
 
             public:
                 /** Constructor.
+                 *  @param id Id for the entity.
                  */
-                Entity();
+                Entity(const std::string &id);
 
                 /** Constructor.
                  *  @param element TiXmlElement to load entity from.
@@ -60,6 +64,11 @@ namespace jvgs
                 /** Destructor.
                  */
                 virtual ~Entity();
+
+                /** Get the entity id.
+                 *  @return The id for this entity.
+                 */
+                virtual const std::string &getId() const;
 
                 /** Get the entity position.
                  *  @return The entity position.

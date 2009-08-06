@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     Sprite *sprite = new Sprite(document->RootElement());
     delete document;
 
-    Entity *entity = new Entity();
+    Entity *entity = new Entity("player");
     entity->setRadius(Vector2D(25.0f, 41.0f));
     entity->setPosition(Vector2D(200.0f, 140.0f));
     entity->setController(new InputController(entity, 0.2f));
