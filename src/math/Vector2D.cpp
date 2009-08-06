@@ -92,6 +92,11 @@ namespace jvgs
             return *this;
         }
 
+        const Vector2D Vector2D::operator-() const
+        {
+            return Vector2D(-x, -y);
+        }
+
         float Vector2D::operator*(const Vector2D &other) const
         {
             return x * other.x + y * other.y;

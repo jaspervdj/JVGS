@@ -1,9 +1,6 @@
 #include "LineSegment.h"
 #include "BoundingBox.h"
 
-#include <iostream>
-using namespace std;
-
 namespace jvgs
 {
     namespace math

@@ -44,6 +44,9 @@ namespace jvgs
                 addFrame(fileName, duration);
                 child = child->NextSiblingElement("frame");
             }
+
+            currentFrame = 0;
+            counter = 0;
         }
 
         Animation::~Animation()

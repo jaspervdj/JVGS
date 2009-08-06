@@ -19,9 +19,12 @@ using namespace jvgs::math;
 using namespace jvgs::sketch;
 
 #include "../game/Entity.h"
+#include "../game/Sprite.h"
 #include "../game/CollisionResponsePositioner.h"
 #include "../game/InputController.h"
 using namespace jvgs::game;
+
+#include "../tinyxml/tinyxml.h"
 
 #include <vector>
 #include <iostream>
@@ -35,14 +38,19 @@ int main(int argc, char **argv)
     InputManager *inputManager = InputManager::getInstance();
 
     Sketch *sketch = new Sketch("resources/world.svg");
-    Sketch *ellipse = new Sketch("resources/ellipse.svg");
+
+    TiXmlDocument *document = new TiXmlDocument("resources/sprite.xml");
+    document->LoadFile();
+    Sprite *sprite = new Sprite(document->RootElement());
+    delete document;
 
     Entity *entity = new Entity();
-    entity->setEllipse(ellipse->getSize() / 2.0f);
+    entity->setRadius(Vector2D(25.0f, 41.0f));
     entity->setPosition(Vector2D(200.0f, 140.0f));
     entity->setController(new InputController(entity, 0.2f, 100.0f));
     entity->setPositioner(new CollisionResponsePositioner(entity, sketch,
             Vector2D(0.0f, 0.004f)));
+    entity->setSprite(sprite);
 
     ScriptManager *scriptManager = ScriptManager::getInstance();
     scriptManager->runCode("print(\"Hello world!\")");
@@ -71,12 +79,7 @@ int main(int argc, char **argv)
             entity->update(ms);
 
         sketch->render();
-
-        videoManager->push();
-        videoManager->translate(entity->getPosition() -
-                ellipse->getSize() / 2.0f);
-        ellipse->render();
-        videoManager->pop();
+        entity->render();
 
         videoManager->flip();
 
@@ -85,5 +88,6 @@ int main(int argc, char **argv)
 
     delete entity;
     delete sketch;
-    delete ellipse;
+
+    return 0;
 }

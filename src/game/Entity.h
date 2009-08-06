@@ -21,8 +21,8 @@ namespace jvgs
                 /** The entity velocity. */
                 math::Vector2D velocity;
 
-                /** Ellipse used for collision detection. */
-                math::Vector2D ellipse;
+                /** Radius used for collision detection. */
+                math::Vector2D radius;
 
                 /** If the entity is falling. */
                 bool falling;
@@ -68,15 +68,15 @@ namespace jvgs
                  */
                 virtual void setVelocity(const math::Vector2D &velocity);
 
-                /** Get the ellipse used for collision detection.
-                 *  @return The ellipse used for collision detection.
+                /** Get the radius used for collision detection.
+                 *  @return The radius used for collision detection.
                  */
-                virtual const math::Vector2D &getEllipse() const;
+                virtual const math::Vector2D &getRadius() const;
 
-                /** Set the ellipse used for collision detection.
-                 *  @param ellipse The new ellipse.
+                /** Set the radius used for collision detection.
+                 *  @param radius The new radius.
                  */
-                virtual void setEllipse(const math::Vector2D &ellipse);
+                virtual void setRadius(const math::Vector2D &radius);
 
                 /** Check if the entity is falling.
                  *  @return If the entity is falling.

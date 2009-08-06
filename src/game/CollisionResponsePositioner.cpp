@@ -14,7 +14,6 @@ using namespace jvgs::sketch;
 #include "../math/QuadTree.h"
 using namespace jvgs::math;
 
-#include <iostream>
 using namespace std;
 
 namespace jvgs
@@ -63,7 +62,7 @@ namespace jvgs
 
                 /* A collision occurred. */
                 if(collisionDetector->getClosestCollision(
-                        entity->getEllipse(), position, velocity,
+                        entity->getRadius(), position, velocity,
                         &time, &collision)) {
                     Vector2D newPosition = position;
 
@@ -108,7 +107,7 @@ namespace jvgs
             entity->setSlipping(false);
             Vector2D down = gravity;
             down.setLength(VERY_CLOSE * 2.0f);
-            if(collisionDetector->getClosestCollision(entity->getEllipse(),
+            if(collisionDetector->getClosestCollision(entity->getRadius(),
                     position, down, &time, &collision)) {
                 Vector2D fall = collision - position;
                 float cosine = (gravity * fall) /

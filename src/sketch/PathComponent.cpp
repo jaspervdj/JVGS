@@ -5,9 +5,8 @@
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
 
-#include <iostream>
-using namespace std;
 using namespace jvgs::video;
+using namespace std;
 
 namespace jvgs
 {

@@ -6,7 +6,9 @@
 #include "../core/LogManager.h"
 using namespace jvgs::core;
 
-#include <iostream>
+#include "../video/VideoManager.h"
+using namespace jvgs::video;
+
 using namespace std;
 
 using namespace jvgs::math;
@@ -19,7 +21,7 @@ namespace jvgs
         {
             position = Vector2D(0.0f, 0.0f);
             velocity = Vector2D(0.0f, 0.0f);
-            ellipse = Vector2D(0.0f, 0.0f);
+            radius = Vector2D(0.0f, 0.0f);
             falling = true;
             slipping = false;
             controller = 0;
@@ -57,14 +59,14 @@ namespace jvgs
             this->velocity = velocity;
         }
 
-        const Vector2D &Entity::getEllipse() const
+        const Vector2D &Entity::getRadius() const
         {
-            return ellipse;
+            return radius;
         }
 
-        void Entity::setEllipse(const Vector2D &ellipse)
+        void Entity::setRadius(const Vector2D &radius)
         {
-            this->ellipse = ellipse;
+            this->radius = radius;
         }
 
         bool Entity::isFalling() const
@@ -129,14 +131,33 @@ namespace jvgs
                 controller->affect(ms);
             if(positioner)
                 positioner->affect(ms);
+
+            if(falling || slipping)
+                sprite->setAnimation("falling");
+            else
+                sprite->setAnimation("walking");
+
             if(sprite)
                 sprite->update(ms);
         }
 
         void Entity::render()
         {
-            if(sprite)
+            if(sprite) {
+                VideoManager *videoManager = VideoManager::getInstance();
+
+                videoManager->push();
+                videoManager->translate(position);
+
+                if(velocity.getX() <= 0)
+                    videoManager->scale(Vector2D(-1.0f, 1.0f));
+
+                videoManager->translate(-radius);
+
                 sprite->render();
+
+                videoManager->pop();
+            }
         }
     }
 }

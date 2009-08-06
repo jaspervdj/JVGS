@@ -8,6 +8,7 @@
 using namespace std;
 
 #include "../core/LogManager.h"
+#include "../core/DataManager.h"
 using namespace jvgs::core;
 
 #include "../math/Vector2D.h"
@@ -21,8 +22,10 @@ namespace jvgs
     {
         Parser::Parser(string fileName, Sketch *sketch)
         {
-            document = new TiXmlDocument( fileName.c_str() );
-            if (!document->LoadFile()) {
+            DataManager *dataManager = DataManager::getInstance();
+
+            document = new TiXmlDocument(dataManager->expand(fileName));
+            if(!document->LoadFile()) {
                 LogManager::getInstance()->error(
                         "Could not load xml document: %s", fileName.c_str());
             }
@@ -35,9 +38,9 @@ namespace jvgs
 
         Parser::~Parser()
         {
-            for( map<string,SketchElementParser*>::iterator iterator =
+            for(map<string,SketchElementParser*>::iterator iterator =
                     sketchElementParsers.begin();
-                    iterator != sketchElementParsers.end(); iterator++ ) {
+                    iterator != sketchElementParsers.end(); iterator++) {
                 delete iterator->second;
             }
 

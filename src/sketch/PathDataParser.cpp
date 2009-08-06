@@ -14,7 +14,6 @@
 using namespace jvgs::core;
 
 #include <sstream>
-#include <iostream>
 using namespace std;
 
 using namespace jvgs::math;

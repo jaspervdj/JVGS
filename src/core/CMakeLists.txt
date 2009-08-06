@@ -1,4 +1,5 @@
 ADD_LIBRARY( 
     core STATIC 
+    DataManager.cpp
     LogManager.cpp
 )

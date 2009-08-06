@@ -11,7 +11,6 @@ using namespace jvgs::core;
 #include <sstream>
 #include <string>
 #include <vector>
-#include <iostream>
 using namespace std;
 
 namespace jvgs

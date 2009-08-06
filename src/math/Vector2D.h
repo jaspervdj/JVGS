@@ -63,6 +63,8 @@ namespace jvgs
                 const Vector2D operator/(const float &scalar) const;
                 const Vector2D &operator/=(const float &scalar);
 
+                const Vector2D operator-() const;
+
                 /** Dot product.
                  *  @param other Vector to perform the dot product with.
                  *  @return The dot product.

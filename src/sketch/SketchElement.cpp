@@ -1,7 +1,7 @@
 #include "SketchElement.h"
 #include "../math/AffineTransformationMatrix.h"
 
-#include <iostream>
+#include <string>
 using namespace std;
 
 using namespace jvgs::video;

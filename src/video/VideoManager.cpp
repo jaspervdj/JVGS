@@ -6,7 +6,6 @@
 
 using namespace jvgs::math;
 
-#include <iostream>
 using namespace std;
 
 namespace jvgs

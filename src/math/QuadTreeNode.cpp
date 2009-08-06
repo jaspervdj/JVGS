@@ -5,8 +5,6 @@
 #include "../core/LogManager.h"
 using namespace jvgs::core;
 
-#include <iostream>
-#include <string>
 using namespace std;
 
 namespace jvgs
