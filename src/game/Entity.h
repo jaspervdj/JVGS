@@ -4,6 +4,8 @@
 #include "../math/Vector2D.h"
 #include <vector>
 
+class TiXmlElement;
+
 namespace jvgs
 {
     namespace game
@@ -49,6 +51,11 @@ namespace jvgs
                 /** Constructor.
                  */
                 Entity();
+
+                /** Constructor.
+                 *  @param element TiXmlElement to load entity from.
+                 */
+                Entity(TiXmlElement *element);
 
                 /** Destructor.
                  */

@@ -1,6 +1,8 @@
 #ifndef JVGS_MATH_VECTOR_H
 #define JVGS_MATH_VECTOR_H
 
+class TiXmlElement;
+
 namespace jvgs
 {
     namespace math
@@ -24,6 +26,11 @@ namespace jvgs
                  *  @param other Object to copy.
                  */
                 Vector2D(const Vector2D &other);
+
+                /** Constructor.
+                 *  @param element TiXmlElement to load data from. Can be 0.
+                 */
+                Vector2D(TiXmlElement *element);
 
                 /** Destructor.
                  */

@@ -1,6 +1,8 @@
 #include "Vector2D.h"
 #include <cmath>
 
+#include "../tinyxml/tinyxml.h"
+
 namespace jvgs
 {
     namespace math
@@ -11,6 +13,14 @@ namespace jvgs
 
         Vector2D::Vector2D(const Vector2D &other): x(other.x), y(other.y)
         {
+        }
+
+        Vector2D::Vector2D(TiXmlElement *element): x(0.0f), y(0.0f)
+        {
+            if(element) {
+                element->QueryFloatAttribute("x", &x);
+                element->QueryFloatAttribute("y", &y);
+            }
         }
 
         Vector2D::~Vector2D()

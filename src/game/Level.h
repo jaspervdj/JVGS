@@ -4,6 +4,9 @@
 #include "../sketch/Sketch.h"
 #include "../video/Renderer.h"
 #include <vector>
+#include <string>
+
+class TiXmlElement;
 
 namespace jvgs
 {
@@ -26,6 +29,16 @@ namespace jvgs
                 /** Constructor.
                  */
                 Level();
+
+                /** Constructor.
+                 *  @param element TiXmlElement to load the data from.
+                 */
+                Level(TiXmlElement *element);
+
+                /** Constructor
+                 *  @param fileName XML file to load the data from.
+                 */
+                Level(const std::string &fileName);
 
                 /** Detructor.
                  */

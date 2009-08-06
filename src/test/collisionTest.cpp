@@ -20,6 +20,7 @@ using namespace jvgs::sketch;
 
 #include "../game/Entity.h"
 #include "../game/Sprite.h"
+#include "../game/Level.h"
 #include "../game/CollisionResponsePositioner.h"
 #include "../game/InputController.h"
 using namespace jvgs::game;
@@ -47,7 +48,7 @@ int main(int argc, char **argv)
     Entity *entity = new Entity();
     entity->setRadius(Vector2D(25.0f, 41.0f));
     entity->setPosition(Vector2D(200.0f, 140.0f));
-    entity->setController(new InputController(entity, 0.2f, 100.0f));
+    entity->setController(new InputController(entity, 0.2f));
     entity->setPositioner(new CollisionResponsePositioner(entity, sketch,
             Vector2D(0.0f, 0.004f)));
     entity->setSprite(sprite);

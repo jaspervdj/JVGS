@@ -9,8 +9,9 @@ using namespace jvgs::core;
 #include "../video/VideoManager.h"
 using namespace jvgs::video;
 
-using namespace std;
+#include "../tinyxml/tinyxml.h"
 
+using namespace std;
 using namespace jvgs::math;
 
 namespace jvgs
@@ -29,6 +30,20 @@ namespace jvgs
             positioner = 0;
             sprite = 0;
             facingRight = true;
+        }
+
+        Entity::Entity(TiXmlElement *element)
+        {
+            /* Load basic data. */
+            position = Vector2D(element->FirstChildElement("position"));
+            radius = Vector2D(element->FirstChildElement("radius"));
+            element->QueryFloatAttribute("speed", &speed);
+
+            /* TODO: load positioner and controller. */
+
+            /* Load sprite. */
+            TiXmlElement *spriteElement = element->FirstChildElement("sprite");
+            sprite = spriteElement ? new Sprite(spriteElement) : 0;
         }
 
         Entity::~Entity()
