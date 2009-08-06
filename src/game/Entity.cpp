@@ -22,11 +22,13 @@ namespace jvgs
             position = Vector2D(0.0f, 0.0f);
             velocity = Vector2D(0.0f, 0.0f);
             radius = Vector2D(0.0f, 0.0f);
+            speed = 0.3f;
             falling = true;
             slipping = false;
             controller = 0;
             positioner = 0;
             sprite = 0;
+            facingRight = true;
         }
 
         Entity::~Entity()
@@ -67,6 +69,16 @@ namespace jvgs
         void Entity::setRadius(const Vector2D &radius)
         {
             this->radius = radius;
+        }
+
+        float Entity::getSpeed() const
+        {
+            return speed;
+        }
+
+        void Entity::setSpeed(float speed)
+        {
+            this->speed = speed;
         }
 
         bool Entity::isFalling() const
@@ -132,10 +144,17 @@ namespace jvgs
             if(positioner)
                 positioner->affect(ms);
 
+            if(velocity.getX() <= -0.5f * speed && facingRight)
+                facingRight = false;
+            if(velocity.getX() >= 0.5f * speed && !facingRight)
+                facingRight = true;
+
             if(falling || slipping)
                 sprite->setAnimation("falling");
-            else
+            else if(velocity.getLength() >= 0.2f * speed)
                 sprite->setAnimation("walking");
+            else
+                sprite->setAnimation("standing");
 
             if(sprite)
                 sprite->update(ms);
@@ -149,7 +168,7 @@ namespace jvgs
                 videoManager->push();
                 videoManager->translate(position);
 
-                if(velocity.getX() <= 0)
+                if(!facingRight)
                     videoManager->scale(Vector2D(-1.0f, 1.0f));
 
                 videoManager->translate(-radius);

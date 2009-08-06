@@ -11,10 +11,9 @@ namespace jvgs
 {
     namespace game
     {
-        InputController::InputController(Entity *entity, float speed,
-                float minJumpDelay, float jumpForce): Controller(entity)
+        InputController::InputController(Entity *entity, float minJumpDelay,
+                float jumpForce): Controller(entity)
         {
-            this->speed = speed;
             this->minJumpDelay = minJumpDelay;
             this->jumpForce = jumpForce;
             jumpDelay = 0.0f;
@@ -42,8 +41,9 @@ namespace jvgs
                     velocity += positioner->getGravity() * -1.0f * jumpForce;
             }
 
-            velocity.setX(isKeyDown(KEY_LEFT) ? -speed : 0.0f);
-            velocity.setX(isKeyDown(KEY_RIGHT) ? speed : velocity.getX());
+            velocity.setX(isKeyDown(KEY_LEFT) ? -entity->getSpeed() : 0.0f);
+            velocity.setX(isKeyDown(KEY_RIGHT) ? entity->getSpeed() :
+                    velocity.getX());
 
             entity->setVelocity(velocity);
         }

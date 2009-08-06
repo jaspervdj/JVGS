@@ -11,7 +11,7 @@ namespace jvgs
     {
         Sprite::Sprite()
         {
-            current = "walking";
+            current = "standing";
         }
 
         Sprite::Sprite(TiXmlElement *element)
@@ -24,7 +24,7 @@ namespace jvgs
                 child = child->NextSiblingElement("animation");
             }
 
-            current = "walking";
+            current = "standing";
         }
 
 

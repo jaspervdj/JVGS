@@ -24,6 +24,9 @@ namespace jvgs
                 /** Radius used for collision detection. */
                 math::Vector2D radius;
 
+                /** Speed of the entity. */
+                float speed;
+
                 /** If the entity is falling. */
                 bool falling;
 
@@ -38,6 +41,9 @@ namespace jvgs
 
                 /** Entity sprite. */
                 Sprite *sprite;
+
+                /** Used for sprite selection. */
+                bool facingRight;
 
             public:
                 /** Constructor.
@@ -77,6 +83,16 @@ namespace jvgs
                  *  @param radius The new radius.
                  */
                 virtual void setRadius(const math::Vector2D &radius);
+
+                /** Get the speed for this entity.
+                 *  @return The speed for this entity.
+                 */
+                virtual float getSpeed() const;
+
+                /** Set the speed for this entity.
+                 *  @param speed The new speed for this entity.
+                 */
+                virtual void setSpeed(float speed);
 
                 /** Check if the entity is falling.
                  *  @return If the entity is falling.

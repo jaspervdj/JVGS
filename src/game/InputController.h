@@ -12,9 +12,6 @@ namespace jvgs
         class InputController: public Controller, jvgs::input::KeyListener
         {
             private:
-                /** Speed to move the entity with. */
-                float speed;
-
                 /** Minimum delay between jumps. */
                 float minJumpDelay;
 
@@ -26,12 +23,11 @@ namespace jvgs
 
             public:
                 /** Constructor.
-                 *  @param speed Speed to move the entity with.
                  *  @param minJumpDelay Minimum delay between jumps.
                  *  @param jumpForce Force to jump with.
                  */
-                InputController(Entity *entity, float speed,
-                         float minJumpDelay, float jumpForce = 200.0f);
+                InputController(Entity *entity, float minJumpDelay,
+                        float jumpForce = 200.0f);
 
                 /** Destructor.
                  */
