@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "../core/XMLLoadable.h"
 
 class TiXmlElement;
 
@@ -16,7 +17,7 @@ namespace jvgs
 
         /** An animation is a number of sprites.
          */
-        class Animation
+        class Animation: public core::XMLLoadable
         {
             private:
                 /** Id of the animation. */
@@ -30,6 +31,11 @@ namespace jvgs
 
                 /** Counter keeping the current time. */
                 float counter;
+
+            protected:
+                /* Override
+                 */
+                void loadData(TiXmlElement *element);
 
             public:
                 /** Constructor. Create an empty animation.

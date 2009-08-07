@@ -3,6 +3,7 @@
 
 #include "../sketch/Sketch.h"
 #include "../video/Renderer.h"
+#include "../core/XMLLoadable.h"
 #include <vector>
 #include <string>
 #include <map>
@@ -17,7 +18,7 @@ namespace jvgs
 
         /** Class that represents a level the player can play through.
          */
-        class Level
+        class Level: public core::XMLLoadable
         {
             private:
                 /** The game world. */
@@ -29,6 +30,11 @@ namespace jvgs
                 /** Entities by id. */
                 std::map<std::string, Entity*> entitiesById;
 
+            protected:
+                /* Override.
+                 */
+                void loadData(TiXmlElement *element);
+
             public:
                 /** Constructor.
                  */
@@ -38,6 +44,11 @@ namespace jvgs
                  *  @param element TiXmlElement to load the data from.
                  */
                 Level(TiXmlElement *element);
+
+                /** Constructor.
+                 *  @param fileName XML file to load the data from.
+                 */
+                Level(const std::string &fileName);
 
                 /** Detructor.
                  */

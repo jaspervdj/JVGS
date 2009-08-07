@@ -122,7 +122,7 @@ namespace jvgs
                 virtual const Color &getColor() const;
 
                 /** Select a color for clearing the screen.
-                 *  @param color Color to be used.
+                 *  @param clearColor Color to be used.
                  */
                 virtual void setClearColor(const Color &clearColor);
 

@@ -38,10 +38,7 @@ int main(int argc, char **argv)
 
     InputManager *inputManager = InputManager::getInstance();
 
-    TiXmlDocument *document = new TiXmlDocument("resources/level.xml");
-    document->LoadFile();
-    Level *level = new Level(document->RootElement());
-    delete document;
+    Level *level = new Level("resources/level.xml");
 
     bool running = true;
     float ms = 0;

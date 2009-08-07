@@ -9,12 +9,7 @@ namespace jvgs
 {
     namespace game
     {
-        Sprite::Sprite()
-        {
-            current = "standing";
-        }
-
-        Sprite::Sprite(TiXmlElement *element)
+        void Sprite::loadData(TiXmlElement *element)
         {
             /* Loop through all animation elements, adding them. */
             TiXmlElement *child = element->FirstChildElement("animation");
@@ -23,10 +18,18 @@ namespace jvgs
                 addAnimation(animation);
                 child = child->NextSiblingElement("animation");
             }
+        }
 
+        Sprite::Sprite()
+        {
             current = "standing";
         }
 
+        Sprite::Sprite(TiXmlElement *element)
+        {
+            load(element);
+            current = "standing";
+        }
 
         Sprite::~Sprite()
         {

@@ -2,6 +2,7 @@
 #include "Entity.h"
 
 #include "../core/DataManager.h"
+#include "../core/LogManager.h"
 using namespace jvgs::core;
 
 #include "../tinyxml/tinyxml.h"
@@ -13,18 +14,15 @@ namespace jvgs
 {
     namespace game
     {
-        Level::Level()
-        {
-            world = 0;
-        }
-
-        Level::Level(TiXmlElement *element)
+        void Level::loadData(TiXmlElement *element)
         {
             /* Load the world. */
             if(element->Attribute("world")) {
                 string worldFileName = element->Attribute("world");
                 world = new Sketch(worldFileName);
             } else {
+                LogManager::getInstance()->warning(
+                        "No world attribute specified in the level xml.");
                 world = 0;
             }
 
@@ -35,6 +33,21 @@ namespace jvgs
                 addEntity(entity);
                 entityElement = entityElement->NextSiblingElement("entity");
             }
+        }
+
+        Level::Level()
+        {
+            world = 0;
+        }
+
+        Level::Level(TiXmlElement *element)
+        {
+            load(element);
+        }
+
+        Level::Level(const string &fileName)
+        {
+            load(fileName);
         }
 
         Level::~Level()

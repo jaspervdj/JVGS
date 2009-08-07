@@ -2,6 +2,7 @@
 #define JVGS_GAME_ENTITY_H
 
 #include "../math/Vector2D.h"
+#include "../core/XMLLoadable.h"
 #include <string>
 
 class TiXmlElement;
@@ -15,7 +16,7 @@ namespace jvgs
         class Sprite;
         class Level;
 
-        class Entity
+        class Entity: public core::XMLLoadable
         {
             private:
                 /** Entity id. */
@@ -53,6 +54,11 @@ namespace jvgs
 
                 /** Used for sprite selection. */
                 bool facingRight;
+
+            protected:
+                /* Override
+                 */
+                void loadData(TiXmlElement *element);
 
             public:
                 /** Constructor.

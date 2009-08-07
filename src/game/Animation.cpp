@@ -21,14 +21,7 @@ namespace jvgs
             float duration;
         };
 
-        Animation::Animation(const string &id)
-        {
-            this->id = id;
-            currentFrame = 0;
-            counter = 0;
-        }
-
-        Animation::Animation(TiXmlElement *element)
+        void Animation::loadData(TiXmlElement *element)
         {
             if(element->Attribute("id"))
                 id = element->Attribute("id");
@@ -44,7 +37,18 @@ namespace jvgs
                 addFrame(fileName, duration);
                 child = child->NextSiblingElement("frame");
             }
+        }
 
+        Animation::Animation(const string &id)
+        {
+            this->id = id;
+            currentFrame = 0;
+            counter = 0;
+        }
+
+        Animation::Animation(TiXmlElement *element)
+        {
+            load(element);
             currentFrame = 0;
             counter = 0;
         }

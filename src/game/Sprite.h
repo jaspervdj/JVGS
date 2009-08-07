@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+#include "../core/XMLLoadable.h"
 
 class TiXmlElement;
 
@@ -14,7 +15,7 @@ namespace jvgs
 
         /** A sprite is a collection of animations.
          */
-        class Sprite
+        class Sprite: public core::XMLLoadable
         {
             private:
                 /** The animations in this sprite. */
@@ -22,6 +23,11 @@ namespace jvgs
 
                 /** The current animation. */
                 std::string current;
+                
+            protected:
+                /* Override
+                 */
+                void loadData(TiXmlElement *element);
 
             public:
                 /** Constructor. Create an empty sprite.

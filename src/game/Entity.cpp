@@ -13,6 +13,7 @@ using namespace jvgs::video;
 
 #include "../tinyxml/tinyxml.h"
 
+#include <iostream>
 using namespace std;
 using namespace jvgs::math;
 
@@ -20,27 +21,13 @@ namespace jvgs
 {
     namespace game
     {
-        Entity::Entity(const std::string &id, Level *level)
+        void Entity::loadData(TiXmlElement *element)
         {
-            this->id = id;
-            this->level = level;
-            position = Vector2D(0.0f, 0.0f);
-            velocity = Vector2D(0.0f, 0.0f);
-            radius = Vector2D(0.0f, 0.0f);
-            speed = 0.3f;
-            falling = true;
-            slipping = false;
-            controller = 0;
-            positioner = 0;
-            sprite = 0;
-            facingRight = true;
-        }
+            /* Get id. */
+            if(element->Attribute("id"))
+                id = element->Attribute("id");
 
-        Entity::Entity(TiXmlElement *element, Level *level)
-        {
             /* Load basic data. */
-            id = element->Attribute("id");
-            this->level = level;
             position = Vector2D(element->FirstChildElement("position"));
             velocity = Vector2D(element->FirstChildElement("velocity"));
             radius = Vector2D(element->FirstChildElement("radius"));
@@ -63,7 +50,28 @@ namespace jvgs
             /* Load sprite. */
             TiXmlElement *spriteElement = element->FirstChildElement("sprite");
             sprite = spriteElement ? new Sprite(spriteElement) : 0;
+        }
 
+        Entity::Entity(const std::string &id, Level *level)
+        {
+            this->id = id;
+            this->level = level;
+            position = Vector2D(0.0f, 0.0f);
+            velocity = Vector2D(0.0f, 0.0f);
+            radius = Vector2D(0.0f, 0.0f);
+            speed = 0.3f;
+            falling = true;
+            slipping = false;
+            controller = 0;
+            positioner = 0;
+            sprite = 0;
+            facingRight = true;
+        }
+
+        Entity::Entity(TiXmlElement *element, Level *level)
+        {
+            this->level = level;
+            load(element);
             facingRight = true;
         }
 

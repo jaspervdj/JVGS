@@ -117,7 +117,7 @@ namespace jvgs
             entity->setFalling(false);
             entity->setSlipping(false);
             Vector2D down = gravity;
-            down.setLength(VERY_CLOSE * 10.0f);
+            down.setLength(VERY_CLOSE * 100.0f);
             if(collisionDetector->getClosestCollision(entity->getRadius(),
                     position, down, &time, &collision)) {
                 Vector2D fall = collision - position;
