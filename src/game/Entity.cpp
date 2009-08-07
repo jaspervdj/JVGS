@@ -2,6 +2,8 @@
 #include "Controller.h"
 #include "Positioner.h"
 #include "Sprite.h"
+#include "InputController.h"
+#include "CollisionResponsePositioner.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -18,9 +20,10 @@ namespace jvgs
 {
     namespace game
     {
-        Entity::Entity(const std::string &id)
+        Entity::Entity(const std::string &id, Level *level)
         {
             this->id = id;
+            this->level = level;
             position = Vector2D(0.0f, 0.0f);
             velocity = Vector2D(0.0f, 0.0f);
             radius = Vector2D(0.0f, 0.0f);
@@ -33,18 +36,29 @@ namespace jvgs
             facingRight = true;
         }
 
-        Entity::Entity(TiXmlElement *element)
+        Entity::Entity(TiXmlElement *element, Level *level)
         {
             /* Load basic data. */
             id = element->Attribute("id");
+            this->level = level;
             position = Vector2D(element->FirstChildElement("position"));
             velocity = Vector2D(element->FirstChildElement("velocity"));
             radius = Vector2D(element->FirstChildElement("radius"));
             element->QueryFloatAttribute("speed", &speed);
 
-            /* TODO: load positioner and controller. */
-            controller = 0;
-            positioner = 0;
+            /* Load controller. */
+            TiXmlElement *controllerElement =
+                    element->FirstChildElement("controller");
+            if(!strcmp("InputController", controllerElement->Attribute("type")))
+                controller = new InputController(this, controllerElement);
+
+            /* Load positioner. */
+            TiXmlElement *positionerElement =
+                    element->FirstChildElement("positioner");
+            if(!strcmp("CollisionResponsePositioner",
+                    positionerElement->Attribute("type")))
+                positioner = new CollisionResponsePositioner(this,
+                        positionerElement);
 
             /* Load sprite. */
             TiXmlElement *spriteElement = element->FirstChildElement("sprite");
@@ -66,6 +80,11 @@ namespace jvgs
         const string &Entity::getId() const
         {
             return id;
+        }
+
+        Level *Entity::getLevel() const
+        {
+            return level;
         }
 
         const Vector2D &Entity::getPosition() const

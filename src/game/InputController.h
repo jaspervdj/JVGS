@@ -5,6 +5,8 @@
 #include "../input/KeyListener.h"
 #include "Controller.h"
 
+class TiXmlElement;
+
 namespace jvgs
 {
     namespace game
@@ -23,11 +25,18 @@ namespace jvgs
 
             public:
                 /** Constructor.
+                 *  @param entity Entity to control.
                  *  @param minJumpDelay Minimum delay between jumps.
                  *  @param jumpForce Force to jump with.
                  */
                 InputController(Entity *entity, float minJumpDelay,
                         float jumpForce = 200.0f);
+
+                /** Constructor.
+                 *  @param entity Entity to control.
+                 *  @param element TiXmlElement to load data from.
+                 */
+                InputController(Entity *entity, TiXmlElement *element);
 
                 /** Destructor.
                  */

@@ -28,14 +28,6 @@ TARGET_LINK_LIBRARIES(
 )
 
 ADD_EXECUTABLE(
-    collisionTest collisionTest.cpp
-)
-
-TARGET_LINK_LIBRARIES(
-    collisionTest sketch math game input bind
-)
-
-ADD_EXECUTABLE(
     performanceTest performanceTest.cpp
 )
 

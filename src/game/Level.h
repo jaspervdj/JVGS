@@ -43,6 +43,11 @@ namespace jvgs
                  */
                 virtual ~Level();
 
+                /** Get the level world.
+                 *  @return The level world.
+                 */
+                virtual sketch::Sketch *getWorld() const;
+
                 /** Add an entity to the level.
                  *  @param entity Entity to add.
                  */

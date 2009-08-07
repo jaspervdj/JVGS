@@ -31,7 +31,7 @@ namespace jvgs
             /* Walk through the file, adding entities. */
             TiXmlElement *entityElement = element->FirstChildElement("entity");
             while(entityElement) {
-                Entity *entity = new Entity(entityElement);
+                Entity *entity = new Entity(entityElement, this);
                 addEntity(entity);
                 entityElement = entityElement->NextSiblingElement("entity");
             }
@@ -44,6 +44,11 @@ namespace jvgs
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 delete (*iterator);
+        }
+
+        Sketch *Level::getWorld() const
+        {
+            return world;
         }
 
         void Level::addEntity(Entity *entity)

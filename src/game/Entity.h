@@ -13,12 +13,16 @@ namespace jvgs
         class Controller;
         class Positioner;
         class Sprite;
+        class Level;
 
         class Entity
         {
             private:
                 /** Entity id. */
                 std::string id;
+
+                /** Level the entity is in. */
+                Level *level;
 
                 /** The entity position. */
                 math::Vector2D position;
@@ -53,13 +57,15 @@ namespace jvgs
             public:
                 /** Constructor.
                  *  @param id Id for the entity.
+                 *  @param level Level the entity is in.
                  */
-                Entity(const std::string &id);
+                Entity(const std::string &id, Level *level);
 
                 /** Constructor.
                  *  @param element TiXmlElement to load entity from.
+                 *  @param level Level the entity is in.
                  */
-                Entity(TiXmlElement *element);
+                Entity(TiXmlElement *element, Level *level);
 
                 /** Destructor.
                  */
@@ -69,6 +75,11 @@ namespace jvgs
                  *  @return The id for this entity.
                  */
                 virtual const std::string &getId() const;
+
+                /** Get the entity level.
+                 *  @return The level the entity is in.
+                 */
+                virtual Level *getLevel() const;
 
                 /** Get the entity position.
                  *  @return The entity position.

@@ -12,6 +12,8 @@
 #include "Positioner.h"
 #include <vector>
 
+class TiXmlElement;
+
 namespace jvgs
 {
     namespace game
@@ -43,12 +45,17 @@ namespace jvgs
             public:
                 /** Constructor.
                  *  @param entity Entity to respond to collisions.
-                 *  @param sketch Sketch width lines to collide against.
                  *  @param gravity Gravity pulling the entity.
                  */
                 CollisionResponsePositioner(Entity *entity,
-                        sketch::Sketch *sketch,
                         const math::Vector2D &gravity);
+
+                /** Constructor.
+                 *  @param entity Entity to respond to collisions.
+                 *  @param element TiXmlElement containing the data.
+                 */
+                CollisionResponsePositioner(Entity *entity,
+                        TiXmlElement *element);
 
                 /** Destructor.
                  */

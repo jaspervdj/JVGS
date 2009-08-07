@@ -1,5 +1,6 @@
 #include "CollisionResponsePositioner.h"
 #include "Entity.h"
+#include "Level.h"
 
 #include "../input/InputManager.h"
 using namespace jvgs::input;
@@ -14,6 +15,8 @@ using namespace jvgs::sketch;
 #include "../math/QuadTree.h"
 using namespace jvgs::math;
 
+#include "../tinyxml/tinyxml.h"
+
 using namespace std;
 
 namespace jvgs
@@ -25,11 +28,19 @@ namespace jvgs
         const float CollisionResponsePositioner::SLIP_LIMIT;
 
         CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
-                Sketch *sketch, const math::Vector2D &gravity):
-                Positioner(entity)
+                const math::Vector2D &gravity): Positioner(entity)
         {
-            collisionDetector = new CollisionDetector(sketch);
+            Sketch *world = entity->getLevel()->getWorld();
+            collisionDetector = new CollisionDetector(world);
             this->gravity = gravity;
+        }
+
+        CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
+                TiXmlElement *element): Positioner(entity)
+        {
+            Sketch *world = entity->getLevel()->getWorld();
+            collisionDetector = new CollisionDetector(world);
+            gravity = Vector2D(element->FirstChildElement("gravity"));
         }
 
         CollisionResponsePositioner::~CollisionResponsePositioner()
@@ -106,7 +117,7 @@ namespace jvgs
             entity->setFalling(false);
             entity->setSlipping(false);
             Vector2D down = gravity;
-            down.setLength(VERY_CLOSE * 2.0f);
+            down.setLength(VERY_CLOSE * 10.0f);
             if(collisionDetector->getClosestCollision(entity->getRadius(),
                     position, down, &time, &collision)) {
                 Vector2D fall = collision - position;

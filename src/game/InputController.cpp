@@ -2,6 +2,8 @@
 #include "Entity.h"
 #include "Positioner.h"
 
+#include "../tinyxml/tinyxml.h"
+
 using namespace jvgs::input;
 using namespace jvgs::math;
 
@@ -18,6 +20,15 @@ namespace jvgs
             this->jumpForce = jumpForce;
             jumpDelay = 0.0f;
         }
+
+        InputController::InputController(Entity *entity,
+                TiXmlElement *element): Controller(entity)
+        {
+            element->QueryFloatAttribute("minJumpDelay", &minJumpDelay);
+            element->QueryFloatAttribute("jumpForce", &jumpForce);
+            jumpDelay = 0.0f;
+        }
+                
 
         InputController::~InputController()
         {
