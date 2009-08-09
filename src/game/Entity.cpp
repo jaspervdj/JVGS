@@ -4,6 +4,9 @@
 #include "Sprite.h"
 #include "InputController.h"
 #include "CollisionResponsePositioner.h"
+#include "AffectorFactory.h"
+#include "ControllerFactory.h"
+#include "PositionerFactory.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -21,6 +24,36 @@ namespace jvgs
 {
     namespace game
     {
+        /* Function to fill in the controller factories. */
+        map<string, AffectorFactory<Controller>*> createControllerFactories()
+        {
+            map<string, AffectorFactory<Controller>*> controllerFactories;
+
+            static ControllerFactory<InputController> inputControllerFactory;
+            controllerFactories["InputController"] = &inputControllerFactory;
+
+            return controllerFactories;
+        }
+
+        map<string, AffectorFactory<Controller>*> Entity::controllerFactories =
+                createControllerFactories();
+
+        /* Function to fill in the positioner factories. */
+        map<string, AffectorFactory<Positioner>*> createPositionerFactories()
+        {
+            map<string, AffectorFactory<Positioner>*> positionerFactories;
+
+            static PositionerFactory<CollisionResponsePositioner>
+                    collisionResponsePositionerFactory;
+            positionerFactories["CollisionResponsePositioner"] =
+                    &collisionResponsePositionerFactory;
+
+            return positionerFactories;
+        }
+
+        map<string, AffectorFactory<Positioner>*> Entity::positionerFactories =
+                createPositionerFactories();
+
         void Entity::loadData(TiXmlElement *element)
         {
             /* Get id. */
@@ -36,16 +69,28 @@ namespace jvgs
             /* Load controller. */
             TiXmlElement *controllerElement =
                     element->FirstChildElement("controller");
-            if(!strcmp("InputController", controllerElement->Attribute("type")))
-                controller = new InputController(this, controllerElement);
+            string type = controllerElement->Attribute("type");
+            map<string, AffectorFactory<Controller>*>::iterator
+                    controllerFactory = controllerFactories.find(type);
+            if(controllerFactory != controllerFactories.end())
+                controller = controllerFactory->second->create(this,
+                        controllerElement);
+            else
+                LogManager::getInstance()->error("No controller: %s",
+                        type.c_str());
 
             /* Load positioner. */
             TiXmlElement *positionerElement =
                     element->FirstChildElement("positioner");
-            if(!strcmp("CollisionResponsePositioner",
-                    positionerElement->Attribute("type")))
-                positioner = new CollisionResponsePositioner(this,
+            type = positionerElement->Attribute("type");
+            map<string, AffectorFactory<Positioner>*>::iterator
+                    positionerFactory = positionerFactories.find(type);
+            if(positionerFactory != positionerFactories.end())
+                positioner = positionerFactory->second->create(this,
                         positionerElement);
+            else
+                LogManager::getInstance()->error("No positioner: %s",
+                        type.c_str());
 
             /* Load sprite. */
             TiXmlElement *spriteElement = element->FirstChildElement("sprite");

@@ -26,11 +26,8 @@ namespace jvgs
             public:
                 /** Constructor.
                  *  @param entity Entity to control.
-                 *  @param minJumpDelay Minimum delay between jumps.
-                 *  @param jumpForce Force to jump with.
                  */
-                InputController(Entity *entity, float minJumpDelay,
-                        float jumpForce = 200.0f);
+                InputController(Entity *entity);
 
                 /** Constructor.
                  *  @param entity Entity to control.
@@ -49,6 +46,16 @@ namespace jvgs
                 /* Override.
                  */
                 virtual void keyPressed(const jvgs::input::Key &key);
+
+                /** Set the minimum jump delay.
+                 *  @param The minimum jump delay.
+                 */
+                void setMinJumpDelay(float minJumpDelay);
+
+                /** Set the jump force.
+                 *  @param jumpForce Force to jump with.
+                 */
+                void setJumpForce(float jumpForce);
         };
     }
 }

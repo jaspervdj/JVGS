@@ -27,12 +27,12 @@ namespace jvgs
         const int CollisionResponsePositioner::MAX_STEPS;
         const float CollisionResponsePositioner::SLIP_LIMIT;
 
-        CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
-                const math::Vector2D &gravity): Positioner(entity)
+        CollisionResponsePositioner::CollisionResponsePositioner(
+                Entity *entity): Positioner(entity)
         {
             Sketch *world = entity->getLevel()->getWorld();
             collisionDetector = new CollisionDetector(world);
-            this->gravity = gravity;
+            gravity = Vector2D(0.0f, 0.0f);
         }
 
         CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
@@ -140,6 +140,11 @@ namespace jvgs
         const Vector2D &CollisionResponsePositioner::getGravity() const
         {
             return gravity;
+        }
+
+        void CollisionResponsePositioner::setGravity(const Vector2D &gravity)
+        {
+            this->gravity = gravity;
         }
     }
 }

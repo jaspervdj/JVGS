@@ -13,11 +13,11 @@ namespace jvgs
 {
     namespace game
     {
-        InputController::InputController(Entity *entity, float minJumpDelay,
-                float jumpForce): Controller(entity)
+        InputController::InputController(Entity *entity): Controller(entity)
         {
-            this->minJumpDelay = minJumpDelay;
-            this->jumpForce = jumpForce;
+            /* Some defaults. */
+            minJumpDelay = 200.0f;
+            jumpForce = 50.0f;
             jumpDelay = 0.0f;
         }
 
@@ -61,7 +61,16 @@ namespace jvgs
 
         void InputController::keyPressed(const Key &key)
         {
+        }
 
+        void InputController::setMinJumpDelay(float minJumpDelay)
+        {
+            this->minJumpDelay = minJumpDelay;
+        }
+
+        void InputController::setJumpForce(float jumpForce)
+        {
+            this->jumpForce = jumpForce;
         }
     }
 }

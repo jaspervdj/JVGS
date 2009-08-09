@@ -2,8 +2,10 @@
 #define JVGS_GAME_ENTITY_H
 
 #include "../math/Vector2D.h"
+#include "AffectorFactory.h"
 #include "../core/XMLLoadable.h"
 #include <string>
+#include <map>
 
 class TiXmlElement;
 
@@ -54,6 +56,14 @@ namespace jvgs
 
                 /** Used for sprite selection. */
                 bool facingRight;
+
+                /** Map for controller factories. */
+                static std::map<std::string, AffectorFactory<Controller>*> 
+                        controllerFactories;
+
+                /** Map for positioner factories. */
+                static std::map<std::string, AffectorFactory<Positioner>*>
+                        positionerFactories;
 
             protected:
                 /* Override

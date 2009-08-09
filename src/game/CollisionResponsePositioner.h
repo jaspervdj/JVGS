@@ -45,10 +45,8 @@ namespace jvgs
             public:
                 /** Constructor.
                  *  @param entity Entity to respond to collisions.
-                 *  @param gravity Gravity pulling the entity.
                  */
-                CollisionResponsePositioner(Entity *entity,
-                        const math::Vector2D &gravity);
+                CollisionResponsePositioner(Entity *entity);
 
                 /** Constructor.
                  *  @param entity Entity to respond to collisions.
@@ -61,13 +59,18 @@ namespace jvgs
                  */
                 virtual ~CollisionResponsePositioner();
 
-                /* Override.
+                /* Override
                  */
                 virtual void affect(float ms);
 
                 /* Override
                  */
                 virtual const math::Vector2D &getGravity() const;
+
+                /** Set the gravity.
+                 *  @param gravity The new gravity.
+                 */
+                virtual void setGravity(const math::Vector2D &gravity);
         };
     }
 }
