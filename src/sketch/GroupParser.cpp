@@ -14,7 +14,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        GroupParser::GroupParser(Parser *parser): SketchElementParser(parser)
+        GroupParser::GroupParser()
         {
         }
 
@@ -36,7 +36,7 @@ namespace jvgs
 
                 string value = child->ValueStr();
                 SketchElementParser *sketchElementParser =
-                        getParser()->getSketchElementParser(value);
+                        Parser::getSketchElementParser(value);
 
                 if (sketchElementParser) {
                     SketchElement *sketchElement =

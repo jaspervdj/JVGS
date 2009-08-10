@@ -14,7 +14,7 @@ namespace jvgs
         {
             private:
             public:
-                PathParser(Parser *parser);
+                PathParser();
                 virtual ~PathParser();
 
                 virtual SketchElement *parse(SketchElement *parent,

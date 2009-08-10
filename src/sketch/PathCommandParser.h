@@ -12,16 +12,12 @@ namespace jvgs
 
         class PathCommandParser
         {
-            private:
-                PathDataParser *dataParser;
-
             public:
-                PathCommandParser(PathDataParser *dataParser);
+                PathCommandParser();
                 virtual ~PathCommandParser();
 
-                PathDataParser *getDataParser() const;
-
                 virtual void parse(Path *path, char command,
+                        PathDataParser *dataParser,
                         const std::vector<float> &arguments) const = 0;
         };
     }

@@ -13,8 +13,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        SPathCommandParser::SPathCommandParser(PathDataParser *dataParser):
-                PathCommandParser(dataParser)
+        SPathCommandParser::SPathCommandParser()
         {
         }
 
@@ -23,12 +22,11 @@ namespace jvgs
         }
 
         void SPathCommandParser::parse(Path *path, char command,
-                const vector<float> &arguments) const
+                PathDataParser *dataParser, const vector<float> &arguments)
+                const
         {
-            PathDataParser *dataParser = getDataParser();
-
             CPathCommandParser *cCommandParser =
-                    new CPathCommandParser(dataParser);
+                    new CPathCommandParser();
 
             for(vector<float>::size_type i = 0; i < arguments.size(); i += 4) {
 
@@ -48,7 +46,7 @@ namespace jvgs
                 char cCommand = dataParser->isRelativeCommand(command) ?
                         'c' : 'C';
 
-                cCommandParser->parse(path, cCommand, cArguments);
+                cCommandParser->parse(path, cCommand, dataParser, cArguments);
             }
 
             delete cCommandParser;

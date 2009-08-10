@@ -11,10 +11,11 @@ namespace jvgs
         {
             private:
             public:
-                TPathCommandParser(PathDataParser *dataParser);
+                TPathCommandParser();
                 virtual ~TPathCommandParser();
 
                 virtual void parse(Path *path, char command,
+                        PathDataParser *dataParser,
                         const std::vector<float> &arguments) const;
         };
     }

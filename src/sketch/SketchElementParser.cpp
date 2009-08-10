@@ -17,18 +17,12 @@ namespace jvgs
 {
     namespace sketch
     {
-        SketchElementParser::SketchElementParser(Parser *parser)
+        SketchElementParser::SketchElementParser()
         {
-            this->parser = parser;
         }
 
         SketchElementParser::~SketchElementParser()
         {
-        }
-
-        Parser *SketchElementParser::getParser() const
-        {
-            return parser;
         }
 
         void SketchElementParser::parseAttributes(SketchElement *sketchElement,

@@ -12,8 +12,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        ZPathCommandParser::ZPathCommandParser(PathDataParser *dataParser):
-                PathCommandParser(dataParser)
+        ZPathCommandParser::ZPathCommandParser()
         {
         }
 
@@ -22,17 +21,15 @@ namespace jvgs
         }
 
         void ZPathCommandParser::parse(Path *path, char command,
-                const vector<float> &arguments) const
+                PathDataParser *dataParser, const vector<float> &arguments)
+                const
         {
-            PathDataParser *dataParser = getDataParser();
-
-            LPathCommandParser *lCommandParser =
-                    new LPathCommandParser(dataParser);
+            LPathCommandParser *lCommandParser = new LPathCommandParser();
 
             vector<float> lArguments;
             lArguments.push_back(dataParser->getCurrentPoint().getX());
             lArguments.push_back(dataParser->getCurrentPoint().getY());
-            lCommandParser->parse(path, 'L', lArguments);
+            lCommandParser->parse(path, 'L', dataParser, lArguments);
 
             delete lCommandParser;
         }

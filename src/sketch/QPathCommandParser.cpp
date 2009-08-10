@@ -12,8 +12,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        QPathCommandParser::QPathCommandParser(PathDataParser *dataParser):
-                PathCommandParser(dataParser)
+        QPathCommandParser::QPathCommandParser()
         {
         }
 
@@ -22,10 +21,9 @@ namespace jvgs
         }
 
         void QPathCommandParser::parse(Path *path, char command,
-                const vector<float> &arguments) const
+                PathDataParser *dataParser, const vector<float> &arguments)
+                const
         {
-            PathDataParser *dataParser = getDataParser();
-
             for(vector<float>::size_type i = 0; i < arguments.size(); i += 4) {
 
                 /* Get the defining points. */

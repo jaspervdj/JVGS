@@ -25,7 +25,8 @@ namespace jvgs
                 TiXmlDocument *document;
 
                 /** Map containing the different svg element parsers. */
-                std::map<std::string,SketchElementParser*> sketchElementParsers;
+                static std::map<std::string, SketchElementParser*>
+                        sketchElementParsers;
 
             public:
                 /** Constructor.
@@ -38,17 +39,17 @@ namespace jvgs
                  */
                 virtual ~Parser();
 
+                /** Start parsing, load everything.
+                 */
+                virtual void parse();
+
                 /** Get an appropriate SketchElementParser for a certain xml
                  *  tag.
                  *  @param tag Tag to find a SketchElementParser for.
                  *  @return An appropriate SketchElementParser.
                  */
-                virtual SketchElementParser *getSketchElementParser(
+                static SketchElementParser *getSketchElementParser(
                     const std::string &tag);
-
-                /** Start parsing, load everything.
-                 */
-                virtual void parse();
         };
     };
 };

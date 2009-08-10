@@ -13,8 +13,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        LPathCommandParser::LPathCommandParser(PathDataParser *dataParser):
-                PathCommandParser(dataParser)
+        LPathCommandParser::LPathCommandParser()
         {
         }
 
@@ -23,10 +22,9 @@ namespace jvgs
         }
 
         void LPathCommandParser::parse(Path *path, char command,
-                const vector<float> &arguments) const
+                PathDataParser *dataParser, const vector<float> &arguments)
+                const
         {
-            PathDataParser *dataParser = getDataParser();
-
             /* We take the vectors two by two and add lines to the
              * path component. */
             for(vector<float>::size_type  i = 0; i < arguments.size(); i += 2) {

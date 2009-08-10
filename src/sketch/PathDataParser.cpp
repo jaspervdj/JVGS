@@ -24,6 +24,39 @@ namespace jvgs
     {
         const string PathDataParser::COMMANDS = "MmLlHhVvCcSsQqTtAaZz";
 
+        /* Map filling. */
+        map<char, PathCommandParser*> createCommandParsers()
+        {
+            map<char, PathCommandParser*> commandParsers;
+
+            static CPathCommandParser cPathCommandParser;
+            commandParsers['c'] = &cPathCommandParser;
+
+            static LPathCommandParser lPathCommandParser;
+            commandParsers['l'] = &lPathCommandParser;
+
+            static MPathCommandParser mPathCommandParser;
+            commandParsers['m'] = &mPathCommandParser;
+
+            static QPathCommandParser qPathCommandParser;
+            commandParsers['q'] = &qPathCommandParser;
+
+            static SPathCommandParser sPathCommandParser;
+            commandParsers['s'] = &sPathCommandParser;
+
+            static TPathCommandParser tPathCommandParser;
+            commandParsers['t'] = &tPathCommandParser;
+
+            static ZPathCommandParser zPathCommandParser;
+            commandParsers['z'] = &zPathCommandParser;
+
+            return commandParsers;
+        }
+
+        /* Map implementation. */
+        map<char, PathCommandParser*> PathDataParser::commandParsers =
+                createCommandParsers();
+
         PathDataParser::PathDataParser(Path *path, const string &data)
         {
             this->path = path;
@@ -32,23 +65,11 @@ namespace jvgs
             currentComponent = 0;
             lastSegment = 0;
 
-            commandParsers['c'] = new CPathCommandParser(this);
-            commandParsers['l'] = new LPathCommandParser(this);
-            commandParsers['m'] = new MPathCommandParser(this);
-            commandParsers['q'] = new QPathCommandParser(this);
-            commandParsers['s'] = new SPathCommandParser(this);
-            commandParsers['t'] = new TPathCommandParser(this);
-            commandParsers['z'] = new ZPathCommandParser(this);
-
             matrix = path->getCompleteMatrix();
         }
 
         PathDataParser::~PathDataParser()
         {
-            for(map<char, PathCommandParser*>::iterator iterator =
-                    commandParsers.begin(); iterator != commandParsers.end();
-                    iterator++)
-                delete iterator->second;
         }
 
         PathComponent *PathDataParser::getCurrentComponent() const
@@ -149,7 +170,7 @@ namespace jvgs
 
             if(iterator != commandParsers.end()) {
                 PathCommandParser *commandParser = iterator->second;
-                commandParser->parse(path, command, arguments);
+                commandParser->parse(path, command, this, arguments);
             } else {
                 LogManager::getInstance()->warning(
                         "%c path command is not implemented.", command);

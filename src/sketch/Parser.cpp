@@ -20,6 +20,24 @@ namespace jvgs
 {
     namespace sketch
     {
+        /* Map filling. */
+        map<string, SketchElementParser*> createSketchElementParsers()
+        {
+            map<string, SketchElementParser*> sketchElementParsers;
+
+            static GroupParser groupParser;
+            sketchElementParsers["g"] = &groupParser;
+
+            static PathParser pathParser;
+            sketchElementParsers["path"] = &pathParser;
+
+            return sketchElementParsers;
+        }
+
+        /* Map implementation. */
+        map<string, SketchElementParser*> Parser::sketchElementParsers = 
+                createSketchElementParsers();
+
         Parser::Parser(string fileName, Sketch *sketch)
         {
             DataManager *dataManager = DataManager::getInstance();
@@ -31,30 +49,11 @@ namespace jvgs
             }
 
             this->sketch = sketch;
-
-            sketchElementParsers["g"] = new GroupParser(this);
-            sketchElementParsers["path"] = new PathParser(this);
         }
 
         Parser::~Parser()
         {
-            for(map<string,SketchElementParser*>::iterator iterator =
-                    sketchElementParsers.begin();
-                    iterator != sketchElementParsers.end(); iterator++) {
-                delete iterator->second;
-            }
-
             delete document;
-        }
-
-        SketchElementParser *Parser::getSketchElementParser(const string &tag)
-        {
-            map<string, SketchElementParser*>::iterator iterator =
-                    sketchElementParsers.find(tag);
-            if (iterator != sketchElementParsers.end())
-                return iterator->second;
-            else
-                return 0;
         }
 
         void Parser::parse()
@@ -66,12 +65,22 @@ namespace jvgs
             rootElement->QueryFloatAttribute("height", &height);
             sketch->setSize(Vector2D(width, height));
 
-            GroupParser *groupParser = new GroupParser(this);
+            GroupParser *groupParser = new GroupParser();
 
             Group *root = (Group*) groupParser->parse(0, rootElement);
             sketch->setRoot(root);
 
             delete groupParser;
+        }
+
+        SketchElementParser *Parser::getSketchElementParser(const string &tag)
+        {
+            map<string, SketchElementParser*>::iterator iterator =
+                    sketchElementParsers.find(tag);
+            if (iterator != sketchElementParsers.end())
+                return iterator->second;
+            else
+                return 0;
         }
     };
 };

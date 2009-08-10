@@ -12,8 +12,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        CPathCommandParser::CPathCommandParser(PathDataParser *dataParser):
-                PathCommandParser(dataParser)
+        CPathCommandParser::CPathCommandParser()
         {
         }
 
@@ -22,10 +21,9 @@ namespace jvgs
         }
 
         void CPathCommandParser::parse(Path *path, char command,
-                const vector<float> &arguments) const
+                PathDataParser *dataParser, const vector<float> &arguments)
+                const
         {
-            PathDataParser *dataParser = getDataParser();
-
             for(vector<float>::size_type i = 0; i < arguments.size(); i += 6) {
 
                 /* Get the defining points. */

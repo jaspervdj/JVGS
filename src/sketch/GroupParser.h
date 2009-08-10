@@ -11,7 +11,7 @@ namespace jvgs
         {
             private:
             public:
-                GroupParser(Parser *parser);
+                GroupParser();
                 virtual ~GroupParser();
 
                 virtual SketchElement *parse(SketchElement *parent,

@@ -17,24 +17,14 @@ namespace jvgs
          */
         class SketchElementParser: public TextParser
         {
-            private:
-                /** Reference to the main parser. */
-                Parser *parser;
-
             public:
                 /** Constructor.
-                 *  @param parser Reference to the main parser.
                  */
-                SketchElementParser(Parser *parser);
+                SketchElementParser();
 
                 /** Destructor.
                  */
                 virtual ~SketchElementParser();
-
-                /** Get a reference to the main parser.
-                 *  @return A reference to the main parser.
-                 */
-                virtual Parser *getParser() const;
 
                 /** Parse a number of general attributes and apply them
                  *  to the sketch element.

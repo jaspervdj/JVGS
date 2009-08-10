@@ -17,8 +17,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        PathParser::PathParser(Parser *parser):
-                SketchElementParser(parser)
+        PathParser::PathParser()
         {
         }
 

@@ -35,7 +35,7 @@ namespace jvgs
                 math::Vector2D currentPoint;
                 math::Vector2D lastControlPoint;
 
-                std::map<char, PathCommandParser*> commandParsers;
+                static std::map<char, PathCommandParser*> commandParsers;
 
                 math::AffineTransformationMatrix matrix;
 
