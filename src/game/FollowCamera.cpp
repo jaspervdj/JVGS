@@ -1,20 +1,47 @@
 #include "FollowCamera.h"
 #include "Entity.h"
+#include "Level.h"
+
+#include "../core/LogManager.h"
+using namespace jvgs::core;
+
+#include <string>
+using namespace std;
 
 #include "../video/VideoManager.h"
 using namespace jvgs::video;
 
 using namespace jvgs::math;
 
+#include "../tinyxml/tinyxml.h"
+
 namespace jvgs
 {
     namespace game
     {
-        FollowCamera::FollowCamera(Entity *entity, float maxDistance)
+        void FollowCamera::loadData(TiXmlElement *element)
         {
+            element->QueryFloatAttribute("maxDistance", &maxDistance);
+            string entityId = element->Attribute("entity");
+            entity = level->getEntityById(entityId);
+            if(entity)
+                position = entity->getPosition();
+            else
+                LogManager::getInstance()->error("No entity called %s",
+                        entityId.c_str());
+        }
+
+        FollowCamera::FollowCamera(Entity *entity, float maxDistance, Level *level)
+        {
+            this->level = level;
             this->entity = entity;
             this->maxDistance = maxDistance;
-            this->position = entity->getPosition();
+        }
+
+        FollowCamera::FollowCamera(TiXmlElement *element, Level *level)
+        {
+            this->level = level;
+            load(element);
         }
 
         FollowCamera::~FollowCamera()

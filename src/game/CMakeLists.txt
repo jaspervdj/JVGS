@@ -7,6 +7,7 @@ ADD_LIBRARY(
     Affector.cpp
     Animation.cpp
     Camera.cpp
+    CameraFactory.cpp
     CollisionResponsePositioner.cpp
     Controller.cpp
     Entity.cpp

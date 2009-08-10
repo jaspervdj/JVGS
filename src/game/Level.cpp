@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "Entity.h"
 #include "FollowCamera.h"
+#include "CameraFactory.h"
 
 #include "../core/DataManager.h"
 #include "../core/LogManager.h"
@@ -18,6 +19,21 @@ namespace jvgs
 {
     namespace game
     {
+        /* Filling. */
+        map<string, CameraFactory*> createCameraFactories()
+        {
+            map<string, CameraFactory*> cameraFactories;
+
+            static TCameraFactory<FollowCamera> followCameraFactory;
+            cameraFactories["FollowCamera"] = &followCameraFactory;
+
+            return cameraFactories;
+        }
+
+        /* Implementation. */
+        map<string, CameraFactory*> Level::cameraFactories =
+                createCameraFactories();
+
         void Level::loadData(TiXmlElement *element)
         {
             /* Load the world. */
@@ -38,10 +54,18 @@ namespace jvgs
                 entityElement = entityElement->NextSiblingElement("entity");
             }
 
-            /* Add a simple camera. */
-            Entity *player = getEntityById("player");
-            if(player) {
-                camera = new FollowCamera(player, 100.0f);
+            /* Add the camera. */
+            TiXmlElement *cameraElement = element->FirstChildElement("camera");
+            if(cameraElement) {
+                string type = cameraElement->Attribute("type");
+                map<string, CameraFactory*>::iterator result =
+                        cameraFactories.find(type);
+                if(result != cameraFactories.end()) {
+                    camera = result->second->create(cameraElement, this);
+                } else {
+                    LogManager::getInstance()->error("No camera %s",
+                            type.c_str());
+                }
             }
         }
 

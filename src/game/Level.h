@@ -16,6 +16,7 @@ namespace jvgs
     {
         class Entity;
         class Camera;
+        class CameraFactory;
 
         /** Class that represents a level the player can play through.
          */
@@ -33,6 +34,9 @@ namespace jvgs
 
                 /** Camera. */
                 Camera *camera;
+
+                /** Camera factories. */
+                static std::map<std::string, CameraFactory*> cameraFactories;
 
             protected:
                 /* Override.
