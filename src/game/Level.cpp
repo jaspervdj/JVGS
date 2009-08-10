@@ -1,9 +1,13 @@
 #include "Level.h"
 #include "Entity.h"
+#include "FollowCamera.h"
 
 #include "../core/DataManager.h"
 #include "../core/LogManager.h"
 using namespace jvgs::core;
+
+#include "../video/VideoManager.h"
+using namespace jvgs::video;
 
 #include "../tinyxml/tinyxml.h"
 
@@ -33,11 +37,18 @@ namespace jvgs
                 addEntity(entity);
                 entityElement = entityElement->NextSiblingElement("entity");
             }
+
+            /* Add a simple camera. */
+            Entity *player = getEntityById("player");
+            if(player) {
+                camera = new FollowCamera(player, 100.0f);
+            }
         }
 
         Level::Level()
         {
             world = 0;
+            camera = 0;
         }
 
         Level::Level(TiXmlElement *element)
@@ -57,6 +68,8 @@ namespace jvgs
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 delete (*iterator);
+            if(camera)
+                delete camera;
         }
 
         Sketch *Level::getWorld() const
@@ -81,6 +94,9 @@ namespace jvgs
 
         void Level::update(float ms)
         {
+            if(camera)
+                camera->update(ms);
+
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 (*iterator)->update(ms);
@@ -88,13 +104,19 @@ namespace jvgs
 
         void Level::render()
         {
-            world->getSize();
+            VideoManager::getInstance()->push();
+
+            if(camera)
+                camera->transform();
+
             if(world)
                 world->render();
 
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 (*iterator)->render();
+
+            VideoManager::getInstance()->pop();
         }
     }
 }

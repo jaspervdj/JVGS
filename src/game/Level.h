@@ -15,6 +15,7 @@ namespace jvgs
     namespace game
     {
         class Entity;
+        class Camera;
 
         /** Class that represents a level the player can play through.
          */
@@ -29,6 +30,9 @@ namespace jvgs
 
                 /** Entities by id. */
                 std::map<std::string, Entity*> entitiesById;
+
+                /** Camera. */
+                Camera *camera;
 
             protected:
                 /* Override.
