@@ -1,6 +1,8 @@
 #ifndef JVGS_GAME_AFFECTOR_H
 #define JVGS_GAME_AFFECTOR_H
 
+#include "../core/XMLLoadable.h"
+
 namespace jvgs
 {
     namespace game
@@ -10,7 +12,7 @@ namespace jvgs
         /** A class that affects an entity. This could be used for gravity,
          *  controls, collision response, ...
          */
-        class Affector
+        class Affector: public core::XMLLoadable
         {
             private:
                 Entity *entity;

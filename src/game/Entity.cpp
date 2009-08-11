@@ -2,6 +2,7 @@
 #include "Controller.h"
 #include "Positioner.h"
 #include "Sprite.h"
+#include "BullController.h"
 #include "InputController.h"
 #include "CollisionResponsePositioner.h"
 #include "AffectorFactory.h"
@@ -28,6 +29,9 @@ namespace jvgs
         map<string, AffectorFactory<Controller>*> createControllerFactories()
         {
             map<string, AffectorFactory<Controller>*> controllerFactories;
+
+            static ControllerFactory<BullController> bullControllerFactory;
+            controllerFactories["BullController"] = &bullControllerFactory;
 
             static ControllerFactory<InputController> inputControllerFactory;
             controllerFactories["InputController"] = &inputControllerFactory;

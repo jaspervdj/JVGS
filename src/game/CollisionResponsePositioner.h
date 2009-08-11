@@ -42,6 +42,11 @@ namespace jvgs
                 /** Gravity pulling the entity. */
                 math::Vector2D gravity;
 
+            protected:
+                /* Override
+                 */
+                void loadData(TiXmlElement *element);
+
             public:
                 /** Constructor.
                  *  @param entity Entity to respond to collisions.

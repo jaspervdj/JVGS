@@ -27,6 +27,11 @@ namespace jvgs
         const int CollisionResponsePositioner::MAX_STEPS;
         const float CollisionResponsePositioner::SLIP_LIMIT;
 
+        void CollisionResponsePositioner::loadData(TiXmlElement *element)
+        {
+            gravity = Vector2D(element->FirstChildElement("gravity"));
+        }
+
         CollisionResponsePositioner::CollisionResponsePositioner(
                 Entity *entity): Positioner(entity)
         {
@@ -40,7 +45,7 @@ namespace jvgs
         {
             Sketch *world = entity->getLevel()->getWorld();
             collisionDetector = new CollisionDetector(world);
-            gravity = Vector2D(element->FirstChildElement("gravity"));
+            load(element);
         }
 
         CollisionResponsePositioner::~CollisionResponsePositioner()

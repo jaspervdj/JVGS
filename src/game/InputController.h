@@ -23,6 +23,11 @@ namespace jvgs
                 /** Delay to next jump. */
                 float jumpDelay;
 
+            protected:
+                /* Override
+                 */
+                void loadData(TiXmlElement *element);
+
             public:
                 /** Constructor.
                  *  @param entity Entity to control.

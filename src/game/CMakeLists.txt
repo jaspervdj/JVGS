@@ -6,6 +6,7 @@ ADD_LIBRARY(
     game STATIC 
     Affector.cpp
     Animation.cpp
+    BullController.cpp
     Camera.cpp
     CameraFactory.cpp
     CollisionResponsePositioner.cpp
