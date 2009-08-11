@@ -15,6 +15,7 @@ ADD_LIBRARY(
     FollowCamera.cpp
     InputController.cpp
     Positioner.cpp
+    SillyController.cpp
     Sprite.cpp
     Level.cpp
 )

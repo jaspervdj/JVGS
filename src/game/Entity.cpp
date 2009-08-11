@@ -8,6 +8,7 @@
 #include "AffectorFactory.h"
 #include "ControllerFactory.h"
 #include "PositionerFactory.h"
+#include "SillyController.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -35,6 +36,9 @@ namespace jvgs
 
             static ControllerFactory<InputController> inputControllerFactory;
             controllerFactories["InputController"] = &inputControllerFactory;
+
+            static ControllerFactory<SillyController> sillyControllerFactory;
+            controllerFactories["SillyController"] = &sillyControllerFactory;
 
             return controllerFactories;
         }
