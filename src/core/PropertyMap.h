@@ -51,6 +51,13 @@ namespace jvgs
                  */
                 virtual std::string get(const std::string &key);
 
+                /** Checks the existance and checks the value of a key.
+                 *  @param key Key to examine.
+                 *  @param value Will contain the value.
+                 *  @return If the key exists in the map.
+                 */
+                virtual bool get(const std::string &key, std::string *value);
+
                 /** Set the value of a key.
                  *  @param key Key to set the value for.
                  *  @param value Value for key.

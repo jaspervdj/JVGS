@@ -105,6 +105,7 @@ namespace jvgs
         {
             entities.push_back(entity);
             entitiesById[entity->getId()] = entity;
+            entity->on("spawn");
         }
 
         Entity *Level::getEntityById(const string &id)

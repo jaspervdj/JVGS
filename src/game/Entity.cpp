@@ -16,6 +16,9 @@ using namespace jvgs::core;
 #include "../video/VideoManager.h"
 using namespace jvgs::video;
 
+#include "../bind/ScriptManager.h"
+using namespace jvgs::bind;
+
 #include "../tinyxml/tinyxml.h"
 
 #include <iostream>
@@ -26,6 +29,8 @@ namespace jvgs
 {
     namespace game
     {
+        Entity *Entity::eventSource;
+
         /* Function to fill in the controller factories. */
         map<string, AffectorFactory<Controller>*> createControllerFactories()
         {
@@ -103,6 +108,11 @@ namespace jvgs
             /* Load sprite. */
             TiXmlElement *spriteElement = element->FirstChildElement("sprite");
             sprite = spriteElement ? new Sprite(spriteElement) : 0;
+
+            /* Load properties. */
+            TiXmlElement *eventsElement = element->FirstChildElement("events");
+            events = eventsElement ?
+                    new PropertyMap(eventsElement) : new PropertyMap();
         }
 
         Entity::Entity(const std::string &id, Level *level)
@@ -119,6 +129,7 @@ namespace jvgs
             positioner = 0;
             sprite = 0;
             facingRight = true;
+            events = new PropertyMap();
         }
 
         Entity::Entity(TiXmlElement *element, Level *level)
@@ -242,6 +253,26 @@ namespace jvgs
         Sprite *Entity::getSprite() const
         {
             return sprite;
+        }
+
+        PropertyMap *Entity::getEvents() const
+        {
+            return events;
+        }
+
+        void Entity::on(const string &event)
+        {
+            ScriptManager *scriptManager = ScriptManager::getInstance();
+            string fileName;
+            if(events->get(event, &fileName)) {
+                eventSource = this;
+                scriptManager->runScript(fileName);
+            }
+        }
+
+        Entity *Entity::getEventSource()
+        {
+            return eventSource;
         }
 
         void Entity::update(float ms)

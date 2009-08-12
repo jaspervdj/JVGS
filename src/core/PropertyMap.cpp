@@ -57,6 +57,17 @@ namespace jvgs
             return result != entries.end() ? result->second : "";
         }
 
+        bool PropertyMap::get(const string &key, string *value)
+        {
+            map<string, string>::iterator result = entries.find(key);
+            if(result != entries.end()) {
+                (*value) = result->second;
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         void PropertyMap::set(const string &key, const string &value)
         {
             entries[key] = value;

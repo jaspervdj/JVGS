@@ -4,6 +4,7 @@
 #include "../math/Vector2D.h"
 #include "AffectorFactory.h"
 #include "../core/XMLLoadable.h"
+#include "../core/PropertyMap.h"
 #include <string>
 #include <map>
 
@@ -56,6 +57,12 @@ namespace jvgs
 
                 /** Used for sprite selection. */
                 bool facingRight;
+
+                /** Events. */
+                core::PropertyMap *events;
+
+                /** Event sender. */
+                static Entity *eventSource;
 
                 /** Map for controller factories. */
                 static std::map<std::string, AffectorFactory<Controller>*> 
@@ -160,6 +167,9 @@ namespace jvgs
                 /** Set the controller of this entity.
                  *  @param controller The controller of this entity.
                  */
+#               ifdef SWIG
+                    %apply SWIGTYPE *DISOWN {Controller* controller};
+#               endif
                 virtual void setController(Controller *controller);
 
                 /** Get the controller of this entity.
@@ -170,6 +180,9 @@ namespace jvgs
                 /** Set the positioner of this entity.
                  *  @param positioner The positioner of this entity.
                  */
+#               ifdef SWIG
+                    %apply SWIGTYPE *DISOWN {Positioner* positioner};
+#               endif
                 virtual void setPositioner(Positioner *positioner);
 
                 /** Get the positioner of this entity.
@@ -180,12 +193,30 @@ namespace jvgs
                 /** Set the sprite of this entity.
                  *  @param sprite The sprite of this entity.
                  */
+#               ifdef SWIG
+                    %apply SWIGTYPE *DISOWN {Sprite* sprite};
+#               endif
                 virtual void setSprite(Sprite *sprite);
 
                 /** Get the sprite of this entity.
                  *  @return The sprite of this entity.
                  */
                 virtual Sprite *getSprite() const;
+
+                /** Get the events assigned to this entity.
+                 *  @return The assigned events.
+                 */
+                virtual core::PropertyMap *getEvents() const;
+
+                /** Execute a certain event.
+                 *  @param event Event to execute.
+                 */
+                virtual void on(const std::string &event);
+
+                /** Get the event source.
+                 *  @return The event source.
+                 */
+                static Entity *getEventSource();
 
                 /** Update this entity for a given time.
                  *  @param ms Time to update for.
