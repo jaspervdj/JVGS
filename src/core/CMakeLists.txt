@@ -3,4 +3,5 @@ ADD_LIBRARY(
     DataManager.cpp
     LogManager.cpp
     XMLLoadable.cpp
+    PropertyMap.cpp
 )

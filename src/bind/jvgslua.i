@@ -1,9 +1,10 @@
 %module jvgslua
-
 %include <std_string.i>
 
 %{
 #include "../core/LogManager.h"
+#include "../core/XMLLoadable.h"
+#include "../core/PropertyMap.h"
 #include "../input/KeyListener.h"
 #include "../input/Key.h"
 #include "../input/InputManager.h"
@@ -65,6 +66,8 @@ using namespace jvgs;
 %}
 
 %include "../core/LogManager.h"
+%include "../core/XMLLoadable.h"
+%include "../core/PropertyMap.h"
 %include "../input/KeyListener.h"
 %include "../input/Key.h"
 %include "../input/InputManager.h"
