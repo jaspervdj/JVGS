@@ -155,6 +155,7 @@ namespace jvgs
                 if(!(*iterator)->isGarbage()) {
                     entities.push_back(*iterator);
                 } else {
+                    EntityEvent::die(*iterator);
                     entitiesById.erase((*iterator)->getId());
                     delete (*iterator);
                 }

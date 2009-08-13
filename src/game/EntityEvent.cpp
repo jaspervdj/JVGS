@@ -58,5 +58,13 @@ namespace jvgs
             event->source = entity;
             event->scriptManager->runScript(entity->getScript());
         }
+
+        void EntityEvent::die(Entity *entity)
+        {
+            EntityEvent *event = getEvent();
+            event->type = "die";
+            event->source = entity;
+            event->scriptManager->runScript(entity->getScript());
+        }
     }
 }

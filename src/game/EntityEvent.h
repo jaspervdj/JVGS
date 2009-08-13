@@ -66,6 +66,11 @@ namespace jvgs
                  *  @param entity Spawned entity.
                  */
                 static void spawn(Entity *entity);
+
+                /** Execute a die event for an entity.
+                 *  @param entity Dying entity.
+                 */
+                static void die(Entity *entity);
         };
     }
 }

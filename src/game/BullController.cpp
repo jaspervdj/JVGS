@@ -2,6 +2,9 @@
 #include "Entity.h"
 #include "Level.h"
 
+#include "../core/LogManager.h"
+using namespace jvgs::core;
+
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
 
@@ -15,7 +18,12 @@ namespace jvgs
     {
         void BullController::loadData(TiXmlElement *element)
         {
-            target = element->Attribute("target");
+            if(element->Attribute("target"))
+                target = element->Attribute("target");
+            else
+                LogManager::getInstance()->error(
+                        "BullController must have a target.");
+
             element->QueryFloatAttribute("sight", &sight);
         }
 
