@@ -14,6 +14,7 @@ using namespace jvgs::video;
 #include "../tinyxml/tinyxml.h"
 
 using namespace jvgs::sketch;
+using namespace jvgs::math;
 using namespace std;
 
 namespace jvgs
@@ -41,6 +42,8 @@ namespace jvgs
             if(element->Attribute("world")) {
                 string worldFileName = element->Attribute("world");
                 world = new Sketch(worldFileName);
+                boundingBox = BoundingBox(Vector2D(0.0f, 0.0f),
+                        world->getSize());
             } else {
                 LogManager::getInstance()->warning(
                         "No world attribute specified in the level xml.");
@@ -134,18 +137,27 @@ namespace jvgs
                 camera->update(ms);
 
             for(vector<Entity*>::iterator iterator = entities.begin();
-                    iterator != entities.end(); iterator++)
-                (*iterator)->update(ms);
+                    iterator != entities.end(); iterator++) {
+                Entity *entity = *iterator;
+
+                entity->update(ms);
+
+                /* When out of the level, they become garbage. */
+                if(!boundingBox.intersectsWith(entity->getBoundingBox()))
+                    entity->setGarbage();
+            }
 
             /* Remove garbage. */
             vector<Entity*> originalEntities = entities;
             entities.clear();
             for(vector<Entity*>::iterator iterator = originalEntities.begin();
                     iterator != originalEntities.end(); iterator++) {
-                if(!(*iterator)->isGarbage())
+                if(!(*iterator)->isGarbage()) {
                     entities.push_back(*iterator);
-                else
-                    delete *iterator;
+                } else {
+                    entitiesById.erase((*iterator)->getId());
+                    delete (*iterator);
+                }
             }
         }
 

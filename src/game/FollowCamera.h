@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "../math/Vector2D.h"
 #include "../core/XMLLoadable.h"
+#include <string>
 
 namespace jvgs
 {
@@ -18,8 +19,8 @@ namespace jvgs
                 /** Level the camera is in. */
                 Level *level;
 
-                /** Object to follow. */
-                Entity *entity;
+                /** Id of object to follow. */
+                std::string target;
 
                 /** Max distance between camera focus and object. */
                 float maxDistance;
@@ -34,11 +35,12 @@ namespace jvgs
 
             public:
                 /** Constructor.
-                 *  @param entity Object to follow.
+                 *  @param target Id of target to follow.
                  *  @param maxDistance Max distance between focus and object.
                  *  @param level Level the camera is used for.
                  */
-                FollowCamera(Entity *entity, float maxDistance, Level *level);
+                FollowCamera(const std::string &target, float maxDistance,
+                        Level *level);
 
                 /** Constructor.
                  *  @param element XML element to load data from.

@@ -4,6 +4,7 @@
 #include "../sketch/Sketch.h"
 #include "../video/Renderer.h"
 #include "../core/XMLLoadable.h"
+#include "../math/BoundingBox.h"
 #include <vector>
 #include <string>
 #include <map>
@@ -34,6 +35,9 @@ namespace jvgs
 
                 /** Camera. */
                 Camera *camera;
+
+                /** Level bounding box. */
+                math::BoundingBox boundingBox;
 
                 /** Camera factories. */
                 static std::map<std::string, CameraFactory*> cameraFactories;
