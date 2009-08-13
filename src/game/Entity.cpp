@@ -1,4 +1,6 @@
 #include "Entity.h"
+#include "EntityEvent.h"
+#include "Level.h"
 #include "Controller.h"
 #include "Positioner.h"
 #include "Sprite.h"
@@ -29,8 +31,6 @@ namespace jvgs
 {
     namespace game
     {
-        Entity *Entity::eventSource;
-
         /* Function to fill in the controller factories. */
         map<string, AffectorFactory<Controller>*> createControllerFactories()
         {
@@ -77,6 +77,7 @@ namespace jvgs
             position = Vector2D(element->FirstChildElement("position"));
             velocity = Vector2D(element->FirstChildElement("velocity"));
             radius = Vector2D(element->FirstChildElement("radius"));
+            collisionChecker = getBoolAttribute(element, "collisionChecker");
             element->QueryFloatAttribute("speed", &speed);
 
             /* Load controller. */
@@ -109,19 +110,20 @@ namespace jvgs
             TiXmlElement *spriteElement = element->FirstChildElement("sprite");
             sprite = spriteElement ? new Sprite(spriteElement) : 0;
 
-            /* Load properties. */
-            TiXmlElement *eventsElement = element->FirstChildElement("events");
-            events = eventsElement ?
-                    new PropertyMap(eventsElement) : new PropertyMap();
+            /* Load script. */
+            script = element->Attribute("script") ?
+                    element->Attribute("script") : "none";
         }
 
-        Entity::Entity(const std::string &id, Level *level)
+        Entity::Entity(const std::string &id, bool collisionChecker,
+                Level *level)
         {
             this->id = id;
             this->level = level;
             position = Vector2D(0.0f, 0.0f);
             velocity = Vector2D(0.0f, 0.0f);
             radius = Vector2D(0.0f, 0.0f);
+            this->collisionChecker = collisionChecker;
             speed = 0.3f;
             falling = true;
             slipping = false;
@@ -129,7 +131,6 @@ namespace jvgs
             positioner = 0;
             sprite = 0;
             facingRight = true;
-            events = new PropertyMap();
         }
 
         Entity::Entity(TiXmlElement *element, Level *level)
@@ -187,6 +188,11 @@ namespace jvgs
         void Entity::setRadius(const Vector2D &radius)
         {
             this->radius = radius;
+        }
+
+        bool Entity::isCollisionChecker() const
+        {
+            return collisionChecker;
         }
 
         float Entity::getSpeed() const
@@ -255,24 +261,20 @@ namespace jvgs
             return sprite;
         }
 
-        PropertyMap *Entity::getEvents() const
+        void Entity::setScript(const string &script)
         {
-            return events;
+            this->script = script;
         }
 
-        void Entity::on(const string &event)
+        const string &Entity::getScript() const
         {
-            ScriptManager *scriptManager = ScriptManager::getInstance();
-            string fileName;
-            if(events->get(event, &fileName)) {
-                eventSource = this;
-                scriptManager->runScript(fileName);
-            }
+            return script;
         }
 
-        Entity *Entity::getEventSource()
+        BoundingBox *Entity::getBoundingBox()
         {
-            return eventSource;
+            boundingBox = BoundingBox(position - radius, position + radius);
+            return &boundingBox;
         }
 
         void Entity::update(float ms)
@@ -296,6 +298,21 @@ namespace jvgs
 
             if(sprite)
                 sprite->update(ms);
+
+            /* Check for collision. */
+            if(collisionChecker) {
+                BoundingBox *myBoundingBox = getBoundingBox();
+                for(int i = 0; i < level->getNumberOfEntities(); i++) {
+                    Entity *other = level->getEntity(i);
+                    if(this != other) {
+                        /* Collision found. */
+                        if(myBoundingBox->intersectsWith(
+                                other->getBoundingBox())) {
+                            EntityEvent::collision(this, other);
+                        }
+                    }
+                }
+            }
         }
 
         void Entity::render()

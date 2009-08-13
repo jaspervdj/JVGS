@@ -12,6 +12,7 @@ ADD_LIBRARY(
     CollisionResponsePositioner.cpp
     Controller.cpp
     Entity.cpp
+    EntityEvent.cpp
     FollowCamera.cpp
     InputController.cpp
     Positioner.cpp

@@ -21,6 +21,16 @@ namespace jvgs
                  */
                 virtual ~XMLLoadable();
 
+                /** Check for a boolean attribute.
+                 *  TRUE: when set and not "0"
+                 *  FALSE: when not set or "0"
+                 *  @param element Element containing the attribute.
+                 *  @param attribute Name of the attribute.
+                 *  @return Boolean value of the attribute.
+                 */
+                virtual bool getBoolAttribute(TiXmlElement *element,
+                        const std::string &attribute) const;
+
             protected:
                 /** Load data from an XML element. Call this function.
                  *  @param element XML element to load data from.

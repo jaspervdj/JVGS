@@ -67,9 +67,23 @@ namespace jvgs
                  */
                 virtual sketch::Sketch *getWorld() const;
 
+                /** Get the number of entities.
+                 *  @return The number of entities.
+                 */
+                virtual int getNumberOfEntities() const;
+
+                /** Get an entity by index.
+                 *  @param index Index of the entity to retrieve.
+                 *  @return The requested entity.
+                 */
+                virtual Entity *getEntity(int index) const;
+
                 /** Add an entity to the level.
                  *  @param entity Entity to add.
                  */
+#               ifdef SWIG
+                    %apply SWIGTYPE *DISOWN {Entity* entity};
+#               endif
                 virtual void addEntity(Entity *entity);
 
                 /** Get an entity by id.

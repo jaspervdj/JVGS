@@ -17,6 +17,7 @@
 #include "../game/Controller.h"
 #include "../game/ControllerFactory.h"
 #include "../game/Entity.h"
+#include "../game/EntityEvent.h"
 #include "../game/FollowCamera.h"
 #include "../game/InputController.h"
 #include "../game/Level.h"
@@ -85,6 +86,7 @@ using namespace jvgs::sketch;
 using namespace jvgs;
 %}
 
+%include "../math/Vector2D.h"
 %include "../bind/ScriptManager.h"
 %include "../core/DataManager.h"
 %include "../core/LogManager.h"
@@ -100,6 +102,7 @@ using namespace jvgs;
 %include "../game/BullController.h"
 %include "../game/ControllerFactory.h"
 %include "../game/Entity.h"
+%include "../game/EntityEvent.h"
 %include "../game/FollowCamera.h"
 %include "../game/InputController.h"
 %include "../game/Level.h"
@@ -125,7 +128,6 @@ using namespace jvgs;
 %include "../math/QuadTree.h"
 %include "../math/QuadTreeNode.h"
 %include "../math/QuadraticCurve.h"
-%include "../math/Vector2D.h"
 %include "../sketch/CPathCommandParser.h"
 %include "../sketch/Group.h"
 %include "../sketch/GroupParser.h"

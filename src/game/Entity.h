@@ -1,10 +1,11 @@
 #ifndef JVGS_GAME_ENTITY_H
 #define JVGS_GAME_ENTITY_H
 
+#include "../math/BoundingBox.h"
+#include "../math/BoundedObject.h"
 #include "../math/Vector2D.h"
 #include "AffectorFactory.h"
 #include "../core/XMLLoadable.h"
-#include "../core/PropertyMap.h"
 #include <string>
 #include <map>
 
@@ -19,7 +20,7 @@ namespace jvgs
         class Sprite;
         class Level;
 
-        class Entity: public core::XMLLoadable
+        class Entity: public core::XMLLoadable, public math::BoundedObject
         {
             private:
                 /** Entity id. */
@@ -36,6 +37,10 @@ namespace jvgs
 
                 /** Radius used for collision detection. */
                 math::Vector2D radius;
+
+                /** If the entity actively checks for collision with other
+                 *  entities. */
+                bool collisionChecker;
 
                 /** Speed of the entity. */
                 float speed;
@@ -58,11 +63,11 @@ namespace jvgs
                 /** Used for sprite selection. */
                 bool facingRight;
 
-                /** Events. */
-                core::PropertyMap *events;
+                /** Event script. */
+                std::string script;
 
-                /** Event sender. */
-                static Entity *eventSource;
+                /** Bounding box. */
+                math::BoundingBox boundingBox;
 
                 /** Map for controller factories. */
                 static std::map<std::string, AffectorFactory<Controller>*> 
@@ -80,9 +85,11 @@ namespace jvgs
             public:
                 /** Constructor.
                  *  @param id Id for the entity.
+                 *  @param collisionChecker Check for collisions actively?
                  *  @param level Level the entity is in.
                  */
-                Entity(const std::string &id, Level *level);
+                Entity(const std::string &id, bool collisionChecker,
+                        Level *level);
 
                 /** Constructor.
                  *  @param element TiXmlElement to load entity from.
@@ -133,6 +140,11 @@ namespace jvgs
                  *  @param radius The new radius.
                  */
                 virtual void setRadius(const math::Vector2D &radius);
+
+                /** See if this object actively checks for collisions.
+                 *  @return If this object actively checks for collisions.
+                 */
+                virtual bool isCollisionChecker() const;
 
                 /** Get the speed for this entity.
                  *  @return The speed for this entity.
@@ -203,20 +215,20 @@ namespace jvgs
                  */
                 virtual Sprite *getSprite() const;
 
-                /** Get the events assigned to this entity.
-                 *  @return The assigned events.
+                /** Set the event script.
+                 *  @param script The event script.
                  */
-                virtual core::PropertyMap *getEvents() const;
+                virtual void setScript(const std::string &script);
 
-                /** Execute a certain event.
-                 *  @param event Event to execute.
+                /** Get the event script.
+                 *  @return The event script.
                  */
-                virtual void on(const std::string &event);
+                virtual const std::string &getScript() const;
 
-                /** Get the event source.
-                 *  @return The event source.
+                /** Get a bounding box for the entity.
+                 *  @return A bounding box for the entity.
                  */
-                static Entity *getEventSource();
+                virtual math::BoundingBox *getBoundingBox();
 
                 /** Update this entity for a given time.
                  *  @param ms Time to update for.

@@ -18,6 +18,14 @@ namespace jvgs
         {
         }
 
+        bool XMLLoadable::getBoolAttribute(TiXmlElement *element,
+                const string &attribute) const
+        {
+            int value = 0;
+            int result = element->QueryIntAttribute(attribute, &value);
+            return result == TIXML_SUCCESS && value;
+        }
+
         void XMLLoadable::load(TiXmlElement *element)
         {
             /* First load data from another file. */

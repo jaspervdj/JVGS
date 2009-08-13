@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "EntityEvent.h"
 #include "Entity.h"
 #include "FollowCamera.h"
 #include "CameraFactory.h"
@@ -101,11 +102,21 @@ namespace jvgs
             return world;
         }
 
+        int Level::getNumberOfEntities() const
+        {
+            return entities.size();
+        }
+
+        Entity *Level::getEntity(int index) const
+        {
+            return entities[index];
+        }
+
         void Level::addEntity(Entity *entity)
         {
             entities.push_back(entity);
             entitiesById[entity->getId()] = entity;
-            entity->on("spawn");
+            EntityEvent::spawn(entity);
         }
 
         Entity *Level::getEntityById(const string &id)
