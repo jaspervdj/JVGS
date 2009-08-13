@@ -124,6 +124,7 @@ namespace jvgs
             velocity = Vector2D(0.0f, 0.0f);
             radius = Vector2D(0.0f, 0.0f);
             this->collisionChecker = collisionChecker;
+            garbage = false;
             speed = 0.3f;
             falling = true;
             slipping = false;
@@ -137,6 +138,7 @@ namespace jvgs
         {
             this->level = level;
             load(element);
+            garbage = false;
             facingRight = true;
         }
 
@@ -193,6 +195,16 @@ namespace jvgs
         bool Entity::isCollisionChecker() const
         {
             return collisionChecker;
+        }
+
+        bool Entity::isGarbage() const
+        {
+            return garbage;
+        }
+
+        void Entity::setGarbage()
+        {
+            garbage = true;
         }
 
         float Entity::getSpeed() const

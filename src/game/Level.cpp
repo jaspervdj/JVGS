@@ -136,6 +136,17 @@ namespace jvgs
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 (*iterator)->update(ms);
+
+            /* Remove garbage. */
+            vector<Entity*> originalEntities = entities;
+            entities.clear();
+            for(vector<Entity*>::iterator iterator = originalEntities.begin();
+                    iterator != originalEntities.end(); iterator++) {
+                if(!(*iterator)->isGarbage())
+                    entities.push_back(*iterator);
+                else
+                    delete *iterator;
+            }
         }
 
         void Level::render()

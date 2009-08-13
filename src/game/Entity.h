@@ -42,6 +42,9 @@ namespace jvgs
                  *  entities. */
                 bool collisionChecker;
 
+                /** If the entity is garbage and should be removed. */
+                bool garbage;
+
                 /** Speed of the entity. */
                 float speed;
 
@@ -145,6 +148,16 @@ namespace jvgs
                  *  @return If this object actively checks for collisions.
                  */
                 virtual bool isCollisionChecker() const;
+
+                /** See if this object is garbage. When garbage, it should be
+                 *  removed.
+                 *  @return If this entity is garbage.
+                 */
+                virtual bool isGarbage() const;
+
+                /** Mark this entity as being garbage. It will be removed later.
+                 */
+                virtual void setGarbage();
 
                 /** Get the speed for this entity.
                  *  @return The speed for this entity.
