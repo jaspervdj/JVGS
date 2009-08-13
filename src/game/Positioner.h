@@ -13,6 +13,15 @@ namespace jvgs
          */
         class Positioner: public Affector
         {
+            private:
+                /** Gravity pulling the entity. */
+                math::Vector2D gravity;
+
+            protected:
+                /* Override
+                 */
+                void loadData(TiXmlElement *element);
+
             public:
                 /** Constructor.
                  *  @param entity Entity to position.
@@ -30,7 +39,12 @@ namespace jvgs
                 /** Get the gravity applied by the positioner.
                  *  @return The gravity.
                  */
-                virtual const math::Vector2D &getGravity() const = 0;
+                virtual const math::Vector2D &getGravity() const;
+
+                /** Set the gravity.
+                 *  @param gravity The new gravity.
+                 */
+                virtual void setGravity(const math::Vector2D &gravity);
         };
     }
 }

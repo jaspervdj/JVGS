@@ -7,6 +7,7 @@
 #include "BullController.h"
 #include "InputController.h"
 #include "CollisionResponsePositioner.h"
+#include "NaivePositioner.h"
 #include "AffectorFactory.h"
 #include "ControllerFactory.h"
 #include "PositionerFactory.h"
@@ -60,6 +61,9 @@ namespace jvgs
                     collisionResponsePositionerFactory;
             positionerFactories["CollisionResponsePositioner"] =
                     &collisionResponsePositionerFactory;
+
+            static PositionerFactory<NaivePositioner> naivePositionerFactory;
+            positionerFactories["NaivePositioner"] = &naivePositionerFactory;
 
             return positionerFactories;
         }

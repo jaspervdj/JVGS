@@ -39,9 +39,6 @@ namespace jvgs
                 /** MathManager to perform calculations. */
                 math::MathManager *mathManager;
 
-                /** Gravity pulling the entity. */
-                math::Vector2D gravity;
-
             protected:
                 /* Override
                  */
@@ -67,15 +64,6 @@ namespace jvgs
                 /* Override
                  */
                 virtual void affect(float ms);
-
-                /* Override
-                 */
-                virtual const math::Vector2D &getGravity() const;
-
-                /** Set the gravity.
-                 *  @param gravity The new gravity.
-                 */
-                virtual void setGravity(const math::Vector2D &gravity);
         };
     }
 }

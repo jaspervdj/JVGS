@@ -29,7 +29,7 @@ namespace jvgs
 
         void CollisionResponsePositioner::loadData(TiXmlElement *element)
         {
-            gravity = Vector2D(element->FirstChildElement("gravity"));
+            Positioner::loadData(element);
         }
 
         CollisionResponsePositioner::CollisionResponsePositioner(
@@ -37,7 +37,7 @@ namespace jvgs
         {
             Sketch *world = entity->getLevel()->getWorld();
             collisionDetector = new CollisionDetector(world);
-            gravity = Vector2D(0.0f, 0.0f);
+            setGravity(Vector2D(0.0f, 0.0f));
         }
 
         CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
@@ -121,13 +121,13 @@ namespace jvgs
             /* Determine slipping/falling state. */
             entity->setFalling(false);
             entity->setSlipping(false);
-            Vector2D down = gravity;
+            Vector2D down = getGravity();
             down.setLength(VERY_CLOSE * 100.0f);
             if(collisionDetector->getClosestCollision(entity->getRadius(),
                     position, down, &time, &collision)) {
                 Vector2D fall = collision - position;
-                float cosine = (gravity * fall) /
-                        (gravity.getLength() * fall.getLength());
+                float cosine = (getGravity() * fall) /
+                        (getGravity().getLength() * fall.getLength());
                 if(cosine < 1.0f - SLIP_LIMIT || cosine > 1.0f + SLIP_LIMIT)
                     entity->setSlipping(true);
             } else {
@@ -135,21 +135,11 @@ namespace jvgs
             }
 
             if(entity->isFalling() || entity->isSlipping())
-                velocity += gravity * ms;
+                velocity += getGravity() * ms;
 
             /* Now set the entity's state. */
             entity->setPosition(position);
             entity->setVelocity(velocity);
-        }
-
-        const Vector2D &CollisionResponsePositioner::getGravity() const
-        {
-            return gravity;
-        }
-
-        void CollisionResponsePositioner::setGravity(const Vector2D &gravity)
-        {
-            this->gravity = gravity;
         }
     }
 }

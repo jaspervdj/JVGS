@@ -15,6 +15,7 @@ ADD_LIBRARY(
     EntityEvent.cpp
     FollowCamera.cpp
     InputController.cpp
+    NaivePositioner.cpp
     Positioner.cpp
     SillyController.cpp
     Sprite.cpp
