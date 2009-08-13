@@ -73,6 +73,8 @@ namespace jvgs
 
         void Entity::loadData(TiXmlElement *element)
         {
+            PropertyMap::loadData(element);
+
             /* Get id. */
             if(element->Attribute("id"))
                 id = element->Attribute("id");

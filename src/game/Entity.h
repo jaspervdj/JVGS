@@ -6,6 +6,7 @@
 #include "../math/Vector2D.h"
 #include "AffectorFactory.h"
 #include "../core/XMLLoadable.h"
+#include "../core/PropertyMap.h"
 #include <string>
 #include <map>
 
@@ -20,7 +21,7 @@ namespace jvgs
         class Sprite;
         class Level;
 
-        class Entity: public core::XMLLoadable, public math::BoundedObject
+        class Entity: public math::BoundedObject, public core::PropertyMap
         {
             private:
                 /** Entity id. */
