@@ -47,6 +47,20 @@ ELSE(LUA51_FOUND)
     MESSAGE( STATUS "Lua is required" )
 ENDIF(LUA51_FOUND)
 
+#######################
+# Freetype
+#######################
+FIND_PACKAGE(Freetype)
+IF(FREETYPE_INCLUDE_DIRS)
+    MESSAGE( STATUS "Freetype has been found:" )
+    MESSAGE( STATUS "\tCFLAGS : ${FREETYPE_INCLUDE_DIRS}" )
+    MESSAGE( STATUS "\tLDFLAGS: ${FREETYPE_LIBRARIES}" )
+ELSE(FREETYPE_INCLUDE_DIRS)
+    SET( FREETYPE_INCLUDE_DIRS NOTFOUND )
+    SET( FREETYPE_LIBRARIES NOTFOUND )
+    MESSAGE( STATUS "Freetype is required" )
+ENDIF(FREETYPE_INCLUDE_DIRS)
+
 # Continue for subdirectories.
 ADD_SUBDIRECTORY(src)
 

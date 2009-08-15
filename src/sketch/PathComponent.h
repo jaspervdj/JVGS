@@ -53,6 +53,11 @@ namespace jvgs
                  */
                 virtual void addSegment(math::PathSegment *segment);
 
+                /** Closes the component by inserting a straight line
+                 *  segment.
+                 */
+                virtual void close();
+
                 /** Render this path component.
                  *  @param renderer Renderer to use.
                  */

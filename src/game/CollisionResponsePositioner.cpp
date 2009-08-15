@@ -97,6 +97,9 @@ namespace jvgs
                     Vector2D normalForce = position - collision;
                     normalForce.setLength(velocity.getLength());
                     velocity += normalForce;
+
+                    /* A little bit of damping. */
+                    velocity /= 2.0f;
  
                     /* Update the time and position. */
                     position = newPosition;

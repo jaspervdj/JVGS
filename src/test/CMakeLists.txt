@@ -12,6 +12,14 @@ TARGET_LINK_LIBRARIES(
 )
 
 ADD_EXECUTABLE(
+    fontTest fontTest.cpp
+)
+
+TARGET_LINK_LIBRARIES(
+    fontTest sketch font
+)
+
+ADD_EXECUTABLE(
     mathTest mathTest.cpp
 )
 

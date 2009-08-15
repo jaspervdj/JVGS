@@ -142,8 +142,9 @@ namespace jvgs
 
                 entity->update(ms);
 
-                /* When out of the level, they become garbage. */
-                if(!boundingBox.intersectsWith(entity->getBoundingBox()))
+                /* When below the level, they become garbage. */
+                if(entity->getPosition().getY() - entity->getRadius().getY() >
+                        world->getSize().getY())
                     entity->setGarbage();
             }
 

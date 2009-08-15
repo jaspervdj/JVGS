@@ -2,6 +2,7 @@
 #include "Path.h"
 
 #include "../math/PathSegment.h"
+#include "../math/LineSegment.h"
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
 
@@ -42,6 +43,15 @@ namespace jvgs
         void PathComponent::addSegment(PathSegment *segment)
         {
             segments.push_back(segment);
+        }
+
+        void PathComponent::close()
+        {
+            if(segments.size() >= 1) {
+                Vector2D start = segments[0]->getPoint(0.0f);
+                Vector2D end = segments[segments.size() - 1]->getPoint(1.0f);
+                addSegment(new LineSegment(start, end));
+            }
         }
 
         void PathComponent::render(Renderer *renderer) const
