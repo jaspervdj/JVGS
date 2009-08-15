@@ -18,11 +18,15 @@ namespace jvgs
             return &instance;
         }
 
-        ListManager::List ListManager::beginList() const
+        ListManager::List ListManager::createLists(int number) const
         {
-            List list = glGenLists(1);
-            glNewList(list, GL_COMPILE);
+            List list = glGenLists(number);
             return list;
+        }
+
+        void ListManager::beginList(const List &list) const
+        {
+            glNewList(list, GL_COMPILE);
         }
 
         void ListManager::endList() const
@@ -35,9 +39,16 @@ namespace jvgs
             glCallList(list);
         }
 
-        void ListManager::deleteList(List list) const
+        void ListManager::callLists(const List &base, GLubyte *lists,
+                int number) const
         {
-            glDeleteLists(list, 1);
+            glListBase(base);
+            glCallLists(number, GL_UNSIGNED_BYTE, lists);
+        }
+
+        void ListManager::deleteLists(const List &list, int number) const
+        {
+            glDeleteLists(list, number);
         }
     }
 }

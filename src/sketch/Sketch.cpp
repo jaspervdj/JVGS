@@ -41,7 +41,7 @@ namespace jvgs
             if(root)
                 delete root;
 
-            ListManager::getInstance()->deleteList(list);
+            ListManager::getInstance()->deleteLists(list);
         }
 
         const string &Sketch::getFileName() const
@@ -68,7 +68,8 @@ namespace jvgs
 
             /* Generate the display list. */
             ListManager *listManager = ListManager::getInstance();
-            list = listManager->beginList();
+            list = listManager->createLists();
+            listManager->beginList(list);
 
             Renderer *renderer = new Renderer();
             root->render(renderer);

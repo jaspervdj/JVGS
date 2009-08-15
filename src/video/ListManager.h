@@ -30,11 +30,17 @@ namespace jvgs
                  */
                 static ListManager *getInstance();
 
-                /** Create and start a new list. Render commands executed
-                 *  from now on will be stored in the list.
-                 *  @return The new display list.
+                /** Create a number of new lists.
+                 *  @param number Number of lists to create.
+                 *  @return The first list created.
                  */
-                List beginList() const;
+                List createLists(int number = 1) const;
+
+                /** Start a new list. Render commands executed
+                 *  from now on will be stored in the list.
+                 *  @param list List to start.
+                 */
+                void beginList(const List &list) const;
 
                 /** End the currently open display list. Render commands
                  *  will now be executed regularly.
@@ -46,11 +52,20 @@ namespace jvgs
                  */
                 void callList(const List &list) const;
 
-                /** Delete a display list. After this, it would also be
-                 *  a good idea not to call the list anymore.
-                 *  @param list List to be deleted.
+                /** Execute a number of display lists.
+                 *  @param base The first list.
+                 *  @param lists Offsets to the lists.
+                 *  @param number Number of lists.
                  */
-                void deleteList(List list) const;
+                void callLists(const List &base, GLubyte *lists, int number)
+                        const;
+
+                /** Delete display lists. After this, it would also be
+                 *  a good idea not to call the lists anymore.
+                 *  @param base Base list to be deleted.
+                 *  @param number Number of lists to be deleted.
+                 */
+                void deleteLists(const List &base, int number = 1) const;
         };
     }
 }
