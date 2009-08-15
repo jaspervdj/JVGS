@@ -77,11 +77,11 @@ namespace jvgs
 
                 /* Add point. */
                 Vector2D point = toVector(outline->points[p]);
-                if(FT_CURVE_TAG(outline->tags[p]) & FT_CURVE_TAG_ON)
+                if(FT_CURVE_TAG(outline->tags[p]) == FT_CURVE_TAG_ON)
                     onPoints.push_back(point);
-                else if(FT_CURVE_TAG(outline->tags[p]) & FT_CURVE_TAG_CONIC)
+                else if(FT_CURVE_TAG(outline->tags[p]) == FT_CURVE_TAG_CONIC)
                     quadraticPoints.push_back(point);
-                else if(FT_CURVE_TAG(outline->tags[p]) & FT_CURVE_TAG_CUBIC)
+                else if(FT_CURVE_TAG(outline->tags[p]) == FT_CURVE_TAG_CUBIC)
                     cubicPoints.push_back(point);
 
                 if(cubicPoints.size() == 2 && onPoints.size() == 2) {
