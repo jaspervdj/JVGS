@@ -104,6 +104,7 @@ using namespace jvgs;
 %include "../game/Controller.h"
 %include "../game/BullController.h"
 %include "../game/ControllerFactory.h"
+%include "../game/AbstractEntity.h"
 %include "../game/Entity.h"
 %include "../game/EntityEvent.h"
 %include "../game/FollowCamera.h"

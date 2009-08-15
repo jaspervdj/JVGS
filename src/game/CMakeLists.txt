@@ -4,6 +4,7 @@ INCLUDE_DIRECTORIES(
 
 ADD_LIBRARY( 
     game STATIC 
+    AbstractEntity.cpp
     Affector.cpp
     Animation.cpp
     BullController.cpp

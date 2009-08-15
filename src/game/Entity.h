@@ -1,13 +1,12 @@
 #ifndef JVGS_GAME_ENTITY_H
 #define JVGS_GAME_ENTITY_H
 
+#include "AbstractEntity.h"
 #include "../math/BoundingBox.h"
 #include "../math/BoundedObject.h"
-#include "../math/Vector2D.h"
 #include "AffectorFactory.h"
 #include "../core/XMLLoadable.h"
 #include "../core/PropertyMap.h"
-#include <string>
 #include <map>
 
 class TiXmlElement;
@@ -19,35 +18,17 @@ namespace jvgs
         class Controller;
         class Positioner;
         class Sprite;
-        class Level;
 
-        class Entity: public math::BoundedObject, public core::PropertyMap
+        class Entity: public AbstractEntity, public math::BoundedObject,
+                public core::PropertyMap
         {
             private:
-                /** Entity id. */
-                std::string id;
-
-                /** Level the entity is in. */
-                Level *level;
-
-                /** The entity position. */
-                math::Vector2D position;
-
-                /** The entity velocity. */
-                math::Vector2D velocity;
-
                 /** Radius used for collision detection. */
                 math::Vector2D radius;
 
                 /** If the entity actively checks for collision with other
                  *  entities. */
                 bool collisionChecker;
-
-                /** If the entity is garbage and should be removed. */
-                bool garbage;
-
-                /** Speed of the entity. */
-                float speed;
 
                 /** If the entity is falling. */
                 bool falling;
@@ -105,36 +86,6 @@ namespace jvgs
                  */
                 virtual ~Entity();
 
-                /** Get the entity id.
-                 *  @return The id for this entity.
-                 */
-                virtual const std::string &getId() const;
-
-                /** Get the entity level.
-                 *  @return The level the entity is in.
-                 */
-                virtual Level *getLevel() const;
-
-                /** Get the entity position.
-                 *  @return The entity position.
-                 */
-                virtual const math::Vector2D &getPosition() const;
-
-                /** Set the entity position.
-                 *  @param position The new entity position.
-                 */
-                virtual void setPosition(const math::Vector2D &position);
-
-                /** Get the entity velocity.
-                 *  @return The entity velocity.
-                 */
-                virtual const math::Vector2D &getVelocity() const;
-
-                /** Set the entity velocity.
-                 *  @param velocity The new entity velocity.
-                 */
-                virtual void setVelocity(const math::Vector2D &velocity);
-
                 /** Get the radius used for collision detection.
                  *  @return The radius used for collision detection.
                  */
@@ -149,26 +100,6 @@ namespace jvgs
                  *  @return If this object actively checks for collisions.
                  */
                 virtual bool isCollisionChecker() const;
-
-                /** See if this object is garbage. When garbage, it should be
-                 *  removed.
-                 *  @return If this entity is garbage.
-                 */
-                virtual bool isGarbage() const;
-
-                /** Mark this entity as being garbage. It will be removed later.
-                 */
-                virtual void setGarbage();
-
-                /** Get the speed for this entity.
-                 *  @return The speed for this entity.
-                 */
-                virtual float getSpeed() const;
-
-                /** Set the speed for this entity.
-                 *  @param speed The new speed for this entity.
-                 */
-                virtual void setSpeed(float speed);
 
                 /** Check if the entity is falling.
                  *  @return If the entity is falling.
@@ -244,12 +175,11 @@ namespace jvgs
                  */
                 virtual math::BoundingBox *getBoundingBox();
 
-                /** Update this entity for a given time.
-                 *  @param ms Time to update for.
+                /* Override
                  */
                 virtual void update(float ms);
 
-                /** Render this entity to the screen.
+                /* Override
                  */
                 virtual void render();
         };

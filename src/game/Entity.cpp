@@ -77,14 +77,17 @@ namespace jvgs
 
             /* Get id. */
             if(element->Attribute("id"))
-                id = element->Attribute("id");
+                setId(element->Attribute("id"));
 
             /* Load basic data. */
-            position = Vector2D(element->FirstChildElement("position"));
-            velocity = Vector2D(element->FirstChildElement("velocity"));
+            setPosition(Vector2D(element->FirstChildElement("position")));
+            setVelocity(Vector2D(element->FirstChildElement("velocity")));
             radius = Vector2D(element->FirstChildElement("radius"));
             collisionChecker = getBoolAttribute(element, "collisionChecker");
+
+            float speed;
             element->QueryFloatAttribute("speed", &speed);
+            setSpeed(speed);
 
             /* Load controller. */
             TiXmlElement *controllerElement =
@@ -122,16 +125,10 @@ namespace jvgs
         }
 
         Entity::Entity(const std::string &id, bool collisionChecker,
-                Level *level)
+                Level *level): AbstractEntity(id, level)
         {
-            this->id = id;
-            this->level = level;
-            position = Vector2D(0.0f, 0.0f);
-            velocity = Vector2D(0.0f, 0.0f);
             radius = Vector2D(0.0f, 0.0f);
             this->collisionChecker = collisionChecker;
-            garbage = false;
-            speed = 0.3f;
             falling = true;
             slipping = false;
             controller = 0;
@@ -141,10 +138,9 @@ namespace jvgs
         }
 
         Entity::Entity(TiXmlElement *element, Level *level)
+                : AbstractEntity("none", level)
         {
-            this->level = level;
             load(element);
-            garbage = false;
             facingRight = true;
         }
 
@@ -156,36 +152,6 @@ namespace jvgs
                 delete positioner;
             if(sprite)
                 delete sprite;
-        }
-
-        const string &Entity::getId() const
-        {
-            return id;
-        }
-
-        Level *Entity::getLevel() const
-        {
-            return level;
-        }
-
-        const Vector2D &Entity::getPosition() const
-        {
-            return position;
-        }
-
-        void Entity::setPosition(const Vector2D &position)
-        {
-            this->position = position;
-        }
-
-        const Vector2D &Entity::getVelocity() const
-        {
-            return velocity;
-        }
-
-        void Entity::setVelocity(const Vector2D &velocity)
-        {
-            this->velocity = velocity;
         }
 
         const Vector2D &Entity::getRadius() const
@@ -201,26 +167,6 @@ namespace jvgs
         bool Entity::isCollisionChecker() const
         {
             return collisionChecker;
-        }
-
-        bool Entity::isGarbage() const
-        {
-            return garbage;
-        }
-
-        void Entity::setGarbage()
-        {
-            garbage = true;
-        }
-
-        float Entity::getSpeed() const
-        {
-            return speed;
-        }
-
-        void Entity::setSpeed(float speed)
-        {
-            this->speed = speed;
         }
 
         bool Entity::isFalling() const
@@ -291,7 +237,8 @@ namespace jvgs
 
         BoundingBox *Entity::getBoundingBox()
         {
-            boundingBox = BoundingBox(position - radius, position + radius);
+            boundingBox = BoundingBox(getPosition() - radius,
+                    getPosition() + radius);
             return &boundingBox;
         }
 
@@ -302,14 +249,14 @@ namespace jvgs
             if(positioner)
                 positioner->affect(ms);
 
-            if(velocity.getX() <= -0.5f * speed && facingRight)
+            if(getVelocity().getX() <= -0.5f * getSpeed() && facingRight)
                 facingRight = false;
-            if(velocity.getX() >= 0.5f * speed && !facingRight)
+            if(getVelocity().getX() >= 0.5f * getSpeed() && !facingRight)
                 facingRight = true;
 
             if(falling || slipping)
                 sprite->setAnimation("falling");
-            else if(velocity.getLength() >= 0.2f * speed)
+            else if(getVelocity().getLength() >= 0.2f * getSpeed())
                 sprite->setAnimation("walking");
             else
                 sprite->setAnimation("standing");
@@ -320,8 +267,8 @@ namespace jvgs
             /* Check for collision. */
             if(collisionChecker) {
                 BoundingBox *myBoundingBox = getBoundingBox();
-                for(int i = 0; i < level->getNumberOfEntities(); i++) {
-                    Entity *other = level->getEntity(i);
+                for(int i = 0; i < getLevel()->getNumberOfEntities(); i++) {
+                    Entity *other = getLevel()->getEntity(i);
                     if(this != other) {
                         /* Collision found. */
                         if(myBoundingBox->intersectsWith(
@@ -339,7 +286,7 @@ namespace jvgs
                 VideoManager *videoManager = VideoManager::getInstance();
 
                 videoManager->push();
-                videoManager->translate(position);
+                videoManager->translate(getPosition());
 
                 if(!facingRight)
                     videoManager->scale(Vector2D(-1.0f, 1.0f));
