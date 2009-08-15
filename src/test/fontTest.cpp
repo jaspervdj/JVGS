@@ -12,10 +12,11 @@ int main(int argc, char **argv)
     VideoManager *videoManager = VideoManager::getInstance();
     videoManager->setVideoMode(Vector2D(400, 300), "Font test.");
 
+    Font *font = new Font("resources/font.ttf", 40);
     videoManager->clear();
-    videoManager->translate(Vector2D(150.0f, 150.0f));
-    //videoManager->scale(Vector2D(0.1f, 0.1f));
-    Font *font = new Font("resources/font.ttf", 100);
+    videoManager->identity();
+    videoManager->translate(Vector2D(50.0f, 50.0f));
+    font->drawString("This is a quick test.");
     videoManager->flip();
     SDL_Delay(5000);
 

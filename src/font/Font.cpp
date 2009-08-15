@@ -7,6 +7,7 @@ using namespace jvgs::core;
 #include "../sketch/Path.h"
 #include "../sketch/PathComponent.h"
 using namespace jvgs::sketch;
+
 #include "../math/CubicCurve.h"
 #include "../math/LineSegment.h"
 #include "../math/QuadraticCurve.h"
@@ -15,19 +16,32 @@ using namespace jvgs::math;
 #include <vector>
 using namespace std;
 
+#include "../video/VideoManager.h"
+#include "../video/Renderer.h"
+using namespace jvgs::video;
+
 namespace jvgs
 {
     namespace font
     {
+        const int Font::NUMBER_OF_CHARACTERS;
+
         Font::Font(const string &fileName, float size)
         {
+            /* Some references. */
+            ListManager *listManager = ListManager::getInstance();
+            VideoManager *videoManager = VideoManager::getInstance();
+            LogManager *logManager = LogManager::getInstance();
+
             this->size = size;
 
+            /* Matrix to convert points. */
             matrix = AffineTransformationMatrix();
             matrix.scale(Vector2D(1.0f / 64.0f, 1.0f / 64.0f));
             matrix.scale(Vector2D(1.0f, -1.0f));
 
-            LogManager *logManager = LogManager::getInstance();
+            /* Generate lists. */
+            base = listManager->createLists(NUMBER_OF_CHARACTERS);
 
             /* Create the main library and init it. */
             FT_Library library;
@@ -42,27 +56,53 @@ namespace jvgs
             /* Set the pixel size. */
             FT_Set_Pixel_Sizes(face, 0, (FT_UInt) size);
 
-            /* Load a character. */
-            FT_UInt index = FT_Get_Char_Index(face, 'd');
-            FT_Load_Glyph(face, index, FT_LOAD_DEFAULT);
+            /* Load characters. */
+            for(int i = 0; i < NUMBER_OF_CHARACTERS; i++) {
 
-            FT_Outline outline = face->glyph->outline;
-            Sketch *sketch = createSketch(&outline);
-            sketch->render();
-            delete sketch;
+                /* Get the glyph. */
+                FT_UInt index = FT_Get_Char_Index(face, i);
+                FT_Load_Glyph(face, index, FT_LOAD_DEFAULT);
+                FT_GlyphSlot glyph = face->glyph;
 
+                /* Create the outline. */
+                FT_Outline outline = glyph->outline;
+                Group *group = createSketchGroup(&outline);
+
+                /* Start rendering. */
+                listManager->beginList(base + i);
+
+                Renderer *renderer = new Renderer();
+                group->render(renderer);
+                delete renderer;
+                delete group;
+
+                /* Advance for next character. */
+                videoManager->translate(toVector(glyph->advance));
+
+                /* End render. */
+                listManager->endList();
+            }
+
+            /* Clean up. */
             FT_Done_Face(face);
             FT_Done_FreeType(library);
         }
 
         Font::~Font()
         {
-            //delete sketch;
+            ListManager::getInstance()->deleteLists(base, NUMBER_OF_CHARACTERS);
         }
 
-        Sketch *Font::createSketch(FT_Outline *outline)
+        void Font::drawString(const string &string) const
         {
-            Sketch *sketch = new Sketch(Vector2D(16, 16));
+            VideoManager::getInstance()->push();
+            ListManager *listManager = ListManager::getInstance();
+            listManager->callLists(base, (GLubyte*) string.c_str(), string.size());
+            VideoManager::getInstance()->pop();
+        }
+
+        Group *Font::createSketchGroup(FT_Outline *outline) const
+        {
             Group *root = new Group(0);
             Path *path = new Path(root);
             PathComponent *component = new PathComponent(path);
@@ -84,6 +124,7 @@ namespace jvgs
                 else if(FT_CURVE_TAG(outline->tags[p]) == FT_CURVE_TAG_CUBIC)
                     cubicPoints.push_back(point);
 
+                /* A cubic curve matches. */
                 if(cubicPoints.size() == 2 && onPoints.size() == 2) {
                     CubicCurve *curve = new CubicCurve(onPoints[0],
                             cubicPoints[0], cubicPoints[1], onPoints[1]);
@@ -92,12 +133,14 @@ namespace jvgs
                     onPoints.erase(onPoints.begin());
                 }
 
+                /* Insert "off" points. See freetype documentation. */
                 if(quadraticPoints.size() == 2 && onPoints.size() < 2) {
                     Vector2D middle = quadraticPoints[0] + quadraticPoints[1];
                     middle *= 0.5f;
                     onPoints.push_back(middle);
                 }
 
+                /* Quadratic curve matches. Could be more than one. */
                 while(quadraticPoints.size() >= 1 && onPoints.size() >= 2) {
                     QuadraticCurve *curve = new QuadraticCurve(onPoints[0],
                             quadraticPoints[0], onPoints[1]);
@@ -106,6 +149,7 @@ namespace jvgs
                     onPoints.erase(onPoints.begin());
                 }
 
+                /* Straight line segment matches. */
                 if(onPoints.size() == 2 && quadraticPoints.size() <= 0 && 
                         cubicPoints.size() <= 0) {
                     LineSegment *segment = new LineSegment(onPoints[0],
@@ -131,9 +175,8 @@ namespace jvgs
             component->close();
             path->addComponent(component);
             root->addSketchElement(path);
-            sketch->setRoot(root);
 
-            return sketch;
+            return root;
         }
 
         Vector2D Font::toVector(const FT_Vector &point) const

@@ -46,10 +46,7 @@ namespace jvgs
             VideoManager *videoManager = VideoManager::getInstance();
 
             for(int i = 0; i < getNumberOfSketchElements(); i++) {
-                //videoManager->push();
-                //videoManager->transform(sketchElements[i]->getMatrix());
                 sketchElements[i]->render(renderer);
-                //videoManager->pop();
             }
         }
     }

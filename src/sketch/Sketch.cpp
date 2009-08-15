@@ -8,6 +8,7 @@
 using namespace jvgs::core;
 
 #include "../video/Renderer.h"
+#include "../video/VideoManager.h"
 using namespace jvgs::video;
 
 using namespace jvgs::math;
@@ -71,9 +72,11 @@ namespace jvgs
             list = listManager->createLists();
             listManager->beginList(list);
 
+            VideoManager::getInstance()->push();
             Renderer *renderer = new Renderer();
             root->render(renderer);
             delete renderer;
+            VideoManager::getInstance()->pop();
 
             listManager->endList();
 
