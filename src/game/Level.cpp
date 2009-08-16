@@ -165,8 +165,6 @@ namespace jvgs
 
         void Level::render()
         {
-            VideoManager::getInstance()->push();
-
             if(camera)
                 camera->transform();
 
@@ -176,8 +174,6 @@ namespace jvgs
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 (*iterator)->render();
-
-            VideoManager::getInstance()->pop();
         }
     }
 }

@@ -60,6 +60,7 @@ namespace jvgs
                 effectManager->update(ms);
 
                 videoManager->clear();
+                videoManager->identity();
 
                 if(level)
                     level->render();

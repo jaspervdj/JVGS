@@ -9,6 +9,8 @@ namespace jvgs
     {
         FontManager::FontManager()
         {
+            /* DEBUG */
+            fonts["regular"] = new Font("resources/font.ttf", 40);
         }
 
         FontManager::~FontManager()

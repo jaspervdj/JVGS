@@ -20,9 +20,6 @@ namespace jvgs
                 /** Level the entity is in. */
                 Level *level;
 
-                /** If the entity is garbage and should be removed. */
-                bool garbage;
-
                 /** The entity position. */
                 math::Vector2D position;
 

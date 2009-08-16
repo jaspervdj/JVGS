@@ -1,6 +1,7 @@
 #include "Font.h"
 
 #include "../core/LogManager.h"
+#include "../core/DataManager.h"
 using namespace jvgs::core;
 
 #include "../sketch/Group.h"
@@ -32,6 +33,7 @@ namespace jvgs
             ListManager *listManager = ListManager::getInstance();
             VideoManager *videoManager = VideoManager::getInstance();
             LogManager *logManager = LogManager::getInstance();
+            DataManager *dataManager = DataManager::getInstance();
 
             this->size = size;
 
@@ -50,7 +52,8 @@ namespace jvgs
         
             /* Load the actual font. */
             FT_Face face;
-            if(FT_New_Face(library, fileName.c_str(), 0, &face))
+            string expanded = dataManager->expand(fileName);
+            if(FT_New_Face(library, expanded.c_str(), 0, &face))
                 logManager->error("Could not open '%s'.", fileName.c_str());
 
             /* Set the pixel size. */
