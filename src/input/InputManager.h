@@ -65,6 +65,10 @@ namespace jvgs
                  *  @return If the InputManager received a quit event.
                  */
                 bool hasQuitEvent() const;
+
+                /** Send a simulated quit event.
+                 */
+                void sendQuitEvent();
         };
     }
 }

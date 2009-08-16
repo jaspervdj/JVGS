@@ -73,5 +73,10 @@ namespace jvgs
         {
             return quitEvent;
         }
+
+        void InputManager::sendQuitEvent()
+        {
+            quitEvent = true;
+        }
     }
 }
