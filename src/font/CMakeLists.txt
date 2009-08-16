@@ -6,6 +6,7 @@ INCLUDE_DIRECTORIES(
 ADD_LIBRARY( 
     font STATIC 
     Font.cpp
+    FontManager.cpp
 )
 
 # Link to the following libraries
