@@ -22,17 +22,24 @@ namespace jvgs
                 /** Life lift. */
                 float life;
 
+                /** Rotation speed. */
+                float rotationSpeed;
+
                 /** Font used. */
                 font::Font *font;
 
                 /** Width of the text. */
                 float width;
 
+                /** Current rotation. */
+                float rotation;
+
             public:
                 /** Constructor.
                  */
                 TextEffect(const std::string &text, const math::Vector2D
-                        &position, float life);
+                        &position, float life = 2000,
+                        float rotationSpeed = 0.04f);
 
                 /** Destructor.
                  */
