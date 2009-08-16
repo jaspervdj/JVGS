@@ -22,6 +22,9 @@ namespace jvgs
                 /** Key state. */
                 Uint8 *keyState;
 
+                /** Received a quit event. */
+                bool quitEvent;
+
             protected:
                 /** Constructor.
                  */
@@ -57,6 +60,11 @@ namespace jvgs
                  *  @param keyListener KeyListener to remove.
                  */
                 void removeKeyListener(KeyListener *keyListener);
+
+                /** Check if the InputManager received a quit event.
+                 *  @return If the InputManager received a quit event.
+                 */
+                bool hasQuitEvent() const;
         };
     }
 }

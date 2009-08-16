@@ -4,4 +4,5 @@ ADD_LIBRARY(
     LogManager.cpp
     XMLLoadable.cpp
     PropertyMap.cpp
+    TimeManager.cpp
 )

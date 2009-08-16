@@ -21,4 +21,5 @@ ADD_LIBRARY(
     SillyController.cpp
     Sprite.cpp
     Level.cpp
+    LevelManager.cpp
 )

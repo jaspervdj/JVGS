@@ -11,6 +11,7 @@ namespace jvgs
         {
             SDL_InitSubSystem(SDL_INIT_EVENTTHREAD);
             keyState = SDL_GetKeyState(0);
+            quitEvent = false;
         }
 
         InputManager::~InputManager()
@@ -42,6 +43,9 @@ namespace jvgs
                             (*iterator)->keyPressed((Key) event.key.keysym.sym);
                         }
                         break;
+                    case SDL_QUIT:
+                        quitEvent = true;
+                        break;
                 }
             }
         }
@@ -63,6 +67,11 @@ namespace jvgs
                     iterator++;
                 }
             }
+        }
+
+        bool InputManager::hasQuitEvent() const
+        {
+            return quitEvent;
         }
     }
 }
