@@ -1,6 +1,9 @@
 #include "LevelManager.h"
 #include "Level.h"
 
+#include "../effect/EffectManager.h"
+using namespace jvgs::effect;
+
 #include "../video/VideoManager.h"
 using namespace jvgs::video;
 
@@ -40,6 +43,7 @@ namespace jvgs
             InputManager *inputManager = InputManager::getInstance();
             TimeManager *timeManager = TimeManager::getInstance();
             VideoManager *videoManager = VideoManager::getInstance();
+            EffectManager *effectManager = EffectManager::getInstance();
 
             long lastUpdate = timeManager->getTicks();
             while(!inputManager->hasQuitEvent()) {
@@ -53,10 +57,14 @@ namespace jvgs
                 if(level && ms > 0.0f)
                     level->update(ms);
 
+                effectManager->update(ms);
+
                 videoManager->clear();
 
                 if(level)
                     level->render();
+
+                effectManager->render();
 
                 videoManager->flip();
 

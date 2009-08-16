@@ -5,4 +5,5 @@ ADD_LIBRARY(
     XMLLoadable.cpp
     PropertyMap.cpp
     TimeManager.cpp
+    View.cpp
 )

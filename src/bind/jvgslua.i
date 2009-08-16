@@ -7,6 +7,8 @@
 #include "../core/LogManager.h"
 #include "../core/PropertyMap.h"
 #include "../core/XMLLoadable.h"
+#include "../core/View.h"
+#include "../effect/EffectManager.h"
 #include "../game/Affector.h"
 #include "../game/AffectorFactory.h"
 #include "../game/Animation.h"
@@ -80,6 +82,7 @@
 #include "../video/Renderer.h"
 #include "../video/VideoManager.h"
 using namespace jvgs::core;
+using namespace jvgs::effect;
 using namespace jvgs::input;
 using namespace jvgs::game;
 using namespace jvgs::video;
@@ -94,6 +97,8 @@ using namespace jvgs;
 %include "../core/LogManager.h"
 %include "../core/XMLLoadable.h"
 %include "../core/PropertyMap.h"
+%include "../core/View.h"
+%include "../effect/EffectManager.h"
 %include "../game/Affector.h"
 %include "../game/AffectorFactory.h"
 %include "../game/Animation.h"

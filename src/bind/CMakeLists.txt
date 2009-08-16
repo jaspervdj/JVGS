@@ -15,6 +15,7 @@ TARGET_LINK_LIBRARIES(
     ${LUA_LIBRARIES}
     math
     core
+    effect
     input
     game
     video

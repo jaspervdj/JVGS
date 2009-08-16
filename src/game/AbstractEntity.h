@@ -2,6 +2,7 @@
 #define JVGS_GAME_ABSTRACTENTITY_H
 
 #include "../math/Vector2D.h"
+#include "../core/View.h"
 #include <string>
 
 namespace jvgs
@@ -10,7 +11,7 @@ namespace jvgs
     {
         class Level;
 
-        class AbstractEntity
+        class AbstractEntity: public core::View
         {
             private:
                 /** Entity id. */
@@ -57,16 +58,6 @@ namespace jvgs
                  */
                 virtual Level *getLevel() const;
 
-                /** See if this object is garbage. When garbage, it should be
-                 *  removed.
-                 *  @return If this entity is garbage.
-                 */
-                virtual bool isGarbage() const;
-
-                /** Mark this entity as being garbage. It will be removed later.
-                 */
-                virtual void setGarbage();
-
                 /** Get the entity position.
                  *  @return The entity position.
                  */
@@ -96,15 +87,6 @@ namespace jvgs
                  *  @param speed The new speed for this entity.
                  */
                 virtual void setSpeed(float speed);
-
-                /** Update this entity for a given time.
-                 *  @param ms Time to update for.
-                 */
-                virtual void update(float ms) = 0;
-
-                /** Render this entity to the screen.
-                 */
-                virtual void render() = 0;
         };
     }
 }

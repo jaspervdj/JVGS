@@ -11,7 +11,6 @@ namespace jvgs
         {
             this->id = id;
             this->level = level;
-            garbage = false;
             position = Vector2D(0.0f, 0.0f);
             velocity = Vector2D(0.0f, 0.0f);
             speed = 0.3f;
@@ -34,16 +33,6 @@ namespace jvgs
         Level *AbstractEntity::getLevel() const
         {
             return level;
-        }
-
-        bool AbstractEntity::isGarbage() const
-        {
-            return garbage;
-        }
-
-        void AbstractEntity::setGarbage()
-        {
-            garbage = true;
         }
 
         const Vector2D &AbstractEntity::getPosition() const

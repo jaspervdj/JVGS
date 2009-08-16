@@ -4,6 +4,7 @@
 #include "../sketch/Sketch.h"
 #include "../video/Renderer.h"
 #include "../core/XMLLoadable.h"
+#include "../core/View.h"
 #include "../math/BoundingBox.h"
 #include <vector>
 #include <string>
@@ -21,7 +22,7 @@ namespace jvgs
 
         /** Class that represents a level the player can play through.
          */
-        class Level: public core::XMLLoadable
+        class Level: public core::XMLLoadable, public core::View
         {
             private:
                 /** The game world. */
@@ -96,12 +97,11 @@ namespace jvgs
                  */
                 virtual Entity *getEntityById(const std::string &id);
 
-                /** Update the level and everything in it.
-                 *  @param ms Milliseconds to update for.
+                /* Override
                  */
                 virtual void update(float ms);
 
-                /** Render the level to the screen.
+                /* Override
                  */
                 virtual void render();
         };
