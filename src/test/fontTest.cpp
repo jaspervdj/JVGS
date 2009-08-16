@@ -23,8 +23,10 @@ int main(int argc, char **argv)
     Font *font = new Font("resources/font.ttf", 40);
     videoManager->clear();
     videoManager->identity();
-    videoManager->translate(Vector2D(50.0f, 50.0f));
-    font->drawString(string(argv[1]));
+    videoManager->translate(Vector2D(200.0f, 150.0f));
+    videoManager->translate(Vector2D(-font->getStringWidth(argv[1]) * 0.5f,
+                0.0f));
+    font->drawString(argv[1]);
     videoManager->flip();
     SDL_Delay(5000);
 

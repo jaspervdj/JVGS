@@ -26,6 +26,9 @@ namespace jvgs
                 /** Font size. */
                 float size;
 
+                /** Advance per character. Used to calculate text width. */
+                float advances[NUMBER_OF_CHARACTERS];
+
                 /** Transformation matrix for points. */
                 math::AffineTransformationMatrix matrix;
 
@@ -47,6 +50,12 @@ namespace jvgs
                  *  @param string String to draw.
                  */
                 void drawString(const std::string &string) const;
+
+                /** Calculate the width of a string when drawn.
+                 *  @param string String to calculate width for.
+                 *  @return The string width.
+                 */
+                float getStringWidth(const std::string &string) const;
 
             protected:
                 /** Create a sketch group from a given freetype outline.

@@ -77,7 +77,9 @@ namespace jvgs
                 delete group;
 
                 /* Advance for next character. */
-                videoManager->translate(toVector(glyph->advance));
+                Vector2D advance = toVector(glyph->advance);
+                videoManager->translate(advance);
+                advances[i] = advance.getX();
 
                 /* End render. */
                 listManager->endList();
@@ -97,8 +99,19 @@ namespace jvgs
         {
             VideoManager::getInstance()->push();
             ListManager *listManager = ListManager::getInstance();
-            listManager->callLists(base, (GLubyte*) string.c_str(), string.size());
+            listManager->callLists(base, (GLubyte*) string.c_str(),
+                    string.size());
             VideoManager::getInstance()->pop();
+        }
+
+        float Font::getStringWidth(const string &string) const
+        {
+            float width = 0;
+
+            for(string::size_type i = 0; i < string.size(); i++)
+                width += advances[string[i]];
+
+            return width;
         }
 
         Group *Font::createSketchGroup(FT_Outline *outline) const
