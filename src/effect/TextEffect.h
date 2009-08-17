@@ -39,7 +39,7 @@ namespace jvgs
                  */
                 TextEffect(const std::string &text, const math::Vector2D
                         &position, float life = 2000,
-                        float rotationSpeed = 0.04f);
+                        float rotationSpeed = 0.1f);
 
                 /** Destructor.
                  */

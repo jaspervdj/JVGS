@@ -26,6 +26,11 @@ namespace jvgs
             effects.push_back(effect);
         }
 
+        void EffectManager::clear()
+        {
+            effects.clear();
+        }
+
         void EffectManager::update(float ms)
         {
             vector<View*> remaining;

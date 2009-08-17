@@ -19,5 +19,6 @@ TARGET_LINK_LIBRARIES(
     input
     game
     video
+    audio
     sketch
 )

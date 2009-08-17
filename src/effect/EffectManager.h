@@ -40,6 +40,10 @@ namespace jvgs
 #               endif
                 void addEffect(core::View *effect);
 
+                /** Remove all effects.
+                 */
+                void clear();
+
                 /* Override
                  */
                 virtual void update(float ms);
