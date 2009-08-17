@@ -23,3 +23,7 @@ ADD_LIBRARY(
     Level.cpp
     LevelManager.cpp
 )
+
+TARGET_LINK_LIBRARIES(
+    game input
+)

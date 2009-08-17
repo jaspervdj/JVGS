@@ -11,7 +11,8 @@ namespace jvgs
 {
     namespace game
     {
-        class InputController: public Controller, jvgs::input::KeyListener
+        class InputController: public Controller,
+                public jvgs::input::KeyListener
         {
             private:
                 /** Minimum delay between jumps. */

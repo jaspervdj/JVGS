@@ -19,3 +19,11 @@ ADD_SUBDIRECTORY( font )
 ADD_SUBDIRECTORY( effect )
 ADD_SUBDIRECTORY( test )
 ADD_SUBDIRECTORY( bind )
+
+ADD_EXECUTABLE(
+    jvgs main.cpp
+)
+
+TARGET_LINK_LIBRARIES(
+    jvgs bind input
+)
