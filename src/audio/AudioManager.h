@@ -20,6 +20,9 @@ namespace jvgs
                 /** Playing music. */
                 Mix_Music *music;
 
+                /** If the audio is teh epic fail. */
+                bool failed;
+
             protected:
                 /** Constructor.
                  */

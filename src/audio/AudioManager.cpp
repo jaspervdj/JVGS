@@ -15,12 +15,18 @@ namespace jvgs
         AudioManager::AudioManager()
         {
             music = 0;
-            SDL_InitSubSystem(SDL_INIT_AUDIO);
-            Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024);
+            if(SDL_InitSubSystem(SDL_INIT_AUDIO) ||
+                    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024))
+                failed = true;
+            else
+                failed = false;
         }
 
         AudioManager::~AudioManager()
         {
+            if(failed)
+                return;
+
             for(map<string, Mix_Chunk*>::iterator iterator = sounds.begin();
                     iterator != sounds.end(); iterator++)
                 Mix_FreeChunk(iterator->second);
@@ -40,6 +46,9 @@ namespace jvgs
 
         void AudioManager::playSound(const string &fileName)
         {
+            if(failed)
+                return;
+
             Mix_Chunk *sound = 0;
             map<string, Mix_Chunk*>::iterator result = sounds.find(fileName);
             if(result != sounds.end()) {
@@ -58,6 +67,9 @@ namespace jvgs
 
         void AudioManager::playMusic(const string &fileName)
         {
+            if(failed)
+                return;
+
             if(music)
                 Mix_FreeMusic(music);
 
