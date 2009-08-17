@@ -19,6 +19,24 @@ ELSE(SDL_FOUND)
     MESSAGE( STATUS "SDL is required")
 ENDIF(SDL_FOUND)
 
+##########################
+# SDL_mixer
+##########################
+FIND_PACKAGE(SDL_mixer)
+IF( SDLMIXER_FOUND )
+    # take a lucky guess
+    IF(${SDLMIXER_INCLUDE_DIR} MATCHES "NOTFOUND")
+        SET(SDLMIXER_INCLUDE_DIR ${SDL_INCLUDE_DIR})
+    ENDIF(${SDLMIXER_INCLUDE_DIR} MATCHES "NOTFOUND")
+        MESSAGE( STATUS "SDL_mixer has been found:" )
+        MESSAGE( STATUS "\tCFLAGS : ${SDLMIXER_INCLUDE_DIR}" )
+        MESSAGE( STATUS "\tLDFLAGS: ${SDLMIXER_LIBRARY}" )
+ELSE( SDLMIXER_FOUND )
+    SET( SDLMIXER_INCLUDE_DIR NOTFOUND )
+    SET( SDLMIXER_LIBRARY NOTFOUND )
+    MESSAGE( STATUS "SDL_mixer is required" )
+ENDIF(SDLMIXER_FOUND)
+
 #######################
 # OpenGL
 #######################

@@ -65,26 +65,6 @@ namespace jvgs
             return minimum + randFloat()*(maximum-minimum);
         }
 
-        int MathManager::min(const int &a, const int &b) const
-        {
-            return a<b?a:b;
-        }
-
-        int MathManager::max(const int &a, const int &b) const
-        {
-            return a>b?a:b;
-        }
-
-        int MathManager::abs(const int &value) const
-        {
-            return value>0?value:-value;
-        }
-
-        float MathManager::abs(const float &value) const
-        {
-            return value>0?value:-value;
-        }
-
         bool MathManager::getLowestPositiveRoot(float a, float b, float c,
                 float treshold, float *root) const
         {

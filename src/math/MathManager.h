@@ -71,26 +71,32 @@ namespace jvgs
                  *  \param b An integer.
                  *  \return The smallest of a and b.
                  */
-                int min(const int &a, const int &b) const;
+                template <class T>
+                const T &min(const T &a, const T &b) const
+                {
+                    return a < b ? a : b;
+                }
 
                 /** Returns a or b, whichever is the largest.
                  *  \param a An integer.
                  *  \param b An integer.
                  *  \return The largest of a and b.
                  */
-                int max(const int &a, const int &b) const;
+                template <class T>
+                const T &max(const T &a, const T &b) const
+                {
+                    return a > b ? a : b;
+                }
 
                 /** Returns the absolute value.
                  *  \param value An integer.
                  *  \return The absolute value of the input.
                  */
-                int abs(const int &value) const;
-
-                /** Returns the absolute value.
-                 *  \param value A floating point number.
-                 *  \return The absolute value of the input.
-                 */
-                float abs(const float &value) const;
+                template <class T>
+                T abs(const T &value) const
+                {
+                    return value >= (T) 0 ? value : -value;
+                }
 
                 /** Returns the lowest positive root for a quadratic equation in
                  *  the form of a * x^2 + b * x + c = 0.
