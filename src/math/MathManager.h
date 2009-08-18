@@ -66,6 +66,11 @@ namespace jvgs
                 float randFloat(const float &minimum, const float &maximum)
                     const;
 
+                /** Get a random bool.
+                 *  @param chance Chance on true (between 0.0 and 1.0).
+                 */
+                bool randBool(const float &chance = 0.5f) const;
+
                 /** Returns a or b, whichever is the smallest.
                  *  \param a An integer.
                  *  \param b An integer.

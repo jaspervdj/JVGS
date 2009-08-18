@@ -65,6 +65,11 @@ namespace jvgs
             return minimum + randFloat()*(maximum-minimum);
         }
 
+        bool MathManager::randBool(const float &chance) const
+        {
+            return randFloat() < chance;
+        }
+
         bool MathManager::getLowestPositiveRoot(float a, float b, float c,
                 float treshold, float *root) const
         {

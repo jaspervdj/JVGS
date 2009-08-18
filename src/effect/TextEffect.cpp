@@ -22,7 +22,10 @@ namespace jvgs
             this->text = text;
             this->position = position;
             this->life = life;
-            this->rotationSpeed = rotationSpeed;
+
+            MathManager *mathManager = MathManager::getInstance();
+            this->rotationSpeed = mathManager->randBool() ?
+                    rotationSpeed : -rotationSpeed;
 
             FontManager *fontManager = FontManager::getInstance();
             font = fontManager->getFont("effect");
@@ -30,7 +33,7 @@ namespace jvgs
                 font = fontManager->getFont("regular");
 
             width = font->getStringWidth(text);
-            rotation = MathManager::getInstance()->randFloat(360.0f);
+            rotation = mathManager->randFloat(360.0f);
         }
 
         TextEffect::~TextEffect()
