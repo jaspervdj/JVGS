@@ -51,6 +51,14 @@ namespace jvgs
             event->scriptManager->runScript(entity2->getScript());
         }
 
+        void EntityEvent::action(Entity *entity)
+        {
+            EntityEvent *event = getEvent();
+            event->type = "action";
+            event->source = entity;
+            event->scriptManager->runScript(entity->getScript());
+        }
+
         void EntityEvent::spawn(Entity *entity)
         {
             EntityEvent *event = getEvent();

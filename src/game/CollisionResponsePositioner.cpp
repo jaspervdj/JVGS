@@ -32,35 +32,32 @@ namespace jvgs
             Positioner::loadData(element);
         }
 
-        CollisionResponsePositioner::CollisionResponsePositioner(
-                Entity *entity): Positioner(entity)
+        CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity)
+                : Positioner(entity)
         {
-            Sketch *world = entity->getLevel()->getWorld();
-            collisionDetector = new CollisionDetector(world);
             setGravity(Vector2D(0.0f, 0.0f));
         }
 
         CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
                 TiXmlElement *element): Positioner(entity)
         {
-            Sketch *world = entity->getLevel()->getWorld();
-            collisionDetector = new CollisionDetector(world);
             load(element);
         }
 
         CollisionResponsePositioner::~CollisionResponsePositioner()
         {
-            delete collisionDetector;
         }
 
         void CollisionResponsePositioner::affect(float ms)
         {
             Entity *entity = getEntity();
+            CollisionDetector *collisionDetector =
+                    entity->getLevel()->getCollisionDetector();
 
             /* Store the original ms. */
             float timeLeft = 1.0f;
 
-            /* Convert vectors to ellipse space. */
+            /* Get vectors. */
             Vector2D position = entity->getPosition();
             Vector2D velocity = entity->getVelocity() * ms;
 

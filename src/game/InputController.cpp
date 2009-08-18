@@ -1,10 +1,13 @@
 #include "InputController.h"
 #include "Entity.h"
+#include "EntityEvent.h"
 #include "Positioner.h"
+
+#include "../input/InputManager.h"
+using namespace jvgs::input;
 
 #include "../tinyxml/tinyxml.h"
 
-using namespace jvgs::input;
 using namespace jvgs::math;
 
 using namespace std;
@@ -25,6 +28,7 @@ namespace jvgs
             minJumpDelay = 200.0f;
             jumpForce = 50.0f;
             jumpDelay = 0.0f;
+            InputManager::getInstance()->addKeyListener(this);
         }
 
         InputController::InputController(Entity *entity,
@@ -32,11 +36,12 @@ namespace jvgs
         {
             jumpDelay = 0.0f;
             load(element);
+            InputManager::getInstance()->addKeyListener(this);
         }
-                
 
         InputController::~InputController()
         {
+            InputManager::getInstance()->removeKeyListener(this);
         }
 
         void InputController::affect(float ms)
@@ -66,6 +71,8 @@ namespace jvgs
 
         void InputController::keyPressed(const Key &key)
         {
+            if(key == KEY_LCTRL)
+                EntityEvent::action(getEntity());
         }
 
         void InputController::setMinJumpDelay(float minJumpDelay)

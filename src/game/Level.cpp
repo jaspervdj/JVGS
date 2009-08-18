@@ -42,6 +42,7 @@ namespace jvgs
             if(element->Attribute("world")) {
                 string worldFileName = element->Attribute("world");
                 world = new Sketch(worldFileName);
+                collisionDetector = new CollisionDetector(world);
                 boundingBox = BoundingBox(Vector2D(0.0f, 0.0f),
                         world->getSize());
             } else {
@@ -76,6 +77,7 @@ namespace jvgs
         Level::Level()
         {
             world = 0;
+            collisionDetector = 0;
             camera = 0;
         }
 
@@ -93,6 +95,8 @@ namespace jvgs
         {
             if(world)
                 delete world;
+            if(collisionDetector)
+                delete collisionDetector;
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 delete (*iterator);
@@ -103,6 +107,11 @@ namespace jvgs
         Sketch *Level::getWorld() const
         {
             return world;
+        }
+
+        CollisionDetector *Level::getCollisionDetector() const
+        {
+            return collisionDetector;
         }
 
         int Level::getNumberOfEntities() const

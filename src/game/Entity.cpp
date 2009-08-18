@@ -6,7 +6,9 @@
 #include "Sprite.h"
 #include "BullController.h"
 #include "InputController.h"
+#include "FlyStraightController.h"
 #include "CollisionResponsePositioner.h"
+#include "CollisionDestroyPositioner.h"
 #include "NaivePositioner.h"
 #include "AffectorFactory.h"
 #include "ControllerFactory.h"
@@ -40,6 +42,11 @@ namespace jvgs
             static ControllerFactory<BullController> bullControllerFactory;
             controllerFactories["bullcontroller"] = &bullControllerFactory;
 
+            static ControllerFactory<FlyStraightController>
+                    flyStraightControllerFactory;
+            controllerFactories["flystraightcontroller"] =
+                    &flyStraightControllerFactory;
+
             static ControllerFactory<InputController> inputControllerFactory;
             controllerFactories["inputcontroller"] = &inputControllerFactory;
 
@@ -56,6 +63,11 @@ namespace jvgs
         map<string, AffectorFactory<Positioner>*> createPositionerFactories()
         {
             map<string, AffectorFactory<Positioner>*> positionerFactories;
+
+            static PositionerFactory<CollisionDestroyPositioner>
+                    collisionDestroyPositionerFactory;
+            positionerFactories["collisiondestroypositioner"] = 
+                    &collisionDestroyPositionerFactory;
 
             static PositionerFactory<CollisionResponsePositioner>
                     collisionResponsePositionerFactory;
@@ -141,6 +153,13 @@ namespace jvgs
                 : AbstractEntity("none", level)
         {
             load(element);
+            facingRight = true;
+        }
+
+        Entity::Entity(const string &fileName, Level *level)
+                : AbstractEntity("none", level)
+        {
+            load(fileName);
             facingRight = true;
         }
 
@@ -233,6 +252,11 @@ namespace jvgs
         const string &Entity::getScript() const
         {
             return script;
+        }
+
+        bool Entity::isFacingRight() const
+        {
+            return facingRight;
         }
 
         BoundingBox *Entity::getBoundingBox()

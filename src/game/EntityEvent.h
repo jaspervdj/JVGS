@@ -62,6 +62,11 @@ namespace jvgs
                  */
                 static void collision(Entity *entity1, Entity *entity2);
 
+                /** Execute an action event for an entity.
+                 *  @param entity Entity executing action.
+                 */
+                static void action(Entity *entity);
+
                 /** Execute a spawn event for an entity.
                  *  @param entity Spawned entity.
                  */

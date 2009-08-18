@@ -10,10 +10,12 @@ ADD_LIBRARY(
     BullController.cpp
     Camera.cpp
     CameraFactory.cpp
+    CollisionDestroyPositioner.cpp
     CollisionResponsePositioner.cpp
     Controller.cpp
     Entity.cpp
     EntityEvent.cpp
+    FlyStraightController.cpp
     FollowCamera.cpp
     InputController.cpp
     NaivePositioner.cpp

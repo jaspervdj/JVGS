@@ -6,6 +6,7 @@
 #include "../core/XMLLoadable.h"
 #include "../core/View.h"
 #include "../math/BoundingBox.h"
+#include "../math/CollisionDetector.h"
 #include <vector>
 #include <string>
 #include <map>
@@ -27,6 +28,9 @@ namespace jvgs
             private:
                 /** The game world. */
                 sketch::Sketch *world;
+
+                /** Collision detector for the world. */
+                math::CollisionDetector *collisionDetector;
 
                 /** The entities in the game world. */
                 std::vector<Entity*> entities;
@@ -71,6 +75,11 @@ namespace jvgs
                  *  @return The level world.
                  */
                 virtual sketch::Sketch *getWorld() const;
+
+                /** Get the level world collision detector.
+                 *  @return The level world collision detector.
+                 */
+                virtual math::CollisionDetector *getCollisionDetector() const;
 
                 /** Get the number of entities.
                  *  @return The number of entities.

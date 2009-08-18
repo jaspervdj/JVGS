@@ -82,6 +82,12 @@ namespace jvgs
                  */
                 Entity(TiXmlElement *element, Level *level);
 
+                /** Constructor.
+                 *  @param fileName XML file to load entity from.
+                 *  @param level Level the entity is in.
+                 */
+                Entity(const std::string &id, Level *level);
+
                 /** Destructor.
                  */
                 virtual ~Entity();
@@ -169,6 +175,11 @@ namespace jvgs
                  *  @return The event script.
                  */
                 virtual const std::string &getScript() const;
+
+                /** Check if the entity is facing right.
+                 *  @return If the entity is facing right.
+                 */
+                virtual bool isFacingRight() const;
 
                 /** Get a bounding box for the entity.
                  *  @return A bounding box for the entity.

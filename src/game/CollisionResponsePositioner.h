@@ -33,9 +33,6 @@ namespace jvgs
                     static float SLIP_LIMIT = 0.1f;
 #               endif
 
-                /** CollisionDetector to do, well, collision detection. */
-                math::CollisionDetector *collisionDetector;
-
                 /** MathManager to perform calculations. */
                 math::MathManager *mathManager;
 
