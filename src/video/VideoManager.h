@@ -58,6 +58,12 @@ namespace jvgs
                 void setVideoMode(const math::Vector2D &size,
                         std::string title);
 
+                /** Sets a windowed video mode with the given dimensions.
+                 *  \param size The screen size.
+                 *  \param title Title to be fed to the window manager.
+                 */
+                void setVideoMode(const math::Vector2D &size);
+
                 /** Sets a number of (good!) default flags. This includes
                  *  blending mode, textures enabled, the correct projection
                  *  matrix, the identity modelview matrix... for the full

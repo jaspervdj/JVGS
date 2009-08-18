@@ -50,23 +50,31 @@ namespace jvgs
         void VideoManager::setVideoMode(const Vector2D &size,
                                         std::string title)
         {
+            SDL_WM_SetCaption(title.c_str(), NULL);
+            setVideoMode(size);
+        }
+
+        void VideoManager::setVideoMode(const Vector2D &size)
+        {
             this->size = Vector2D((int) size.getX(), (int) size.getY());
 
             SDL_SetVideoMode((int) size.getX(), (int) size.getY(), 0, flags);
             SDL_ShowCursor(0);
-            SDL_WM_SetCaption(title.c_str(), NULL);
             
             setVideoDefaults();
         }
 
         void VideoManager::setVideoDefaults()
         {
+            glViewport(0, 0, (GLfloat) size.getX(), (GLfloat) size.getY());
+
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
             glOrtho(0.0f, (GLfloat) size.getX(), (GLfloat) size.getY(), 
                     0.0f, -1.0f, 1.0f);
 
             glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
 
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, 0);
