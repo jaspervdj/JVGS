@@ -38,13 +38,13 @@ namespace jvgs
             map<string, AffectorFactory<Controller>*> controllerFactories;
 
             static ControllerFactory<BullController> bullControllerFactory;
-            controllerFactories["BullController"] = &bullControllerFactory;
+            controllerFactories["bullcontroller"] = &bullControllerFactory;
 
             static ControllerFactory<InputController> inputControllerFactory;
-            controllerFactories["InputController"] = &inputControllerFactory;
+            controllerFactories["inputcontroller"] = &inputControllerFactory;
 
             static ControllerFactory<SillyController> sillyControllerFactory;
-            controllerFactories["SillyController"] = &sillyControllerFactory;
+            controllerFactories["sillycontroller"] = &sillyControllerFactory;
 
             return controllerFactories;
         }
@@ -59,11 +59,11 @@ namespace jvgs
 
             static PositionerFactory<CollisionResponsePositioner>
                     collisionResponsePositionerFactory;
-            positionerFactories["CollisionResponsePositioner"] =
+            positionerFactories["collisionresponsepositioner"] =
                     &collisionResponsePositionerFactory;
 
             static PositionerFactory<NaivePositioner> naivePositionerFactory;
-            positionerFactories["NaivePositioner"] = &naivePositionerFactory;
+            positionerFactories["naivepositioner"] = &naivePositionerFactory;
 
             return positionerFactories;
         }
@@ -83,7 +83,7 @@ namespace jvgs
             setPosition(Vector2D(element->FirstChildElement("position")));
             setVelocity(Vector2D(element->FirstChildElement("velocity")));
             radius = Vector2D(element->FirstChildElement("radius"));
-            collisionChecker = getBoolAttribute(element, "collisionChecker");
+            collisionChecker = getBoolAttribute(element, "collisionchecker");
 
             float speed;
             element->QueryFloatAttribute("speed", &speed);

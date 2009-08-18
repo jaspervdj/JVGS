@@ -64,6 +64,12 @@ namespace jvgs
                  */
                 virtual void set(const std::string &key,
                         const std::string &value);
+
+                /** Write the XML data to a file.
+                 *  @param fileName File to write to.
+                 *  @param expand If the file name should be expanded.
+                 */
+                virtual void write(const std::string &fileName, bool expand = false);
         };
     }
 }

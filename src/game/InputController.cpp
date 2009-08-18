@@ -15,8 +15,8 @@ namespace jvgs
     {
         void InputController::loadData(TiXmlElement *element)
         {
-            element->QueryFloatAttribute("minJumpDelay", &minJumpDelay);
-            element->QueryFloatAttribute("jumpForce", &jumpForce);
+            element->QueryFloatAttribute("minjumpdelay", &minJumpDelay);
+            element->QueryFloatAttribute("jumpforce", &jumpForce);
         }
 
         InputController::InputController(Entity *entity): Controller(entity)

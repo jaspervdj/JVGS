@@ -1,5 +1,6 @@
 #include "PropertyMap.h"
 #include "LogManager.h"
+#include "DataManager.h"
 
 #include "../tinyxml/tinyxml.h"
 using namespace std;
@@ -71,6 +72,28 @@ namespace jvgs
         void PropertyMap::set(const string &key, const string &value)
         {
             entries[key] = value;
+        }
+
+        void PropertyMap::write(const string &fileName, bool expand)
+        {
+            string expanded = expand ?
+                    DataManager::getInstance()->expand(fileName) : fileName;
+
+            TiXmlDocument document(expanded);
+            TiXmlElement root("propertymap");
+
+            for(map<string, string>::iterator iterator = entries.begin();
+                    iterator != entries.end(); iterator++) {
+                TiXmlElement element("entry");
+                element.SetAttribute("key", iterator->first);
+                element.SetAttribute("value", iterator->second);
+                root.InsertEndChild(element);
+            }
+
+            document.InsertEndChild(root);
+            if(!document.SaveFile())
+                LogManager::getInstance()->error(
+                        "Could not save to %s", fileName.c_str());
         }
     }
 }

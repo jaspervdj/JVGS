@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <level world="resources/world.svg">
-    <camera type="FollowCamera" maxDistance="50.0f" target="player" />
+    <camera type="followcamera" maxdistance="50.0f" target="player" />
     <entity id="player" speed="0.4" script="resources/player.lua"
-            collisionChecker="1">
-        <controller type="InputController" minJumpDelay="100" jumpForce="200.0"
+            collisionchecker="1">
+        <controller type="inputcontroller" minjumpdelay="100" jumpforce="200.0"
                 />
-        <positioner type="CollisionResponsePositioner">
+        <positioner type="collisionresponsepositioner">
             <gravity x="0" y="0.003" />
         </positioner>
         <position x="62" y="140" />
@@ -24,8 +24,8 @@
         </sprite>
     </entity>
     <entity id="silly" speed="0.2" script="resources/bull.lua">
-        <controller type="SillyController" speedTreshold="0.5" /> 
-        <positioner type="CollisionResponsePositioner">
+        <controller type="sillycontroller" speedtreshold="0.5" /> 
+        <positioner type="collisionresponsepositioner">
             <gravity x="0" y="0.003" />
         </positioner>
         <position x="1200" y="140" />
@@ -41,8 +41,8 @@
         </sprite>
     </entity>
     <entity id="bull" speed="0.2" script="resources/bull.lua">
-        <controller type="BullController" target="player" sight="100" /> 
-        <positioner type="CollisionResponsePositioner">
+        <controller type="bullcontroller" target="player" sight="100" /> 
+        <positioner type="collisionresponsepositioner">
             <gravity x="0" y="0.003" />
         </positioner>
         <position x="250" y="140" />

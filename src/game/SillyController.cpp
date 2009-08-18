@@ -11,7 +11,7 @@ namespace jvgs
     {
         void SillyController::loadData(TiXmlElement *element)
         {
-            element->QueryFloatAttribute("speedTreshold", &speedTreshold);
+            element->QueryFloatAttribute("speedtreshold", &speedTreshold);
         }
 
         SillyController::SillyController(Entity *entity, float speedTreshold)

@@ -27,7 +27,7 @@ namespace jvgs
             map<string, CameraFactory*> cameraFactories;
 
             static TCameraFactory<FollowCamera> followCameraFactory;
-            cameraFactories["FollowCamera"] = &followCameraFactory;
+            cameraFactories["followcamera"] = &followCameraFactory;
 
             return cameraFactories;
         }

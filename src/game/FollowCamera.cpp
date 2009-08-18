@@ -20,7 +20,7 @@ namespace jvgs
     {
         void FollowCamera::loadData(TiXmlElement *element)
         {
-            element->QueryFloatAttribute("maxDistance", &maxDistance);
+            element->QueryFloatAttribute("maxdistance", &maxDistance);
             target = element->Attribute("target");
             Entity *entity = level->getEntityById(target);
             if(entity)
