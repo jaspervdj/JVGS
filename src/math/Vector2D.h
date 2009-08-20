@@ -27,11 +27,6 @@ namespace jvgs
                  */
                 Vector2D(const Vector2D &other);
 
-                /** Constructor.
-                 *  @param element TiXmlElement to load data from. Can be 0.
-                 */
-                Vector2D(TiXmlElement *element);
-
                 /** Destructor.
                  */
                 ~Vector2D();
@@ -126,6 +121,12 @@ namespace jvgs
                  *  @return The reflection of the parameter around this vector.
                  */
                 Vector2D reflect(const Vector2D &other) const;
+
+                /** Load a vector from xml data..
+                 *  @param element TiXmlElement to load data from. Can be 0.
+                 *  @param vector Vector2D to fill in.
+                 */
+                static void fromXML(TiXmlElement *element, Vector2D *vector);
         };
     };
 };

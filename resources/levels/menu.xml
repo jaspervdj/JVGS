@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<level world="resources/levels/menu.svg">
+    <camera type="followcamera" target="player" maxdistance="100" />
+    <entity id="player" fileName="resources/player/player.xml">
+        <position x="200" y="160" />
+    </entity>
+</level>

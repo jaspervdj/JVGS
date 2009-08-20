@@ -15,14 +15,6 @@ namespace jvgs
         {
         }
 
-        Vector2D::Vector2D(TiXmlElement *element): x(0.0f), y(0.0f)
-        {
-            if(element) {
-                element->QueryFloatAttribute("x", &x);
-                element->QueryFloatAttribute("y", &y);
-            }
-        }
-
         Vector2D::~Vector2D()
         {
         }
@@ -160,6 +152,14 @@ namespace jvgs
         Vector2D Vector2D::reflect(const Vector2D &other) const
         {
             return (*this) * 2.0f - other;
+        }
+
+        void Vector2D::fromXML(TiXmlElement *element, Vector2D *vector)
+        {
+            if(element) {
+                element->QueryFloatAttribute("x", &vector->x);
+                element->QueryFloatAttribute("y", &vector->y);
+            }
         }
     };
 };

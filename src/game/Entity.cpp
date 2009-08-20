@@ -92,12 +92,21 @@ namespace jvgs
                 setId(element->Attribute("id"));
 
             /* Load basic data. */
-            setPosition(Vector2D(element->FirstChildElement("position")));
-            setVelocity(Vector2D(element->FirstChildElement("velocity")));
-            radius = Vector2D(element->FirstChildElement("radius"));
+            Vector2D position = getPosition();
+            Vector2D::fromXML(element->FirstChildElement("position"),
+                    &position);
+            setPosition(position);
+
+            Vector2D velocity = getVelocity();
+            Vector2D::fromXML(element->FirstChildElement("velocity"),
+                    &velocity);
+            setVelocity(velocity);
+
+            Vector2D::fromXML(element->FirstChildElement("radius"), &radius);
+
             collisionChecker = getBoolAttribute(element, "collisionchecker");
 
-            float speed;
+            float speed = getSpeed();;
             element->QueryFloatAttribute("speed", &speed);
             setSpeed(speed);
 
@@ -114,8 +123,6 @@ namespace jvgs
                 else
                     LogManager::getInstance()->error("No controller: %s",
                             type.c_str());
-            } else {
-                controller = 0;
             }
 
             /* Load positioner. */
@@ -131,17 +138,15 @@ namespace jvgs
                 else
                     LogManager::getInstance()->error("No positioner: %s",
                             type.c_str());
-            } else {
-                positioner = 0;
             }
 
             /* Load sprite. */
             TiXmlElement *spriteElement = element->FirstChildElement("sprite");
-            sprite = spriteElement ? new Sprite(spriteElement) : 0;
+            sprite = spriteElement ? new Sprite(spriteElement) : sprite;
 
             /* Load script. */
             script = element->Attribute("script") ?
-                    element->Attribute("script") : "none";
+                    element->Attribute("script") : script;
         }
 
         Entity::Entity(const std::string &id, bool collisionChecker,
@@ -160,6 +165,9 @@ namespace jvgs
         Entity::Entity(TiXmlElement *element, Level *level)
                 : AbstractEntity("none", level)
         {
+            controller = 0;
+            positioner = 0;
+            sprite = 0;
             load(element);
             facingRight = true;
         }

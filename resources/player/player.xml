@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entity id="player" speed="0.4" script="resources/player/player.lua"
+        collisionChecker="1">
+    <controller type="inputcontroller" minjumpdelay="300" jumpforce="200.0" />
+    <positioner type="collisionresponsepositioner">
+        <gravity x="0" y="0.003" />
+    </positioner>
+    <radius x="15" y="41" />
+    <sprite>
+        <animation id="standing">
+            <frame sketch="resources/player/walking01.svg" duration="100" />
+        </animation>
+        <animation id="walking">
+            <frame sketch="resources/player/walking01.svg" duration="100" />
+            <frame sketch="resources/player/walking02.svg" duration="100" />
+        </animation>
+        <animation id="falling">
+            <frame sketch="resources/player/falling01.svg" duration="100" />
+        </animation>
+    </sprite>
+</entity>

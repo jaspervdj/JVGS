@@ -8,6 +8,7 @@
 #include "../sketch/Group.h"
 using namespace jvgs::sketch;
 
+#include <iostream>
 using namespace std;
 
 namespace jvgs

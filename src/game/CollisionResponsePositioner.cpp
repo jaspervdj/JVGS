@@ -17,6 +17,7 @@ using namespace jvgs::math;
 
 #include "../tinyxml/tinyxml.h"
 
+#include <iostream>
 using namespace std;
 
 namespace jvgs
@@ -101,7 +102,6 @@ namespace jvgs
                     /* Update the time and position. */
                     position = newPosition;
                     timeLeft -= time;
-
                 /* No collision, just update position. */
                 } else {
                     position = destination;

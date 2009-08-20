@@ -11,7 +11,7 @@ namespace jvgs
     {
         void Positioner::loadData(TiXmlElement *element)
         {
-            gravity = Vector2D(element->FirstChildElement("gravity"));
+            Vector2D::fromXML(element->FirstChildElement("gravity"), &gravity);
         }
 
         Positioner::Positioner(Entity *entity): Affector(entity)

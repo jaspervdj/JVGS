@@ -71,6 +71,8 @@ namespace jvgs
                     LogManager::getInstance()->error("No camera %s",
                             type.c_str());
                 }
+            } else {
+                camera = 0;
             }
         }
 
