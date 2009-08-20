@@ -104,7 +104,7 @@ namespace jvgs
 
             Vector2D::fromXML(element->FirstChildElement("radius"), &radius);
 
-            collisionChecker = getBoolAttribute(element, "collisionchecker");
+            queryBoolAttribute(element, "collisionchecker", &collisionChecker);
 
             float speed = getSpeed();;
             element->QueryFloatAttribute("speed", &speed);

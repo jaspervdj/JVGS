@@ -18,12 +18,13 @@ namespace jvgs
         {
         }
 
-        bool XMLLoadable::getBoolAttribute(TiXmlElement *element,
-                const string &attribute) const
+        void XMLLoadable::queryBoolAttribute(TiXmlElement *element,
+                const string &attribute, bool *value) const
         {
-            int value = 0;
-            int result = element->QueryIntAttribute(attribute, &value);
-            return result == TIXML_SUCCESS && value;
+            int ivalue = 0;
+            int result = element->QueryIntAttribute(attribute, &ivalue);
+            if(result == TIXML_SUCCESS)
+                *value = (bool) ivalue;
         }
 
         void XMLLoadable::load(TiXmlElement *element)
