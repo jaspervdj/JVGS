@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <level world="resources/world.svg">
     <camera type="followcamera" maxdistance="50.0f" target="player" />
+    <entity id="minimalist" script="resources/minimalist.lua">
+        <position x="120" y="140" />
+        <radius x="15" y="41" />
+    </entity>
     <entity id="player" speed="0.4" script="resources/player.lua"
             collisionchecker="1">
         <controller type="inputcontroller" minjumpdelay="100" jumpforce="200.0"

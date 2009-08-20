@@ -104,28 +104,36 @@ namespace jvgs
             /* Load controller. */
             TiXmlElement *controllerElement =
                     element->FirstChildElement("controller");
-            string type = controllerElement->Attribute("type");
-            map<string, AffectorFactory<Controller>*>::iterator
-                    controllerFactory = controllerFactories.find(type);
-            if(controllerFactory != controllerFactories.end())
-                controller = controllerFactory->second->create(this,
-                        controllerElement);
-            else
-                LogManager::getInstance()->error("No controller: %s",
-                        type.c_str());
+            if(controllerElement) {
+                string type = controllerElement->Attribute("type");
+                map<string, AffectorFactory<Controller>*>::iterator
+                        controllerFactory = controllerFactories.find(type);
+                if(controllerFactory != controllerFactories.end())
+                    controller = controllerFactory->second->create(this,
+                            controllerElement);
+                else
+                    LogManager::getInstance()->error("No controller: %s",
+                            type.c_str());
+            } else {
+                controller = 0;
+            }
 
             /* Load positioner. */
             TiXmlElement *positionerElement =
                     element->FirstChildElement("positioner");
-            type = positionerElement->Attribute("type");
-            map<string, AffectorFactory<Positioner>*>::iterator
-                    positionerFactory = positionerFactories.find(type);
-            if(positionerFactory != positionerFactories.end())
-                positioner = positionerFactory->second->create(this,
-                        positionerElement);
-            else
-                LogManager::getInstance()->error("No positioner: %s",
-                        type.c_str());
+            if(positionerElement) {
+                string type = positionerElement->Attribute("type");
+                map<string, AffectorFactory<Positioner>*>::iterator
+                        positionerFactory = positionerFactories.find(type);
+                if(positionerFactory != positionerFactories.end())
+                    positioner = positionerFactory->second->create(this,
+                            positionerElement);
+                else
+                    LogManager::getInstance()->error("No positioner: %s",
+                            type.c_str());
+            } else {
+                positioner = 0;
+            }
 
             /* Load sprite. */
             TiXmlElement *spriteElement = element->FirstChildElement("sprite");
@@ -278,15 +286,16 @@ namespace jvgs
             if(getVelocity().getX() >= 0.5f * getSpeed() && !facingRight)
                 facingRight = true;
 
-            if(falling || slipping)
-                sprite->setAnimation("falling");
-            else if(getVelocity().getLength() >= 0.2f * getSpeed())
-                sprite->setAnimation("walking");
-            else
-                sprite->setAnimation("standing");
+            if(sprite) {
+                if(falling || slipping)
+                    sprite->setAnimation("falling");
+                else if(getVelocity().getLength() >= 0.2f * getSpeed())
+                    sprite->setAnimation("walking");
+                else
+                    sprite->setAnimation("standing");
 
-            if(sprite)
                 sprite->update(ms);
+            }
 
             /* Check for collision. */
             if(collisionChecker) {
