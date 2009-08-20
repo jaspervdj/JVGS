@@ -35,6 +35,11 @@ namespace jvgs
             return &instance;
         }
 
+        Level *LevelManager::getLevel() const
+        {
+            return level;
+        }
+
         void LevelManager::run()
         {
             /* Behold, as I have been told

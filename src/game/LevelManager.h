@@ -37,6 +37,11 @@ namespace jvgs
                  *  @return The LevelManager instance.
                  */
                 static LevelManager *getInstance();
+                
+                /** Get the current level.
+                 *  @return The current level.
+                 */
+                virtual Level *getLevel() const;
 
                 /** Never returns.
                  */
@@ -46,7 +51,7 @@ namespace jvgs
                  *  level will be removed ans this level will be set.
                  *  @param fileName File name of the level to run.
                  */
-                void queueLevel(const std::string &fileName);
+                virtual void queueLevel(const std::string &fileName);
         };
     }
 }
