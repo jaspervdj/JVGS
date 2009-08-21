@@ -1,6 +1,6 @@
-event = jvgslua.EntityEvent_getEvent()
-self = event:getSource()
+require("resources/common")
+local event = jvgslua.EntityEvent_getEvent()
 
-events = {}
-
-if events[event:getType()] then events[event:getType()]() end
+if event:getType() == "die" then
+    common.gameOver()
+end

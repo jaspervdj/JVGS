@@ -1,4 +1,5 @@
 local event = jvgslua.EntityEvent_getEvent()
 if event:getType() == "collision" then
-    print("Let's play!")
+    local lm = jvgslua.LevelManager_getInstance()
+    lm:queueLevel("resources/levels/level-01.xml")
 end

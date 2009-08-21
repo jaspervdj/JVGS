@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<level world="resources/levels/level-01.svg">
+    <camera type="followcamera" target="player" maxdistance="100" />
+    <entity id="player" fileName ="resources/player/player.xml">
+        <position x="900" y="640" />
+    </entity>
+    <entity id="spikes01" script="resources/spikes/spikes.lua">
+        <radius x="450" y="90" />
+        <position x="1800" y="660" />
+    </entity>
+</level>
