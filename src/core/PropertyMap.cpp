@@ -69,9 +69,20 @@ namespace jvgs
             }
         }
 
+        bool PropertyMap::getBool(const string &key)
+        {
+            map<string, string>::iterator result = entries.find(key);
+            return result != entries.end() ? result->second == "true" : false;
+        }
+
         void PropertyMap::set(const string &key, const string &value)
         {
             entries[key] = value;
+        }
+
+        void PropertyMap::setBool(const string &key, bool value)
+        {
+            entries[key] = value ? "true" : "false";
         }
 
         void PropertyMap::write(const string &fileName, bool expand)

@@ -3,7 +3,7 @@ function common.kill(e)
     -- Drop him.
     local positioner = jvgslua.NaivePositioner(e)
     e:setPositioner(positioner)
-    e:set("dead", 1)
+    e:setBool("dead", true)
 
     local am = jvgslua.AudioManager_getInstance()
     am:playSound("resources/sounds/die-01.ogg")

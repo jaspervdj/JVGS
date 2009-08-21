@@ -58,12 +58,24 @@ namespace jvgs
                  */
                 virtual bool get(const std::string &key, std::string *value);
 
+                /** Get a key as boolean.
+                 *  @param key Key to get the value for.
+                 *  @return The boolean value for key.
+                 */
+                virtual bool getBool(const std::string &keu);
+
                 /** Set the value of a key.
                  *  @param key Key to set the value for.
                  *  @param value Value for key.
                  */
                 virtual void set(const std::string &key,
                         const std::string &value);
+
+                /** Set a key as boolean.
+                 *  @param key Key to get the value for.
+                 *  @param value The boolean value for key.
+                 */
+                virtual void setBool(const std::string &keu, bool value);
 
                 /** Write the XML data to a file.
                  *  @param fileName File to write to.
