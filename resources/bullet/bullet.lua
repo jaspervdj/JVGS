@@ -8,9 +8,6 @@ function events:collision()
     local collider = event:getCollider()
     if not collider:getBool("dead") and collider:getId() ~= "player" then
         common.kill(collider)
-        print("Killing " .. collider:getId())
-    else
-        print("Not killing " ..collider:getId())
     end
 end
 

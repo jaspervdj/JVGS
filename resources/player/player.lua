@@ -9,6 +9,10 @@ function events:die()
 end
 
 function events.action()
+    local em = jvgslua.EffectManager_getInstance()
+    local effect = jvgslua.InvertEffect()
+    em:addEffect(effect)
+
     if self:getBool("hat") then
         local level = self:getLevel()
         local bullet = jvgslua.Entity("resources/bullet/bullet.xml", level)

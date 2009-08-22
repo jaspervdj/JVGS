@@ -9,8 +9,6 @@ namespace jvgs
     {
         FontManager::FontManager()
         {
-            /* DEBUG */
-            fonts["regular"] = new Font("resources/font.ttf", 40);
         }
 
         FontManager::~FontManager()
@@ -37,7 +35,7 @@ namespace jvgs
 
         void FontManager::addFont(const string &name, Font *font)
         {
-            fonts["name"] = font;
+            fonts[name] = font;
         }
     }
 }

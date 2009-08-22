@@ -9,6 +9,9 @@ using namespace jvgs::font;
 #include "../math/MathManager.h"
 using namespace jvgs::math;
 
+#include "../core/LogManager.h"
+using namespace jvgs::core;
+
 using namespace jvgs::math;
 using namespace std;
 
@@ -31,6 +34,8 @@ namespace jvgs
             font = fontManager->getFont("effect");
             if(!font)
                 font = fontManager->getFont("regular");
+            if(!font)
+                LogManager::getInstance()->error("No font for text effect.");
 
             width = font->getStringWidth(text);
             rotation = mathManager->randFloat(360.0f);

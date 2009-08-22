@@ -19,7 +19,7 @@ namespace jvgs
                 /** Position. */
                 math::Vector2D position;
 
-                /** Life lift. */
+                /** Life left. */
                 float life;
 
                 /** Rotation speed. */
@@ -36,6 +36,10 @@ namespace jvgs
 
             public:
                 /** Constructor.
+                 *  @param text Text to display.
+                 *  @param position Position for the text.
+                 *  @param life Lifetime in milliseconds.
+                 *  @param rotationSpeed Speed to rotate the text with.
                  */
                 TextEffect(const std::string &text, const math::Vector2D
                         &position, float life = 2000,

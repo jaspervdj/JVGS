@@ -79,6 +79,8 @@ namespace jvgs
                     if(level)
                         delete level;
 
+                    effectManager->clear();
+
                     /* Load new level. */
                     level = new Level(queueFileName);
                     queue = false;

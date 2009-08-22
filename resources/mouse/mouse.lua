@@ -6,9 +6,8 @@ events = {}
 
 function events.collision()
     local collider = event:getCollider()
-    if collider:getId() == "player" then
-        common.enemyPlayerCollision(self, collider)
-    end
+    local winner, loser = common.fight(self, collider)
+    if loser then common.kill(loser) end
 end
 
 f = events[event:getType()]

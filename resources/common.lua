@@ -1,28 +1,35 @@
 common = {}
-function common.enemyPlayerCollision(e, p)
-    if e:getBool("dead") or p:getBool("dead") then return end
 
-    local y = p:getPosition():getY() + p:getRadius():getY()
-    local loser
-    if e:getPosition():getY() > y then
-        loser = e
-    else
-        loser = p
+-- Returns winner, loser
+function common.fight(enemy, collider)
+    if collider:getId() ~= "player" then return nil, nil end
+    if enemy:getBool("dead") or collider:getBool("dead") then
+        return nil, nil
     end
 
-    common.kill(loser)
+    local em = jvgslua.EffectManager_getInstance()
+    local effect = jvgslua.TextEffect("Whack!", enemy:getPosition())
+    em:addEffect(effect)
+
+    local y = collider:getPosition():getY() + collider:getRadius():getY()
+    if enemy:getPosition():getY() > y then
+        return collider, enemy
+    else
+        return enemy, collider
+    end
 end
 
 function common.kill(e)
-    -- Drop him.
     if e:getBool("invulnerable") then return end
 
-    local positioner = jvgslua.NaivePositioner(e)
-    e:setController(nil)
-    e:setPositioner(positioner)
+    -- Kill him
     e:setBool("dead", true)
 
-    local velocity = jvgslua.Vector2D(0, e:getSpeed())
+    -- Drop him.
+    e:setController(nil)
+    local positioner = jvgslua.NaivePositioner(e)
+    e:setPositioner(positioner)
+    local velocity = jvgslua.Vector2D(0, 2 * e:getSpeed())
     e:setVelocity(velocity)
 end
 

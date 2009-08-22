@@ -28,6 +28,9 @@ namespace jvgs
 
         void EffectManager::clear()
         {
+            for(vector<View*>::iterator iterator = effects.begin();
+                    iterator != effects.end(); iterator++)
+                delete *iterator;
             effects.clear();
         }
 
@@ -40,6 +43,8 @@ namespace jvgs
                 (*iterator)->update(ms);
                 if(!(*iterator)->isGarbage())
                     remaining.push_back(*iterator);
+                else
+                    delete *iterator;
             }
 
             effects = remaining;
