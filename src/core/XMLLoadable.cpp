@@ -30,8 +30,8 @@ namespace jvgs
         void XMLLoadable::load(TiXmlElement *element)
         {
             /* First load data from another file. */
-            if(element->Attribute("fileName"))
-                load(element->Attribute("fileName"));
+            if(element->Attribute("filename"))
+                load(element->Attribute("filename"));
             /* Now load the specific data. */
             loadData(element);
         }
