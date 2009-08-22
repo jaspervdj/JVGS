@@ -31,6 +31,12 @@ namespace jvgs
             current = "standing";
         }
 
+        Sprite::Sprite(const string &fileName)
+        {
+            load(fileName);
+            current = "standing";
+        }
+
         Sprite::~Sprite()
         {
             /* Clear all animations. */

@@ -39,6 +39,11 @@ namespace jvgs
                  */
                 Sprite(TiXmlElement *element);
 
+                /** Constructor. Load a sprite from an XML file.
+                 *  @param fileName The XML data file.
+                 */
+                Sprite(const std::string &fileName);
+
                 /** Destructor.
                  */
                 virtual ~Sprite();
