@@ -63,9 +63,12 @@ namespace jvgs
                 float increment = Path::getSubdivideLength() /
                         segment->getLength();
 
-                for(float t = 0.0f; t <= 1.0f; t += increment) {
+                renderer->vector(segment->getPoint(0.0f));
+                for(float t = increment; t < 1.0f; t += increment) {
                     renderer->vector(segment->getPoint(t));
                 }
+
+                renderer->vector(segment->getPoint(1.0f));
             }
 
             renderer->end();
