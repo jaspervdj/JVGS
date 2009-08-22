@@ -6,8 +6,8 @@ events = {}
 
 function events.collision()
     local collider = event:getCollider()
-    if collider:getId() == "player" then
-        common.enemyPlayerCollision(self, collider)
+    if collider:getId() == "player" and not collider:getBool("dead") then
+        common.kill(collider)
     end
 end
 

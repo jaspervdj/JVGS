@@ -8,6 +8,9 @@
         <radius x="450" y="90" />
         <position x="1800" y="660" />
     </entity>
+    <entity id="troll-01" filename="resources/troll/troll.xml">
+        <position x="2600" y="1040" />
+    </entity>
     <entity id="spider-01" filename="resources/spider/spider.xml">
         <position x="600" y="1800" />
     </entity>
