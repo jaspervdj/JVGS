@@ -6,16 +6,5 @@
         <gravity x="0" y="0.003" />
     </positioner>
     <radius x="20" y="40" />
-    <sprite>
-        <animation id="standing">
-            <frame sketch="resources/player/walking-01.svg" duration="100" />
-        </animation>
-        <animation id="walking">
-            <frame sketch="resources/player/walking-01.svg" duration="100" />
-            <frame sketch="resources/player/walking-02.svg" duration="100" />
-        </animation>
-        <animation id="falling">
-            <frame sketch="resources/player/falling-01.svg" duration="100" />
-        </animation>
-    </sprite>
+    <sprite filename="resources/player/regular-sprite.xml" />
 </entity>

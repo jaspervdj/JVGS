@@ -4,7 +4,7 @@ function common.enemyPlayerCollision(e, p)
 
     local y = p:getPosition():getY() + p:getRadius():getY()
     local loser
-    if p:isFalling() or e:getPosition():getY() < y then
+    if e:getPosition():getY() > y then
         loser = e
     else
         loser = p
@@ -15,6 +15,8 @@ end
 
 function common.kill(e)
     -- Drop him.
+    if e:getBool("invulnerable") then return end
+
     local positioner = jvgslua.NaivePositioner(e)
     e:setController(nil)
     e:setPositioner(positioner)
