@@ -3,7 +3,12 @@ function common.enemyPlayerCollision(e, p)
     if e:getBool("dead") or p:getBool("dead") then return end
 
     local y = p:getPosition():getY() + p:getRadius():getY()
-    local loser = e:getPosition():getY() < y and p or e
+    local loser
+    if p:isFalling() or e:getPosition():getY() < y then
+        loser = e
+    else
+        loser = p
+    end
 
     common.kill(loser)
 end

@@ -24,7 +24,19 @@
     <entity id="mouse-01" filename="resources/mouse/mouse.xml">
         <position x="500" y="1000" />
     </entity>
-    <entity id="mouse-01" filename="resources/mouse/mouse.xml">
+    <entity id="mouse-02" filename="resources/mouse/mouse.xml">
         <position x="380" y="1000" />
+    </entity>
+    <entity id="mouse-03" filename="resources/mouse/mouse.xml">
+        <position x="2000" y="100" />
+    </entity>
+    <entity id="mouse-04" filename="resources/mouse/mouse.xml">
+        <position x="2400" y="100" />
+    </entity>
+    <entity id="spider-03" filename="resources/spider/spider.xml">
+        <position x="2800" y="100" />
+    </entity>
+    <entity id="spider-04" filename="resources/spider/spider.xml">
+        <position x="3100" y="100" />
     </entity>
 </level>
