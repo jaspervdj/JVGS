@@ -21,4 +21,10 @@
         <radius x="25" y="20" />
         <position x="230" y="1740" />
     </entity>
+    <entity id="mouse-01" filename="resources/mouse/mouse.xml">
+        <position x="500" y="1000" />
+    </entity>
+    <entity id="mouse-01" filename="resources/mouse/mouse.xml">
+        <position x="380" y="1000" />
+    </entity>
 </level>
