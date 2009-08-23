@@ -1,3 +1,8 @@
+local textEffects = {"Whack!", "Splash!", "Pow!"}
+local function randomTextEffect()
+    return textEffects[math.random(1, #textEffects)]
+end
+
 common = {}
 
 -- Returns winner, loser
@@ -6,10 +11,6 @@ function common.fight(enemy, collider)
     if enemy:getBool("dead") or collider:getBool("dead") then
         return nil, nil
     end
-
-    local em = jvgslua.EffectManager_getInstance()
-    local effect = jvgslua.TextEffect("Whack!", enemy:getPosition())
-    em:addEffect(effect)
 
     local y = collider:getPosition():getY() + collider:getRadius():getY()
     if enemy:getPosition():getY() > y then
@@ -32,7 +33,12 @@ function common.kill(e)
     local velocity = jvgslua.Vector2D(0, 2 * e:getSpeed())
     e:setVelocity(velocity)
 
-    -- Effect when player.
+    -- Text effect.
+    local em = jvgslua.EffectManager_getInstance()
+    local effect = jvgslua.TextEffect(randomTextEffect(), e:getPosition())
+    em:addEffect(effect)
+
+    -- Invert effect when player.
     if e:getId() == "player" then
         local em = jvgslua.EffectManager_getInstance()
         local effect = jvgslua.InvertEffect()

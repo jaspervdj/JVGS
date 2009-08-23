@@ -12,7 +12,7 @@
         <position x="2600" y="1040" />
     </entity>
     <entity id="spider-01" filename="resources/spider/spider.xml">
-        <position x="600" y="1800" />
+        <position x="730" y="1800" />
     </entity>
     <entity id="spider-02" filename="resources/spider/spider.xml">
         <position x="400" y="1800" />
