@@ -165,6 +165,7 @@ namespace jvgs
         Entity::Entity(TiXmlElement *element, Level *level)
                 : AbstractEntity("none", level)
         {
+            collisionChecker = false;
             controller = 0;
             positioner = 0;
             sprite = 0;
@@ -175,6 +176,10 @@ namespace jvgs
         Entity::Entity(const string &fileName, Level *level)
                 : AbstractEntity("none", level)
         {
+            collisionChecker = false;
+            controller = 0;
+            positioner = 0;
+            sprite = 0;
             load(fileName);
             facingRight = true;
         }
