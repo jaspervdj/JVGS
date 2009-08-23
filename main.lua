@@ -1,6 +1,10 @@
 videoManager = jvgslua.VideoManager_getInstance()
 videoManager:setVideoMode(jvgslua.Vector2D(600, 400), "jvgs")
 
+-- Play soundtrack
+am = jvgslua.AudioManager_getInstance()
+am:playMusic("resources/soundtrack.ogg")
+
 -- Load a font
 font = jvgslua.Font("resources/font.ttf", 28)
 fontManager = jvgslua.FontManager_getInstance()
