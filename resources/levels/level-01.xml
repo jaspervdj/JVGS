@@ -42,4 +42,8 @@
     <entity id="hat" filename="resources/hat/hat.xml">
         <position x="2964" y="120" />
     </entity>
+    <entity id="heart" script="resources/heart.lua">
+        <radius x="45" y="90" />
+        <position x="2940" y="1140" />
+    </entity>
 </level>

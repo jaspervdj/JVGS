@@ -31,6 +31,13 @@ function common.kill(e)
     e:setPositioner(positioner)
     local velocity = jvgslua.Vector2D(0, 2 * e:getSpeed())
     e:setVelocity(velocity)
+
+    -- Effect when player.
+    if e:getId() == "player" then
+        local em = jvgslua.EffectManager_getInstance()
+        local effect = jvgslua.InvertEffect()
+        em:addEffect(effect)
+    end
 end
 
 function common.gameOver()
