@@ -27,7 +27,7 @@ namespace jvgs
 
         bool InputManager::isKeyDown(const Key &key) const
         {
-            return keyState[key];
+            return (bool) keyState[key];
         }
 
         void InputManager::update(float ms)

@@ -24,13 +24,13 @@ namespace jvgs
         {
             private:
 #               ifndef SWIG
-                    const static float VERY_CLOSE = 0.1f;
-                    const static int MAX_STEPS = 10;
-                    const static float SLIP_LIMIT = 0.1f;
+                    const static float VERY_CLOSE;
+                    const static int MAX_STEPS;
+                    const static float SLIP_LIMIT;
 #               else
-                    static float VERY_CLOSE = 0.1f;
-                    static int MAX_STEPS = 10;
-                    static float SLIP_LIMIT = 0.1f;
+                    static float VERY_CLOSE;
+                    static int MAX_STEPS;
+                    static float SLIP_LIMIT;
 #               endif
 
                 /** MathManager to perform calculations. */

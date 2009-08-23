@@ -1,4 +1,5 @@
 #include "AffineTransformationMatrix.h"
+#include "MathManager.h"
 
 #include <cmath>
 

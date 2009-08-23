@@ -33,7 +33,7 @@ namespace jvgs
 
         void MathManager::newRandomSeed() const
         {
-            srand(time(0));
+            srand((unsigned int) time(0));
         }
 
         int MathManager::randInt(const int &maximum) const

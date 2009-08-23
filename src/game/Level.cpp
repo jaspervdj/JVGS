@@ -118,7 +118,7 @@ namespace jvgs
 
         int Level::getNumberOfEntities() const
         {
-            return entities.size();
+            return (int) entities.size();
         }
 
         Entity *Level::getEntity(int index) const

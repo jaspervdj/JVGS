@@ -16,9 +16,9 @@ namespace jvgs
         {
             private:
 #               ifndef SWIG
-                    const static float SUBDIVIDE_LENGTH = 5.0f;
+                    static const float SUBDIVIDE_LENGTH;
 #               else
-                    static float SUBDIVIDE_LENGTH = 5.0f;
+                    static float SUBDIVIDE_LENGTH;
 #               endif
 
                 std::vector<PathComponent*> components;

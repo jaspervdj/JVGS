@@ -24,9 +24,9 @@ namespace jvgs
 {
     namespace game
     {
-        const float CollisionResponsePositioner::VERY_CLOSE;
-        const int CollisionResponsePositioner::MAX_STEPS;
-        const float CollisionResponsePositioner::SLIP_LIMIT;
+        const float CollisionResponsePositioner::VERY_CLOSE = 0.1f;
+        const int CollisionResponsePositioner::MAX_STEPS = 10;
+        const float CollisionResponsePositioner::SLIP_LIMIT = 0.1f;
 
         void CollisionResponsePositioner::loadData(TiXmlElement *element)
         {

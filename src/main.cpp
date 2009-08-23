@@ -7,6 +7,9 @@ using namespace jvgs::core;
 #include <string>
 using namespace std;
 
+/* Needed on windows to link main with SDLmain. */
+#include <SDL/SDL.h>
+
 int main(int argc, char **argv)
 {
     ScriptManager *scriptManager = ScriptManager::getInstance();

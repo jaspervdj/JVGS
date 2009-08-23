@@ -32,7 +32,7 @@ namespace jvgs
 
         int PathComponent::getNumberOfSegments() const
         {
-            return segments.size();
+            return (int) segments.size();
         }
 
         PathSegment *PathComponent::getSegment(int index) const

@@ -1,7 +1,7 @@
 #ifndef JVGS_VIDEO_LISTMANAGER_H
 #define JVGS_VIDEO_LISTMANAGER_H
 
-#include <GL/gl.h>
+#include <SDL/SDL_opengl.h>
 
 namespace jvgs
 {

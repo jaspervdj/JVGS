@@ -1,6 +1,10 @@
 #ifndef JVGS_MATH_MATHMANAGER_H
 #define JVGS_MATH_MATHMANAGER_H
 
+#ifndef M_PI
+#define M_PI 3.14159265
+#endif
+
 namespace jvgs
 {
     namespace math

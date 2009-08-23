@@ -25,7 +25,7 @@ namespace jvgs
 {
     namespace font
     {
-        const int Font::NUMBER_OF_CHARACTERS;
+        const int Font::NUMBER_OF_CHARACTERS = 256;
 
         Font::Font(const string &fileName, float size)
         {
@@ -34,6 +34,8 @@ namespace jvgs
             VideoManager *videoManager = VideoManager::getInstance();
             LogManager *logManager = LogManager::getInstance();
             DataManager *dataManager = DataManager::getInstance();
+
+            advances = new float[NUMBER_OF_CHARACTERS];
 
             this->size = size;
 
@@ -96,6 +98,7 @@ namespace jvgs
         Font::~Font()
         {
             ListManager::getInstance()->deleteLists(base, NUMBER_OF_CHARACTERS);
+            delete[] advances;
         }
 
         void Font::drawString(const string &string) const
@@ -103,7 +106,7 @@ namespace jvgs
             VideoManager::getInstance()->push();
             ListManager *listManager = ListManager::getInstance();
             listManager->callLists(base, (GLubyte*) string.c_str(),
-                    string.size());
+                    (int) string.size());
             VideoManager::getInstance()->pop();
         }
 
@@ -197,7 +200,7 @@ namespace jvgs
 
         Vector2D Font::toVector(const FT_Vector &point) const
         {
-            return matrix * Vector2D(point.x, point.y);
+            return matrix * Vector2D((float) point.x, (float) point.y);
         }
     }
 }

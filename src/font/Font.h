@@ -18,16 +18,16 @@ namespace jvgs
             private:
                 /** Number of characters. */
 #               ifndef SWIG
-                    const static int NUMBER_OF_CHARACTERS = 256;
+                    const static int NUMBER_OF_CHARACTERS;
 #               else
-                    static int NUMBER_OF_CHARACTERS = 256;
+                    static int NUMBER_OF_CHARACTERS;
 #               endif
 
                 /** Font size. */
                 float size;
 
                 /** Advance per character. Used to calculate text width. */
-                float advances[NUMBER_OF_CHARACTERS];
+                float *advances;
 
                 /** Transformation matrix for points. */
                 math::AffineTransformationMatrix matrix;

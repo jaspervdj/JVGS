@@ -33,7 +33,7 @@ namespace jvgs
 
         int Group::getNumberOfSketchElements() const
         {
-            return sketchElements.size();
+            return (int) sketchElements.size();
         }
 
         SketchElement *Group::getSketchElement(int index) const

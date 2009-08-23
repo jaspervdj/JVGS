@@ -11,7 +11,7 @@ namespace jvgs
 {
     namespace sketch
     {
-        const float Path::SUBDIVIDE_LENGTH;
+        const float Path::SUBDIVIDE_LENGTH = 5.0f;
 
         Path::Path(SketchElement *parent): SketchElement(parent)
         {
@@ -36,7 +36,7 @@ namespace jvgs
 
         int Path::getNumberOfComponents() const
         {
-            return components.size();
+            return (int) components.size();
         }
 
         PathComponent *Path::getComponent(int index) const

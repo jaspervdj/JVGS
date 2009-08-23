@@ -56,7 +56,8 @@ namespace jvgs
 
         void VideoManager::setVideoMode(const Vector2D &size)
         {
-            this->size = Vector2D((int) size.getX(), (int) size.getY());
+            this->size = Vector2D((float)(int) size.getX(),
+                    (float)(int) size.getY());
 
             SDL_SetVideoMode((int) size.getX(), (int) size.getY(), 0, flags);
             SDL_ShowCursor(0);
@@ -66,7 +67,7 @@ namespace jvgs
 
         void VideoManager::setVideoDefaults()
         {
-            glViewport(0, 0, (GLfloat) size.getX(), (GLfloat) size.getY());
+            glViewport(0, 0, (GLsizei) size.getX(), (GLsizei) size.getY());
 
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
