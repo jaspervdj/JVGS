@@ -12,5 +12,11 @@ function events.collision()
     end
 end
 
+function events.die()
+    local am = jvgslua.AudioManager_getInstance()
+    am:playSound("resources/sounds/troll.ogg")
+end
+
+
 f = events[event:getType()]
 if f then f() end

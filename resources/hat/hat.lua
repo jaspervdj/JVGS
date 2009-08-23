@@ -11,6 +11,9 @@ function events.collision()
         collider:setSprite(hatSprite)
         collider:setBool("hat", true)
         self:setGarbage()
+
+        local am = jvgslua.AudioManager_getInstance()
+        am:playSound("resources/sounds/hat.ogg")
     end
 end
 

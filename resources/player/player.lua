@@ -5,6 +5,8 @@ local self = event:getSource()
 events = {}
 
 function events:die()
+    local am = jvgslua.AudioManager_getInstance()
+    am:playSound("resources/sounds/player-die.ogg")
     common.gameOver()
 end
 
@@ -19,8 +21,10 @@ function events.action()
         end
 
         bullet:setPosition(self:getPosition())
-
         level:addEntity(bullet)
+
+        local am = jvgslua.AudioManager_getInstance()
+        am:playSound("resources/sounds/shoot.ogg")
     end
 end
 
