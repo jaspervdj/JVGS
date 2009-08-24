@@ -318,7 +318,8 @@ namespace jvgs
                     if(this != other) {
                         /* Collision found. */
                         if(myBoundingBox->intersectsWith(
-                                other->getBoundingBox())) {
+                                other->getBoundingBox(), getVelocity() * ms,
+                                other->getVelocity() * ms)) {
                             EntityEvent::collision(this, other);
                         }
                     }

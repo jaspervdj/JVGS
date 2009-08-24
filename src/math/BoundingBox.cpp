@@ -1,4 +1,5 @@
 #include "BoundingBox.h"
+#include "MathManager.h"
 
 namespace jvgs
 {
@@ -62,6 +63,75 @@ namespace jvgs
             if(bottomRight.getY() < other->topLeft.getY())
                 return false;
             return true;
+        }
+
+        bool BoundingBox::intersectsWith(BoundingBox *other, const Vector2D
+                &vel1, const Vector2D &vel2) const
+        {
+            /* Reference to do some math. */
+            MathManager *mathManager = MathManager::getInstance();
+
+            /* Relative movement. Consider this object static, and other as
+             * moving. */
+            Vector2D velocity = vel2 - vel1;
+            float t0, t1, tMinX, tMaxX, tMinY, tMaxY;
+
+            /* X intersection times.  */
+            if(velocity.getX() == 0.0f) {
+                t0 = (bottomRight.getX() - other->topLeft.getX()) /
+                        velocity.getX();
+                t1 = (topLeft.getX() - other->bottomRight.getX()) /
+                        velocity.getX();
+                tMinX = mathManager->min<float>(t0, t1);
+                tMaxX = mathManager->max<float>(t0, t1);
+            } else {
+                if(topLeft.getX() < other->bottomRight.getX() &&
+                        bottomRight.getX() > other->topLeft.getX()) {
+                    tMinX = 0.0f;
+                    tMaxX = 1.0f;
+                } else {
+                    return false;
+                }
+            }
+
+            /* Some trivial rejections. */
+            if(tMaxX < 0.0f)
+                return false;
+            if(tMinX > 1.0f)
+                return false;
+
+            /* Y intersection times. */
+            if(velocity.getY() == 0.0f) {
+                t0 = (bottomRight.getY() - other->topLeft.getY()) /
+                        velocity.getY();
+                t1 = (topLeft.getY() - other->bottomRight.getY()) /
+                        velocity.getY();
+                tMinY = mathManager->min<float>(t0, t1);
+                tMaxY = mathManager->max<float>(t0, t1);
+            } else {
+                if(topLeft.getY() < other->bottomRight.getY() &&
+                        bottomRight.getY() > other->topLeft.getY()) {
+                    tMinY = 0.0f;
+                    tMaxY = 1.0f;
+                } else {
+                    return false;
+                }
+            }
+
+            /* Some trivial rejections. */
+            if(tMaxY < 0.0f)
+                return false;
+            if(tMinY > 1.0f)
+                return false;
+
+            /* Reject. */
+            if(tMaxX < tMinY)
+                return false;
+            if(tMinX > tMaxY)
+                return false;
+
+            float exact = mathManager->min<float>(tMinX, tMinY);
+            return exact >= 0.0f && exact <= 1.0f;
         }
 
         bool BoundingBox::completelyIn(BoundingBox *other) const

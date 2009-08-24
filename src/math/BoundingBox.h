@@ -51,6 +51,15 @@ namespace jvgs
                  *  @param other BoundingBox to check intersection with.
                  *  @return If there is any intersection of the two boxes.
                  */
+                virtual bool intersectsWith(BoundingBox *other,
+                        const Vector2D &vel1, const Vector2D &vel2) const;
+
+                /** Check for intersection with another bounding box.
+                 *  @param other BoundingBox to check intersection with.
+                 *  @param vel1 Velocity of this bounding box.
+                 *  @param vel2 Velocity of the other bounding box.
+                 *  @return If there is an intersection of the boxes.
+                 */
                 virtual bool intersectsWith(BoundingBox *other) const;
 
                 /** Check if this bounding box lays completely in another
