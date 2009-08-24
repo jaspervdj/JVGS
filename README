@@ -12,6 +12,8 @@
 ################################################################################
 
 The sounds are not included on github. Get them from the sourceforge mirrors.
+Actually, get the whole package from sourceforge unless you want an unstable
+release.
 
 ################################################################################
 # 3 Dependencies
@@ -30,7 +32,6 @@ The sounds are not included on github. Get them from the sourceforge mirrors.
 
 cd into the jvgs folder, and then:
 cmake .
-make swig
 make
 
 To execute, use:

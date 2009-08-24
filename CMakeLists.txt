@@ -79,6 +79,17 @@ ELSE(FREETYPE_INCLUDE_DIRS)
     MESSAGE( STATUS "Freetype is required" )
 ENDIF(FREETYPE_INCLUDE_DIRS)
 
+#######################
+# Swig
+#######################
+FIND_PACKAGE(SWIG)
+IF(SWIG_FOUND)
+    MESSAGE( STATUS "SWIG has been found:" )
+    MESSAGE( STATUS "\tSWIG : ${SWIG_EXECUTABLE}" )
+ELSE(SWIG_FOUND)
+    MESSAGE( STATUS "SWIG is required" )
+ENDIF(SWIG_FOUND)
+
 # Continue for subdirectories.
 ADD_SUBDIRECTORY(src)
 
