@@ -28,8 +28,10 @@
 #include "../core/TimeManager.h"
 #include "../core/View.h"
 #include "../effect/EffectManager.h"
+#include "../effect/LifeEffect.h"
 #include "../effect/InvertEffect.h"
 #include "../effect/TextEffect.h"
+#include "../effect/Particle.h"
 #include "../font/Font.h"
 #include "../font/FontManager.h"
 #include "../input/InputManager.h"
@@ -74,6 +76,7 @@ using namespace jvgs::bind;
 using namespace jvgs::math;
 using namespace jvgs::game;
 using namespace jvgs::input;
+using namespace jvgs::effect;
 using namespace jvgs::video;
 using namespace jvgs::sketch;
 using namespace jvgs;
@@ -105,8 +108,10 @@ using namespace jvgs;
 %include "../core/TimeManager.h"
 %include "../core/View.h"
 %include "../effect/EffectManager.h"
+%include "../effect/LifeEffect.h"
 %include "../effect/InvertEffect.h"
 %include "../effect/TextEffect.h"
+%include "../effect/Particle.h"
 %include "../font/Font.h"
 %include "../font/FontManager.h"
 %include "../input/InputManager.h"
@@ -146,3 +151,12 @@ using namespace jvgs;
 %include "../video/ListManager.h"
 %include "../video/Renderer.h"
 %include "../video/VideoManager.h"
+using namespace jvgs::audio;
+using namespace jvgs::bind;
+using namespace jvgs::math;
+using namespace jvgs::game;
+using namespace jvgs::input;
+using namespace jvgs::effect;
+using namespace jvgs::video;
+using namespace jvgs::sketch;
+using namespace jvgs;

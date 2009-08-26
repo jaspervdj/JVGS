@@ -127,6 +127,13 @@ namespace jvgs
                  *  @param vector Vector2D to fill in.
                  */
                 static void fromXML(TiXmlElement *element, Vector2D *vector);
+
+                /** Create a vector from polar coordinates.
+                 *  @param radius Radius.
+                 *  @param theta Angle in radians.
+                 *  @param The vector in cartesian coordinates.
+                 */
+                static Vector2D fromPolar(float radius, float theta);
         };
     };
 };

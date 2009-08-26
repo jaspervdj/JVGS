@@ -20,11 +20,10 @@ namespace jvgs
     namespace effect
     {
         TextEffect::TextEffect(const string &text, const Vector2D &position,
-                float life, float rotationSpeed)
+                float life, float rotationSpeed): LifeEffect(life)
         {
             this->text = text;
             this->position = position;
-            this->life = life;
 
             MathManager *mathManager = MathManager::getInstance();
             this->rotationSpeed = mathManager->randBool() ?
@@ -47,9 +46,7 @@ namespace jvgs
 
         void TextEffect::update(float ms)
         {
-            life -= ms;
-            if(life <= 0.0f)
-                setGarbage();
+            LifeEffect::update(ms);
 
             rotation += rotationSpeed * ms;
             if(rotation > 360.0f)

@@ -1,7 +1,7 @@
 #ifndef JVGS_EFFECT_TEXTEFFECT_H
 #define JVGS_EFFECT_TEXTEFFECT_H
 
-#include "../core/View.h"
+#include "LifeEffect.h"
 #include "../font/Font.h"
 #include "../math/Vector2D.h"
 #include <string>
@@ -10,7 +10,7 @@ namespace jvgs
 {
     namespace effect
     {
-        class TextEffect: public core::View
+        class TextEffect: public LifeEffect
         {
             private:
                 /** Text of the effect. */
@@ -18,9 +18,6 @@ namespace jvgs
 
                 /** Position. */
                 math::Vector2D position;
-
-                /** Life left. */
-                float life;
 
                 /** Rotation speed. */
                 float rotationSpeed;

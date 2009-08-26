@@ -7,10 +7,8 @@ namespace jvgs
 {
     namespace effect
     {
-        InvertEffect::InvertEffect(float life)
+        InvertEffect::InvertEffect(float life): LifeEffect(life)
         {
-            this->life = life;
-
             VideoManager::getInstance()->invert();
         }
 
@@ -21,9 +19,7 @@ namespace jvgs
 
         void InvertEffect::update(float ms)
         {
-            life -= ms;
-            if(life <= 0.0f)
-                setGarbage();
+            LifeEffect::update(ms);
         }
 
         void InvertEffect::render()

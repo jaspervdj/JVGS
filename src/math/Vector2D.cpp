@@ -161,5 +161,10 @@ namespace jvgs
                 element->QueryFloatAttribute("y", &vector->y);
             }
         }
+
+        Vector2D Vector2D::fromPolar(float radius, float theta)
+        {
+            return Vector2D(radius * cos(theta), radius * sin(theta));
+        }
     };
 };
