@@ -130,7 +130,7 @@ namespace jvgs
 
                 /** Create a vector from polar coordinates.
                  *  @param radius Radius.
-                 *  @param theta Angle in radians.
+                 *  @param theta Angle in degrees.
                  *  @param The vector in cartesian coordinates.
                  */
                 static Vector2D fromPolar(float radius, float theta);

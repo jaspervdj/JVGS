@@ -1,5 +1,6 @@
 #include "Vector2D.h"
 #include <cmath>
+#include "MathManager.h"
 
 #include "../tinyxml/tinyxml.h"
 
@@ -164,7 +165,9 @@ namespace jvgs
 
         Vector2D Vector2D::fromPolar(float radius, float theta)
         {
-            return Vector2D(radius * cos(theta), radius * sin(theta));
+            MathManager *mathManager = MathManager::getInstance();
+            return Vector2D(radius * cos(mathManager->toRadians(theta)),
+                    radius * sin(mathManager->toRadians(theta)));
         }
     };
 };

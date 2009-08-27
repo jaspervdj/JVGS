@@ -126,6 +126,12 @@ namespace jvgs
                  *  @return Clamped value.
                  */
                 float clamp(float a, float lower, float upper) const;
+
+                /** Convert an angle in degrees to radians.
+                 *  @param degrees Angle to convert.
+                 *  @return The result in radians.
+                 */
+                float toRadians(float degrees) const;
         };
     };
 };

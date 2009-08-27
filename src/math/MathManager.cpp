@@ -116,5 +116,10 @@ namespace jvgs
                 return upper;
             return a;
         }
+
+        float MathManager::toRadians(float degrees) const
+        {
+            return degrees * M_PI / 180.0f;
+        }
     };
 };
