@@ -10,9 +10,6 @@ local events = {
     end,
 
     action = function()
-        require("resources/effects/effects")
-        effects.stars(self:getPosition())
-
         if self:getBool("hat") then
             local level = self:getLevel()
             local bullet = jvgslua.Entity("resources/bullet/bullet.xml", level)

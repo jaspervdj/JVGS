@@ -1,7 +1,4 @@
-local textEffects = {"Whack!", "Splash!", "Pow!"}
-local function randomTextEffect()
-    return textEffects[math.random(1, #textEffects)]
-end
+require("resources/effects/effects")
 
 common = {
     -- Returns winner, loser
@@ -32,10 +29,9 @@ common = {
         local velocity = jvgslua.Vector2D(0, 2 * e:getSpeed())
         e:setVelocity(velocity)
 
-        -- Text effect.
-        local em = jvgslua.EffectManager_getInstance()
-        local effect = jvgslua.TextEffect(randomTextEffect(), e:getPosition())
-        em:addEffect(effect)
+        -- Effects.
+        effects.text(e:getPosition())
+        effects.stars(e:getPosition())
 
         -- Invert effect when player.
         if e:getId() == "player" then

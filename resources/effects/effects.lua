@@ -1,4 +1,8 @@
+require("resources/jlib")
+
 effects = {
+    textEffects = {"Whack!", "Splash!", "Pow!"},
+
     stars = function(position)
         local sm = jvgslua.SketchManager_getInstance()
         local em = jvgslua.EffectManager_getInstance()
@@ -14,5 +18,12 @@ effects = {
                     position, velocity, gravity)
             em:addEffect(particle)
         end
+    end,
+
+    text = function(position)
+        local em = jvgslua.EffectManager_getInstance()
+        local e = jvgslua.TextEffect(jlib.randomItem(effects.textEffects),
+                position)
+        em:addEffect(e)
     end
 }
