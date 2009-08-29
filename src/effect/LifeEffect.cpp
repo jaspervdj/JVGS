@@ -15,9 +15,12 @@ namespace jvgs
 
         void LifeEffect::update(float ms)
         {
-            life -= ms;
-            if(life <= 0.0f)
-                setGarbage();
+            if(life > 0.0f) {
+                if(life - ms <= 0.0f)
+                    setGarbage();
+                else
+                    life -= ms;
+            }
         }
     }
 }

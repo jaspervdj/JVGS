@@ -16,7 +16,7 @@ namespace jvgs
 
             public:
                 /** Constructor.
-                 *  @param life Lifetime given.
+                 *  @param life Lifetime given. 0 means infinity.
                  */
                 LifeEffect(float life);
 
