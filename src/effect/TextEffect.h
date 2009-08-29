@@ -37,10 +37,11 @@ namespace jvgs
                  *  @param position Position for the text.
                  *  @param life Lifetime in milliseconds.
                  *  @param rotationSpeed Speed to rotate the text with.
+                 *  @param rotation Initial text rotation.
                  */
                 TextEffect(const std::string &text, const math::Vector2D
                         &position, float life = 2000,
-                        float rotationSpeed = 0.1f);
+                        float rotationSpeed = 0.1f, float rotation = 0.0f);
 
                 /** Destructor.
                  */

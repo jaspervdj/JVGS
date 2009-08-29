@@ -20,7 +20,8 @@ namespace jvgs
     namespace effect
     {
         TextEffect::TextEffect(const string &text, const Vector2D &position,
-                float life, float rotationSpeed): LifeEffect(life)
+                float life, float rotationSpeed, float rotation)
+                : LifeEffect(life)
         {
             this->text = text;
             this->position = position;
@@ -28,6 +29,7 @@ namespace jvgs
             MathManager *mathManager = MathManager::getInstance();
             this->rotationSpeed = mathManager->randBool() ?
                     rotationSpeed : -rotationSpeed;
+            this->rotation = rotation;
 
             FontManager *fontManager = FontManager::getInstance();
             font = fontManager->getFont("effect");
@@ -37,7 +39,6 @@ namespace jvgs
                 LogManager::getInstance()->error("No font for text effect.");
 
             width = font->getStringWidth(text);
-            rotation = mathManager->randFloat(360.0f);
         }
 
         TextEffect::~TextEffect()

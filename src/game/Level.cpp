@@ -64,6 +64,10 @@ namespace jvgs
             /* Add the camera. */
             TiXmlElement *cameraElement = element->FirstChildElement("camera");
             if(cameraElement) {
+                if(!cameraElement->Attribute("type"))
+                    LogManager::getInstance()->error(
+                            "Camera element always needs a type attribute.");
+
                 string type = cameraElement->Attribute("type");
                 map<string, CameraFactory*>::iterator result =
                         cameraFactories.find(type);

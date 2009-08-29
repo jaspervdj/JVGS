@@ -20,10 +20,17 @@ effects = {
         end
     end,
 
-    text = function(position)
+    text = function(position, str)
+        str = str or jlib.randomItem(effects.textEffects)
         local em = jvgslua.EffectManager_getInstance()
-        local e = jvgslua.TextEffect(jlib.randomItem(effects.textEffects),
-                position)
+        local e = jvgslua.TextEffect(str, position, 1000 + 1000 * math.random(),
+                0.1 + 0.1 * math.random(), 360 * math.random())
+        em:addEffect(e)
+    end,
+
+    staticText = function(position, str)
+        local em = jvgslua.EffectManager_getInstance()
+        local e = jvgslua.TextEffect(str, position, 0, 0, 0)
         em:addEffect(e)
     end
 }

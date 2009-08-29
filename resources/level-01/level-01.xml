@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<level world="resources/level-01/level-01.svg">
+    <camera type="followcamera" filename="resources/camera.xml" />
+    <entity id="player" filename="resources/player/player.xml">
+        <position x="320" y="280" />
+    </entity>
+    <entity id="tutorial-01" script="resources/level-01/tutorial-01.lua">
+    </entity>
+    <entity id="tutorial-02" script="resources/level-01/tutorial-02.lua">
+        <position x="1040" y="250" />
+        <radius x="100" y="100" />
+    </entity>
+</level>

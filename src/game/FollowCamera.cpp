@@ -24,8 +24,6 @@ namespace jvgs
 
             if(element->Attribute("target"))
                 target = element->Attribute("target");
-            else
-                LogManager::getInstance()->error("FollowCamera needs target.");
 
             Entity *entity = level->getEntityById(target);
             if(entity)

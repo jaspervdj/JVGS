@@ -6,7 +6,7 @@ am = jvgslua.AudioManager_getInstance()
 am:playMusic("resources/soundtrack.ogg")
 
 -- Load a font
-font = jvgslua.Font("resources/font.ttf", 28)
+font = jvgslua.Font("resources/font.ttf", 36)
 fontManager = jvgslua.FontManager_getInstance()
 fontManager:addFont("regular", font)
 
