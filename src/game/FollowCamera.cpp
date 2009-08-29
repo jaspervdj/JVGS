@@ -67,5 +67,13 @@ namespace jvgs
             VideoManager *videoManager = VideoManager::getInstance();
             videoManager->translate(-position + videoManager->getSize() * 0.5f);
         }
+
+        BoundingBox *FollowCamera::getBoundingBox()
+        {
+            VideoManager *videoManager = VideoManager::getInstance();
+            boundingBox = BoundingBox(position - videoManager->getSize() * 0.5f,
+                    position + videoManager->getSize() * 0.5f);
+            return &boundingBox;
+        }
     }
 }

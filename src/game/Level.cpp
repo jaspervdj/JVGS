@@ -15,6 +15,8 @@ using namespace jvgs::video;
 
 using namespace jvgs::sketch;
 using namespace jvgs::math;
+
+#include <iostream>
 using namespace std;
 
 namespace jvgs
@@ -176,15 +178,30 @@ namespace jvgs
 
         void Level::render()
         {
-            if(camera)
+            BoundingBox *cameraBoundingBox;
+            if(camera) {
                 camera->transform();
+                cameraBoundingBox = camera->getBoundingBox();
+            }
 
             if(world)
                 world->render();
 
+            Entity *entity;
             for(vector<Entity*>::iterator iterator = entities.begin();
-                    iterator != entities.end(); iterator++)
-                (*iterator)->render();
+                    iterator != entities.end(); iterator++) {
+                entity = *iterator;
+                if(camera) {
+                    /* Try not too render all entities by using a bounding box
+                     * test. */
+                    if(entity->getBoundingBox()->intersectsWith(
+                            cameraBoundingBox))
+                        entity->render();
+                /* No camera, so we could be anywhere. Render anyway. */
+                } else {
+                    entity->render();
+                }
+            }
         }
     }
 }

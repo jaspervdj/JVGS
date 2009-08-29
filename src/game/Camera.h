@@ -1,13 +1,15 @@
 #ifndef JVGS_GAME_CAMERA_H
 #define JVGS_GAME_CAMERA_H
 
+#include "../math/BoundedObject.h"
+
 namespace jvgs
 {
     namespace game
     {
         /** Abstract camera class.
          */
-        class Camera
+        class Camera: public math::BoundedObject
         {
             private:
             public:

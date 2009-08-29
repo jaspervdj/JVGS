@@ -3,6 +3,7 @@
 
 #include "Camera.h"
 #include "../math/Vector2D.h"
+#include "../math/BoundingBox.h"
 #include "../core/XMLLoadable.h"
 #include <string>
 
@@ -27,6 +28,9 @@ namespace jvgs
 
                 /** Current camera focus position. */
                 math::Vector2D position;
+
+                /** Bounding box. */
+                math::BoundingBox boundingBox;
 
             protected:
                 /* Override
@@ -59,6 +63,10 @@ namespace jvgs
                 /* Override
                  */
                 virtual void transform() const;
+
+                /* Override
+                 */
+                virtual math::BoundingBox *getBoundingBox();
         };
     }
 }
