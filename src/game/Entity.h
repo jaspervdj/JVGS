@@ -51,6 +51,9 @@ namespace jvgs
                 /** Event script. */
                 std::string script;
 
+                /** For time events. */
+                float timer;
+
                 /** Bounding box. */
                 math::BoundingBox boundingBox;
 
@@ -175,6 +178,16 @@ namespace jvgs
                  *  @return The event script.
                  */
                 virtual const std::string &getScript() const;
+
+                /** Get the timer time.
+                 *  @return The timer time.
+                 */
+                virtual float getTimer() const;
+
+                /** Set the timer event time.
+                 *  @param timer The new timer event time.
+                 */
+                virtual void setTimer(float timer);
 
                 /** Check if the entity is facing right.
                  *  @return If the entity is facing right.

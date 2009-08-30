@@ -81,7 +81,8 @@ namespace jvgs
                  *  @param fileName File to write to.
                  *  @param expand If the file name should be expanded.
                  */
-                virtual void write(const std::string &fileName, bool expand = false);
+                virtual void write(const std::string &fileName,
+                        bool expand = false);
         };
     }
 }

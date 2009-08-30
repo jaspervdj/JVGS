@@ -76,6 +76,11 @@ namespace jvgs
                  *  @param entity Dying entity.
                  */
                 static void die(Entity *entity);
+
+                /** Execute a timer event for an entity.
+                 *  @param entity Entity holding the timer.
+                 */
+                static void timer(Entity *entity);
         };
     }
 }

@@ -46,7 +46,7 @@ namespace jvgs
             if(document->LoadFile()) {
                 load(document->RootElement());
             } else {
-                logManager->error("Could not load xml document: %s.",
+                logManager->warning("Could not load xml document: %s.",
                         fileName.c_str());
             }
             delete document;

@@ -280,6 +280,16 @@ namespace jvgs
             return script;
         }
 
+        float Entity::getTimer() const
+        {
+            return timer;
+        }
+
+        void Entity::setTimer(float timer)
+        {
+            this->timer = timer;
+        }
+
         bool Entity::isFacingRight() const
         {
             return facingRight;
@@ -298,6 +308,12 @@ namespace jvgs
                 controller->affect(ms);
             if(positioner)
                 positioner->affect(ms);
+
+            if(timer > 0.0f) {
+                if(timer - ms <= 0.0f)
+                    EntityEvent::timer(this);
+                timer -= ms;
+            }
 
             if(getVelocity().getX() <= -0.5f * getSpeed() && facingRight)
                 facingRight = false;
