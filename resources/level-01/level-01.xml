@@ -25,7 +25,11 @@
         <radius x="100" y="100" />
     </entity>
     <entity id="hedgehog-01" filename="resources/hedgehog/hedgehog.xml">
-        <position x="3500" y="150" />
+        <position x="3500" y="100" />
         <controller type="patrollingcontroller" x1="3150" x2="3750" />
+    </entity>
+    <entity id="heart" script="resources/level-01/heart.lua">
+        <position x="4360" y="260" />
+        <radius x="50" y="50" />
     </entity>
 </level>

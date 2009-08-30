@@ -5,7 +5,7 @@ local self = event:getSource()
 local events = {
     collision = function()
         local collider = event:getCollider()
-        local winner, loser = common.fight(self, collider)
+        local winner, loser = common.impossibleFight(self, collider)
         if loser then common.kill(loser) end
     end
 }

@@ -11,6 +11,6 @@ fontManager = jvgslua.FontManager_getInstance()
 fontManager:addFont("regular", font)
 
 levelManager = jvgslua.LevelManager_getInstance()
-levelManager:queueLevel("resources/levels/menu.xml")
+levelManager:queueLevel("resources/main-menu/main-menu.xml")
 
 levelManager:run()

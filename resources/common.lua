@@ -16,6 +16,15 @@ common = {
         end
     end,
 
+    impossibleFight = function(enemy, collider)
+        if collider:getId() ~= "player" then return nil end
+        if enemy:getBool("dead") or collider:getBool("dead") then
+            return nil
+        end
+
+        return enemy, collider
+    end,
+
     kill = function(e)
         if e:getBool("invulnerable") then return end
 
@@ -49,6 +58,26 @@ common = {
 
     gameOver = function()
         local lm = jvgslua.LevelManager_getInstance()
-        lm:queueLevel("resources/levels/menu.xml")
+        lm:queueLevel("resources/main-menu/main-menu.xml")
+    end,
+
+    nextLevel = function(fileName)
+        local pm = jvgslua.PersistenceManager_getInstance()
+        pm:set("level", fileName)
+        local lm = jvgslua.LevelManager_getInstance()
+        lm:queueLevel(fileName)
+    end,
+
+    continue = function()
+        local pm = jvgslua.PersistenceManager_getInstance()
+        local fileName
+        if pm:isSet("level") then
+            pm:get("level")
+        else
+            fileName = "resources/level-01/level-01.xml"
+        end
+
+        local lm = jvgslua.LevelManager_getInstance()
+        lm:queueLevel(fileName)
     end
 }
