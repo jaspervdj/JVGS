@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<entity script="resources/hedgehog/hedgehog.lua" speed = "0.07"
+        collisionchecker="0">
+    <positioner type="collisionresponsepositioner">
+        <gravity x="0" y="0.003" />
+    </positioner>
+    <radius x="23" y="18" />
+    <sprite>
+        <animation id="standing">
+            <frame sketch="resources/hedgehog/walking-01.svg" duration="100" />
+        </animation>
+        <animation id="walking">
+            <frame sketch="resources/hedgehog/walking-01.svg" duration="100" />
+            <frame sketch="resources/hedgehog/walking-02.svg" duration="100" />
+        </animation>
+    </sprite>
+</entity>

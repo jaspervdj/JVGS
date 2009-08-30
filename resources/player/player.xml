@@ -7,4 +7,5 @@
     </positioner>
     <radius x="20" y="40" />
     <sprite filename="resources/player/regular-sprite.xml" />
+    <entry key="die-sound" value="resources/player/die.ogg" />
 </entity>

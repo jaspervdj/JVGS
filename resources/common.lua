@@ -33,6 +33,12 @@ common = {
         effects.text(e:getPosition())
         effects.stars(e:getPosition())
 
+        -- Play sound.
+        if e:isSet("die-sound") then
+            local am = jvgslua.AudioManager_getInstance()
+            am:playSound(e:get("die-sound"))
+        end
+
         -- Invert effect when player.
         if e:getId() == "player" then
             local em = jvgslua.EffectManager_getInstance()

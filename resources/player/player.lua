@@ -4,12 +4,13 @@ local self = event:getSource()
 
 local events = {
     die = function()
-        local am = jvgslua.AudioManager_getInstance()
-        am:playSound("resources/sounds/player-die.ogg")
         common.gameOver()
     end,
 
     action = function()
+        local pos = self:getPosition()
+        print("(" .. pos:getX() .. ", " .. pos:getY() .. ")")
+
         if self:getBool("hat") then
             local level = self:getLevel()
             local bullet = jvgslua.Entity("resources/bullet/bullet.xml", level)
