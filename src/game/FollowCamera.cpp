@@ -20,27 +20,28 @@ namespace jvgs
     {
         void FollowCamera::loadData(TiXmlElement *element)
         {
+            AbstractCamera::loadData(element);
+
             element->QueryFloatAttribute("maxdistance", &maxDistance);
 
             if(element->Attribute("target"))
                 target = element->Attribute("target");
 
-            Entity *entity = level->getEntityById(target);
+            Entity *entity = getLevel()->getEntityById(target);
             if(entity)
-                position = entity->getPosition();
+                setPosition(entity->getPosition());
         }
 
         FollowCamera::FollowCamera(const std::string &target, float maxDistance,
-                Level *level)
+                Level *level): AbstractCamera(Vector2D(0.0f, 0.0f), level)
         {
-            this->level = level;
             this->target = target;
             this->maxDistance = maxDistance;
         }
 
         FollowCamera::FollowCamera(TiXmlElement *element, Level *level)
+                : AbstractCamera(element, level)
         {
-            this->level = level;
             load(element);
         }
 
@@ -50,28 +51,14 @@ namespace jvgs
 
         void FollowCamera::update(float ms)
         {
-            Entity *entity = level->getEntityById(target);
+            Entity *entity = getLevel()->getEntityById(target);
             if(entity) {
-                Vector2D entityToCamera = position - entity->getPosition();
+                Vector2D entityToCamera = getPosition() - entity->getPosition();
                 if(entityToCamera.getLength() > maxDistance) {
                     entityToCamera.setLength(maxDistance);
-                    position = entity->getPosition() + entityToCamera;
+                    setPosition(entity->getPosition() + entityToCamera);
                 }
             }
-        }
-
-        void FollowCamera::transform() const
-        {
-            VideoManager *videoManager = VideoManager::getInstance();
-            videoManager->translate(-position + videoManager->getSize() * 0.5f);
-        }
-
-        BoundingBox *FollowCamera::getBoundingBox()
-        {
-            VideoManager *videoManager = VideoManager::getInstance();
-            boundingBox = BoundingBox(position - videoManager->getSize() * 0.5f,
-                    position + videoManager->getSize() * 0.5f);
-            return &boundingBox;
         }
     }
 }

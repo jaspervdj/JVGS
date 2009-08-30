@@ -7,19 +7,29 @@ namespace jvgs
 {
     namespace game
     {
+        class Level;
+
         /** Abstract camera class.
          */
         class Camera: public math::BoundedObject
         {
             private:
+                /** Level the camera is in. */
+                Level *level;
+
             public:
                 /** Constructor.
                  */
-                Camera();
+                Camera(Level *level);
 
                 /** Destructor.
                  */
                 virtual ~Camera();
+
+                /** Get the level the camera is used for.
+                 *  @return The camera level.
+                 */
+                virtual Level *getLevel() const;
 
                 /** Update the camera.
                  *  @param ms Milliseconds to update for.

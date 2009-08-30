@@ -1,7 +1,7 @@
 #ifndef JVGS_GAME_FOLLOWCAMERA_H
 #define JVGS_GAME_FOLLOWCAMERA_H
 
-#include "Camera.h"
+#include "AbstractCamera.h"
 #include "../math/Vector2D.h"
 #include "../math/BoundingBox.h"
 #include "../core/XMLLoadable.h"
@@ -14,23 +14,14 @@ namespace jvgs
         class Entity;
         class Level;
 
-        class FollowCamera: public Camera, public core::XMLLoadable
+        class FollowCamera: public AbstractCamera
         {
             private:
-                /** Level the camera is in. */
-                Level *level;
-
                 /** Id of object to follow. */
                 std::string target;
 
                 /** Max distance between camera focus and object. */
                 float maxDistance;
-
-                /** Current camera focus position. */
-                math::Vector2D position;
-
-                /** Bounding box. */
-                math::BoundingBox boundingBox;
 
             protected:
                 /* Override
@@ -59,14 +50,6 @@ namespace jvgs
                 /* Override
                  */
                 virtual void update(float ms);
-
-                /* Override
-                 */
-                virtual void transform() const;
-
-                /* Override
-                 */
-                virtual math::BoundingBox *getBoundingBox();
         };
     }
 }

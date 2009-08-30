@@ -4,6 +4,7 @@ INCLUDE_DIRECTORIES(
 
 ADD_LIBRARY( 
     game STATIC 
+    AbstractCamera.cpp
     AbstractEntity.cpp
     Affector.cpp
     Animation.cpp
