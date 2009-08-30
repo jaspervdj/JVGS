@@ -2,6 +2,7 @@
 #include "EntityEvent.h"
 #include "Entity.h"
 #include "FollowCamera.h"
+#include "SimpleCamera.h"
 #include "CameraFactory.h"
 
 #include "../core/DataManager.h"
@@ -30,6 +31,9 @@ namespace jvgs
 
             static TCameraFactory<FollowCamera> followCameraFactory;
             cameraFactories["followcamera"] = &followCameraFactory;
+
+            static TCameraFactory<SimpleCamera> simpleCameraFactory;
+            cameraFactories["simplecamera"] = &simpleCameraFactory;
 
             return cameraFactories;
         }
