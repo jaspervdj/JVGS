@@ -19,6 +19,7 @@ ADD_LIBRARY(
     FollowCamera.cpp
     InputController.cpp
     NaivePositioner.cpp
+    PatrollingController.cpp
     Positioner.cpp
     SillyController.cpp
     Sprite.cpp

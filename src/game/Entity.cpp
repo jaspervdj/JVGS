@@ -7,6 +7,7 @@
 #include "BullController.h"
 #include "InputController.h"
 #include "FlyStraightController.h"
+#include "PatrollingController.h"
 #include "CollisionResponsePositioner.h"
 #include "CollisionDestroyPositioner.h"
 #include "NaivePositioner.h"
@@ -26,7 +27,6 @@ using namespace jvgs::bind;
 
 #include "../tinyxml/tinyxml.h"
 
-#include <iostream>
 using namespace std;
 using namespace jvgs::math;
 
@@ -49,6 +49,11 @@ namespace jvgs
 
             static ControllerFactory<InputController> inputControllerFactory;
             controllerFactories["inputcontroller"] = &inputControllerFactory;
+
+            static ControllerFactory<PatrollingController>
+                    patrollingControllerFactory;
+            controllerFactories["patrollingcontroller"] =
+                    &patrollingControllerFactory;
 
             static ControllerFactory<SillyController> sillyControllerFactory;
             controllerFactories["sillycontroller"] = &sillyControllerFactory;
