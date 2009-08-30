@@ -56,13 +56,15 @@ namespace jvgs
             } else {
                 string expanded = DataManager::getInstance()->expand(fileName);
                 sound = Mix_LoadWAV(expanded.c_str());
-                if(!sound)
-                    LogManager::getInstance()->error(
-                            "Could not open sound %s.", fileName.c_str());
                 sounds[fileName] = sound;
             }
 
-            Mix_PlayChannel(-1, sound, 0);
+            if(sound) {
+                Mix_PlayChannel(-1, sound, 0);
+            } else {
+                LogManager::getInstance()->warning(
+                        "Could not open sound %s.", fileName.c_str());
+            }
         }
 
         void AudioManager::playMusic(const string &fileName)
@@ -75,11 +77,11 @@ namespace jvgs
 
             string expanded = DataManager::getInstance()->expand(fileName);
             music = Mix_LoadMUS(expanded.c_str());
-            if(!music)
-                    LogManager::getInstance()->error(
-                            "Could not open music %s.", fileName.c_str());
-
-            Mix_PlayMusic(music, -1);
+            if(music)
+                Mix_PlayMusic(music, -1);
+            else
+                LogManager::getInstance()->warning(
+                        "Could not open music %s.", fileName.c_str());
         }
     }
 }
