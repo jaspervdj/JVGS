@@ -10,7 +10,6 @@ namespace jvgs
     {
         void SimpleCamera::loadData(TiXmlElement *element)
         {
-            AbstractCamera::loadData(element);
             Vector2D::fromXML(element->FirstChildElement("velocity"),
                     &velocity);
         }

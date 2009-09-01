@@ -22,7 +22,7 @@ namespace jvgs
             protected:
                 /* Override
                  */
-                void loadData(TiXmlElement *element);
+                virtual void loadData(TiXmlElement *element);
 
             public:
                 /** Constructor.

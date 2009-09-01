@@ -28,15 +28,16 @@ namespace jvgs
                  */
                 virtual void queryBoolAttribute(TiXmlElement *element,
                         const std::string &attribute, bool *value) const;
+
                 /** Load data from an XML element. Call this function.
                  *  @param element XML element to load data from.
                  */
-                void load(TiXmlElement *element);
+                virtual void load(TiXmlElement *element);
 
                 /** Load data from an XML file.
                  *  @param fileName XML file to load data from.
                  */
-                void load(const std::string &fileName);
+                virtual void load(const std::string &fileName);
 
             protected:
 
