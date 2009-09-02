@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<level world="resources/level-02/level-02.svg">
+    <camera type="followcamera" filename="resources/camera.xml" />
+    <entity id="player" filename="resources/player/player.xml">
+        <position x="60" y="50" />
+    </entity>
+    <entity id="mouse-01" filename="resources/mouse/mouse.xml">
+        <position x="2200" y="400" />
+    </entity>
+    <entity id="mouse-02" filename="resources/mouse/mouse.xml">
+        <position x="2600" y="200" />
+    </entity>
+</level>

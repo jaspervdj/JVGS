@@ -72,7 +72,7 @@ common = {
         local pm = jvgslua.PersistenceManager_getInstance()
         local fileName
         if pm:isSet("level") then
-            pm:get("level")
+            fileName = pm:get("level")
         else
             fileName = "resources/level-01/level-01.xml"
         end
