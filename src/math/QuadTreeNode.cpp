@@ -1,4 +1,5 @@
 #include "QuadTreeNode.h"
+#include "QuadTree.h"
 #include "LineSegment.h"
 #include "BoundingBox.h"
 
@@ -11,8 +12,9 @@ namespace jvgs
 {
     namespace math
     {
-        QuadTreeNode::QuadTreeNode(BoundingBox *boundingBox)
+        QuadTreeNode::QuadTreeNode(QuadTree *tree, BoundingBox *boundingBox)
         {
+            this->tree = tree;
             children = 0;
             this->boundingBox = boundingBox;
         }
@@ -54,8 +56,8 @@ namespace jvgs
             /* Add to root and maybe subdidivde. */
             } else {
                 objects.push_back(object);
-                if(objects.size() >=
-                        (vector<BoundedObject*>::size_type) SUBDIVIDE_LIMIT)
+                if(objects.size() >= (vector<BoundedObject*>::size_type)
+                        tree->getSubdivideLimit())
                     subdivide();
             }
         }
@@ -74,22 +76,22 @@ namespace jvgs
                     boundingBox->getTopLeft()) * 0.5f;
 
             /* Top left. */
-            children[0] = new QuadTreeNode(new BoundingBox(
+            children[0] = new QuadTreeNode(tree, new BoundingBox(
                     boundingBox->getTopLeft(),
                     boundingBox->getTopLeft() + size));
 
             /* Bottom left. */
-            children[1] = new QuadTreeNode(new BoundingBox(
+            children[1] = new QuadTreeNode(tree, new BoundingBox(
                     boundingBox->getTopLeft() + size.onlyY(),
                     boundingBox->getTopLeft() + size.onlyY() + size));
 
             /* Bottom right. */
-            children[2] = new QuadTreeNode(new BoundingBox(
+            children[2] = new QuadTreeNode(tree, new BoundingBox(
                     boundingBox->getTopLeft() + size,
                     boundingBox->getBottomRight()));
 
             /* Top right. */
-            children[3] = new QuadTreeNode(new BoundingBox(
+            children[3] = new QuadTreeNode(tree, new BoundingBox(
                     boundingBox->getTopLeft() + size.onlyX(),
                     boundingBox->getTopLeft() + size.onlyX() + size));
 

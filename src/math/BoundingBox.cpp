@@ -1,6 +1,11 @@
 #include "BoundingBox.h"
 #include "MathManager.h"
 
+#include "../core/LogManager.h"
+using namespace jvgs::core;
+
+using namespace std;
+
 namespace jvgs
 {
     namespace math
@@ -10,6 +15,41 @@ namespace jvgs
         {
             this->topLeft = topLeft;
             this->bottomRight = bottomRight;
+        }
+
+        BoundingBox::BoundingBox(vector<Vector2D> *points)
+        {
+            MathManager *mathManager = MathManager::getInstance();
+            if(points->size() >= 2) {
+                vector<Vector2D>::iterator iterator = points->begin();
+                Vector2D first = *iterator;
+                iterator++;
+                Vector2D second = *iterator;
+
+                topLeft = Vector2D(mathManager->min<float>(first.getX(),
+                        second.getX()),
+                        mathManager->min<float>(first.getY(), second.getY()));
+                bottomRight = Vector2D(mathManager->max<float>(
+                        first.getX(), second.getX()),
+                        mathManager->max<float>(first.getY(), second.getY()));
+
+                /* Expand. */
+                for(iterator = points->begin(); iterator != points->end();
+                        iterator++) {
+                    Vector2D point = *iterator;
+                    if(point.getX() < topLeft.getX())
+                        topLeft.setX(point.getX());
+                    if(point.getX() > bottomRight.getX())
+                        bottomRight.setX(point.getX());
+                    if(point.getY() < topLeft.getY())
+                        topLeft.setY(point.getY());
+                    if(point.getY() > bottomRight.getY())
+                        bottomRight.setY(point.getY());
+                }
+            } else {
+                LogManager::getInstance()->warning(
+                        "Boundingbox based on < 2 points."); 
+            }
         }
 
         BoundingBox::BoundingBox(const BoundingBox &b1, const BoundingBox &b2)

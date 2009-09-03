@@ -7,6 +7,8 @@
 #include "../math/Vector2D.h"
 #include "../video/Renderer.h"
 #include "../video/ListManager.h"
+#include "../math/BoundingBox.h"
+#include "../math/QuadTree.h"
 
 namespace jvgs
 {
@@ -27,8 +29,11 @@ namespace jvgs
                 /** Root group of the sketch. */
                 Group *root;
 
-                /** Display list to speed up rendering. */
-                video::ListManager::List list;
+                /** List to construct to the tree. */
+                std::vector<math::BoundedObject*> boundedObjects;
+
+                /** QuadTree to speed up rendering. */
+                math::QuadTree *tree;
 
                 /** Map for quicly accessing elements by id. */
                 std::map<std::string, SketchElement*> ids;
@@ -83,20 +88,28 @@ namespace jvgs
                  */
                 virtual SketchElement *getElementById(const std::string &id);
 
-                /** Render this sketch. This renders a previously compiled
-                 *  display list of the sketch, in order to speed things up a
-                 *  little.
+                /** Finnish the sketch. After calling this, do not add any
+                 *  elements anymore.
+                 */
+                virtual void finnish();
+
+                /** Render this sketch. 
                  */
                 virtual void render() const;
 
-            protected:
-                /** Collect all ids from the given group and put them in a map
-                 *  so they can be accessed more quickly. This method works
-                 *  recursively. This will not add group's id, only those of
-                 *  it's children.
-                 *  @param group Group to collect id's from.
+                /** Render (at least) a part of this sketch. With large sketches
+                 *  this should be a lot quicker. This render method uses a
+                 *  QuadTree to search for objects that should be rendered.
+                 *  @param boundingBox Part of the sketch to render.
                  */
-                virtual void collectIds(Group *group);
+                virtual void render(math::BoundingBox *boundingBox);
+
+            protected:
+                /** Called to process every element in the sketch. Works
+                 *  recursively.
+                 *  @param group Group to process.
+                 */
+                virtual void processElements(Group *group);
         };
     }
 }

@@ -18,7 +18,7 @@ using namespace jvgs::math;
 using namespace std;
 
 #include "../video/VideoManager.h"
-#include "../video/Renderer.h"
+#include "../video/SketchyRenderer.h"
 using namespace jvgs::video;
 
 namespace jvgs
@@ -76,8 +76,8 @@ namespace jvgs
                 /* Start rendering. */
                 listManager->beginList(base + i);
 
-                Renderer *renderer = new Renderer();
-                group->render(renderer);
+                Renderer *renderer = new SketchyRenderer();
+                group->render();
                 delete renderer;
                 delete group;
 

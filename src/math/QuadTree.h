@@ -17,15 +17,26 @@ namespace jvgs
                 /** Root of the tree. */
                 QuadTreeNode *root;
 
+                /** Nodes will subdivide when they have more bounded than
+                 *  this limit. */
+                int subdivideLimit;
+
             public:
                 /** Constructor.
                  *  @param objects Objects to add. These will not be deleted.
+                 *  @param subdivideLimit The subdivide limit.
                  */
-                QuadTree(std::vector<BoundedObject*> *objects);
+                QuadTree(std::vector<BoundedObject*> *objects,
+                        int subdivideLimit = 20);
 
                 /** Destructor.
                  */
                 virtual ~QuadTree();
+
+                /** Get the subdivide limit.
+                 *  @return The subdivide limit for this tree.
+                 */
+                virtual int getSubdivideLimit() const;
 
                 /** Find objects that intersect with a certain bounding box.
                  *  @param boundingBox BoundingBox to check intersection with.

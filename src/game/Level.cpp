@@ -193,7 +193,7 @@ namespace jvgs
             }
 
             if(world)
-                world->render();
+                world->render(cameraBoundingBox);
 
             Entity *entity;
             for(vector<Entity*>::iterator iterator = entities.begin();

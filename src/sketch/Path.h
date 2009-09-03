@@ -1,7 +1,10 @@
 #ifndef JVGS_SKETCH_PATH_H
 #define JVGS_SKETCH_PATH_H
 
+#include "../math/BoundedObject.h"
+#include "../math/BoundingBox.h"
 #include "SketchElement.h"
+#include "../video/ListManager.h"
 #include <vector>
 
 namespace jvgs
@@ -12,7 +15,7 @@ namespace jvgs
 
         /** A path is a class that represents an svg path.
          */
-        class Path: public SketchElement
+        class Path: public SketchElement, public math::BoundedObject
         {
             private:
 #               ifndef SWIG
@@ -22,6 +25,12 @@ namespace jvgs
 #               endif
 
                 std::vector<PathComponent*> components;
+                
+                /** Display list of this path. */
+                video::ListManager::List list;
+
+                /** Bounding box. */
+                math::BoundingBox *boundingBox;
 
             public:
                 /** Constructor.
@@ -59,10 +68,17 @@ namespace jvgs
                  */
                 virtual void addComponent(PathComponent *component);
 
-                /** Render the path.
-                 *  @param renderer Renderer to use.
+                /* Override
                  */
-                virtual void render(video::Renderer *renderer) const;
+                virtual void finnish();
+
+                /* Override
+                 */
+                virtual void render() const;
+
+                /* Override
+                 */
+                virtual math::BoundingBox *getBoundingBox();
         };
     }
 }

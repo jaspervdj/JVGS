@@ -9,6 +9,7 @@ namespace jvgs
     {
         class BoundingBox;
         class BoundedObject;
+        class QuadTree;
 
         /** A node containing some bounded objects. This node is able to
          *  subdivide aka. spawn children.
@@ -24,6 +25,9 @@ namespace jvgs
                     static int SUBDIVIDE_LIMIT = 20;
 #               endif
 
+                /** QuadTree this node belongs to. */
+                QuadTree *tree;
+
                 /** Children of the node. 0 if no children yet. */
                 QuadTreeNode **children;
 
@@ -35,9 +39,10 @@ namespace jvgs
 
             public:
                 /** Constructor.
+                 *  @param tree QuadTree this node belongs to.
                  *  @param boundingBox Bounding box for this node's area.
                  */
-                QuadTreeNode(BoundingBox *boundingBox);
+                QuadTreeNode(QuadTree *tree, BoundingBox *boundingBox);
 
                 /** Destructor.
                  */

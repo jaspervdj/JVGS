@@ -74,6 +74,8 @@
 #include "../video/ListManager.h"
 #include "../video/FPSLogger.h"
 #include "../video/Renderer.h"
+#include "../video/SketchyRenderer.h"
+#include "../video/DataRenderer.h"
 #include "../video/VideoManager.h"
 using namespace jvgs::audio;
 using namespace jvgs::bind;
@@ -158,6 +160,8 @@ using namespace jvgs;
 %include "../video/ListManager.h"
 %include "../video/FPSLogger.h"
 %include "../video/Renderer.h"
+%include "../video/SketchyRenderer.h"
+%include "../video/DataRenderer.h"
 %include "../video/VideoManager.h"
 using namespace jvgs::audio;
 using namespace jvgs::bind;

@@ -4,7 +4,6 @@
 #include <string>
 using namespace std;
 
-using namespace jvgs::video;
 using namespace jvgs::math;
 
 namespace jvgs

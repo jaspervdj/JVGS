@@ -48,10 +48,13 @@ namespace jvgs
                  */
                 virtual SketchElement *getSketchElement(int index) const;
 
-                /** Render the element.
-                 *  @param renderer Renderer to use.
+                /* Override
                  */
-                virtual void render(video::Renderer *renderer) const;
+                virtual void finnish();
+
+                /* Override
+                 */
+                virtual void render() const;
         };
     }
 }

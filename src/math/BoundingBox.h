@@ -2,6 +2,7 @@
 #define JVGS_MATH_BOUNDINGBOX_H
 
 #include "Vector2D.h"
+#include <vector>
 
 namespace jvgs
 {
@@ -19,6 +20,12 @@ namespace jvgs
                  */
                 BoundingBox(const Vector2D &topLeft = Vector2D(),
                         const Vector2D &bottomRight = Vector2D());
+
+                /** Constructor. Create the smallest bounding box fitting
+                 *  around a number of points.
+                 *  @param points Vectors to fit around.
+                 */
+                BoundingBox(std::vector<Vector2D> *points);
 
                 /** Constructor. Join two bounding boxes so we get a bounding
                  *  box containing both bounding boxes.

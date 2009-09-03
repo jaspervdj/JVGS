@@ -41,12 +41,17 @@ namespace jvgs
             return sketchElements[index];
         }
 
-        void Group::render(Renderer *renderer) const
+        void Group::finnish()
         {
-            VideoManager *videoManager = VideoManager::getInstance();
-
             for(int i = 0; i < getNumberOfSketchElements(); i++) {
-                sketchElements[i]->render(renderer);
+                sketchElements[i]->finnish();
+            }
+        }
+
+        void Group::render() const
+        {
+            for(int i = 0; i < getNumberOfSketchElements(); i++) {
+                sketchElements[i]->render();
             }
         }
     }

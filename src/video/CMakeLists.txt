@@ -7,9 +7,11 @@ INCLUDE_DIRECTORIES(
 ADD_LIBRARY( 
     video STATIC 
     Color.cpp
+    DataRenderer.cpp
     ListManager.cpp
     FPSLogger.cpp
     Renderer.cpp
+    SketchyRenderer.cpp
     VideoManager.cpp
 )
 

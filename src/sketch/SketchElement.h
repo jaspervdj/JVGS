@@ -4,7 +4,6 @@
 #include <string>
 #include "../math/Vector2D.h"
 #include "../math/AffineTransformationMatrix.h"
-#include "../video/Renderer.h"
 
 namespace jvgs
 {
@@ -46,7 +45,12 @@ namespace jvgs
                 virtual const std::string &getId() const;
                 virtual void setId(const std::string &id);
 
-                virtual void render(video::Renderer *renderer) const = 0;
+                /** Finishes the SketchElement, caches some stuff. After this,
+                 *  do not modify this SketchElement anymore.
+                 */
+                virtual void finnish() = 0;
+
+                virtual void render() const = 0;
         };
     }
 }

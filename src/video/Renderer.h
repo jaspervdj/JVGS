@@ -2,7 +2,6 @@
 #define JVGS_VIDEO_RENDERER_H
 
 #include "../math/Vector2D.h"
-#include "../math/Noise.h"
 #include <SDL/SDL_opengl.h>
 #include <vector>
 
@@ -37,13 +36,6 @@ namespace jvgs
                  */
                 RenderType rendering;
 
-                /** List of vectors to render.
-                 */
-                std::vector<math::Vector2D> vectorList;
-
-                /** Noise source. */
-                math::Noise *noiseX, *noiseY;
-
             public:
                 /** Constructor.
                  */
@@ -69,7 +61,7 @@ namespace jvgs
                 /** Add a vector to the primitive.
                  *  @param vector Vector to add to the primitive.
                  */
-                virtual void vector(const math::Vector2D &vector);
+                virtual void vector(const math::Vector2D &vector) = 0;
         };
     };
 };

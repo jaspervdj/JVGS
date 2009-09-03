@@ -69,6 +69,7 @@ namespace jvgs
 
             Group *root = (Group*) groupParser->parse(0, rootElement);
             sketch->setRoot(root);
+            sketch->finnish();
 
             delete groupParser;
         }

@@ -3,6 +3,7 @@
 #include "SketchElement.h"
 #include "SketchElementRenderer.h"
 #include "Group.h"
+#include "Path.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -41,8 +42,8 @@ namespace jvgs
         {
             if(root)
                 delete root;
-
-            ListManager::getInstance()->deleteLists(list);
+            if(tree)
+                delete tree;
         }
 
         const string &Sketch::getFileName() const
@@ -66,22 +67,6 @@ namespace jvgs
                 LogManager::getInstance()->warning(
                         "Setting root for a sketch that already has a root!");
             this->root = root;
-
-            /* Generate the display list. */
-            ListManager *listManager = ListManager::getInstance();
-            list = listManager->createLists();
-            listManager->beginList(list);
-
-            VideoManager::getInstance()->push();
-            Renderer *renderer = new Renderer();
-            root->render(renderer);
-            delete renderer;
-            VideoManager::getInstance()->pop();
-
-            listManager->endList();
-
-            /* Collect the ids. */
-            collectIds(root);
         }
 
         Group *Sketch::getRoot() const
@@ -98,12 +83,31 @@ namespace jvgs
                 return 0;
         }
 
-        void Sketch::render() const
+        void Sketch::finnish()
         {
-            ListManager::getInstance()->callList(list);
+            root->finnish();
+
+            processElements(root);
+            tree = new QuadTree(&boundedObjects, 100);
         }
 
-        void Sketch::collectIds(Group *group)
+        void Sketch::render() const
+        {
+            root->render();
+        }
+
+        void Sketch::render(BoundingBox *boundingBox)
+        {
+            vector<BoundedObject*> result;
+            tree->findObjects(boundingBox, &result);
+            for(vector<BoundedObject*>::iterator iterator = result.begin();
+                    iterator != result.end(); iterator++) {
+                Path *path = (Path*) *iterator;
+                path->render();
+            }
+        }
+
+        void Sketch::processElements(Group *group)
         {
             /* For all sketch elements in this group. */
             for(int i = 0; i < group->getNumberOfSketchElements(); i++) {
@@ -112,9 +116,13 @@ namespace jvgs
                 /* Set the id. */
                 ids[element->getId()] = element;
 
+                /* Add to the objects list. */
+                if(element->getType() == SKETCHELEMENTTYPE_PATH)
+                    boundedObjects.push_back((Path*) element);
+
                 /* Recurse if we are dealing with a group. */
                 if(element->getType() == SKETCHELEMENTTYPE_GROUP)
-                    collectIds((Group*) element);
+                    processElements((Group*) element);
             }
         }
     }

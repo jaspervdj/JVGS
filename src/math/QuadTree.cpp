@@ -10,8 +10,10 @@ namespace jvgs
 {
     namespace math
     {
-        QuadTree::QuadTree(vector<BoundedObject*> *objects)
+        QuadTree::QuadTree(vector<BoundedObject*> *objects, int subdivideLimit)
         {
+            this->subdivideLimit = subdivideLimit;
+
             /* Initialize bounding box. */
             Vector2D topLeft, bottomRight;
             vector<BoundedObject*>::iterator iterator = objects->begin();
@@ -26,16 +28,19 @@ namespace jvgs
 
                     if(boundingBox->getTopLeft().getX() < topLeft.getX())
                         topLeft.setX(boundingBox->getTopLeft().getX());
-                    if(boundingBox->getBottomRight().getX() > bottomRight.getX())
+                    if(boundingBox->getBottomRight().getX() >
+                            bottomRight.getX())
                         bottomRight.setX(boundingBox->getBottomRight().getX());
 
                     if(boundingBox->getTopLeft().getY() < topLeft.getY())
                         topLeft.setY(boundingBox->getTopLeft().getY());
-                    if(boundingBox->getBottomRight().getY() > bottomRight.getY())
+                    if(boundingBox->getBottomRight().getY() >
+                            bottomRight.getY())
                         bottomRight.setY(boundingBox->getBottomRight().getY());
                 }
 
-                root = new QuadTreeNode(new BoundingBox(topLeft, bottomRight));
+                root = new QuadTreeNode(this, 
+                        new BoundingBox(topLeft, bottomRight));
                 for(iterator = objects->begin(); iterator != objects->end();
                         iterator++) {
                     root->addObject(*iterator);
@@ -51,6 +56,11 @@ namespace jvgs
         {
             if(root)
                 delete root;
+        }
+
+        int QuadTree::getSubdivideLimit() const
+        {
+            return subdivideLimit;
         }
 
         void QuadTree::findObjects(BoundingBox *boundingBox,
