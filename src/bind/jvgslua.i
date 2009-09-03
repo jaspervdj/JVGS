@@ -72,6 +72,7 @@
 #include "../sketch/SketchManager.h"
 #include "../video/Color.h"
 #include "../video/ListManager.h"
+#include "../video/FPSLogger.h"
 #include "../video/Renderer.h"
 #include "../video/VideoManager.h"
 using namespace jvgs::audio;
@@ -155,6 +156,7 @@ using namespace jvgs;
 %include "../sketch/SketchManager.h"
 %include "../video/Color.h"
 %include "../video/ListManager.h"
+%include "../video/FPSLogger.h"
 %include "../video/Renderer.h"
 %include "../video/VideoManager.h"
 using namespace jvgs::audio;

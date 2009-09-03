@@ -8,6 +8,7 @@ ADD_LIBRARY(
     video STATIC 
     Color.cpp
     ListManager.cpp
+    FPSLogger.cpp
     Renderer.cpp
     VideoManager.cpp
 )

@@ -5,6 +5,7 @@
 using namespace jvgs::effect;
 
 #include "../video/VideoManager.h"
+#include "../video/FPSLogger.h"
 using namespace jvgs::video;
 
 #include "../core/TimeManager.h"
@@ -50,6 +51,8 @@ namespace jvgs
             VideoManager *videoManager = VideoManager::getInstance();
             EffectManager *effectManager = EffectManager::getInstance();
 
+            FPSLogger fps;
+
             long lastUpdate = timeManager->getTicks();
             while(!inputManager->hasQuitEvent()) {
 
@@ -63,6 +66,7 @@ namespace jvgs
                     level->update(ms);
 
                 effectManager->update(ms);
+                fps.update(ms);
 
                 videoManager->clear();
                 videoManager->identity();
@@ -71,6 +75,7 @@ namespace jvgs
                     level->render();
 
                 effectManager->render();
+                fps.render();
 
                 videoManager->flip();
 
