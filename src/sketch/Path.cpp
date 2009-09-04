@@ -66,9 +66,7 @@ namespace jvgs
 
             /* Fill display list. */
             Renderer *renderer = new SketchyRenderer();
-            for(int i = 0; i < getNumberOfComponents(); i++) {
-                getComponent(i)->render(renderer);
-            }
+            render(renderer);
             delete renderer;
 
             /* End display list. */
@@ -76,9 +74,7 @@ namespace jvgs
 
             /* Create bounding box. */
             DataRenderer *dataRenderer = new DataRenderer();
-            for(int i = 0; i < getNumberOfComponents(); i++) {
-                getComponent(i)->render(dataRenderer);
-            }
+            render(dataRenderer);
             if(dataRenderer->getData()->size() >= 2)
                 boundingBox = new BoundingBox(dataRenderer->getData());
             delete dataRenderer;
@@ -87,6 +83,13 @@ namespace jvgs
         void Path::render() const
         {
             ListManager::getInstance()->callList(list);
+        }
+
+        void Path::render(Renderer *renderer)
+        {
+            for(int i = 0; i < getNumberOfComponents(); i++) {
+                getComponent(i)->render(renderer);
+            }
         }
 
         BoundingBox *Path::getBoundingBox()

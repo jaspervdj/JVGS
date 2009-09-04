@@ -77,7 +77,7 @@ namespace jvgs
                 listManager->beginList(base + i);
 
                 Renderer *renderer = new SketchyRenderer();
-                group->render();
+                group->render(renderer);
                 delete renderer;
                 delete group;
 

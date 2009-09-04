@@ -4,6 +4,7 @@
 #include <string>
 #include "../math/Vector2D.h"
 #include "../math/AffineTransformationMatrix.h"
+#include "../video/Renderer.h"
 
 namespace jvgs
 {
@@ -51,6 +52,11 @@ namespace jvgs
                 virtual void finnish() = 0;
 
                 virtual void render() const = 0;
+
+                /** Render using a given renderer.
+                 *  @param renderer Renderer to use.
+                 */
+                virtual void render(video::Renderer *renderer) = 0;
         };
     }
 }

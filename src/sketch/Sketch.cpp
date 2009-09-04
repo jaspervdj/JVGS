@@ -107,6 +107,11 @@ namespace jvgs
             }
         }
 
+        void Sketch::render(Renderer *renderer)
+        {
+            root->render(renderer);
+        }
+
         void Sketch::processElements(Group *group)
         {
             /* For all sketch elements in this group. */

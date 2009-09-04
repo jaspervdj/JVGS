@@ -104,6 +104,14 @@ namespace jvgs
                  */
                 virtual void render(math::BoundingBox *boundingBox);
 
+                /** Render the sketch with a given renderer. Slow, because this
+                 *  doesn't use display lists. But, this is used to render the
+                 *  sketch to a display list, and therefore needed. It also has
+                 *  other purposes.
+                 *  @param renderer Renderer to use.
+                 */
+                virtual void render(video::Renderer *renderer);
+
             protected:
                 /** Called to process every element in the sketch. Works
                  *  recursively.

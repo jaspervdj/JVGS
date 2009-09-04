@@ -78,6 +78,10 @@ namespace jvgs
 
                 /* Override
                  */
+                virtual void render(video::Renderer *renderer);
+
+                /* Override
+                 */
                 virtual math::BoundingBox *getBoundingBox();
         };
     }

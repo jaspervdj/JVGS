@@ -55,6 +55,10 @@ namespace jvgs
                 /* Override
                  */
                 virtual void render() const;
+
+                /* Override
+                 */
+                virtual void render(video::Renderer *renderer);
         };
     }
 }

@@ -54,5 +54,12 @@ namespace jvgs
                 sketchElements[i]->render();
             }
         }
+
+        void Group::render(Renderer *renderer)
+        {
+            for(int i = 0; i < getNumberOfSketchElements(); i++) {
+                sketchElements[i]->render(renderer);
+            }
+        }
     }
 }
