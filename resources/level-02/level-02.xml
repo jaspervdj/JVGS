@@ -10,4 +10,10 @@
     <entity id="mouse-02" filename="resources/mouse/mouse.xml">
         <position x="2600" y="200" />
     </entity>
+    <entity id="spider-01" filename="resources/spider/spider.xml">
+        <position x="3460" y="660" />
+    </entity>
+    <entity id="spider-02" filename="resources/spider/spider.xml">
+        <position x="3800" y="660" />
+    </entity>
 </level>

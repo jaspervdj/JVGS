@@ -53,10 +53,11 @@ namespace jvgs
         {
             Entity *entity = getLevel()->getEntityById(target);
             if(entity) {
-                Vector2D entityToCamera = getPosition() - entity->getPosition();
-                if(entityToCamera.getLength() > maxDistance) {
-                    entityToCamera.setLength(maxDistance);
-                    setPosition(entity->getPosition() + entityToCamera);
+                Vector2D position= getPosition();
+                Vector2D direction = entity->getPosition() - position;
+                if(direction.getLength() > maxDistance) {
+                    direction.setLength((direction.getLength() - maxDistance));
+                    setPosition(position + direction);
                 }
             }
         }
