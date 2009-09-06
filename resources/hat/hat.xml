@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<entity script="resources/hat/hat.lua" speed = "0.2" collisionchecker="0">
-    <radius x="17" y="4" />
-    <sprite>
-        <animation id="standing">
-            <frame sketch="resources/hat/hat.svg" duration="100" />
-        </animation>
-    </sprite>
-</entity>
