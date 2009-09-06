@@ -6,13 +6,16 @@ local weapons = {
     knife = function()
         local level = self:getLevel()
         local entity = jvgslua.Entity("resources/knife/knife.xml", level)
-        if self:isFacingRight() then
-            entity:setVelocity(jvgslua.Vector2D(entity:getSpeed(), 0))
-        else
-            entity:setVelocity(jvgslua.Vector2D(-entity:getSpeed(), 0))
+
+        local velocity = jvgslua.Vector2D_fromPolar(entity:getSpeed(),
+                math.random() * 20 - 10)
+
+        if not self:isFacingRight() then
+            velocity:setX(-velocity:getX())
         end
 
         entity:setPosition(self:getPosition())
+        entity:setVelocity(velocity)
         level:addEntity(entity)
         self:setTimer(2000)
 
