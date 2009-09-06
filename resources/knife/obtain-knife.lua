@@ -1,4 +1,5 @@
 require("resources/common")
+require("resources/effects/effects")
 local event = jvgslua.EntityEvent_getEvent()
 local self = event:getSource()
 
@@ -10,6 +11,8 @@ events = {
             collider:setSprite(sprite)
             collider:set("weapon", "knife")
             self:setGarbage()
+            effects.staticText(self:getPosition() + jvgslua.Vector2D(0, -100),
+                    "left ctrl to use weapons")
         end
     end
 }
