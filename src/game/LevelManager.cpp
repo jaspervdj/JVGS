@@ -24,6 +24,7 @@ namespace jvgs
         {
             level = 0;
             queue = false;
+            timeFactor = 1.0f;
         }
 
         LevelManager::~LevelManager()
@@ -63,9 +64,9 @@ namespace jvgs
                 inputManager->update(ms);
 
                 if(level && ms > 0.0f)
-                    level->update(ms);
+                    level->update(timeFactor * ms);
 
-                effectManager->update(ms);
+                effectManager->update(timeFactor * ms);
                 fps.update(ms);
 
                 videoManager->clear();
@@ -89,6 +90,7 @@ namespace jvgs
                     /* Load new level. */
                     level = new Level(queueFileName);
                     queue = false;
+                    timeFactor = 1.0f;
                 }
             }
         }
@@ -97,6 +99,16 @@ namespace jvgs
         {
             queue = true;
             queueFileName = fileName;
+        }
+
+        float LevelManager::getTimeFactor() const
+        {
+            return timeFactor;
+        }
+
+        void LevelManager::setTimeFactor(float timeFactor)
+        {
+            this->timeFactor = timeFactor;
         }
     }
 }

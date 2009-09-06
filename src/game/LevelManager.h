@@ -23,6 +23,9 @@ namespace jvgs
                 /** Queue. */
                 std::string queueFileName;
 
+                /** Time factor. */
+                float timeFactor;
+
             protected:
                 /** Constructor.
                  */
@@ -52,6 +55,16 @@ namespace jvgs
                  *  @param fileName File name of the level to run.
                  */
                 virtual void queueLevel(const std::string &fileName);
+
+                /** Get the time factor.
+                 *  @return The current time factor.
+                 */
+                virtual float getTimeFactor() const;
+
+                /** Set the time factor.
+                 *  @param timeFactor The new time factor.
+                 */
+                virtual void setTimeFactor(float timeFactor);
         };
     }
 }

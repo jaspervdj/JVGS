@@ -48,11 +48,13 @@ common = {
             am:playSound(e:get("die-sound"))
         end
 
-        -- Invert effect when player.
+        -- Other things when player.
         if e:getId() == "player" then
             local em = jvgslua.EffectManager_getInstance()
             local effect = jvgslua.InvertEffect()
             em:addEffect(effect)
+            local lm = jvgslua.LevelManager_getInstance()
+            lm:setTimeFactor(0.2)
         end
     end,
 
