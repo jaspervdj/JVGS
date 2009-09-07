@@ -5,6 +5,7 @@ ADD_LIBRARY(
     Particle.cpp
     LifeEffect.cpp
     TextEffect.cpp
+    TimeEffect.cpp
 )
 
 TARGET_LINK_LIBRARIES(
