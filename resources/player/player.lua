@@ -21,6 +21,13 @@ local weapons = {
 
         local am = jvgslua.AudioManager_getInstance()
         am:playSound("resources/knife/throw.ogg")
+    end,
+
+    clock = function()
+        local em = jvgslua.EffectManager_getInstance()
+        local te = jvgslua.TimeEffect(0.2, 1000)
+        em:addEffect(te)
+        self:setTimer(2000)
     end
 }
 
