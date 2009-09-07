@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<entity script="resources/saurian/saurian.lua" speed = "0.2" collisionchecker="0">
+<entity script="resources/saurian/saurian.lua" speed = "0.2"
+        collisionchecker="false">
     <controller type="bullcontroller" sight="400" target="player" />
     <positioner type="collisionresponsepositioner">
         <gravity x="0" y="0.003" />

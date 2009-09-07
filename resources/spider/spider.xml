@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<entity script="resources/spider/spider.lua" speed = "0.2" collisionchecker="0">
+<entity script="resources/spider/spider.lua" speed = "0.2"
+        collisionchecker="false">
     <controller type="sillycontroller" speedtreshold="0.5" />
     <positioner type="collisionresponsepositioner">
         <gravity x="0" y="0.003" />

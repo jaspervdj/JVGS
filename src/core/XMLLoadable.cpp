@@ -21,10 +21,16 @@ namespace jvgs
         void XMLLoadable::queryBoolAttribute(TiXmlElement *element,
                 const string &attribute, bool *value) const
         {
-            int ivalue = 0;
-            int result = element->QueryIntAttribute(attribute, &ivalue);
-            if(result == TIXML_SUCCESS)
-                *value = (bool) ivalue;
+            if(element->Attribute(attribute)) {
+                string str = element->Attribute(attribute.c_str());
+                if(str == "true")
+                    *value = true;
+                else if(str == "false")
+                    *value = false;
+                else
+                    LogManager::getInstance()->error(
+                            "Bool attributes should be true or false.");
+            }
         }
 
         void XMLLoadable::load(TiXmlElement *element)

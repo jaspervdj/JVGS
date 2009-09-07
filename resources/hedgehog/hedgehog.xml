@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <entity script="resources/hedgehog/hedgehog.lua" speed = "0.15"
-        collisionchecker="0">
+        collisionchecker="false">
     <positioner type="collisionresponsepositioner">
         <gravity x="0" y="0.003" />
     </positioner>
