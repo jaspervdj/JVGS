@@ -46,6 +46,9 @@ namespace jvgs
         {
             /* Load the world. */
             if(element->Attribute("world")) {
+                if(world)
+                    delete world;
+
                 string worldFileName = element->Attribute("world");
                 world = new Sketch(worldFileName);
                 collisionDetector = new CollisionDetector(world);
@@ -72,6 +75,9 @@ namespace jvgs
                     LogManager::getInstance()->error(
                             "Camera element always needs a type attribute.");
 
+                if(camera)
+                    delete camera;
+
                 string type = cameraElement->Attribute("type");
                 map<string, CameraFactory*>::iterator result =
                         cameraFactories.find(type);
@@ -95,11 +101,17 @@ namespace jvgs
 
         Level::Level(TiXmlElement *element)
         {
+            world = 0;
+            collisionDetector = 0;
+            camera = 0;
             load(element);
         }
 
         Level::Level(const string &fileName)
         {
+            world = 0;
+            collisionDetector = 0;
+            camera = 0;
             load(fileName);
         }
 
