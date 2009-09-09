@@ -23,6 +23,7 @@ ADD_LIBRARY(
     PatrollingController.cpp
     Positioner.cpp
     SillyController.cpp
+    SimpleBirdController.cpp
     SimpleCamera.cpp
     Sprite.cpp
     Level.cpp

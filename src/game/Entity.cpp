@@ -15,6 +15,7 @@
 #include "ControllerFactory.h"
 #include "PositionerFactory.h"
 #include "SillyController.h"
+#include "SimpleBirdController.h"
 
 #include "../core/LogManager.h"
 using namespace jvgs::core;
@@ -57,6 +58,11 @@ namespace jvgs
 
             static ControllerFactory<SillyController> sillyControllerFactory;
             controllerFactories["sillycontroller"] = &sillyControllerFactory;
+
+            static ControllerFactory<SimpleBirdController>
+                    simpleBirdControllerFactory;
+            controllerFactories["simplebirdcontroller"] =
+                    &simpleBirdControllerFactory;
 
             return controllerFactories;
         }
