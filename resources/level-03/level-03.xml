@@ -4,4 +4,13 @@
     <entity id="player" filename="resources/player/player.xml">
         <position x="4620" y="4400" />
     </entity>
+    <entity id="helidude-01" filename="resources/helidude/helidude.xml">
+        <position x="5607" y="4600" />
+        <controller type="simplebirdcontroller">
+            <point x="5607" y="4630" />
+            <point x="5788" y="4400" />
+            <point x="5400" y="4400" />
+            <point x="5300" y="4630" />
+        </controller>
+    </entity>
 </level>

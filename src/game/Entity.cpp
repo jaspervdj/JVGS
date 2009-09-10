@@ -321,9 +321,9 @@ namespace jvgs
                 timer -= ms;
             }
 
-            if(getVelocity().getX() <= -0.5f * getSpeed() && facingRight)
+            if(getVelocity().getX() <= -0.1f * getSpeed() && facingRight)
                 facingRight = false;
-            if(getVelocity().getX() >= 0.5f * getSpeed() && !facingRight)
+            if(getVelocity().getX() >= 0.1f * getSpeed() && !facingRight)
                 facingRight = true;
 
             if(sprite) {
