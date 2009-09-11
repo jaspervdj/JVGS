@@ -1,33 +1,21 @@
 #ifndef JVGS_GAME_INPUTCONTROLLER_H
 #define JVGS_GAME_INPUTCONTROLLER_H
 
-#include "../math/Vector2D.h"
 #include "../input/KeyListener.h"
 #include "Controller.h"
-
-class TiXmlElement;
 
 namespace jvgs
 {
     namespace game
     {
+        /** Controller that lets the player control the entity. */
         class InputController: public Controller,
                 public jvgs::input::KeyListener
         {
-            private:
-                /** Minimum delay between jumps. */
-                float minJumpDelay;
-
-                /** Force to jump with. */
-                float jumpForce;
-
-                /** Delay to next jump. */
-                float jumpDelay;
-
             protected:
                 /* Override
                  */
-                void loadData(TiXmlElement *element);
+                virtual void loadData(TiXmlElement *element);
 
             public:
                 /** Constructor.
@@ -45,23 +33,13 @@ namespace jvgs
                  */
                 virtual ~InputController();
 
-                /* Override.
+                /* Override
                  */
                 virtual void affect(float ms);
 
-                /* Override.
+                /* Override
                  */
                 virtual void keyPressed(const jvgs::input::Key &key);
-
-                /** Set the minimum jump delay.
-                 *  @param The minimum jump delay.
-                 */
-                void setMinJumpDelay(float minJumpDelay);
-
-                /** Set the jump force.
-                 *  @param jumpForce Force to jump with.
-                 */
-                void setJumpForce(float jumpForce);
         };
     }
 }

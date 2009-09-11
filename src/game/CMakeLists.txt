@@ -14,6 +14,7 @@ ADD_LIBRARY(
     CollisionDestroyPositioner.cpp
     CollisionResponsePositioner.cpp
     Controller.cpp
+    DefaultInputController.cpp
     Entity.cpp
     EntityEvent.cpp
     FlyStraightController.cpp

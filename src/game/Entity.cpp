@@ -5,6 +5,7 @@
 #include "Positioner.h"
 #include "Sprite.h"
 #include "BullController.h"
+#include "DefaultInputController.h"
 #include "InputController.h"
 #include "FlyStraightController.h"
 #include "PatrollingController.h"
@@ -42,6 +43,11 @@ namespace jvgs
 
             static ControllerFactory<BullController> bullControllerFactory;
             controllerFactories["bullcontroller"] = &bullControllerFactory;
+
+            static ControllerFactory<DefaultInputController>
+                    defaultInputControllerFactory;
+            controllerFactories["defaultinputcontroller"] =
+                    &defaultInputControllerFactory;
 
             static ControllerFactory<FlyStraightController>
                     flyStraightControllerFactory;
