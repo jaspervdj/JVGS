@@ -6,10 +6,10 @@
     </entity>
     <entity id="play" script="resources/main-menu/play.lua">
         <position x="136" y="480" />
-        <radius x="25" y="25" />
+        <radius x="50" y="50" />
     </entity>
     <entity id="quit" script="resources/main-menu/quit.lua">
         <position x="1100" y="480" />
-        <radius x="25" y="25" />
+        <radius x="50" y="50" />
     </entity>
 </level>

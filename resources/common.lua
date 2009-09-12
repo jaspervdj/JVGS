@@ -55,6 +55,8 @@ common = {
             em:addEffect(effect)
             local lm = jvgslua.LevelManager_getInstance()
             lm:setTimeFactor(0.2)
+            -- Limit falling sequence.
+            e:setTimer(1000)
         end
     end,
 

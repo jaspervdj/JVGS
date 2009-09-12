@@ -43,6 +43,7 @@ local events = {
     action = function()
         print(string.format("<point x=\"%.0f\" y=\"%.0f\" \/>",
                 self:getPosition():getX(), self:getPosition():getY()))
+
         if self:isSet("weapon") and self:getBool("ready") then
             local weapon = self:get("weapon")
             if weapons[weapon] then weapons[weapon]() end
@@ -51,7 +52,12 @@ local events = {
     end,
 
     timer = function()
-        self:setBool("ready", true)
+        if self:getBool("dead") then
+            -- Falling sequence limit reached.
+            common.gameOver()
+        else
+            self:setBool("ready", true)
+        end
     end
 }
 
