@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity script="resources/helidude/helidude.lua" speed = "0.3"
+<entity script="resources/common-enemy.lua" speed = "0.3"
         collisionchecker="false">
     <positioner type="naivepositioner" />
     <radius x="25" y="27" />

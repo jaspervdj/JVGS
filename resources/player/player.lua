@@ -41,6 +41,8 @@ local events = {
     end,
 
     action = function()
+        print(string.format("<point x=\"%.0f\" y=\"%.0f\" \/>",
+                self:getPosition():getX(), self:getPosition():getY()))
         if self:isSet("weapon") and self:getBool("ready") then
             local weapon = self:get("weapon")
             if weapons[weapon] then weapons[weapon]() end
