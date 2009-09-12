@@ -91,6 +91,10 @@ namespace jvgs
                     level = new Level(queueFileName);
                     queue = false;
                     timeFactor = 1.0f;
+
+                    /* Loading the level might have taken some time, so we skip
+                     * some ticks. */
+                    lastUpdate = timeManager->getTicks();
                 }
             }
         }
