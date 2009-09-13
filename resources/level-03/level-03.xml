@@ -83,4 +83,36 @@
     <entity id="saurian-02" filename="resources/saurian/saurian.xml">
         <position x="6095" y="3550" />
     </entity>
+    <entity id="helidude-04" filename="resources/helidude/helidude.xml">
+        <position x="6719" y="3349" />
+        <controller type="simplebirdcontroller">
+            <point x="6719" y="3349" />
+            <point x="6719" y="3588" />
+            <point x="8230" y="3651" />
+            <point x="8230" y="3398" />
+        </controller>
+    </entity>
+    <entity id="helidude-04" filename="resources/helidude/helidude.xml">
+        <position x="9149" y="3517" />
+        <controller type="simplebirdcontroller">
+            <point x="9149" y="3517" />
+            <point x="8912" y="3517" />
+            <point x="8771" y="3331" />
+            <point x="8539" y="3331" />
+            <point x="8539" y="3612" />
+            <point x="8233" y="3612" />
+            <point x="8233" y="3398" />
+            <point x="9097" y="3200" />
+        </controller>
+    </entity>
+    <entity id="mouse-05" filename="resources/mouse/mouse.xml">
+        <position x="10288" y="3300" />
+    </entity>
+    <entity id="crown-02" filename="resources/level-03/crown.xml">
+        <position x="10680" y="3300" />
+    </entity>
+    <entity id="teleport-02" script="resources/level-03/teleport-to-start.lua">
+        <position x="10908" y="3260" />
+        <radius x="50" y="50" />
+    </entity>
 </level>
