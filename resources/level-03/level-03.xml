@@ -54,7 +54,25 @@
     <entity id="mouse-03" filename="resources/mouse/mouse.xml">
         <position x="6241" y="4587" />
     </entity>
+    <entity id="saurian-01" filename="resources/saurian/saurian.xml">
+        <position x="5927" y="5350" />
+    </entity>
+    <entity id="helidude-03" filename="resources/helidude/helidude.xml">
+        <position x="7662" y="5905" />
+        <controller type="simplebirdcontroller">
+            <point x="7662" y="5905" />
+            <point x="6723" y="5286" />
+            <point x="7875" y="5691" />
+        </controller>
+    </entity>
     <entity id="clock" filename="resources/clock/obtain-clock.xml">
         <position x="6520" y="5270" />
+    </entity>
+    <entity id="crown-01" filename="resources/level-03/crown.xml">
+        <position x="7860" y="5900" />
+    </entity>
+    <entity id="teleport-01" script="resources/level-03/teleport-to-start.lua">
+        <position x="8144" y="5900" />
+        <radius x="50" y="50" />
     </entity>
 </level>

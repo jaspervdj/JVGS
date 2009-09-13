@@ -1,61 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="10000"
    height="10000"
-   id="svg2"
-   sodipodi:version="0.32"
-   inkscape:version="0.46"
-   sodipodi:docname="level-03.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
-  <metadata
-     id="metadata2400">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <sodipodi:namedview
-     inkscape:window-height="780"
-     inkscape:window-width="1278"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     guidetolerance="10.0"
-     gridtolerance="10.0"
-     objecttolerance="10.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base"
-     showgrid="false"
-     inkscape:zoom="0.5248"
-     inkscape:cx="6696.9839"
-     inkscape:cy="4462.4484"
-     inkscape:window-x="0"
-     inkscape:window-y="18"
-     inkscape:current-layer="svg2" />
+   id="svg2">
   <defs
-     id="defs4">
-    <inkscape:perspective
-       sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="0 : 5000 : 1"
-       inkscape:vp_y="0 : 1000 : 0"
-       inkscape:vp_z="10000 : 5000 : 1"
-       inkscape:persp3d-origin="5000 : 3333.3333 : 1"
-       id="perspective2402" />
-  </defs>
+     id="defs4" />
   <path
      d="M 4672.8572,4628.318 C 4700.1473,4629.0709 4862.3214,4632.1429 4889.1964,4633.9286 C 4916.0714,4635.7143 4930,4637.1429 4930,4637.1429 L 4918.5714,4795.7143 L 4900,4655.7143 L 4890,4737.1429 L 4880,4677.1429 L 4871.4286,4747.1429 L 4861.4286,4690 L 4851.4286,4765.7143 L 4842.8571,4665.7143 L 4834.2857,4730 L 4821.4286,4670 L 4805.7143,4758.5714 L 4795.7143,4687.1429 L 4787.1429,4761.4286 L 4775.7143,4662.8571 L 4757.1429,4790 L 4748.5714,4687.1429 L 4740,4735.7143 L 4721.4286,4671.4286 L 4702.8571,4765.7143 L 4692.8571,4707.1429 L 4680,4787.1429 L 4671.4286,4741.4286 L 4661.4286,4795.7143 L 4648.5714,4675.7143 L 4640,4797.1429 L 4620,4678.5714 L 4618.5714,4778.5714 L 4601.4286,4697.1429 L 4585.7143,4767.1429 L 4567.1429,4692.8571 L 4545.7143,4761.4286 L 4524.2857,4665.7143 L 4501.4286,4772.8571 L 4488.5714,4655.7143 L 4474.2857,4807.1429 L 4460,4704.2857 L 4447.1429,4777.1429 L 4430,4680 L 4418.5714,4752.8571 L 4398.5714,4664.2857 L 4391.4286,4772.8571 L 4372.8571,4684.2857 L 4352.8571,4824.2857 L 4340,4681.4286 L 4320,4775.7143 L 4324.2857,4637.1429 C 4420,4631.4286 4533.2068,4628.318 4572.5893,4627.7534 C 4572.5893,4627.7534 4571.4286,4555 4585.7143,4544.2857 C 4600,4533.5714 4623.5714,4525 4646.4286,4535 C 4669.2857,4545 4668.5714,4553.5714 4672.8571,4570 C 4677.1429,4586.4286 4675,4627.1429 4672.8572,4628.318 z"
      id="path2498"
@@ -120,4 +73,12 @@
      d="M 6667.0281,5490.0621 C 6667.3523,5543.023 6663.4122,5590.2274 6657.5061,5601.3163 C 6651.7382,5612.1478 6648.1463,5630.535 6669.5111,5630.535 C 6690.8754,5630.535 6688.9035,5613.1353 6682.8369,5601.239 C 6677.1681,5590.1224 6667.6774,5542.9202 6667.0281,5490.0621 z"
      id="path2746"
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4.54666662;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     d="M 7683.8796,5974.657 L 8044.9695,5974.657 L 8034.4893,6087.0808 L 8023.0564,5996.5701 L 8017.3399,6038.4909 L 8005.907,5989.9009 L 8000.1906,6046.1128 L 7990.6631,5993.7119 L 7976.372,6065.1677 L 7963.0335,6006.0976 L 7953.5061,6044.2073 L 7942.0732,5991.8064 L 7931.593,6025.1524 L 7914.4436,5987.9954 L 7907.7744,6063.2622 L 7901.1052,5998.4756 L 7888.7195,6056.593 L 7880.1448,6005.1448 L 7863.9482,6051.8293 L 7856.3262,6009.9085 L 7842.9878,6027.0579 L 7830.6021,6002.2866 L 7822.0274,6057.5457 L 7808.689,5996.5701 L 7794.3979,6043.2546 L 7782.9649,5990.8537 L 7769.6265,6068.9787 L 7761.0518,5997.5229 L 7744.8552,6045.1601 L 7731.5168,5992.7591 L 7719.1311,6051.8293 L 7705.7927,5995.6174 L 7693.407,6057.5457 L 7683.8796,5974.657 z"
+     id="path2404"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="M 8105.9451,5974.657 L 8105.9451,6042.3018 L 8188.8338,6042.3018 L 8188.8338,5973.7043 L 8105.9451,5974.657 z M 8118.3308,5987.0427 L 8142.1494,5985.1372 L 8137.3857,5993.7119 L 8166.9207,6014.6723 L 8159.2988,6024.1997 L 8133.5747,6003.2393 L 8125.9527,6010.8613 L 8118.3308,5987.0427 z"
+     id="path2406"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
 </svg>
