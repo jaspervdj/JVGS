@@ -4,6 +4,7 @@
     <entity id="player" filename="resources/player/player.xml">
         <position x="4620" y="4400" />
     </entity>
+    <!-- South - east branch. -->
     <entity id="helidude-01" filename="resources/helidude/helidude.xml">
         <position x="5607" y="4600" />
         <controller type="simplebirdcontroller">
@@ -74,5 +75,12 @@
     <entity id="teleport-01" script="resources/level-03/teleport-to-start.lua">
         <position x="8144" y="5900" />
         <radius x="50" y="50" />
+    </entity>
+    <!-- North - east branch. -->
+    <entity id="mouse-04" filename="resources/mouse/mouse.xml">
+        <position x="5617" y="3840" />
+    </entity>
+    <entity id="saurian-02" filename="resources/saurian/saurian.xml">
+        <position x="6095" y="3550" />
     </entity>
 </level>
