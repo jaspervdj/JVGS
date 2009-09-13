@@ -32,6 +32,10 @@ namespace jvgs
                  */
                 static SketchManager *getInstance();
 
+                /** Clear all sketches.
+                 */
+                void clear();
+
                 /** Load a sketch or fetch it from the cache if available.
                  *  @param fileName File name of the file to load.
                  *  @return The requested sketch.

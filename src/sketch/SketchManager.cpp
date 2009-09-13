@@ -13,16 +13,22 @@ namespace jvgs
 
         SketchManager::~SketchManager()
         {
-            /* Delete all loaded sketches. */
-            for(map<string, Sketch*>::iterator iterator = sketches.begin();
-                    iterator != sketches.end(); iterator++)
-                delete iterator->second;
+            clear();
         }
 
         SketchManager* SketchManager::getInstance()
         {
             static SketchManager instance;
             return &instance;
+        }
+
+        void SketchManager::clear()
+        {
+            /* Delete all loaded sketches. */
+            for(map<string, Sketch*>::iterator iterator = sketches.begin();
+                    iterator != sketches.end(); iterator++)
+                delete iterator->second;
+            sketches.clear();
         }
 
         Sketch *SketchManager::getSketch(const string &fileName)

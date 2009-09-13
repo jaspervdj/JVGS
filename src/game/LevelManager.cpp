@@ -1,6 +1,9 @@
 #include "LevelManager.h"
 #include "Level.h"
 
+#include "../sketch/SketchManager.h"
+using namespace jvgs::sketch;
+
 #include "../effect/EffectManager.h"
 using namespace jvgs::effect;
 
@@ -51,6 +54,7 @@ namespace jvgs
             TimeManager *timeManager = TimeManager::getInstance();
             VideoManager *videoManager = VideoManager::getInstance();
             EffectManager *effectManager = EffectManager::getInstance();
+            SketchManager *sketchManager = SketchManager::getInstance();
 
             FPSLogger fps;
 
@@ -86,6 +90,7 @@ namespace jvgs
                         delete level;
 
                     effectManager->clear();
+                    sketchManager->clear();
 
                     /* Load new level. */
                     level = new Level(queueFileName);
