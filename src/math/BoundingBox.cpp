@@ -108,6 +108,10 @@ namespace jvgs
         bool BoundingBox::intersectsWith(BoundingBox *other, const Vector2D
                 &vel1, const Vector2D &vel2) const
         {
+            /* Trivial check. */
+            if(intersectsWith(other))
+                return true;
+
             /* Reference to do some math. */
             MathManager *mathManager = MathManager::getInstance();
 
