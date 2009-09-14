@@ -20,7 +20,9 @@ function translate(word)
 end
 
 for line in io.lines() do
-    -- Substitute all lines.
-    line = string.gsub(line, "[xy]=\"[^\"]+\"", translate)
+    if string.find(line, "position") or string.find(line, "point") then
+        line = string.gsub(line, "[xy]=\"[^\"]+\"", translate)
+    end
+
     print(line)
 end

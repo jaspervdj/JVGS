@@ -2,170 +2,170 @@
 <level world="resources/level-03/level-03.svg">
     <camera type="followcamera" filename="resources/camera.xml" />
     <entity id="player" filename="resources/player/player.xml">
-        <position x="4620" y="4400" />
+        <position x="2425" y="1340" />
     </entity>
     <!-- South - east branch. -->
     <entity id="helidude-01" filename="resources/helidude/helidude.xml">
-        <position x="5607" y="4600" />
+        <position x="3412" y="1540" />
         <controller type="simplebirdcontroller">
-            <point x="5607" y="4630" />
-            <point x="5788" y="4400" />
-            <point x="5400" y="4400" />
-            <point x="5300" y="4630" />
+            <point x="3412" y="1570" />
+            <point x="3593" y="1340" />
+            <point x="3205" y="1340" />
+            <point x="3105" y="1570" />
         </controller>
     </entity>
     <entity id="helidude-02" filename="resources/helidude/helidude.xml">
-        <position x="4583" y="4976" />
+        <position x="2388" y="1916" />
         <controller type="simplebirdcontroller">
-            <point x="4583" y="4976" />
-            <point x="5035" y="4948" />
-            <point x="5280" y="4860" />
-            <point x="5566" y="4860" />
-            <point x="5855" y="4860" />
-            <point x="6090" y="4860" />
-            <point x="6090" y="4654" />
-            <point x="6216" y="4578" />
-            <point x="6216" y="4423" />
-            <point x="6216" y="4295" />
-            <point x="5950" y="4295" />
-            <point x="5950" y="4430" />
-            <point x="5950" y="4626" />
-            <point x="6112" y="4626" />
-            <point x="6112" y="4866" />
-            <point x="5849" y="4866" />
-            <point x="5525" y="4866" />
-            <point x="5289" y="4866" />
-            <point x="5058" y="4866" />
-            <point x="5058" y="4944" />
-            <point x="4754" y="4944" />
-            <point x="4561" y="4971" />
-            <point x="4424" y="5178" />
-            <point x="4224" y="5245" />
-            <point x="4138" y="5091" />
-            <point x="4138" y="4950" />
-            <point x="4324" y="4898" />
+            <point x="2388" y="1916" />
+            <point x="2840" y="1888" />
+            <point x="3085" y="1800" />
+            <point x="3371" y="1800" />
+            <point x="3660" y="1800" />
+            <point x="3895" y="1800" />
+            <point x="3895" y="1594" />
+            <point x="4021" y="1518" />
+            <point x="4021" y="1363" />
+            <point x="4021" y="1235" />
+            <point x="3755" y="1235" />
+            <point x="3755" y="1370" />
+            <point x="3755" y="1566" />
+            <point x="3917" y="1566" />
+            <point x="3917" y="1806" />
+            <point x="3654" y="1806" />
+            <point x="3330" y="1806" />
+            <point x="3094" y="1806" />
+            <point x="2863" y="1806" />
+            <point x="2863" y="1884" />
+            <point x="2559" y="1884" />
+            <point x="2366" y="1911" />
+            <point x="2229" y="2118" />
+            <point x="2029" y="2185" />
+            <point x="1943" y="2031" />
+            <point x="1943" y="1890" />
+            <point x="2129" y="1838" />
         </controller>
     </entity>
     <entity id="mouse-01" filename="resources/mouse/mouse.xml">
-        <position x="4301" y="5008" />
+        <position x="2106" y="1948" />
     </entity>
     <entity id="mouse-02" filename="resources/mouse/mouse.xml">
-        <position x="5391" y="4872" />
+        <position x="3196" y="1812" />
     </entity>
     <entity id="mouse-03" filename="resources/mouse/mouse.xml">
-        <position x="6241" y="4587" />
+        <position x="4046" y="1527" />
     </entity>
     <entity id="saurian-01" filename="resources/saurian/saurian.xml">
-        <position x="5927" y="5350" />
+        <position x="3732" y="2290" />
     </entity>
     <entity id="helidude-03" filename="resources/helidude/helidude.xml">
-        <position x="7662" y="5905" />
+        <position x="5467" y="2845" />
         <controller type="simplebirdcontroller">
-            <point x="7662" y="5905" />
-            <point x="6723" y="5286" />
-            <point x="7875" y="5691" />
+            <point x="5467" y="2845" />
+            <point x="4528" y="2226" />
+            <point x="5680" y="2631" />
         </controller>
     </entity>
     <entity id="clock" filename="resources/clock/obtain-clock.xml">
-        <position x="6520" y="5290" />
+        <position x="4325" y="2230" />
     </entity>
     <entity id="crown-01" filename="resources/level-03/crown.xml">
-        <position x="7860" y="5900" />
+        <position x="5665" y="2840" />
     </entity>
     <entity id="teleport-01" script="resources/level-03/teleport-to-start.lua">
-        <position x="8144" y="5900" />
+        <position x="5949" y="2840" />
         <radius x="50" y="50" />
     </entity>
     <!-- North - east branch. -->
     <entity id="mouse-04" filename="resources/mouse/mouse.xml">
-        <position x="5617" y="3840" />
+        <position x="3422" y="780" />
     </entity>
     <entity id="saurian-02" filename="resources/saurian/saurian.xml">
-        <position x="6095" y="3550" />
+        <position x="3900" y="490" />
     </entity>
     <entity id="helidude-04" filename="resources/helidude/helidude.xml">
-        <position x="6719" y="3349" />
+        <position x="4524" y="289" />
         <controller type="simplebirdcontroller">
-            <point x="6719" y="3349" />
-            <point x="6719" y="3588" />
-            <point x="8230" y="3651" />
-            <point x="8230" y="3398" />
+            <point x="4524" y="289" />
+            <point x="4524" y="528" />
+            <point x="6035" y="591" />
+            <point x="6035" y="338" />
         </controller>
     </entity>
     <entity id="helidude-04" filename="resources/helidude/helidude.xml">
-        <position x="9149" y="3517" />
+        <position x="6954" y="457" />
         <controller type="simplebirdcontroller">
-            <point x="9149" y="3517" />
-            <point x="8912" y="3517" />
-            <point x="8771" y="3331" />
-            <point x="8539" y="3331" />
-            <point x="8539" y="3612" />
-            <point x="8233" y="3612" />
-            <point x="8233" y="3398" />
-            <point x="9097" y="3200" />
+            <point x="6954" y="457" />
+            <point x="6717" y="457" />
+            <point x="6576" y="271" />
+            <point x="6344" y="271" />
+            <point x="6344" y="552" />
+            <point x="6038" y="552" />
+            <point x="6038" y="338" />
+            <point x="6902" y="140" />
         </controller>
     </entity>
     <entity id="mouse-05" filename="resources/mouse/mouse.xml">
-        <position x="10288" y="3300" />
+        <position x="8093" y="240" />
     </entity>
     <entity id="crown-02" filename="resources/level-03/crown.xml">
-        <position x="10680" y="3300" />
+        <position x="8485" y="240" />
     </entity>
     <entity id="teleport-02" script="resources/level-03/teleport-to-start.lua">
-        <position x="10908" y="3260" />
+        <position x="8713" y="200" />
         <radius x="50" y="50" />
     </entity>
     <!-- North - west branch. -->
     <entity id="saurian-03" filename="resources/saurian/saurian.xml">
-        <position x="3620" y="4250" />
+        <position x="1425" y="1190" />
     </entity>
     <entity id="helidude-05" filename="resources/helidude/helidude.xml">
-        <position x="2930" y="4347" />
+        <position x="735" y="1287" />
         <controller type="simplebirdcontroller">
-            <point x="2930" y="4347" />
-            <point x="2750" y="4347" />
-            <point x="2750" y="4078" />
-            <point x="3266" y="4005" />
-            <point x="3511" y="4242" />
-            <point x="3333" y="4242" />
-            <point x="3118" y="4060" />
-            <point x="2932" y="4118" />
+            <point x="735" y="1287" />
+            <point x="555" y="1287" />
+            <point x="555" y="1018" />
+            <point x="1071" y="945" />
+            <point x="1316" y="1182" />
+            <point x="1138" y="1182" />
+            <point x="923" y="1000" />
+            <point x="737" y="1058" />
         </controller>
     </entity>
     <entity id="obtain-knife" filename="resources/knife/obtain-knife.xml">
-        <position x="3070" y="4120" />
+        <position x="875" y="1060" />
     </entity>
     <entity id="crown-03" filename="resources/level-03/crown.xml">
-        <position x="2900" y="4370" />
+        <position x="705" y="1310" />
     </entity>
     <entity id="teleport-03" script="resources/level-03/teleport-to-start.lua">
-        <position x="2700" y="4370" />
+        <position x="505" y="1310" />
         <radius x="50" y="50" />
     </entity>
     <!-- South - west branch. -->
     <entity id="saurian-03" filename="resources/saurian/saurian.xml">
-        <position x="3300" y="5760" />
+        <position x="1105" y="2700" />
     </entity>
     <entity id="mouse-06" filename="resources/mouse/mouse.xml">
-        <position x="3600" y="6400" />
+        <position x="1405" y="3340" />
     </entity>
     <entity id="mouse-07" filename="resources/mouse/mouse.xml">
-        <position x="3650" y="6400" />
+        <position x="1455" y="3340" />
     </entity>
     <entity id="mouse-08" filename="resources/mouse/mouse.xml">
-        <position x="3700" y="6400" />
+        <position x="1505" y="3340" />
     </entity>
     <entity id="mouse-09" filename="resources/mouse/mouse.xml">
-        <position x="3750" y="6400" />
+        <position x="1555" y="3340" />
     </entity>
     <entity id="mouse-10" filename="resources/mouse/mouse.xml">
-        <position x="3800" y="6400" />
+        <position x="1605" y="3340" />
     </entity>
     <entity id="crown-04" filename="resources/level-03/crown.xml">
-        <position x="4000" y="6470" />
+        <position x="1805" y="3410" />
     </entity>
     <entity id="teleport-04" script="resources/level-03/teleport-to-start.lua">
-        <position x="4350" y="6530" />
+        <position x="2155" y="3470" />
         <radius x="50" y="50" />
     </entity>
 </level>
