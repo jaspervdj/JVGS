@@ -12,6 +12,9 @@ using namespace jvgs::core;
 #include "../video/VideoManager.h"
 using namespace jvgs::video;
 
+#include "../audio/AudioManager.h"
+using namespace jvgs::audio;
+
 #include "../tinyxml/tinyxml.h"
 
 using namespace jvgs::sketch;
@@ -44,6 +47,13 @@ namespace jvgs
 
         void Level::loadData(TiXmlElement *element)
         {
+            /* Play some music. */
+            if(element->Attribute("music")) {
+                string music = element->Attribute("music");
+                AudioManager *audioManager = AudioManager::getInstance();
+                audioManager->playMusic(music);
+            }
+
             /* Load the world. */
             if(element->Attribute("world")) {
                 if(world)
