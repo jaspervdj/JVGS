@@ -67,7 +67,7 @@
         </controller>
     </entity>
     <entity id="clock" filename="resources/clock/obtain-clock.xml">
-        <position x="6520" y="5270" />
+        <position x="6520" y="5290" />
     </entity>
     <entity id="crown-01" filename="resources/level-03/crown.xml">
         <position x="7860" y="5900" />
@@ -113,6 +113,33 @@
     </entity>
     <entity id="teleport-02" script="resources/level-03/teleport-to-start.lua">
         <position x="10908" y="3260" />
+        <radius x="50" y="50" />
+    </entity>
+    <!-- North - west branch. -->
+    <entity id="saurian-03" filename="resources/saurian/saurian.xml">
+        <position x="3620" y="4250" />
+    </entity>
+    <entity id="helidude-05" filename="resources/helidude/helidude.xml">
+        <position x="2930" y="4347" />
+        <controller type="simplebirdcontroller">
+            <point x="2930" y="4347" />
+            <point x="2750" y="4347" />
+            <point x="2750" y="4078" />
+            <point x="3266" y="4005" />
+            <point x="3511" y="4242" />
+            <point x="3333" y="4242" />
+            <point x="3118" y="4060" />
+            <point x="2932" y="4118" />
+        </controller>
+    </entity>
+    <entity id="obtain-knife" filename="resources/knife/obtain-knife.xml">
+        <position x="3070" y="4120" />
+    </entity>
+    <entity id="crown-03" filename="resources/level-03/crown.xml">
+        <position x="2900" y="4370" />
+    </entity>
+    <entity id="teleport-03" script="resources/level-03/teleport-to-start.lua">
+        <position x="2700" y="4370" />
         <radius x="50" y="50" />
     </entity>
 </level>
