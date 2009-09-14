@@ -142,4 +142,30 @@
         <position x="2700" y="4370" />
         <radius x="50" y="50" />
     </entity>
+    <!-- South - west branch. -->
+    <entity id="saurian-03" filename="resources/saurian/saurian.xml">
+        <position x="3300" y="5760" />
+    </entity>
+    <entity id="mouse-06" filename="resources/mouse/mouse.xml">
+        <position x="3600" y="6400" />
+    </entity>
+    <entity id="mouse-07" filename="resources/mouse/mouse.xml">
+        <position x="3650" y="6400" />
+    </entity>
+    <entity id="mouse-08" filename="resources/mouse/mouse.xml">
+        <position x="3700" y="6400" />
+    </entity>
+    <entity id="mouse-09" filename="resources/mouse/mouse.xml">
+        <position x="3750" y="6400" />
+    </entity>
+    <entity id="mouse-10" filename="resources/mouse/mouse.xml">
+        <position x="3800" y="6400" />
+    </entity>
+    <entity id="crown-04" filename="resources/level-03/crown.xml">
+        <position x="4000" y="6470" />
+    </entity>
+    <entity id="teleport-04" script="resources/level-03/teleport-to-start.lua">
+        <position x="4350" y="6530" />
+        <radius x="50" y="50" />
+    </entity>
 </level>
