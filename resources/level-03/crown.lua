@@ -1,4 +1,5 @@
 require("resources/effects/effects")
+require("resources/common")
 local event = jvgslua.EntityEvent_getEvent()
 local self = event:getSource()
 
@@ -12,6 +13,10 @@ local events = {
         effects.staticText(self:getPosition() + jvgslua.Vector2D(0, -100),
                 crowns .. " out of 4")
         self:setGarbage() 
+
+        if tonumber(player:get("crowns")) >= 4 then
+            common.nextLevel("resources/level-04/level-04.xml")
+        end
     end
 }
 

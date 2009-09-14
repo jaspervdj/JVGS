@@ -1,4 +1,5 @@
 require("resources/effects/effects")
+require("resources/common")
 local event = jvgslua.EntityEvent_getEvent()
 
 local events = {

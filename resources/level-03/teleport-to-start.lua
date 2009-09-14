@@ -4,7 +4,7 @@ local event = jvgslua.EntityEvent_getEvent()
 local events = {
     collision = function()
         local player = event:getSource():getLevel():getEntityById("player")
-        player:setPosition(jvgslua.Vector2D(4620, 4400))
+        player:setPosition(jvgslua.Vector2D(2425, 1340))
     end
 }
 
