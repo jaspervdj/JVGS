@@ -17,11 +17,6 @@ namespace jvgs
             VideoManager::getInstance()->invert();
         }
 
-        void InvertEffect::update(float ms)
-        {
-            LifeEffect::update(ms);
-        }
-
         void InvertEffect::render()
         {
         }

@@ -1,5 +1,6 @@
 ADD_LIBRARY( 
     effect STATIC 
+    ColorEffect.cpp
     EffectManager.cpp
     InvertEffect.cpp
     Particle.cpp

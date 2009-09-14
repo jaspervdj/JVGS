@@ -21,10 +21,6 @@ namespace jvgs
 
                 /** Override
                  */
-                virtual void update(float ms);
-
-                /** Override
-                 */
                 virtual void render();
         };
     }
