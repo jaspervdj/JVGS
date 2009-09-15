@@ -78,7 +78,14 @@ namespace jvgs
                 if(collisionDetector->getClosestCollision(
                         entity->getRadius(), position, velocity,
                         &time, &collision)) {
+
                     Vector2D newPosition = position;
+
+                    /* Stuck. */
+                    if(time <= 0.0f) {
+                        std::cout << "Stuck!" << endl;
+                        newPosition = position - getGravity() * ms;
+                    }
 
                     /* Only update above a certain distance. */
                     float distance = (velocity * time).getLength();
