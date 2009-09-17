@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<level world="resources/level-04/level-04.svg" music="resources/music/04.ogg">
+    <camera type="followcamera" filename="resources/camera.xml" />
+    <entity id="player" filename="resources/player/player.xml">
+        <position x="230" y="150" />
+    </entity>
+</level>
