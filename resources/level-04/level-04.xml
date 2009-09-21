@@ -4,4 +4,7 @@
     <entity id="player" filename="resources/player/player.xml">
         <position x="230" y="150" />
     </entity>
+    <entity id="saurian-01" filename="resources/saurian/saurian.xml">
+        <position x="1300" y="2480" />
+    </entity>
 </level>
