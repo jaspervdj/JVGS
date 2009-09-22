@@ -4,7 +4,7 @@
     <positioner type="collisionresponsepositioner">
         <gravity x="0" y="0.003" />
     </positioner>
-    <radius x="23" y="18" />
+    <radius x="17" y="13" />
     <sprite>
         <animation id="standing">
             <frame sketch="resources/hedgehog/walking-01.svg" duration="100" />

@@ -9,8 +9,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
-   width="46"
-   height="36"
+   width="34"
+   height="26"
    id="svg2409"
    sodipodi:version="0.32"
    inkscape:version="0.46"
@@ -28,8 +28,8 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:window-height="552"
-     inkscape:window-width="903"
+     inkscape:window-height="389"
+     inkscape:window-width="1278"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      guidetolerance="10.0"
@@ -40,11 +40,11 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="9.1111111"
-     inkscape:cx="23"
-     inkscape:cy="18"
-     inkscape:window-x="187"
-     inkscape:window-y="131"
+     inkscape:zoom="1"
+     inkscape:cx="-145.30988"
+     inkscape:cy="36.138106"
+     inkscape:window-x="0"
+     inkscape:window-y="18"
      inkscape:current-layer="svg2409" />
   <defs
      id="defs2411">
@@ -57,7 +57,7 @@
        id="perspective2634" />
   </defs>
   <g
-     transform="matrix(-1,0,0,1,49.490989,-6.8770658)"
+     transform="matrix(-0.7535451,0,0,0.7535451,37.425722,-5.0501499)"
      id="layer1">
     <path
        d="M 4.9213237,36.344425 C 8.655641,27.616901 15.929439,25.424029 15.929439,25.424029 C 15.929439,25.424029 22.386878,34.643114 20.150145,38.333572 C 17.913413,42.024029 5.3690258,37.116926 4.9213237,36.344425 z"
