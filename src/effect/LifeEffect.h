@@ -11,6 +11,9 @@ namespace jvgs
         class LifeEffect: public core::View
         {
             private:
+                /** Initial life. */
+                float initialLife;
+
                 /** Life left. */
                 float life;
 
@@ -27,6 +30,26 @@ namespace jvgs
                 /* Override
                  */
                 virtual void update(float ms);
+
+                /** Get the inital lifetime given.
+                 *  @return The initial lifetime.
+                 */
+                virtual float getInitialLife() const;
+
+                /** Get the life left.
+                 *  @return The life left.
+                 */
+                virtual float getLife() const;
+
+                /** Get the life left divided by the initial lifetime.
+                 *  @return The life fraction.
+                 */
+                virtual float getLifeFraction() const;
+
+                /** Check if this effect has an infinite lifetime.
+                 *  @return If this life has an infinite lifetime.
+                 */
+                virtual bool isImmortal() const;
         };
     }
 }

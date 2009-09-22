@@ -3,7 +3,7 @@ require("resources/events")
 
 -- Trigger functions for the different weapons.
 local weapons = {
-    knife = function()
+    knife = function(self)
         local level = self:getLevel()
         local entity = jvgslua.Entity("resources/knife/knife.xml", level)
 
@@ -23,11 +23,11 @@ local weapons = {
         am:playSound("resources/knife/throw.ogg")
     end,
 
-    clock = function()
+    clock = function(self)
         local em = jvgslua.EffectManager_getInstance()
-        local te = jvgslua.TimeEffect(0.2, 1000)
+        local te = jvgslua.TimeEffect(0.2, 3000)
         em:addEffect(te)
-        self:setTimer(2000)
+        self:setTimer(3000)
     end
 }
 
@@ -46,7 +46,7 @@ events.trigger{
 
         if self:isSet("weapon") and self:getBool("ready") then
             local weapon = self:get("weapon")
-            if weapons[weapon] then weapons[weapon]() end
+            if weapons[weapon] then weapons[weapon](self) end
             self:setBool("ready", false)
         end
     end,

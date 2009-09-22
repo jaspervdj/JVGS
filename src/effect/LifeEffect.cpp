@@ -6,6 +6,7 @@ namespace jvgs
     {
         LifeEffect::LifeEffect(float life)
         {
+            initialLife = life;
             this->life = life;
         }
 
@@ -21,6 +22,26 @@ namespace jvgs
                 else
                     life -= ms;
             }
+        }
+
+        float LifeEffect::getInitialLife() const
+        {
+            return initialLife;
+        }
+
+        float LifeEffect::getLife() const
+        {
+            return life;
+        }
+
+        float LifeEffect::getLifeFraction() const
+        {
+            return life / initialLife;
+        }
+
+        bool LifeEffect::isImmortal() const
+        {
+            return life <= 0.0f;
         }
     }
 }

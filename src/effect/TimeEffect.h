@@ -12,6 +12,9 @@ namespace jvgs
         class TimeEffect: public LifeEffect
         {
             private:
+                /** Extreme timeFactor to apply. */
+                float timeFactor;
+
             public:
                 /** Constructor.
                  *  @param timeFactor TimeFactor to apply during the effect.
