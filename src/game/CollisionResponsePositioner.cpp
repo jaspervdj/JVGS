@@ -84,15 +84,17 @@ namespace jvgs
                     /* Stuck. */
                     if(time <= 0.0f) {
                         std::cout << "Stuck!" << endl;
-                        newPosition = position - getGravity() * ms;
-                    }
-
-                    /* Only update above a certain distance. */
-                    float distance = (velocity * time).getLength();
-                    if(distance >= VERY_CLOSE) {
-                        Vector2D v = velocity;
-                        v.setLength(distance - VERY_CLOSE);
-                        newPosition = position + v;
+                        Vector2D correction = -getGravity();
+                        correction.setLength(VERY_CLOSE);
+                        newPosition = position + correction;
+                    } else {
+                        /* Only update above a certain distance. */
+                        float distance = (velocity * time).getLength();
+                        if(distance >= VERY_CLOSE) {
+                            Vector2D v = velocity;
+                            v.setLength(distance - VERY_CLOSE);
+                            newPosition = position + v;
+                        }
                     }
 
                     /* Subtract used velocity. */
