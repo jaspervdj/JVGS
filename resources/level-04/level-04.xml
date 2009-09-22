@@ -76,4 +76,38 @@
     <entity id="saurian-02" filename="resources/saurian/saurian.xml">
         <position x="1212" y="1760" />
     </entity>
+    <entity id="mouse-03" filename="resources/mouse/mouse.xml">
+        <position x="2107" y="1654" />
+    </entity>
+    <entity id="mouse-04" filename="resources/mouse/mouse.xml">
+        <position x="2191" y="1632" />
+    </entity>
+    <entity id="saurian-03" filename="resources/saurian/saurian.xml">
+        <position x="2398" y="1582" />
+    </entity>
+    <entity id="saurian-04" filename="resources/saurian/saurian.xml">
+        <position x="2818" y="1613" />
+    </entity>
+    <entity id="mouse-05" filename="resources/mouse/mouse.xml">
+        <position x="3121" y="1705" />
+    </entity>
+    <entity id="saurian-05" filename="resources/saurian/saurian.xml">
+        <position x="3802" y="1658" />
+    </entity>
+    <entity id="saurian-06" filename="resources/saurian/saurian.xml">
+        <position x="4083" y="1700" />
+    </entity>
+    <entity id="mouse-06" filename="resources/mouse/mouse.xml">
+        <position x="4493" y="1423" />
+    </entity>
+    <entity id="saurian-07" filename="resources/saurian/saurian.xml">
+        <position x="4764" y="1238" />
+    </entity>
+    <entity id="mouse-07" filename="resources/mouse/mouse.xml">
+        <position x="4583" y="1045" />
+    </entity>
+    <entity id="spiral" script="resources/level-04/spiral.lua">
+        <position x="4333" y="940" />
+        <radius x="70" y="70" />
+    </entity>
 </level>
