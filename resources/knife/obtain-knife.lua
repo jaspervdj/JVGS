@@ -1,9 +1,6 @@
 require("resources/common")
-require("resources/effects/effects")
-local event = jvgslua.EntityEvent_getEvent()
-local self = event:getSource()
-
-events = {
+require("resources/events")
+events.trigger{
     collision = function()
         local collider = event:getCollider()
         if collider:getId() == "player" then
@@ -16,6 +13,3 @@ events = {
         end
     end
 }
-
-f = events[event:getType()]
-if f then f() end

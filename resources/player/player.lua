@@ -1,7 +1,7 @@
 require("resources/common")
-local event = jvgslua.EntityEvent_getEvent()
-local self = event:getSource()
+require("resources/events")
 
+-- Trigger functions for the different weapons.
 local weapons = {
     knife = function()
         local level = self:getLevel()
@@ -31,16 +31,16 @@ local weapons = {
     end
 }
 
-local events = {
-    spawn = function()
+events.trigger{
+    spawn = function(self, event)
         self:setBool("ready", true)
     end,
 
-    die = function()
+    die = function(self, event)
         common.gameOver()
     end,
 
-    action = function()
+    action = function(self, event)
         print(string.format("<point x=\"%.0f\" y=\"%.0f\" \/>",
                 self:getPosition():getX(), self:getPosition():getY()))
 
@@ -51,7 +51,7 @@ local events = {
         end
     end,
 
-    timer = function()
+    timer = function(self, event)
         if self:getBool("dead") then
             -- Falling sequence limit reached.
             common.gameOver()
@@ -60,6 +60,3 @@ local events = {
         end
     end
 }
-
-local f = events[event:getType()]
-if f then f() end

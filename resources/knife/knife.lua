@@ -1,13 +1,11 @@
 require("resources/common")
-local event = jvgslua.EntityEvent_getEvent()
-local self = event:getSource()
-
-events = {
-    spawn = function()
+require("resources/events")
+events.trigger{
+    spawn = function(self, event)
         self:setTimer(500)
     end,
 
-    collision = function()
+    collision = function(self, event)
         local collider = event:getCollider()
         if collider:getId() ~= "player" then
             common.kill(collider)
@@ -15,10 +13,7 @@ events = {
         end
     end,
 
-    timer = function()
+    timer = function(self, event)
         self:setGarbage()
     end
 }
-
-f = events[event:getType()]
-if f then f() end

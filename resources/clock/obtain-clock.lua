@@ -1,9 +1,7 @@
 require("resources/common")
-local event = jvgslua.EntityEvent_getEvent()
-local self = event:getSource()
-
-events = {
-    collision = function()
+require("resources/events")
+events.trigger{
+    collision = function(self, event)
         local collider = event:getCollider()
         if collider:getId() == "player" then
             local sprite = jvgslua.Sprite("resources/player/clock-sprite.xml")
@@ -13,6 +11,3 @@ events = {
         end
     end
 }
-
-f = events[event:getType()]
-if f then f() end
