@@ -53,16 +53,20 @@ namespace jvgs
                 jumpDelay -= ms;
 
             /** Can start a jump. */
-            if(!entity->isFalling() && isKeyDown(KEY_SPACE) &&
+            if(!entity->isFalling() &&
+                    isKeyDown(configuration->getKey("jump")) &&
                     jumpDelay <= 0.0f) {
                 jumpDelay = minJumpDelay;
                 if(positioner)
                     velocity += positioner->getGravity() * -1.0f * jumpForce;
             }
 
-            velocity.setX(isKeyDown(KEY_LEFT) ? -entity->getSpeed() : 0.0f);
-            velocity.setX(isKeyDown(KEY_RIGHT) ? entity->getSpeed() :
-                    velocity.getX());
+            if(isKeyDown(configuration->getKey("left")))
+                velocity.setX(-entity->getSpeed());
+            else if(isKeyDown(configuration->getKey("right")))
+                velocity.setX(entity->getSpeed());
+            else
+                velocity.setX(0.0f);
 
             entity->setVelocity(velocity);
         }

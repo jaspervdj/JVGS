@@ -5,6 +5,7 @@ INCLUDE_DIRECTORIES(
 
 ADD_LIBRARY( 
     input STATIC 
+    InputConfiguration.cpp
     InputManager.cpp
     KeyListener.cpp
 )

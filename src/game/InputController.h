@@ -2,6 +2,7 @@
 #define JVGS_GAME_INPUTCONTROLLER_H
 
 #include "../input/KeyListener.h"
+#include "../input/InputConfiguration.h"
 #include "Controller.h"
 
 namespace jvgs
@@ -13,6 +14,9 @@ namespace jvgs
                 public jvgs::input::KeyListener
         {
             protected:
+                /** Reference to the input configuration. */
+                input::InputConfiguration *configuration;
+
                 /* Override
                  */
                 virtual void loadData(TiXmlElement *element);

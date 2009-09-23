@@ -21,6 +21,7 @@ namespace jvgs
                 : Controller(entity)
         {
             InputManager::getInstance()->addKeyListener(this);
+            configuration = InputConfiguration::getConfiguration();
         }
 
         InputController::InputController(Entity *entity,
@@ -28,6 +29,7 @@ namespace jvgs
         {
             load(element);
             InputManager::getInstance()->addKeyListener(this);
+            configuration = InputConfiguration::getConfiguration();
         }
 
         InputController::~InputController()
@@ -40,14 +42,14 @@ namespace jvgs
             Entity *entity = getEntity();
             Vector2D velocity = Vector2D();
 
-            if(isKeyDown(KEY_LEFT))
+            if(isKeyDown(configuration->getKey("left")))
                 velocity.setX(-entity->getSpeed());
-            else if(isKeyDown(KEY_RIGHT))
+            else if(isKeyDown(configuration->getKey("right")))
                 velocity.setX(entity->getSpeed());
 
-            if(isKeyDown(KEY_UP))
+            if(isKeyDown(configuration->getKey("up")))
                 velocity.setY(-entity->getSpeed());
-            else if(isKeyDown(KEY_DOWN))
+            else if(isKeyDown(configuration->getKey("down")))
                 velocity.setY(entity->getSpeed());
 
             entity->setVelocity(velocity);
@@ -55,7 +57,7 @@ namespace jvgs
 
         void InputController::keyPressed(const Key &key)
         {
-            if(key == KEY_LCTRL)
+            if(key == configuration->getKey("action"))
                 EntityEvent::action(getEntity());
         }
     }

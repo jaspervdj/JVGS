@@ -1,6 +1,15 @@
 local videoManager = jvgslua.VideoManager_getInstance()
 videoManager:setVideoMode(jvgslua.Vector2D(600, 400), "jvgs")
 
+-- Set key configuration.
+local ic = jvgslua.InputConfiguration_getConfiguration()
+ic:setKey("jump", jvgslua.KEY_SPACE)
+ic:setKey("action", jvgslua.KEY_LCTRL)
+ic:setKey("left", jvgslua.KEY_LEFT)
+ic:setKey("right", jvgslua.KEY_RIGHT)
+ic:setKey("up", jvgslua.KEY_UP)
+ic:setKey("down", jvgslua.KEY_DOWN)
+
 -- Ensure persistence.
 local pm = jvgslua.PersistenceManager_getInstance()
 pm:load("data.xml")
