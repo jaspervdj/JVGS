@@ -1,7 +1,7 @@
 require("resources/effects/effects")
 require("resources/events")
 events.trigger{
-    collision = function()
+    collision = function(self, event)
         local level = self:getLevel()
         local player = level:getEntityById("player")
         local crowns = player:isSet("crowns") and player:get("crowns") or 0

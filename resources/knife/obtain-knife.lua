@@ -1,7 +1,7 @@
 require("resources/common")
 require("resources/events")
 events.trigger{
-    collision = function()
+    collision = function(self, event)
         local collider = event:getCollider()
         if collider:getId() == "player" then
             local sprite = jvgslua.Sprite("resources/player/knife-sprite.xml")
