@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity script="resources/invincible-enemy.lua" speed = "0.15"
+<entity script="resources/invincible-enemy.lua" speed = "0.25"
         collisionchecker="false">
     <controller type="bullcontroller" sight="10000" target="player" />
     <positioner type="collisionresponsepositioner">
