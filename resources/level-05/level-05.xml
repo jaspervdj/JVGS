@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<level world="resources/level-05/level-05.svg" music="resources/music/05.ogg">
+    <camera type="followcamera" filename="resources/camera.xml" />
+    <entity id="player" filename="resources/player/player.xml">
+        <position x="880" y="600" />
+    </entity>
+    <entity id="pacman-01" filename="resources/pacman/pacman.xml">
+        <position x="200" y="0" />
+    </entity>
+</level>
