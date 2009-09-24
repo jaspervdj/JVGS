@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity script="resources/knife/knife.lua" speed="0.5"
+<entity script="resources/knife/script.lua" speed="0.5"
         collisionchecker="true">
     <controller type="flystraightcontroller" />
     <positioner type="collisiondestroypositioner">
