@@ -7,4 +7,13 @@
     <entity id="pacman-01" filename="resources/pacman/pacman.xml">
         <position x="200" y="0" />
     </entity>
+    <entity id="obtain-knife" filename="resources/knife/obtain-knife.xml">
+        <position x="1500" y="560" />
+    </entity>
+    <entity id="ball-01" filename="resources/spikey-ball/ball.xml">
+        <position x="9549" y="110" />
+    </entity>
+    <entity id="cable-01" filename="resources/spikey-ball/cable.xml">
+        <position x="9555" y="-138" />
+    </entity>
 </level>
