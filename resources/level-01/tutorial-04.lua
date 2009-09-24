@@ -1,5 +1,3 @@
-require("resources/effects/effects")
-require("resources/events")
 events.trigger{
     collision = function(self, event)
         effects.staticText(self:getPosition() + jvgslua.Vector2D(0, -100),

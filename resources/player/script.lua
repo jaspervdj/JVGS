@@ -1,5 +1,3 @@
-require("resources/common")
-require("resources/events")
 
 -- Trigger functions for the different weapons.
 local weapons = {

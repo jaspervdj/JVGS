@@ -1,4 +1,3 @@
-require("resources/events")
 events.trigger{
     collision = function(self, event)
         local collider = event:getCollider()

@@ -1,5 +1,18 @@
+require("resources/modules/common")
+require("resources/modules/jlib")
+require("resources/modules/events")
+require("resources/modules/effects")
+
 local videoManager = jvgslua.VideoManager_getInstance()
 videoManager:setVideoMode(jvgslua.Vector2D(600, 400), "jvgs")
+
+-- Warn when using global variables.
+setmetatable(_G, {
+    __newindex = function(table, key, value)
+        print("Warning - setting global " .. key .. " to a " .. type(value))
+        rawset(table, key, value)
+    end
+})
 
 -- Set key configuration.
 local ic = jvgslua.InputConfiguration_getConfiguration()

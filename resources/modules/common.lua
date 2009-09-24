@@ -1,4 +1,3 @@
-require("resources/effects/effects")
 module("common", package.seeall)
 
 -- Returns winner, loser

@@ -1,5 +1,3 @@
-require("resources/effects/effects")
-require("resources/events")
 events.trigger{
     collision = function(self, event)
         local player = self:getLevel():getEntityById("player")

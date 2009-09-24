@@ -1,4 +1,3 @@
-require("resources/jlib")
 module("effects", package.seeall)
 
 function stars(position)

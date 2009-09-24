@@ -1,5 +1,3 @@
-require("resources/common")
-require("resources/events")
 events.trigger{
     spawn = function(self, event)
         self:setTimer(500)
