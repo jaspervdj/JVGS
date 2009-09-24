@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity script="resources/common-enemy.lua" speed = "0.2"
+<entity script="resources/common-scripts/enemy.lua" speed = "0.2"
         collisionchecker="false">
     <controller type="sillycontroller" speedtreshold="0.5" />
     <positioner type="collisionresponsepositioner">

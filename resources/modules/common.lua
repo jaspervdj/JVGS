@@ -24,8 +24,8 @@ function impossibleFight(enemy, collider)
     return enemy, collider
 end
 
-function kill(e)
-    if e:getBool("invulnerable") then return end
+function kill(e, killInvulnerable)
+    if e:getBool("invulnerable") and not killInvulnerable then return end
 
     -- Kill him
     e:setBool("dead", true)
