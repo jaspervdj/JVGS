@@ -1,6 +1,7 @@
 module("effects", package.seeall)
 
-function stars(position)
+function stars(position, amount)
+    amount = amount or 1
     local sm = jvgslua.SketchManager_getInstance()
     local em = jvgslua.EffectManager_getInstance()
     local sketches = jlib.map(
@@ -11,7 +12,7 @@ function stars(position)
 
     local gravity = jvgslua.Vector2D(0, 0.003)
 
-    for i = 1, math.random(10, 30) do
+    for i = 1, math.random(amount * 10, amount * 30) do
         local velocity = jvgslua.Vector2D_fromPolar(0.1 + 1.9 * math.random(),
                 math.random() * 360)
 

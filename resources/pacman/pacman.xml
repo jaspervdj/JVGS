@@ -16,4 +16,5 @@
         </animation>
     </sprite>
     <entry key="invulnerable" value="true" />
+    <entry key="die-sound" value="resources/pacman/pacman.ogg" />
 </entity>

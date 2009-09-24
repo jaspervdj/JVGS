@@ -67,4 +67,8 @@
      d="M 934.375,829.6875 L 934.375,846.09375 L 850,846.09375 L 850,866.40625 L 819.53125,837.89062 L 850,809.375 L 850,829.6875 L 934.375,829.6875 z"
      id="path2760"
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     d="M 5910.2088,701.32803 C 5910.2088,715.12803 5899.0088,726.32803 5885.2088,726.32803 C 5871.4088,726.32803 5860.2088,715.12803 5860.2088,701.32803 C 5860.2088,687.52803 5871.4088,676.32803 5885.2088,676.32803 C 5899.0088,676.32803 5910.2088,687.52803 5910.2088,701.32803 z"
+     id="path2404"
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1" />
 </svg>

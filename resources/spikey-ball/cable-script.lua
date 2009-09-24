@@ -4,8 +4,10 @@ events.trigger{
         local id, number = string.match(self:getId(), "^(.+)-(.+)$")
         local ball = level:getEntityById("ball-" .. number)
 
-        self:setGarbage()
-        ball:getPositioner():setGravity(jvgslua.Vector2D(0, 0.003))
-        ball:setCollisionChecker(true)
+        if ball then
+            self:setGarbage()
+            ball:getPositioner():setGravity(jvgslua.Vector2D(0, 0.003))
+            ball:setCollisionChecker(true)
+        end
     end
 }
