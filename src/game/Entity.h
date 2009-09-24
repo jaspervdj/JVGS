@@ -73,7 +73,7 @@ namespace jvgs
             public:
                 /** Constructor.
                  *  @param id Id for the entity.
-                 *  @param collisionChecker Check for collisions actively?
+                 *  @param collisionChecker If the entity is a collisionChecker.
                  *  @param level Level the entity is in.
                  */
                 Entity(const std::string &id, bool collisionChecker,
@@ -89,7 +89,7 @@ namespace jvgs
                  *  @param fileName XML file to load entity from.
                  *  @param level Level the entity is in.
                  */
-                Entity(const std::string &id, Level *level);
+                Entity(const std::string &fileName, Level *level);
 
                 /** Destructor.
                  */
@@ -109,6 +109,11 @@ namespace jvgs
                  *  @return If this object actively checks for collisions.
                  */
                 virtual bool isCollisionChecker() const;
+
+                /** Set whether this object actively checks for collisions.
+                 *  @param collisionChecker If this object checks collisions.
+                 */
+                 virtual void setCollisionChecker(bool collisionChecker);
 
                 /** Check if the entity is falling.
                  *  @return If the entity is falling.

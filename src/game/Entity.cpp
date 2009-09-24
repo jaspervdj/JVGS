@@ -226,6 +226,11 @@ namespace jvgs
             return collisionChecker;
         }
 
+        void Entity::setCollisionChecker(bool collisionChecker)
+        {
+            this->collisionChecker = collisionChecker;
+        }
+
         bool Entity::isFalling() const
         {
             return falling;
