@@ -63,5 +63,21 @@ namespace jvgs
                 LogManager::getInstance()->error("%s: %s", code.c_str(),
                         lua_tostring(luaState, -1));
         }
+
+        void ScriptManager::setArguments(int argc, const char **argv)
+        {
+            for(int i = 0; i < argc; i++)
+                arguments.push_back(string(argv[i]));
+        }
+
+        int ScriptManager::getNumberOfArguments() const
+        {
+            return (int) arguments.size();
+        }
+
+        const string &ScriptManager::getArgument(int index) const
+        {
+            return arguments[index];
+        }
     }
 }

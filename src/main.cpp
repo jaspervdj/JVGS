@@ -10,9 +10,10 @@ using namespace std;
 /* Needed on windows to link main with SDLmain. */
 #include <SDL/SDL.h>
 
-int main(int argc, char **argv)
+int main(int argc, const char **argv)
 {
     ScriptManager *scriptManager = ScriptManager::getInstance();
+    scriptManager->setArguments(argc, argv);
 
     /* File to execute. */
     string fileName;
