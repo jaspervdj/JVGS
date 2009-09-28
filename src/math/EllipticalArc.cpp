@@ -36,7 +36,7 @@ namespace jvgs
 
             Vector2D tmpCenter = Vector2D(
                     radius.getX() * tmp1.getY() / radius.getY(),
-                    -radius.getY() * tmp1.getX() / radius.getX() * s);
+                    -radius.getY() * tmp1.getX() / radius.getX()) * s;
 
             center = rotate * tmpCenter + (start + end) / 2.0f;
 
@@ -53,6 +53,9 @@ namespace jvgs
                 deltaTheta -= 360.0f;
             else if(sweep && deltaTheta < 0.0f)
                 deltaTheta += 360.0f;
+
+            if(theta1 > deltaTheta)
+                theta1 -= 360.0f;
 
             calculateLength();
         }

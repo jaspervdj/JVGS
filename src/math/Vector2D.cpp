@@ -157,10 +157,9 @@ namespace jvgs
 
         float Vector2D::getAngle(const Vector2D &other) const
         {
-            float abs = acos((*this) * other /
-                    (getLength() * other.getLength()));
+            float abs = acos(normalized() * other.normalized());
             abs = 180.0f * abs / M_PI;
-            return x * other.x - y * other.y >= 0.0f ? abs : -abs;
+            return x * other.y - y * other.x >= 0.0f ? abs : -abs;
         }
 
         void Vector2D::fromXML(TiXmlElement *element, Vector2D *vector)
