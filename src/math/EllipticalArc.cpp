@@ -49,8 +49,10 @@ namespace jvgs
                     Vector2D((-tmp1.getX() - tmpCenter.getX()) / radius.getX(),
                     (-tmp1.getY() - tmpCenter.getY()) / radius.getY()));
 
-            if(sweep)
+            if(!sweep && deltaTheta > 0.0f)
                 deltaTheta -= 360.0f;
+            else if(sweep && deltaTheta < 0.0f)
+                deltaTheta += 360.0f;
 
             calculateLength();
         }
