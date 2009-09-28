@@ -2,7 +2,7 @@
 <entity id="player" speed="0.4" script="resources/player/script.lua"
         collisionchecker="true">
     <controller type="defaultinputcontroller" minjumpdelay="300"
-            jumpforce="200.0" />
+            jumpforce="250.0" />
     <positioner type="collisionresponsepositioner">
         <gravity x="0" y="0.003" />
     </positioner>

@@ -159,6 +159,7 @@ namespace jvgs
         {
             float abs = acos((*this) * other /
                     (getLength() * other.getLength()));
+            abs = 180.0f * abs / M_PI;
             return x * other.x - y * other.y >= 0.0f ? abs : -abs;
         }
 

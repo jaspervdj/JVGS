@@ -11,11 +11,15 @@ namespace jvgs
                 const Vector2D &radius, float phi, bool largeArc, bool sweep,
                 const Vector2D &end)
         {
+            this->radius = radius;
+            this->phi = phi;
+            
             AffineTransformationMatrix rotate, rotateMinus;
             rotate.rotate(phi);
             rotateMinus.rotate(-phi);
 
-            Vector2D tmp1 = rotate * ((start - end) / 2.0f);
+            Vector2D tmp1 = rotateMinus * ((start - end) / 2.0f);
+
             float s = sqrt((
                     radius.getX() * radius.getX() *
                     radius.getY() * radius.getY() -
@@ -32,9 +36,9 @@ namespace jvgs
 
             Vector2D tmpCenter = Vector2D(
                     radius.getX() * tmp1.getY() / radius.getY(),
-                    -radius.getY() * tmp1.getX() / radius.getX());
+                    -radius.getY() * tmp1.getX() / radius.getX() * s);
 
-            Vector2D center = rotateMinus * tmpCenter + (start + end) / 2.0f;
+            center = rotate * tmpCenter + (start + end) / 2.0f;
 
             theta1 = Vector2D(1.0f, 0.0f).getAngle(Vector2D(
                     (tmp1.getX() - tmpCenter.getX()) / radius.getX(),
@@ -47,6 +51,8 @@ namespace jvgs
 
             if(sweep)
                 deltaTheta -= 360.0f;
+
+            calculateLength();
         }
 
         EllipticalArc::~EllipticalArc()
