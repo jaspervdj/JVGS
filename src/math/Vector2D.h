@@ -122,6 +122,12 @@ namespace jvgs
                  */
                 Vector2D reflect(const Vector2D &other) const;
 
+                /** Get the angle to another vector.
+                 *  @param other Vector to get the angle to.
+                 *  @return The requested angle in degrees.
+                 */
+                 float getAngle(const Vector2D &other) const;
+
                 /** Load a vector from xml data..
                  *  @param element TiXmlElement to load data from. Can be 0.
                  *  @param vector Vector2D to fill in.

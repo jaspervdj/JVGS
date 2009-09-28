@@ -1,5 +1,6 @@
 ADD_LIBRARY( 
     sketch STATIC 
+    APathCommandParser.cpp
     CPathCommandParser.cpp
     Group.cpp
     GroupParser.cpp

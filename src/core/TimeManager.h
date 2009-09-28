@@ -28,6 +28,11 @@ namespace jvgs
                  *  @return The ticks in milliseconds.
                  */
                 long getTicks() const;
+
+                /** Sleep for an amount of time.
+                 *  @param ms Milliseconds to sleep.
+                 */
+                void sleep(int ms) const;
         };
     }
 }

@@ -24,5 +24,10 @@ namespace jvgs
         {
             return SDL_GetTicks();
         }
+
+        void TimeManager::sleep(int ms) const
+        {
+            SDL_Delay(ms);
+        }
     }
 }

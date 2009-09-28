@@ -6,6 +6,7 @@ ADD_LIBRARY(
     CubicCurve.cpp
     Curve.cpp
     CollisionDetector.cpp
+    EllipticalArc.cpp
     Line.cpp
     LineSegment.cpp
     MathManager.cpp

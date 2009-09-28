@@ -2,6 +2,7 @@
 #include "Path.h"
 #include "PathComponent.h"
 #include "PathCommandParser.h"
+#include "APathCommandParser.h"
 #include "CPathCommandParser.h"
 #include "LPathCommandParser.h"
 #include "MPathCommandParser.h"
@@ -28,6 +29,9 @@ namespace jvgs
         map<char, PathCommandParser*> createCommandParsers()
         {
             map<char, PathCommandParser*> commandParsers;
+
+            static APathCommandParser aPathCommandParser;
+            commandParsers['a'] = &aPathCommandParser;
 
             static CPathCommandParser cPathCommandParser;
             commandParsers['c'] = &cPathCommandParser;
