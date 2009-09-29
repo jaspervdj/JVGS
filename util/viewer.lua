@@ -1,33 +1,34 @@
 #!/bin/echo Run this script through jvgs: 
 
 -- Get manager references.
-local sm = jvgslua.ScriptManager_getInstance()
-local vm = jvgslua.VideoManager_getInstance()
-local tm = jvgslua.TimeManager_getInstance()
-local im = jvgslua.InputManager_getInstance()
+local scriptManager = jvgslua.ScriptManager_getInstance()
+local videoManager = jvgslua.VideoManager_getInstance()
+local timeManager = jvgslua.TimeManager_getInstance()
+local inputManager = jvgslua.InputManager_getInstance()
+local sketchManager = jvgslua.SketchManager_getInstance()
 
 -- Check arguments.
-if sm:getNumberOfArguments() < 3 then
-    print("Usage: " .. sm:getArgument(0) .. " " ..
-            sm:getArgument(1) .. " file")
+if scriptManager:getNumberOfArguments() < 3 then
+    print("Usage: " .. scriptManager:getArgument(0) .. " " ..
+            scriptManager:getArgument(1) .. " file")
     os.exit(1)
 end
 
 -- Dummy video mode.
-vm:setVideoMode(jvgslua.Vector2D(200, 200), "Loading...")
+videoManager:setVideoMode(jvgslua.Vector2D(200, 200), "Loading...")
 
 -- Load file.
-local sketch = jvgslua.Sketch(sm:getArgument(2))
+local sketch = sketchManager:getSketch(scriptManager:getArgument(2))
 
 -- Set video mode.
-vm:setVideoMode(sketch:getSize(),
-        sm:getArgument(2) .. " - jvgs file viewer")
+videoManager:setVideoMode(sketch:getSize(),
+        scriptManager:getArgument(2) .. " - jvgs file viewer")
 
--- Simple main loop.
-while not im:hasQuitEvent() do
-    im:update(10)
-    vm:clear()
+-- SinputManagerple main loop.
+while not inputManager:hasQuitEvent() do
+    inputManager:update(10)
+    videoManager:clear()
     sketch:render()
-    vm:flip()
-    tm:sleep(10)
+    videoManager:flip()
+    timeManager:sleep(10)
 end
