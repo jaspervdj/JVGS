@@ -211,6 +211,15 @@ namespace jvgs
                 /* Override
                  */
                 virtual void render();
+
+                /* Override
+                 */
+                virtual void set(const std::string &key,
+                        const std::string &value);
+
+                /* Override
+                 */
+                virtual void setBool(const std::string &key, bool value);
         };
     }
 }

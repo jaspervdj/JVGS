@@ -75,7 +75,7 @@ namespace jvgs
                  *  @param key Key to get the value for.
                  *  @param value The boolean value for key.
                  */
-                virtual void setBool(const std::string &keu, bool value);
+                virtual void setBool(const std::string &key, bool value);
 
                 /** Write the XML data to a file.
                  *  @param fileName File to write to.

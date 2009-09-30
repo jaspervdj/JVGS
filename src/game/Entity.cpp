@@ -383,5 +383,18 @@ namespace jvgs
                 videoManager->pop();
             }
         }
+
+        void Entity::set(const std::string &key,
+                const std::string &value)
+        {
+            PropertyMap::set(key, value);
+            EntityEvent::property(this, key);
+        }
+
+        void Entity::setBool(const std::string &key, bool value)
+        {
+            PropertyMap::setBool(key, value);
+            EntityEvent::property(this, key);
+        }
     }
 }

@@ -82,5 +82,14 @@ namespace jvgs
             event->source = entity;
             event->scriptManager->runScript(entity->getScript());
         }
+
+        void EntityEvent::property(Entity *entity, const string &key)
+        {
+            EntityEvent *event = getEvent();
+            event->type = "timer";
+            event->source = entity;
+            event->key = key;
+            event->scriptManager->runScript(entity->getScript());
+        }
     }
 }

@@ -25,6 +25,9 @@ namespace jvgs
                 /** The collider in case of a collision event. */
                 Entity *collider;
 
+                /** The key in case of a property event. */
+                std::string key;
+
             protected:
                 /** Constructor.
                  */
@@ -81,6 +84,12 @@ namespace jvgs
                  *  @param entity Entity holding the timer.
                  */
                 static void timer(Entity *entity);
+
+                /** Execute a property change event for an entity.
+                 *  @param entity Entity which properties are changed.
+                 *  @param propery Name of the property that is changed.
+                 */
+                static void property(Entity *entity, const std::string &key);
         };
     }
 }
