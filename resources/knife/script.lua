@@ -5,7 +5,7 @@ events.trigger{
 
     collision = function(self, event)
         local collider = event:getCollider()
-        if collider:getId() ~= "player" then
+        if not common.isPlayer(collider) then
             common.kill(collider)
             self:setGarbage()
         end

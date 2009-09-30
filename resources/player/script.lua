@@ -1,4 +1,3 @@
-
 -- Trigger functions for the different weapons.
 local weapons = {
     knife = function(self)

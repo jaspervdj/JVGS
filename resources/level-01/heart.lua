@@ -1,5 +1,7 @@
 events.trigger{
     collision = function(self, event)
-        common.nextLevel("resources/level-02/level-02.xml")
+        if common.isPlayer(event:getCollider()) then
+            common.nextLevel("resources/level-02/level-02.xml")
+        end
     end
 }

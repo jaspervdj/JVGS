@@ -109,5 +109,6 @@
     <entity id="spiral" script="resources/level-04/spiral.lua">
         <position x="4333" y="940" />
         <radius x="70" y="70" />
+        <entry key="dead" entry="true" />
     </entity>
 </level>

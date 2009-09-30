@@ -1,8 +1,12 @@
 module("common", package.seeall)
 
+function isPlayer(entity)
+    return entity:getId() == "player"
+end
+
 -- Returns winner, loser
 function fight(enemy, collider)
-    if collider:getId() ~= "player" then return nil, nil end
+    if not common.isPlayer(collider) then return nil, nil end
     if enemy:getBool("dead") or collider:getBool("dead") then
         return nil, nil
     end
@@ -16,7 +20,7 @@ function fight(enemy, collider)
 end
 
 function impossibleFight(enemy, collider)
-    if collider:getId() ~= "player" then return nil end
+    if not common.isPlayer(collider) then return nil end
     if enemy:getBool("dead") or collider:getBool("dead") then
         return nil
     end
@@ -26,6 +30,7 @@ end
 
 function kill(e, killInvulnerable)
     if e:getBool("invulnerable") and not killInvulnerable then return end
+    if e:getBool("dead") then return end
 
     -- Kill him
     e:setBool("dead", true)

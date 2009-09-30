@@ -22,5 +22,6 @@
     <entity id="triforce" script="resources/level-05/triforce.lua">
         <position x="700" y="5230" />
         <radius x="50" y="50" />
+        <entry key="dead" entry="true" />
     </entity>
 </level>

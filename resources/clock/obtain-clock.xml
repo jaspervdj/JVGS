@@ -7,4 +7,5 @@
             <frame sketch="resources/clock/clock.svg" duration="50" />
         </animation>
     </sprite>
+    <entry key="dead" entry="true" />
 </entity>

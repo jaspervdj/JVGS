@@ -31,5 +31,6 @@
     <entity id="heart" script="resources/level-01/heart.lua">
         <position x="4360" y="260" />
         <radius x="50" y="50" />
+        <entry key="dead" entry="true" />
     </entity>
 </level>
