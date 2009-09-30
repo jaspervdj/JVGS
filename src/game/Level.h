@@ -35,6 +35,9 @@ namespace jvgs
                 /** The entities in the game world. */
                 std::vector<Entity*> entities;
 
+                /** The entity garbage. */
+                std::vector<Entity*> garbage;
+
                 /** Entities by id. */
                 std::map<std::string, Entity*> entitiesById;
 

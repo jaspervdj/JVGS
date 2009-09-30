@@ -134,6 +134,9 @@ namespace jvgs
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 delete (*iterator);
+            for(vector<Entity*>::iterator iterator = garbage.begin();
+                    iterator != garbage.end(); iterator++)
+                delete (*iterator);
             if(camera)
                 delete camera;
         }
@@ -201,7 +204,7 @@ namespace jvgs
                 } else {
                     EntityEventManager::getInstance()->die(*iterator);
                     entitiesById.erase((*iterator)->getId());
-                    delete (*iterator);
+                    garbage.push_back(*iterator);
                 }
             }
         }

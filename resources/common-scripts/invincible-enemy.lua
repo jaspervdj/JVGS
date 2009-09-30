@@ -4,7 +4,7 @@ events.trigger{
         if not common.isDead(self) and not common.isDead(collider) then
             common.damage(collider, 1)
         end
-    end
+    end,
 
     property = function(self, event)
         if event:getKey() == "health" and common.isDead(self) then

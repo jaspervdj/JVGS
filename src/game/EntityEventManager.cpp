@@ -16,6 +16,11 @@ namespace jvgs
 
         EntityEventManager::~EntityEventManager()
         {
+            while(!events.empty()) {
+                pendingEvent = events.front();
+                events.pop();
+                delete pendingEvent;
+            }
         }
 
         EntityEventManager *EntityEventManager::getInstance()
