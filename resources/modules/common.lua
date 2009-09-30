@@ -6,7 +6,7 @@ end
 
 function isDead(entity)
     if entity:isSet("health") then
-        return tonumber(entity:get("health")) >= 0
+        return tonumber(entity:get("health")) <= 0
     else
         return false
     end
