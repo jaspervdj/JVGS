@@ -8,19 +8,17 @@ namespace jvgs
 {
     namespace game
     {
-        EntityEvent::EntityEvent()
+        EntityEvent::EntityEvent(Entity *source, const string &type,
+                Entity *collider, const string &key)
         {
-            scriptManager = ScriptManager::getInstance();
+            this->source = source;
+            this->type = type;
+            this->collider = collider;
+            this->key = key;
         }
 
         EntityEvent::~EntityEvent()
         {
-        }
-
-        EntityEvent *EntityEvent::getEvent()
-        {
-            static EntityEvent event;
-            return &event;
         }
 
         Entity *EntityEvent::getSource() const
@@ -38,58 +36,9 @@ namespace jvgs
             return collider;
         }
 
-        void EntityEvent::collision(Entity *entity1, Entity *entity2)
+        const string &EntityEvent::getKey() const
         {
-            EntityEvent *event = getEvent();
-            event->type = "collision";
-            event->source = entity1;
-            event->collider = entity2;
-            event->scriptManager->runScript(entity1->getScript());
-
-            event->source = entity2;
-            event->collider = entity1;
-            event->scriptManager->runScript(entity2->getScript());
-        }
-
-        void EntityEvent::action(Entity *entity)
-        {
-            EntityEvent *event = getEvent();
-            event->type = "action";
-            event->source = entity;
-            event->scriptManager->runScript(entity->getScript());
-        }
-
-        void EntityEvent::spawn(Entity *entity)
-        {
-            EntityEvent *event = getEvent();
-            event->type = "spawn";
-            event->source = entity;
-            event->scriptManager->runScript(entity->getScript());
-        }
-
-        void EntityEvent::die(Entity *entity)
-        {
-            EntityEvent *event = getEvent();
-            event->type = "die";
-            event->source = entity;
-            event->scriptManager->runScript(entity->getScript());
-        }
-
-        void EntityEvent::timer(Entity *entity)
-        {
-            EntityEvent *event = getEvent();
-            event->type = "timer";
-            event->source = entity;
-            event->scriptManager->runScript(entity->getScript());
-        }
-
-        void EntityEvent::property(Entity *entity, const string &key)
-        {
-            EntityEvent *event = getEvent();
-            event->type = "timer";
-            event->source = entity;
-            event->key = key;
-            event->scriptManager->runScript(entity->getScript());
+            return key;
         }
     }
 }

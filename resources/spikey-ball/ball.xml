@@ -8,5 +8,4 @@
             <frame sketch="resources/spikey-ball/ball.svg" duration="50" />
         </animation>
     </sprite>
-    <entry key="invulnerable" value="true" />
 </entity>

@@ -7,5 +7,4 @@
             <frame sketch="resources/knife/knife-01.svg" duration="50" />
         </animation>
     </sprite>
-    <entry key="dead" value="true" />
 </entity>

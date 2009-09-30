@@ -35,3 +35,22 @@ function staticText(position, str)
     local e = jvgslua.TextEffect(str, position, 0, 0, 0)
     em:addEffect(e)
 end
+
+function commonDie(entity)
+    -- Drop him.
+    entity:setController(nil)
+    local positioner = jvgslua.NaivePositioner(entity)
+    entity:setPositioner(positioner)
+    local velocity = jvgslua.Vector2D(0, 2 * entity:getSpeed())
+    entity:setVelocity(velocity)
+
+    -- Effects.
+    effects.text(entity:getPosition())
+    effects.stars(entity:getPosition())
+
+    -- Play optional sound.
+    if entity:isSet("die-sound") then
+        local am = jvgslua.AudioManager_getInstance()
+        am:playSound(entity:get("die-sound"))
+    end
+end

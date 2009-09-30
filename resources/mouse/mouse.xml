@@ -16,4 +16,5 @@
         </animation>
     </sprite>
     <entry key="die-sound" value="resources/mouse/mouse.ogg" />
+    <entry key="health" value="1" />
 </entity>

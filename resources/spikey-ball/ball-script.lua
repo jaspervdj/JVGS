@@ -3,7 +3,7 @@ events.trigger{
         -- Only after being dropped
         if self:isCollisionChecker() then
             local collider = event:getCollider()
-            common.kill(collider, true)
+            common.damage(collider, 100)
             effects.stars(self:getPosition(), 5)
             self:setGarbage()
         end

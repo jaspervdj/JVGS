@@ -15,4 +15,5 @@
         </animation>
     </sprite>
     <entry key="die-sound" value="resources/hedgehog/hedgehog.ogg" />
+    <entry key="health" value="1" />
 </entity>

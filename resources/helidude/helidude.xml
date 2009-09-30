@@ -13,4 +13,5 @@
         </animation>
     </sprite>
     <entry key="die-sound" value="resources/helidude/helidude.ogg" />
+    <entry key="health" value="1" />
 </entity>

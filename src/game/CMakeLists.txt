@@ -17,6 +17,7 @@ ADD_LIBRARY(
     DefaultInputController.cpp
     Entity.cpp
     EntityEvent.cpp
+    EntityEventManager.cpp
     FlyStraightController.cpp
     FollowCamera.cpp
     InputController.cpp

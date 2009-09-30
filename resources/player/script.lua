@@ -4,8 +4,7 @@ local weapons = {
         local level = self:getLevel()
         local entity = jvgslua.Entity("resources/knife/knife.xml", level)
 
-        local velocity = jvgslua.Vector2D_fromPolar(entity:getSpeed(),
-                math.random() * 20 - 10)
+        local velocity = jvgslua.Vector2D_fromPolar(entity:getSpeed(), math.random() * 20 - 10)
 
         if not self:isFacingRight() then
             velocity:setX(-velocity:getX())
@@ -54,6 +53,19 @@ events.trigger{
             common.gameOver()
         else
             self:setBool("ready", true)
+        end
+    end,
+
+    property = function(self, event)
+        if event:getKey() == "health" and common.isDead(self) then
+            effects.commonDie(self)
+            local em = jvgslua.EffectManager_getInstance()
+            local effect = jvgslua.InvertEffect()
+            em:addEffect(effect)
+            local lm = jvgslua.LevelManager_getInstance()
+            lm:setTimeFactor(0.2)
+            -- Limit falling sequence.
+            self:setTimer(1000)
         end
     end
 }

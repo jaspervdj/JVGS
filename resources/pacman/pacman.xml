@@ -15,6 +15,6 @@
             <frame sketch="resources/pacman/walking-02.svg" duration="300" />
         </animation>
     </sprite>
-    <entry key="invulnerable" value="true" />
+    <entry key="health" value="100" />
     <entry key="die-sound" value="resources/pacman/pacman.ogg" />
 </entity>

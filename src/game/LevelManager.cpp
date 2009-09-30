@@ -1,4 +1,5 @@
 #include "LevelManager.h"
+#include "EntityEventManager.h"
 #include "Level.h"
 
 #include "../sketch/SketchManager.h"
@@ -50,6 +51,8 @@ namespace jvgs
             /* Behold, as I have been told
              * what follows below
              * is very important, you know! */
+            EntityEventManager *entityEventManager =
+                    EntityEventManager::getInstance();
             InputManager *inputManager = InputManager::getInstance();
             TimeManager *timeManager = TimeManager::getInstance();
             VideoManager *videoManager = VideoManager::getInstance();
@@ -72,6 +75,8 @@ namespace jvgs
 
                 effectManager->update(timeFactor * ms);
                 fps.update(ms);
+
+                entityEventManager->flush();
 
                 videoManager->clear();
                 videoManager->identity();

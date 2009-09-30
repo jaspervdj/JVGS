@@ -1,5 +1,5 @@
 #include "Level.h"
-#include "EntityEvent.h"
+#include "EntityEventManager.h"
 #include "Entity.h"
 #include "FollowCamera.h"
 #include "SimpleCamera.h"
@@ -162,7 +162,7 @@ namespace jvgs
         {
             entities.push_back(entity);
             entitiesById[entity->getId()] = entity;
-            EntityEvent::spawn(entity);
+            EntityEventManager::getInstance()->spawn(entity);
         }
 
         Entity *Level::getEntityById(const string &id)
@@ -199,7 +199,7 @@ namespace jvgs
                 if(!(*iterator)->isGarbage()) {
                     entities.push_back(*iterator);
                 } else {
-                    EntityEvent::die(*iterator);
+                    EntityEventManager::getInstance()->die(*iterator);
                     entitiesById.erase((*iterator)->getId());
                     delete (*iterator);
                 }

@@ -1,6 +1,6 @@
 #include "InputController.h"
 #include "Entity.h"
-#include "EntityEvent.h"
+#include "EntityEventManager.h"
 
 #include "../input/InputManager.h"
 using namespace jvgs::input;
@@ -58,7 +58,7 @@ namespace jvgs
         void InputController::keyPressed(const Key &key)
         {
             if(key == configuration->getKey("action"))
-                EntityEvent::action(getEntity());
+                EntityEventManager::getInstance()->action(getEntity());
         }
     }
 }

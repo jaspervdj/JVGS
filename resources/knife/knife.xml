@@ -14,5 +14,4 @@
             <frame sketch="resources/knife/knife-04.svg" duration="50" />
         </animation>
     </sprite>
-    <entry key="invulnerable" value="true" />
 </entity>

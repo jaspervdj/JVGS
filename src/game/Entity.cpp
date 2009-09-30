@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include "EntityEvent.h"
+#include "EntityEventManager.h"
 #include "Level.h"
 #include "Controller.h"
 #include "Positioner.h"
@@ -328,7 +328,7 @@ namespace jvgs
 
             if(timer > 0.0f) {
                 if(timer - ms <= 0.0f)
-                    EntityEvent::timer(this);
+                    EntityEventManager::getInstance()->timer(this);
                 timer -= ms;
             }
 
@@ -358,7 +358,8 @@ namespace jvgs
                         if(myBoundingBox->intersectsWith(
                                 other->getBoundingBox(), getVelocity() * ms,
                                 other->getVelocity() * ms)) {
-                            EntityEvent::collision(this, other);
+                            EntityEventManager::getInstance()->collision(this,
+                                    other);
                         }
                     }
                 }
@@ -388,13 +389,13 @@ namespace jvgs
                 const std::string &value)
         {
             PropertyMap::set(key, value);
-            EntityEvent::property(this, key);
+            EntityEventManager::getInstance()->property(this, key);
         }
 
         void Entity::setBool(const std::string &key, bool value)
         {
             PropertyMap::setBool(key, value);
-            EntityEvent::property(this, key);
+            EntityEventManager::getInstance()->property(this, key);
         }
     }
 }

@@ -4,64 +4,16 @@ function isPlayer(entity)
     return entity:getId() == "player"
 end
 
--- Returns winner, loser
-function fight(enemy, collider)
-    if not common.isPlayer(collider) then return nil, nil end
-    if enemy:getBool("dead") or collider:getBool("dead") then
-        return nil, nil
-    end
-
-    local y = collider:getPosition():getY() + collider:getRadius():getY()
-    if enemy:getPosition():getY() > y then
-        return collider, enemy
+function isDead(entity)
+    if entity:isSet("health") then
+        return tonumber(entity:get("health")) >= 0
     else
-        return enemy, collider
+        return false
     end
 end
 
-function impossibleFight(enemy, collider)
-    if not common.isPlayer(collider) then return nil end
-    if enemy:getBool("dead") or collider:getBool("dead") then
-        return nil
-    end
-
-    return enemy, collider
-end
-
-function kill(e, killInvulnerable)
-    if e:getBool("invulnerable") and not killInvulnerable then return end
-    if e:getBool("dead") then return end
-
-    -- Kill him
-    e:setBool("dead", true)
-
-    -- Drop him.
-    e:setController(nil)
-    local positioner = jvgslua.NaivePositioner(e)
-    e:setPositioner(positioner)
-    local velocity = jvgslua.Vector2D(0, 2 * e:getSpeed())
-    e:setVelocity(velocity)
-
-    -- Effects.
-    effects.text(e:getPosition())
-    effects.stars(e:getPosition())
-
-    -- Play sound.
-    if e:isSet("die-sound") then
-        local am = jvgslua.AudioManager_getInstance()
-        am:playSound(e:get("die-sound"))
-    end
-
-    -- Other things when player.
-    if e:getId() == "player" then
-        local em = jvgslua.EffectManager_getInstance()
-        local effect = jvgslua.InvertEffect()
-        em:addEffect(effect)
-        local lm = jvgslua.LevelManager_getInstance()
-        lm:setTimeFactor(0.2)
-        -- Limit falling sequence.
-        e:setTimer(1000)
-    end
+function damage(entity, amount)
+    entity:set("health", entity:get("health") - amount)
 end
 
 function gameOver()

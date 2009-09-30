@@ -75,7 +75,6 @@
     <entity id="teleport-01" script="resources/level-03/teleport-to-start.lua">
         <position x="5949" y="2840" />
         <radius x="50" y="50" />
-        <entry key="dead" value="true" />
     </entity>
     <!-- North - east branch. -->
     <entity id="mouse-04" filename="resources/mouse/mouse.xml">
@@ -115,7 +114,6 @@
     <entity id="teleport-02" script="resources/level-03/teleport-to-start.lua">
         <position x="8713" y="200" />
         <radius x="50" y="50" />
-        <entry key="dead" value="true" />
     </entity>
     <!-- North - west branch. -->
     <entity id="saurian-03" filename="resources/saurian/saurian.xml">
@@ -143,7 +141,6 @@
     <entity id="teleport-03" script="resources/level-03/teleport-to-start.lua">
         <position x="505" y="1310" />
         <radius x="50" y="50" />
-        <entry key="dead" value="true" />
     </entity>
     <!-- South - west branch. -->
     <entity id="saurian-03" filename="resources/saurian/saurian.xml">
@@ -170,6 +167,5 @@
     <entity id="teleport-04" script="resources/level-03/teleport-to-start.lua">
         <position x="2155" y="3470" />
         <radius x="50" y="50" />
-        <entry key="dead" value="true" />
     </entity>
 </level>

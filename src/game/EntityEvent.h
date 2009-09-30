@@ -13,9 +13,6 @@ namespace jvgs
         class EntityEvent
         {
             private:
-                /** Script manager. */
-                bind::ScriptManager *scriptManager;
-
                 /** Source of the event. */
                 Entity *source;
 
@@ -28,20 +25,15 @@ namespace jvgs
                 /** The key in case of a property event. */
                 std::string key;
 
-            protected:
+            public:
                 /** Constructor.
                  */
-                EntityEvent();
+                EntityEvent(Entity *source, const std::string &type,
+                        Entity *collider = 0, const std::string &key = "none");
 
                 /** Destructor.
                  */
                 virtual ~EntityEvent();
-
-            public:
-                /** Get the event instance.
-                 *  @return The event instance.
-                 */
-                static EntityEvent *getEvent();
 
                 /** Get the event source.
                  *  @return The event source.
@@ -59,37 +51,10 @@ namespace jvgs
                  */
                 Entity *getCollider() const;
 
-                /** Execute a collision event for both entities.
-                 *  @param entity1 First colliding entity.
-                 *  @param entity2 Second colliding entity.
+                /** Get the key in case of a property event.
+                 *  @return The key.
                  */
-                static void collision(Entity *entity1, Entity *entity2);
-
-                /** Execute an action event for an entity.
-                 *  @param entity Entity executing action.
-                 */
-                static void action(Entity *entity);
-
-                /** Execute a spawn event for an entity.
-                 *  @param entity Spawned entity.
-                 */
-                static void spawn(Entity *entity);
-
-                /** Execute a die event for an entity.
-                 *  @param entity Dying entity.
-                 */
-                static void die(Entity *entity);
-
-                /** Execute a timer event for an entity.
-                 *  @param entity Entity holding the timer.
-                 */
-                static void timer(Entity *entity);
-
-                /** Execute a property change event for an entity.
-                 *  @param entity Entity which properties are changed.
-                 *  @param propery Name of the property that is changed.
-                 */
-                static void property(Entity *entity, const std::string &key);
+                const std::string &getKey() const;
         };
     }
 }

@@ -7,5 +7,4 @@
             <frame sketch="resources/level-03/crown.svg" duration="50" />
         </animation>
     </sprite>
-    <entry key="dead" entry="true" />
 </entity>
