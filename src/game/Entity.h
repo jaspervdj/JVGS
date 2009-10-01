@@ -220,6 +220,10 @@ namespace jvgs
                 /* Override
                  */
                 virtual void setBool(const std::string &key, bool value);
+
+                /* Override
+                 */
+                virtual void setGarbage();
         };
     }
 }

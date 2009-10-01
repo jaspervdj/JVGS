@@ -14,6 +14,7 @@ end
 
 function damage(entity, amount)
     entity:set("health", entity:get("health") - amount)
+    if isDead(entity) then entity:setGarbage() end
 end
 
 function gameOver()

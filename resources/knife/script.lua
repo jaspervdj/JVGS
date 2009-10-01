@@ -7,7 +7,6 @@ events.trigger{
         local collider = event:getCollider()
         if not common.isPlayer(collider) then
             common.damage(collider, 1)
-            self:setGarbage()
         end
     end,
 

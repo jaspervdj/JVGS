@@ -134,7 +134,6 @@ namespace jvgs
             for(vector<Entity*>::iterator iterator = entities.begin();
                     iterator != entities.end(); iterator++)
                 delete (*iterator);
-            clearGarbage();
             if(camera)
                 delete camera;
         }
@@ -161,6 +160,11 @@ namespace jvgs
 
         void Level::addEntity(Entity *entity)
         {
+            /* Guard from id duplicates. */
+            if(getEntityById(entity->getId()))
+                LogManager::getInstance()->warning("Duplicate entity id: %s",
+                        entity->getId().c_str());
+
             entities.push_back(entity);
             entitiesById[entity->getId()] = entity;
             EntityEventManager::getInstance()->spawn(entity);
@@ -173,17 +177,6 @@ namespace jvgs
                 return result->second;
             else
                 return 0;
-        }
-
-        void Level::clearGarbage()
-        {
-            if(garbage.size() > 0)
-                LogManager::getInstance()->message("Deleting %d object(s).",
-                        garbage.size());
-            for(vector<Entity*>::iterator iterator = garbage.begin();
-                    iterator != garbage.end(); iterator++)
-                delete (*iterator);
-            garbage.clear();
         }
 
         void Level::update(float ms)
@@ -203,6 +196,11 @@ namespace jvgs
                     entity->setGarbage();
             }
 
+            /* Flush all events, so there are no event references remaining
+             * on the queue, making this a good time for clearing the
+             * garbage. */
+            EntityEventManager::getInstance()->flush();
+
             /* Remove garbage. */
             vector<Entity*> originalEntities = entities;
             entities.clear();
@@ -211,9 +209,8 @@ namespace jvgs
                 if(!(*iterator)->isGarbage()) {
                     entities.push_back(*iterator);
                 } else {
-                    EntityEventManager::getInstance()->die(*iterator);
                     entitiesById.erase((*iterator)->getId());
-                    garbage.push_back(*iterator);
+                    delete (*iterator);
                 }
             }
         }

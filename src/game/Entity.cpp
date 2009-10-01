@@ -397,5 +397,11 @@ namespace jvgs
             PropertyMap::setBool(key, value);
             EntityEventManager::getInstance()->property(this, key);
         }
+
+        void Entity::setGarbage()
+        {
+            View::setGarbage();
+            EntityEventManager::getInstance()->die(this);
+        }
     }
 }

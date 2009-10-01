@@ -35,9 +35,6 @@ namespace jvgs
                 /** The entities in the game world. */
                 std::vector<Entity*> entities;
 
-                /** The entity garbage. */
-                std::vector<Entity*> garbage;
-
                 /** Entities by id. */
                 std::map<std::string, Entity*> entitiesById;
 
@@ -108,12 +105,6 @@ namespace jvgs
                  *  @return The requested entity.
                  */
                 virtual Entity *getEntityById(const std::string &id);
-
-                /** Clear the level garbage. (Actually deletes the garbage
-                 *  entities. This should be called after all events are
-                 *  flushed.
-                 */
-                virtual void clearGarbage();
 
                 /* Override
                  */

@@ -1,5 +1,4 @@
 #include "LevelManager.h"
-#include "EntityEventManager.h"
 #include "Level.h"
 
 #include "../sketch/SketchManager.h"
@@ -53,8 +52,6 @@ namespace jvgs
             /* Behold, as I have been told
              * what follows below
              * is very important, you know! */
-            EntityEventManager *entityEventManager =
-                    EntityEventManager::getInstance();
             InputManager *inputManager = InputManager::getInstance();
             TimeManager *timeManager = TimeManager::getInstance();
             VideoManager *videoManager = VideoManager::getInstance();
@@ -81,13 +78,6 @@ namespace jvgs
                 /* Update other things. */
                 effectManager->update(timeFactor * ms);
                 fps.update(ms);
-
-                /* Flush all events, so there are no event references remaining
-                 * on the queue, making this a good time for clearing the
-                 * garbage. */
-                entityEventManager->flush();
-                if(level)
-                    level->clearGarbage();
 
                 /* Setup the videoManager for rendering. */
                 videoManager->clear();
