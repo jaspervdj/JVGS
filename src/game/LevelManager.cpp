@@ -33,6 +33,8 @@ namespace jvgs
 
         LevelManager::~LevelManager()
         {
+            if(level)
+                delete level;
         }
 
         LevelManager *LevelManager::getInstance()
@@ -64,31 +66,45 @@ namespace jvgs
             long lastUpdate = timeManager->getTicks();
             while(!inputManager->hasQuitEvent()) {
 
+                /* Calculate the ticks that have passed. */
                 long ticks = timeManager->getTicks();
                 float ms = (float)(ticks - lastUpdate);
                 lastUpdate = ticks;
 
+                /* Update the input state. */
                 inputManager->update(ms);
 
+                /* Update the level. */
                 if(level && ms > 0.0f)
                     level->update(timeFactor * ms);
 
+                /* Update other things. */
                 effectManager->update(timeFactor * ms);
                 fps.update(ms);
 
+                /* Flush all events, so there are no event references remaining
+                 * on the queue, making this a good time for clearing the
+                 * garbage. */
                 entityEventManager->flush();
+                if(level)
+                    level->clearGarbage();
 
+                /* Setup the videoManager for rendering. */
                 videoManager->clear();
                 videoManager->identity();
 
+                /* Render the level first, this will also apply our camera
+                 * transformation, which is good, since the effect manager
+                 * wants the same transformation. */
                 if(level)
                     level->render();
-
                 effectManager->render();
                 fps.render();
 
+                /* Flip the video buffer. */
                 videoManager->flip();
 
+                /* Update level queue. */
                 if(queue) {
                     /* Remove old level. */
                     if(level)

@@ -109,6 +109,12 @@ namespace jvgs
                  */
                 virtual Entity *getEntityById(const std::string &id);
 
+                /** Clear the level garbage. (Actually deletes the garbage
+                 *  entities. This should be called after all events are
+                 *  flushed.
+                 */
+                virtual void clearGarbage();
+
                 /* Override
                  */
                 virtual void update(float ms);
