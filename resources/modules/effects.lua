@@ -5,7 +5,7 @@ function stars(position, amount)
     local sm = jvgslua.SketchManager_getInstance()
     local em = jvgslua.EffectManager_getInstance()
     local sketches = jlib.map(
-            {"moon", "spiral", "star"},
+            {"moon", "skull", "spiral", "star"},
             function(e)
                 return sm:getSketch("resources/effects/" .. e .. ".svg")
             end)

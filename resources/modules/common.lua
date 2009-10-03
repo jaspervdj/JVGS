@@ -15,7 +15,6 @@ end
 function damage(entity, amount)
     if entity:isSet("health") then
         entity:set("health", entity:get("health") - amount)
-        if isDead(entity) then entity:setGarbage() end
     end
 end
 
