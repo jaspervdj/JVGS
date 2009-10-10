@@ -48,7 +48,7 @@ events.trigger{
     end,
 
     timer = function(self, event)
-        if self:getBool("dead") then
+        if common.isDead(self) then
             -- Falling sequence limit reached.
             common.gameOver()
         else
