@@ -20,21 +20,20 @@ namespace jvgs
         InputController::InputController(Entity *entity)
                 : Controller(entity)
         {
-            InputManager::getInstance()->addKeyListener(this);
             configuration = InputConfiguration::getConfiguration();
+            inputManager = InputManager::getInstance();
         }
 
         InputController::InputController(Entity *entity,
                 TiXmlElement *element): Controller(entity)
         {
             load(element);
-            InputManager::getInstance()->addKeyListener(this);
             configuration = InputConfiguration::getConfiguration();
+            inputManager = InputManager::getInstance();
         }
 
         InputController::~InputController()
         {
-            InputManager::getInstance()->removeKeyListener(this);
         }
 
         void InputController::affect(float ms)
@@ -42,23 +41,20 @@ namespace jvgs
             Entity *entity = getEntity();
             Vector2D velocity = Vector2D();
 
-            if(isKeyDown(configuration->getKey("left")))
+            if(inputManager->isKeyDown(configuration->getKey("left")))
                 velocity.setX(-entity->getSpeed());
-            else if(isKeyDown(configuration->getKey("right")))
+            else if(inputManager->isKeyDown(configuration->getKey("right")))
                 velocity.setX(entity->getSpeed());
 
-            if(isKeyDown(configuration->getKey("up")))
+            if(inputManager->isKeyDown(configuration->getKey("up")))
                 velocity.setY(-entity->getSpeed());
-            else if(isKeyDown(configuration->getKey("down")))
+            else if(inputManager->isKeyDown(configuration->getKey("down")))
                 velocity.setY(entity->getSpeed());
 
-            entity->setVelocity(velocity);
-        }
+            if(inputManager->isKeyTicked(configuration->getKey("action")))
+                EntityEventManager::getInstance()->action(entity);
 
-        void InputController::keyPressed(const Key &key)
-        {
-            if(key == configuration->getKey("action"))
-                EntityEventManager::getInstance()->action(getEntity());
+            entity->setVelocity(velocity);
         }
     }
 }

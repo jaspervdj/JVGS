@@ -177,28 +177,35 @@ namespace jvgs
             positioner = 0;
             sprite = 0;
             facingRight = true;
+            timer = 0.0f;
         }
 
         Entity::Entity(TiXmlElement *element, Level *level)
                 : AbstractEntity("none", level)
         {
             collisionChecker = false;
+            falling = true;
+            slipping = false;
             controller = 0;
             positioner = 0;
             sprite = 0;
             load(element);
             facingRight = true;
+            timer = 0.0f;
         }
 
         Entity::Entity(const string &fileName, Level *level)
                 : AbstractEntity("none", level)
         {
             collisionChecker = false;
+            falling = true;
+            slipping = false;
             controller = 0;
             positioner = 0;
             sprite = 0;
             load(fileName);
             facingRight = true;
+            timer = 0.0f;
         }
 
         Entity::~Entity()

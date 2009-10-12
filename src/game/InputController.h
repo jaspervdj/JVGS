@@ -1,8 +1,8 @@
 #ifndef JVGS_GAME_INPUTCONTROLLER_H
 #define JVGS_GAME_INPUTCONTROLLER_H
 
-#include "../input/KeyListener.h"
 #include "../input/InputConfiguration.h"
+#include "../input/InputManager.h"
 #include "Controller.h"
 
 namespace jvgs
@@ -10,12 +10,14 @@ namespace jvgs
     namespace game
     {
         /** Controller that lets the player control the entity. */
-        class InputController: public Controller,
-                public jvgs::input::KeyListener
+        class InputController: public Controller
         {
             protected:
                 /** Reference to the input configuration. */
                 input::InputConfiguration *configuration;
+
+                /** Reference to the input manager. */
+                input::InputManager *inputManager;
 
                 /* Override
                  */
@@ -40,10 +42,6 @@ namespace jvgs
                 /* Override
                  */
                 virtual void affect(float ms);
-
-                /* Override
-                 */
-                virtual void keyPressed(const jvgs::input::Key &key);
         };
     }
 }

@@ -7,7 +7,6 @@ ADD_LIBRARY(
     input STATIC 
     InputConfiguration.cpp
     InputManager.cpp
-    KeyListener.cpp
 )
 
 # Link to the following libraries

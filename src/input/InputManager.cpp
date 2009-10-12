@@ -1,5 +1,4 @@
 #include "InputManager.h"
-#include "KeyListener.h"
 
 using namespace std;
 
@@ -12,11 +11,13 @@ namespace jvgs
             SDL_InitSubSystem(SDL_INIT_EVENTTHREAD);
             keyState = SDL_GetKeyState(0);
             quitEvent = false;
+            tickedKeys = new bool[KEY_LAST];
         }
 
         InputManager::~InputManager()
         {
             SDL_QuitSubSystem(SDL_INIT_EVENTTHREAD);
+            delete[] tickedKeys;
         }
 
         InputManager *InputManager::getInstance()
@@ -30,41 +31,26 @@ namespace jvgs
             return (bool) keyState[key];
         }
 
+        bool InputManager::isKeyTicked(const Key &key) const
+        {
+            return tickedKeys[key];
+        }
+
         void InputManager::update(float ms)
         {
+            for(int i = 0; i < KEY_LAST; i++)
+                tickedKeys[i] = false;
+
             SDL_Event event;
             while(SDL_PollEvent(&event)) {
                 switch(event.type) {
                     /* Key down - alert all listeners. */
                     case SDL_KEYDOWN:
-                        for(std::vector<KeyListener*>::iterator iterator =
-                                keyListeners.begin();
-                                iterator != keyListeners.end(); iterator++) {
-                            (*iterator)->keyPressed((Key) event.key.keysym.sym);
-                        }
+                        tickedKeys[event.key.keysym.sym] = true;
                         break;
                     case SDL_QUIT:
                         quitEvent = true;
                         break;
-                }
-            }
-        }
-
-        void InputManager::addKeyListener(KeyListener *keyListener)
-        {
-            keyListeners.push_back(keyListener);
-        }
-
-        void InputManager::removeKeyListener(KeyListener *keyListener)
-        {
-            vector<KeyListener*>::iterator iterator = keyListeners.begin();
-            bool removed = false;
-            while(!removed && iterator != keyListeners.end()) {
-                if(*iterator = keyListener) {
-                    keyListeners.erase(iterator);
-                    removed = true;
-                } else {
-                    iterator++;
                 }
             }
         }

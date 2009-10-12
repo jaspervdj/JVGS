@@ -16,14 +16,14 @@ namespace jvgs
         class InputManager
         {
             private:
-                /** Registered keyListeners. */
-                std::vector<KeyListener*> keyListeners;
-
                 /** Key state. */
                 Uint8 *keyState;
 
                 /** Received a quit event. */
                 bool quitEvent;
+
+                /** Array of ticked keys. */
+                bool *tickedKeys;
 
             protected:
                 /** Constructor.
@@ -42,24 +42,21 @@ namespace jvgs
 
                 /** This function ckecks if a certain key is down.
                  *  @param key Key to check.
-                 *  @copydoc InputManager::isKeyDown()
+                 *  @return If the key is down.
                  */
                 bool isKeyDown(const Key &key) const;
+
+                /** This function checks if a certain key was ticked since the
+                 *  last update.
+                 *  @param key Key to check.
+                 *  @return If the key was ticked.
+                 */
+                bool isKeyTicked(const Key &key) const;
 
                 /** Update the InputManager for a certain amount of time.
                  *  @param ms Time to update for.
                  */
                 void update(float ms);
-
-                /** Register a new KeyListener. It will not be deleted.
-                 *  @param keyListener KeyListener to register.
-                 */
-                void addKeyListener(KeyListener *keyListener);
-
-                /** Remove a KeyListener. It will not receive events anumore.
-                 *  @param keyListener KeyListener to remove.
-                 */
-                void removeKeyListener(KeyListener *keyListener);
 
                 /** Check if the InputManager received a quit event.
                  *  @return If the InputManager received a quit event.
