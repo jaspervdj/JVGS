@@ -16,7 +16,8 @@ namespace jvgs
         {
             music = 0;
             if(SDL_InitSubSystem(SDL_INIT_AUDIO) ||
-                    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024))
+                    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,
+                    MIX_DEFAULT_FORMAT, 2, 1024))
                 failed = true;
             else
                 failed = false;
@@ -38,17 +39,8 @@ namespace jvgs
             SDL_QuitSubSystem(SDL_INIT_AUDIO);
         }
 
-        AudioManager *AudioManager::getInstance()
+        Mix_Chunk *AudioManager::getSound(const string &fileName)
         {
-            static AudioManager instance;
-            return &instance;
-        }
-
-        void AudioManager::playSound(const string &fileName)
-        {
-            if(failed)
-                return;
-
             Mix_Chunk *sound = 0;
             map<string, Mix_Chunk*>::iterator result = sounds.find(fileName);
             if(result != sounds.end()) {
@@ -59,12 +51,34 @@ namespace jvgs
                 sounds[fileName] = sound;
             }
 
-            if(sound) {
-                Mix_PlayChannel(-1, sound, 0);
-            } else {
+            if(!sound)
                 LogManager::getInstance()->warning(
                         "Could not open sound %s.", fileName.c_str());
-            }
+
+            return sound;
+        }
+
+        AudioManager *AudioManager::getInstance()
+        {
+            static AudioManager instance;
+            return &instance;
+        }
+
+        void AudioManager::loadSound(const string &fileName)
+        {
+            if(failed)
+                return;
+
+            getSound(fileName);
+        }
+
+        void AudioManager::playSound(const string &fileName)
+        {
+            if(failed)
+                return;
+
+            Mix_Chunk *sound = getSound(fileName);
+            Mix_PlayChannel(-1, sound, 0);
         }
 
         void AudioManager::playMusic(const string &fileName)

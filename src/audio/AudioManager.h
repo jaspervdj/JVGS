@@ -32,11 +32,23 @@ namespace jvgs
                  */
                 virtual ~AudioManager();
 
+                /** Helper function for getting sounds.
+                 *  @param fileName Sound to get.
+                 *  @return The requested sound.
+                 */
+                virtual Mix_Chunk *getSound(const std::string &fileName);
+
             public:
                 /** Get the AudioManager instance.
                  *  @return The AudioManager instance.
                  */
                 static AudioManager *getInstance();
+
+                /** Load a sound. Can be used to load a sound before playing it,
+                 *  so there is no in-game delay.
+                 *  @param fileName File name of the sound.
+                 */
+                void loadSound(const std::string &fileName);
 
                 /** Play a sound.
                  *  @param fileName File name of the sound.
