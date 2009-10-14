@@ -10,7 +10,7 @@ events.trigger{
             self:setGarbage() 
 
             if tonumber(collider:get("crowns")) >= 4 then
-                common.nextLevel("resources/level-07/level-07.xml")
+                common.nextLevel("resources/level-07/level.xml")
             end
         end
     end

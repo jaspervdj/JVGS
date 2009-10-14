@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<level world="resources/level-03/level-03.svg" music="resources/music/03.ogg">
+<level world="resources/level-03/world.svg" music="resources/music/03.ogg">
     <camera type="followcamera" target="player" maxdistance="10" />
     <entity id="player" filename="resources/player/player.xml">
         <position x="200" y="100" />

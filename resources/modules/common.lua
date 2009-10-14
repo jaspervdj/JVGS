@@ -36,7 +36,7 @@ function continue()
     if pm:isSet("level") then
         fileName = pm:get("level")
     else
-        fileName = "resources/level-01/level-01.xml"
+        fileName = "resources/level-01/level.xml"
     end
 
     local lm = jvgslua.LevelManager_getInstance()
