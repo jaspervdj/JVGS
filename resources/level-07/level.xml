@@ -4,4 +4,25 @@
     <entity id="player" filename="resources/player/player.xml">
         <position x="50" y="50" />
     </entity>
+    <entity id="plant-01" filename="resources/plant/plant.xml">
+        <position x="256" y="168" />
+        <controller type="simplebirdcontroller">
+            <point x="256" y="168" />
+            <point x="256" y="260" />
+        </controller>
+    </entity>
+    <entity id="plant-02" filename="resources/plant/plant.xml">
+        <position x="382" y="223" />
+        <controller type="simplebirdcontroller">
+            <point x="382" y="137" />
+            <point x="382" y="223" />
+        </controller>
+    </entity>
+    <entity id="plant-03" filename="resources/plant/plant.xml">
+        <position x="489" y="148" />
+        <controller type="simplebirdcontroller">
+            <point x="489" y="148" />
+            <point x="489" y="235" />
+        </controller>
+    </entity>
 </level>
