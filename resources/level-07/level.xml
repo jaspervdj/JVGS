@@ -4,4 +4,7 @@
     <entity id="player" filename="resources/player/player.xml">
         <position x="50" y="50" />
     </entity>
+    <entity id="obtain-hat" filename="resources/hat/obtain-hat.xml">
+        <position x="200" y="100" />
+    </entity>
 </level>

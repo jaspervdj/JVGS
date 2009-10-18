@@ -24,6 +24,15 @@ local weapons = {
         local te = jvgslua.TimeEffect(0.2, 3000)
         em:addEffect(te)
         self:setTimer(3000)
+    end,
+
+    hat = function(self)
+        local velocity = jvgslua.Vector2D(0.0, -1.0) * self:getSpeed() * 2
+        self:setVelocity(velocity)
+        self:setTimer(500)
+        local pos = jvgslua.Vector2D(self:getPosition():getX(),
+                self:getPosition():getY() + self:getRadius():getY())
+        effects.stars(pos, 0.5, {"star"})
     end
 }
 

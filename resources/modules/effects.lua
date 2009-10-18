@@ -1,11 +1,11 @@
 module("effects", package.seeall)
 
-function stars(position, amount)
+function stars(position, amount, names)
     amount = amount or 1
+    names = names or {"moon", "skull", "spiral", "star"}
     local sm = jvgslua.SketchManager_getInstance()
     local em = jvgslua.EffectManager_getInstance()
-    local sketches = jlib.map(
-            {"moon", "skull", "spiral", "star"},
+    local sketches = jlib.map(names,
             function(e)
                 return sm:getSketch("resources/effects/" .. e .. ".svg")
             end)
