@@ -20,7 +20,7 @@ end
 
 function gameOver()
     local lm = jvgslua.LevelManager_getInstance()
-    lm:queueLevel("resources/main-menu/main-menu.xml")
+    lm:queueLevel("resources/level-main-menu/main-menu.xml")
 end
 
 function nextLevel(fileName)
@@ -36,7 +36,7 @@ function continue()
     if pm:isSet("level") then
         fileName = pm:get("level")
     else
-        fileName = "resources/level-01/level.xml"
+        fileName = "resources/level-intro/level.xml"
     end
 
     local lm = jvgslua.LevelManager_getInstance()

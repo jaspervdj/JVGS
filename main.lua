@@ -33,7 +33,7 @@ local fontManager = jvgslua.FontManager_getInstance()
 fontManager:addFont("regular", font)
 
 local levelManager = jvgslua.LevelManager_getInstance()
-levelManager:queueLevel("resources/main-menu/main-menu.xml")
+levelManager:queueLevel("resources/level-main-menu/main-menu.xml")
 
 levelManager:run()
 

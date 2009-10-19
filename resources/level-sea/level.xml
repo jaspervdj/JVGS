@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<level world="resources/level-03/world.svg" music="resources/music/03.ogg">
+<level world="resources/level-sea/world.svg" music="resources/music/sea.ogg">
     <camera type="followcamera" target="player" maxdistance="10" />
     <entity id="player" filename="resources/player/player.xml">
         <position x="200" y="100" />
@@ -46,7 +46,7 @@
         <position x="4327" y="800" />
         <controller type="patrollingcontroller" x1="4260" x2="4700" />
     </entity>
-    <entity id="star" script="resources/level-03/star.lua">
+    <entity id="star" script="resources/level-sea/star.lua">
         <position x="7731" y="950" />
         <radius x="70" y="70" />
     </entity>

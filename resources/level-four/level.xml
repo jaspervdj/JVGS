@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<level world="resources/level-06/world.svg" music="resources/music/06.ogg">
+<level world="resources/level-four/world.svg" music="resources/music/four.ogg">
     <camera type="followcamera" filename="resources/player/camera.xml" />
     <entity id="player" filename="resources/player/player.xml">
         <position x="2425" y="1340" />
@@ -69,10 +69,10 @@
     <entity id="clock" filename="resources/clock/obtain-clock.xml">
         <position x="4325" y="2230" />
     </entity>
-    <entity id="crown-01" filename="resources/level-06/crown.xml">
+    <entity id="crown-01" filename="resources/level-four/crown.xml">
         <position x="5665" y="2840" />
     </entity>
-    <entity id="teleport-01" script="resources/level-06/teleport-to-start.lua">
+    <entity id="teleport-01" script="resources/level-four/teleport-to-start.lua">
         <position x="5949" y="2840" />
         <radius x="50" y="50" />
     </entity>
@@ -108,10 +108,10 @@
     <entity id="mouse-05" filename="resources/mouse/mouse.xml">
         <position x="8093" y="240" />
     </entity>
-    <entity id="crown-02" filename="resources/level-06/crown.xml">
+    <entity id="crown-02" filename="resources/level-four/crown.xml">
         <position x="8485" y="240" />
     </entity>
-    <entity id="teleport-02" script="resources/level-06/teleport-to-start.lua">
+    <entity id="teleport-02" script="resources/level-four/teleport-to-start.lua">
         <position x="8713" y="200" />
         <radius x="50" y="50" />
     </entity>
@@ -135,10 +135,10 @@
     <entity id="obtain-knife" filename="resources/knife/obtain-knife.xml">
         <position x="875" y="1060" />
     </entity>
-    <entity id="crown-03" filename="resources/level-06/crown.xml">
+    <entity id="crown-03" filename="resources/level-four/crown.xml">
         <position x="705" y="1310" />
     </entity>
-    <entity id="teleport-03" script="resources/level-06/teleport-to-start.lua">
+    <entity id="teleport-03" script="resources/level-four/teleport-to-start.lua">
         <position x="505" y="1310" />
         <radius x="50" y="50" />
     </entity>
@@ -161,10 +161,10 @@
     <entity id="mouse-10" filename="resources/mouse/mouse.xml">
         <position x="1605" y="3340" />
     </entity>
-    <entity id="crown-04" filename="resources/level-06/crown.xml">
+    <entity id="crown-04" filename="resources/level-four/crown.xml">
         <position x="1805" y="3410" />
     </entity>
-    <entity id="teleport-04" script="resources/level-06/teleport-to-start.lua">
+    <entity id="teleport-04" script="resources/level-four/teleport-to-start.lua">
         <position x="2155" y="3470" />
         <radius x="50" y="50" />
     </entity>
