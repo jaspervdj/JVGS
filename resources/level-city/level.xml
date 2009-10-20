@@ -25,6 +25,9 @@
             <point x="1240" y="246" />
         </controller>
     </entity>
+    <entity id="obtain-hat" filename="resources/hat/obtain-hat.xml">
+        <position x="1440" y="50" />
+    </entity>
     <entity id="mouse-01" filename="resources/mouse/mouse.xml">
         <position x="1611" y="42" />
     </entity>
@@ -40,6 +43,13 @@
         <controller type="simplebirdcontroller">
             <point x="1967" y="101" />
             <point x="1967" y="241" />
+        </controller>
+    </entity>
+    <entity id="plant-06" filename="resources/plant/plant.xml">
+        <position x="2050" y="101" />
+        <controller type="simplebirdcontroller">
+            <point x="2050" y="101" />
+            <point x="2150" y="101" />
         </controller>
     </entity>
     <entity id="helidude-01" filename="resources/helidude/helidude.xml">
@@ -76,10 +86,8 @@
             <point x="2400" y="207" />
         </controller>
     </entity>
-    <entity id="mouse-01" filename="resources/mouse/mouse.xml">
-        <position x="2196" y="155" />
-    </entity>
-    <entity id="obtain-hat" filename="resources/hat/obtain-hat.xml">
-        <position x="4391" y="530" />
+    <entity id="cloud" script="resources/level-city/cloud.lua">
+        <position x="9220" y="1080" />
+        <radius x="150" y="100" />
     </entity>
 </level>
