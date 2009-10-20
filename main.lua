@@ -5,6 +5,7 @@ require("resources/modules/effects")
 
 local videoManager = jvgslua.VideoManager_getInstance()
 videoManager:setVideoMode(jvgslua.Vector2D(600, 400), "jvgs")
+--videoManager:setVideoMode("jvgs")
 
 -- Warn when using global variables.
 setmetatable(_G, {
