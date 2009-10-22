@@ -16,7 +16,7 @@
     <entity id="cable-01" filename="resources/spikey-ball/cable.xml">
         <position x="13555" y="-138" />
     </entity>
-    <entity id="saurian-01" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-01" filename="resources/velociraptor/velociraptor.xml">
         <position x="1466" y="5200" />
     </entity>
     <entity id="triforce" script="resources/level-run/triforce.lua">

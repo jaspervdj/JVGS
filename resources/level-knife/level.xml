@@ -19,10 +19,10 @@
     <entity id="spider-02" filename="resources/spider/spider.xml">
         <position x="3800" y="660" />
     </entity>
-    <entity id="saurian-02" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-02" filename="resources/velociraptor/velociraptor.xml">
         <position x="6900" y="840" />
     </entity>
-    <entity id="saurian-03" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-03" filename="resources/velociraptor/velociraptor.xml">
         <position x="7283" y="600" />
     </entity>
     <entity id="mouse-03" filename="resources/mouse/mouse.xml">

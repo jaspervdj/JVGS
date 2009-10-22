@@ -7,7 +7,7 @@
     <entity id="obtain-hat" filename="resources/hat/obtain-hat.xml">
         <position x="3700" y="160" />
     </entity>
-    <entity id="saurian-01" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-01" filename="resources/velociraptor/velociraptor.xml">
         <position x="2100" y="40" />
     </entity>
     <entity id="hedgehog-01" filename="resources/hedgehog/hedgehog.xml">

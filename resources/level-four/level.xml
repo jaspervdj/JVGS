@@ -55,7 +55,7 @@
     <entity id="mouse-03" filename="resources/mouse/mouse.xml">
         <position x="4046" y="1527" />
     </entity>
-    <entity id="saurian-01" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-01" filename="resources/velociraptor/velociraptor.xml">
         <position x="3732" y="2290" />
     </entity>
     <entity id="helidude-03" filename="resources/helidude/helidude.xml">
@@ -80,7 +80,7 @@
     <entity id="mouse-04" filename="resources/mouse/mouse.xml">
         <position x="3422" y="780" />
     </entity>
-    <entity id="saurian-02" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-02" filename="resources/velociraptor/velociraptor.xml">
         <position x="3900" y="490" />
     </entity>
     <entity id="helidude-04" filename="resources/helidude/helidude.xml">
@@ -116,7 +116,7 @@
         <radius x="50" y="50" />
     </entity>
     <!-- North - west branch. -->
-    <entity id="saurian-03" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-03" filename="resources/velociraptor/velociraptor.xml">
         <position x="1425" y="1190" />
     </entity>
     <entity id="helidude-06" filename="resources/helidude/helidude.xml">
@@ -143,7 +143,7 @@
         <radius x="50" y="50" />
     </entity>
     <!-- South - west branch. -->
-    <entity id="saurian-04" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-04" filename="resources/velociraptor/velociraptor.xml">
         <position x="1105" y="2700" />
     </entity>
     <entity id="mouse-06" filename="resources/mouse/mouse.xml">

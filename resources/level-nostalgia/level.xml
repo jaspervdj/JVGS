@@ -4,7 +4,7 @@
     <entity id="player" filename="resources/player/player.xml">
         <position x="230" y="150" />
     </entity>
-    <entity id="saurian-01" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-01" filename="resources/velociraptor/velociraptor.xml">
         <position x="1300" y="2480" />
     </entity>
     <entity id="clock" filename="resources/clock/obtain-clock.xml">
@@ -73,35 +73,29 @@
     <entity id="mouse-02" filename="resources/mouse/mouse.xml">
         <position x="1221" y="2175" />
     </entity>
-    <entity id="saurian-02" filename="resources/saurian/saurian.xml">
-        <position x="1212" y="1760" />
-    </entity>
     <entity id="mouse-03" filename="resources/mouse/mouse.xml">
         <position x="2107" y="1654" />
     </entity>
     <entity id="mouse-04" filename="resources/mouse/mouse.xml">
         <position x="2191" y="1632" />
     </entity>
-    <entity id="saurian-03" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-03" filename="resources/velociraptor/velociraptor.xml">
         <position x="2398" y="1582" />
     </entity>
-    <entity id="saurian-04" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-04" filename="resources/velociraptor/velociraptor.xml">
         <position x="2818" y="1613" />
     </entity>
     <entity id="mouse-05" filename="resources/mouse/mouse.xml">
         <position x="3121" y="1705" />
     </entity>
-    <entity id="saurian-05" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-05" filename="resources/velociraptor/velociraptor.xml">
         <position x="3802" y="1658" />
     </entity>
-    <entity id="saurian-06" filename="resources/saurian/saurian.xml">
+    <entity id="velociraptor-06" filename="resources/velociraptor/velociraptor.xml">
         <position x="4083" y="1700" />
     </entity>
     <entity id="mouse-06" filename="resources/mouse/mouse.xml">
         <position x="4493" y="1423" />
-    </entity>
-    <entity id="saurian-07" filename="resources/saurian/saurian.xml">
-        <position x="4764" y="1238" />
     </entity>
     <entity id="mouse-07" filename="resources/mouse/mouse.xml">
         <position x="4583" y="1045" />

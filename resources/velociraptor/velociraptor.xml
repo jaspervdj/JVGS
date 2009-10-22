@@ -5,16 +5,16 @@
     <positioner type="collisionresponsepositioner">
         <gravity x="0" y="0.003" />
     </positioner>
-    <radius x="25" y="30" />
+    <radius x="55" y="35" />
     <sprite>
         <animation id="standing">
-            <frame sketch="resources/saurian/walking-01.svg" duration="100" />
+            <frame sketch="resources/velociraptor/walking-01.svg" duration="200" />
         </animation>
         <animation id="walking">
-            <frame sketch="resources/saurian/walking-01.svg" duration="100" />
-            <frame sketch="resources/saurian/walking-02.svg" duration="100" />
+            <frame sketch="resources/velociraptor/walking-01.svg" duration="200" />
+            <frame sketch="resources/velociraptor/walking-02.svg" duration="200" />
         </animation>
     </sprite>
-    <entry key="die-sound" value="resources/saurian/saurian.ogg" />
+    <entry key="die-sound" value="resources/velociraptor/velociraptor.ogg" />
     <entry key="health" value="1" />
 </entity>
