@@ -5,7 +5,6 @@
 #include "SimpleCamera.h"
 #include "CameraFactory.h"
 
-#include "../core/DataManager.h"
 #include "../core/LogManager.h"
 using namespace jvgs::core;
 

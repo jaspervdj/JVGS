@@ -1,5 +1,4 @@
 #include "XMLLoadable.h"
-#include "DataManager.h"
 #include "LogManager.h"
 
 #include "../tinyxml/tinyxml.h"
@@ -44,11 +43,9 @@ namespace jvgs
 
         void XMLLoadable::load(const string &fileName)
         {
-            DataManager *dataManager = DataManager::getInstance();
             LogManager *logManager = LogManager::getInstance();
 
-            TiXmlDocument *document =
-                    new TiXmlDocument(dataManager->expand(fileName));
+            TiXmlDocument *document = new TiXmlDocument(fileName);
             if(document->LoadFile()) {
                 load(document->RootElement());
             } else {

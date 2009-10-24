@@ -1,7 +1,6 @@
 #include "AudioManager.h"
 
 #include "../core/LogManager.h"
-#include "../core/DataManager.h"
 using namespace jvgs::core;
 
 #include <SDL.h>
@@ -46,8 +45,7 @@ namespace jvgs
             if(result != sounds.end()) {
                 sound = result->second;
             } else {
-                string expanded = DataManager::getInstance()->expand(fileName);
-                sound = Mix_LoadWAV(expanded.c_str());
+                sound = Mix_LoadWAV(fileName.c_str());
                 sounds[fileName] = sound;
             }
 
@@ -89,8 +87,7 @@ namespace jvgs
             if(music)
                 Mix_FreeMusic(music);
 
-            string expanded = DataManager::getInstance()->expand(fileName);
-            music = Mix_LoadMUS(expanded.c_str());
+            music = Mix_LoadMUS(fileName.c_str());
             if(music)
                 Mix_PlayMusic(music, -1);
             else

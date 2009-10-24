@@ -2,7 +2,6 @@
 #include <lua.hpp>
 
 #include "../core/LogManager.h"
-#include "../core/DataManager.h"
 using namespace jvgs::core;
 
 using namespace std;
@@ -41,11 +40,8 @@ namespace jvgs
 
         void ScriptManager::runScript(const string &fileName)
         {
-            DataManager *dataManager = DataManager::getInstance();
-
             /* Load the file. */
-            int result = luaL_dofile(luaState,
-                    dataManager->expand(fileName).c_str());
+            int result = luaL_dofile(luaState, fileName.c_str());
 
             /* An error occurred. */
             if(result)

@@ -1,6 +1,5 @@
 #include "PropertyMap.h"
 #include "LogManager.h"
-#include "DataManager.h"
 
 #include "../tinyxml/tinyxml.h"
 using namespace std;
@@ -85,12 +84,9 @@ namespace jvgs
             entries[key] = value ? "true" : "false";
         }
 
-        void PropertyMap::write(const string &fileName, bool expand)
+        void PropertyMap::write(const string &fileName)
         {
-            string expanded = expand ?
-                    DataManager::getInstance()->expand(fileName) : fileName;
-
-            TiXmlDocument document(expanded);
+            TiXmlDocument document(fileName);
             TiXmlElement root("propertymap");
 
             for(map<string, string>::iterator iterator = entries.begin();
