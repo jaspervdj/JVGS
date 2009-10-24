@@ -33,6 +33,22 @@ local weapons = {
         local pos = jvgslua.Vector2D(self:getPosition():getX(),
                 self:getPosition():getY() + self:getRadius():getY())
         effects.stars(pos, 0.5, {"star"})
+    end,
+
+    grenade = function(self)
+        local level = self:getLevel()
+        local entity = jvgslua.Entity("resources/grenade/grenade.xml", level)
+
+        local velocity = jvgslua.Vector2D_fromPolar(entity:getSpeed(), -math.random() * 20)
+
+        if not self:isFacingRight() then
+            velocity:setX(-velocity:getX())
+        end
+
+        entity:setPosition(self:getPosition())
+        entity:setVelocity(velocity)
+        level:addEntity(entity)
+        self:setTimer(4000)
     end
 }
 
