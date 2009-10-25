@@ -58,14 +58,6 @@
     <entity id="velociraptor-01" filename="resources/velociraptor/velociraptor.xml">
         <position x="3732" y="2290" />
     </entity>
-    <entity id="helidude-03" filename="resources/helidude/helidude.xml">
-        <position x="5467" y="2845" />
-        <controller type="simplebirdcontroller">
-            <point x="5467" y="2845" />
-            <point x="4528" y="2226" />
-            <point x="5680" y="2631" />
-        </controller>
-    </entity>
     <entity id="clock" filename="resources/clock/obtain-clock.xml">
         <position x="4325" y="2230" />
     </entity>
@@ -79,9 +71,6 @@
     <!-- North - east branch. -->
     <entity id="mouse-04" filename="resources/mouse/mouse.xml">
         <position x="3422" y="780" />
-    </entity>
-    <entity id="velociraptor-02" filename="resources/velociraptor/velociraptor.xml">
-        <position x="3900" y="490" />
     </entity>
     <entity id="helidude-04" filename="resources/helidude/helidude.xml">
         <position x="4524" y="289" />
@@ -104,9 +93,6 @@
             <point x="6038" y="338" />
             <point x="6902" y="140" />
         </controller>
-    </entity>
-    <entity id="mouse-05" filename="resources/mouse/mouse.xml">
-        <position x="8093" y="240" />
     </entity>
     <entity id="crown-02" filename="resources/level-four/crown.xml">
         <position x="8485" y="240" />
@@ -146,14 +132,8 @@
     <entity id="velociraptor-04" filename="resources/velociraptor/velociraptor.xml">
         <position x="1105" y="2700" />
     </entity>
-    <entity id="mouse-06" filename="resources/mouse/mouse.xml">
-        <position x="1405" y="3340" />
-    </entity>
     <entity id="mouse-07" filename="resources/mouse/mouse.xml">
         <position x="1455" y="3340" />
-    </entity>
-    <entity id="mouse-08" filename="resources/mouse/mouse.xml">
-        <position x="1505" y="3340" />
     </entity>
     <entity id="mouse-09" filename="resources/mouse/mouse.xml">
         <position x="1555" y="3340" />
