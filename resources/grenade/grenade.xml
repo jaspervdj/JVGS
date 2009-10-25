@@ -3,7 +3,7 @@
         collisionchecker="false">
     <controller type="flystraightcontroller" />
     <positioner type="collisionresponsepositioner">
-        <gravity x="0" y="0.0003" />
+        <gravity x="0" y="0.0009" />
     </positioner>
     <radius x="6" y="6" />
     <sprite>

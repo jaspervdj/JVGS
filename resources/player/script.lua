@@ -39,7 +39,7 @@ local weapons = {
         local level = self:getLevel()
         local entity = jvgslua.Entity("resources/grenade/grenade.xml", level)
 
-        local velocity = jvgslua.Vector2D_fromPolar(entity:getSpeed(), -math.random() * 20)
+        local velocity = jvgslua.Vector2D_fromPolar(entity:getSpeed(), -math.random() * 45)
 
         if not self:isFacingRight() then
             velocity:setX(-velocity:getX())
