@@ -45,6 +45,11 @@ namespace jvgs
                  *  @param gravity The new gravity.
                  */
                 virtual void setGravity(const math::Vector2D &gravity);
+
+                /** Ask the positioner if the entity can jump.
+                 *  @return If the entity can jump.
+                 */
+                virtual bool canJump();
         };
     }
 }

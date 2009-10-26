@@ -36,6 +36,9 @@ namespace jvgs
                 /** MathManager to perform calculations. */
                 math::MathManager *mathManager;
 
+                /** Max distance from collision if you want to jump. */
+                float jumpDistanceLimit;
+
             protected:
                 /* Override
                  */
@@ -61,6 +64,10 @@ namespace jvgs
                 /* Override
                  */
                 virtual void affect(float ms);
+
+                /* Override
+                 */
+                virtual bool canJump();
         };
     }
 }

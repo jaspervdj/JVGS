@@ -31,17 +31,22 @@ namespace jvgs
         void CollisionResponsePositioner::loadData(TiXmlElement *element)
         {
             Positioner::loadData(element);
+            element->QueryFloatAttribute("jumpdistancelimit",
+                    &jumpDistanceLimit);
         }
 
         CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity)
                 : Positioner(entity)
         {
             setGravity(Vector2D(0.0f, 0.0f));
+            jumpDistanceLimit = 100.0f;
         }
 
         CollisionResponsePositioner::CollisionResponsePositioner(Entity *entity,
                 TiXmlElement *element): Positioner(entity)
         {
+            setGravity(Vector2D(0.0f, 0.0f));
+            jumpDistanceLimit = 100.0f;
             load(element);
         }
 
@@ -131,7 +136,7 @@ namespace jvgs
             entity->setFalling(false);
             entity->setSlipping(false);
             Vector2D down = getGravity();
-            down.setLength(VERY_CLOSE * 100.0f);
+            down.setLength(VERY_CLOSE * 20.0f);
             if(collisionDetector->getClosestCollision(entity->getRadius(),
                     position, down, &time, &collision)) {
                 Vector2D fall = collision - position;
@@ -149,6 +154,20 @@ namespace jvgs
             /* Now set the entity's state. */
             entity->setPosition(position);
             entity->setVelocity(velocity);
+        }
+
+        bool CollisionResponsePositioner::canJump()
+        {
+            Entity *entity = getEntity();
+            CollisionDetector *collisionDetector =
+                    entity->getLevel()->getCollisionDetector();
+            Vector2D down = getGravity();
+            float time;
+            Vector2D collision;
+
+            down.setLength(jumpDistanceLimit);
+            return collisionDetector->getClosestCollision(entity->getRadius(),
+                    entity->getPosition(), down, &time, &collision);
         }
     }
 }

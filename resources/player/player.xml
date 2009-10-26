@@ -3,7 +3,7 @@
         collisionchecker="true">
     <controller type="defaultinputcontroller" minjumpdelay="300"
             jumpforce="250.0" />
-    <positioner type="collisionresponsepositioner">
+    <positioner type="collisionresponsepositioner" jumpdistancelimit="20">
         <gravity x="0" y="0.003" />
     </positioner>
     <radius x="20" y="40" />

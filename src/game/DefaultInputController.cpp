@@ -54,12 +54,12 @@ namespace jvgs
                 jumpDelay -= ms;
 
             /** Can start a jump. */
-            if(!entity->isFalling() &&
-                    inputManager->isKeyDown(configuration->getKey("jump")) &&
-                    jumpDelay <= 0.0f) {
-                jumpDelay = minJumpDelay;
-                if(positioner)
-                    velocity += positioner->getGravity() * -1.0f * jumpForce;
+            if(positioner) {
+                if(inputManager->isKeyDown(configuration->getKey("jump")) &&
+                        positioner->canJump() && jumpDelay <= 0.0f) {
+                    jumpDelay = minJumpDelay;
+                    velocity = positioner->getGravity() * -1.0f * jumpForce;
+                }
             }
 
             if(inputManager->isKeyDown(configuration->getKey("left")))

@@ -31,5 +31,10 @@ namespace jvgs
         {
             this->gravity = gravity;
         }
+
+        bool Positioner::canJump()
+        {
+            return true;
+        }
     }
 }
