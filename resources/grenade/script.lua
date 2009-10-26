@@ -1,6 +1,6 @@
 events.trigger{
     spawn = function(self, event)
-        self:setTimer(3000)
+        self:setTimer(1000 + 4000 * math.random())
     end,
 
     collision = function(self, event)
