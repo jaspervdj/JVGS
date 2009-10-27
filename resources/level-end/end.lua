@@ -23,6 +23,6 @@ events.trigger{
     end,
 
     timer = function(self, event)
-        common.gameOver()
+        common.nextLevel("resources/level-credits/level.xml")
     end
 }
