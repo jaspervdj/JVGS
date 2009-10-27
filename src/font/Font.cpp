@@ -60,31 +60,36 @@ namespace jvgs
 
             /* Load characters. */
             for(int i = 0; i < NUMBER_OF_CHARACTERS; i++) {
-
                 /* Get the glyph. */
                 FT_UInt index = FT_Get_Char_Index(face, i);
-                FT_Load_Glyph(face, index, FT_LOAD_DEFAULT);
-                FT_GlyphSlot glyph = face->glyph;
+                if(!FT_Load_Glyph(face, index, FT_LOAD_DEFAULT)) {
+                    FT_GlyphSlot glyph = face->glyph;
 
-                /* Create the outline. */
-                FT_Outline outline = glyph->outline;
-                Group *group = createSketchGroup(&outline);
+                    /* Create the outline. */
+                    FT_Outline outline = glyph->outline;
+                    Group *group = createSketchGroup(&outline);
 
-                /* Start rendering. */
-                listManager->beginList(base + i);
+                    /* Start rendering. */
+                    listManager->beginList(base + i);
 
-                Renderer *renderer = new SketchyRenderer();
-                group->render(renderer);
-                delete renderer;
-                delete group;
+                    Renderer *renderer = new SketchyRenderer();
+                    group->render(renderer);
+                    delete renderer;
+                    delete group;
 
-                /* Advance for next character. */
-                Vector2D advance = toVector(glyph->advance);
-                videoManager->translate(advance);
-                advances[i] = advance.getX();
+                    /* Advance for next character. */
+                    Vector2D advance = toVector(glyph->advance);
+                    videoManager->translate(advance);
+                    advances[i] = advance.getX();
 
-                /* End render. */
-                listManager->endList();
+                    /* End render. */
+                    listManager->endList();
+                /* Loading the glyph failed, but we create a dummy list anyway
+                 * so we don't get errors when rendering. */
+                } else {
+                    listManager->beginList(base + i);
+                    listManager->endList();
+                }
             }
 
             /* Clean up. */
