@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity id="girl" speed="0.25" script="resources/level-end/girl.lua"
+<entity id="girl" speed="0.28" script="resources/level-end/girl.lua"
         collisionchecker="true">
     <position x="265" y="176" />
     <controller type="simplebirdcontroller">
