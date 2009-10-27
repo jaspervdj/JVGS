@@ -55,6 +55,20 @@ local weapons = {
 events.trigger{
     spawn = function(self, event)
         self:setBool("ready", true)
+
+        -- Add some random weapons.
+        local availableWeapons = {}
+        for k in pairs(weapons) do
+            availableWeapons[#availableWeapons + 1] = k
+        end
+        for i = 1, #availableWeapons do
+            availableWeapons[#availableWeapons + 1] = "regular"
+        end
+
+        local w = jlib.randomItem(availableWeapons)
+        local sprite = jvgslua.Sprite("resources/player/" .. w .. "-sprite.xml")
+        self:setSprite(sprite)
+        self:set("weapon", w)
     end,
 
     die = function(self, event)
