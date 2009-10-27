@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<entity id="player" speed="0.4" script="resources/player/script.lua"
+<entity id="player" speed="0.8" script="resources/player/script.lua"
         collisionchecker="true">
     <controller type="defaultinputcontroller" minjumpdelay="300"
             jumpforce="250.0" />

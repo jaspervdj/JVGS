@@ -4,4 +4,9 @@
     <entity id="player" filename="resources/player/player.xml">
         <position x="200" y="50" />
     </entity>
+    <entity id="girl" filename="resources/level-end/girl.xml" />
+    <entity id="end" script="resources/level-end/end.lua">
+        <position x="13427" y="2363" />
+        <radius x="50" y="50" />
+    </entity>
 </level>

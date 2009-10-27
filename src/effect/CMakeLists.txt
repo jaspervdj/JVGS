@@ -2,6 +2,7 @@ ADD_LIBRARY(
     effect STATIC 
     ColorEffect.cpp
     EffectManager.cpp
+    FadeEffect.cpp
     InvertEffect.cpp
     Particle.cpp
     LifeEffect.cpp
