@@ -5,12 +5,12 @@ events.trigger{
         -- Player reached end, prepare for end.
         if common.isPlayer(collider) and self:getBool("girl-arrived") then
             local em = jvgslua.EffectManager_getInstance()
-            local fe = jvgslua.FadeEffect(10000)
+            local fe = jvgslua.FadeEffect(20000)
             collider:setController(nil)
             collider:setPositioner(nil)
             collider:setVelocity(jvgslua.Vector2D(0, 0))
             em:addEffect(fe)
-            self:setTimer(10000)
+            self:setTimer(20000)
             -- Hack to prevent future collisions
             self:setPosition(jvgslua.Vector2D(0, 0))
 
@@ -24,5 +24,7 @@ events.trigger{
 
     timer = function(self, event)
         common.nextLevel("resources/level-credits/level.xml")
+        local pm = jvgslua.PersistenceManager_getInstance()
+        pm:set("level", "resources/level-intro/level.xml")
     end
 }
