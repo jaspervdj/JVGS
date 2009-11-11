@@ -1,7 +1,12 @@
 events.trigger{
     collision = function(self, event)
         if common.isPlayer(event:getCollider()) then
-            common.nextLevel("resources/level-planet/level.xml")
+            effects.nextLevelAnimation(event:getCollider())
+            self:setTimer(2000)
         end
+    end,
+
+    timer = function(self, event)
+        common.nextLevel("resources/level-planet/level.xml")
     end
 }

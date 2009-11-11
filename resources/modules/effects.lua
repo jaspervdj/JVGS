@@ -54,3 +54,12 @@ function commonDie(entity)
         am:playSound(entity:get("die-sound"))
     end
 end
+
+function nextLevelAnimation(entity)
+    -- Lift him.
+    entity:setController(nil)
+    local positioner = jvgslua.NaivePositioner(entity)
+    entity:setPositioner(positioner)
+    local velocity = jvgslua.Vector2D(0, -entity:getSpeed())
+    entity:setVelocity(velocity)
+end

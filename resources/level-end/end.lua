@@ -11,8 +11,7 @@ events.trigger{
             collider:setVelocity(jvgslua.Vector2D(0, 0))
             em:addEffect(fe)
             self:setTimer(20000)
-            -- Hack to prevent future collisions
-            self:setPosition(jvgslua.Vector2D(0, 0))
+            common.dispose(self)
 
         -- Girl reached the end, wait for player.
         elseif collider:getId() == "girl" then

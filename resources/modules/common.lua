@@ -42,3 +42,7 @@ function continue()
     local lm = jvgslua.LevelManager_getInstance()
     lm:queueLevel(fileName)
 end
+
+function dispose(entity)
+    entity:setPosition(jvgslua.Vector2D(-100000, -100000)) 
+end
