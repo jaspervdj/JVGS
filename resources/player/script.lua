@@ -83,6 +83,8 @@ events.trigger{
             local weapon = self:get("weapon")
             if weapons[weapon] then weapons[weapon](self) end
             self:setBool("ready", false)
+            local sprite = jvgslua.Sprite("resources/player/regular-sprite.xml")
+            self:setSprite(sprite)
         end
     end,
 
@@ -91,6 +93,12 @@ events.trigger{
             -- Falling sequence limit reached.
             common.gameOver()
         else
+            if self:isSet("weapon") then
+                local sprite = jvgslua.Sprite("resources/player/" ..
+                        self:get("weapon") .. "-sprite.xml")
+                self:setSprite(sprite)
+            end
+
             self:setBool("ready", true)
         end
     end,
