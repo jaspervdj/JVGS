@@ -66,6 +66,20 @@ ELSE(LUA51_FOUND)
 ENDIF(LUA51_FOUND)
 
 #######################
+# zlib
+#######################
+FIND_PACKAGE(ZLIB)
+IF(ZLIB_FOUND)
+    MESSAGE( STATUS "zlib has been found:" )
+    MESSAGE( STATUS "\tCFLAGS : ${ZLIB_INCLUDE_DIRS}" )
+    MESSAGE( STATUS "\tLDFLAGS: ${ZLIB_LIBRARIES}" )
+ELSE(ZLIB_FOUND)
+    SET( ZLIB_INCLUDE_DIRS NOTFOUND )
+    SET( ZLIB_LIBRARIES NOTFOUND )
+    MESSAGE( STATUS "zlib is required")
+ENDIF(ZLIB_FOUND)
+
+#######################
 # Freetype
 #######################
 FIND_PACKAGE(Freetype)
