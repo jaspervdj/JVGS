@@ -60,7 +60,7 @@ namespace jvgs
                         lua_tostring(luaState, -1));
         }
 
-        void ScriptManager::setArguments(int argc, const char **argv)
+        void ScriptManager::setArguments(int argc, char *argv[])
         {
             for(int i = 0; i < argc; i++)
                 arguments.push_back(string(argv[i]));

@@ -51,7 +51,7 @@ namespace jvgs
                  *  @param argc Number of parameters.
                  *  @param argv Parameters.
                  */
-                void setArguments(int argc, const char **argv);
+                void setArguments(int argc, char *argv[]);
 
                 /** Get the number of arguments given to the jvgs executable.
                  *  @return The number of arguments.
