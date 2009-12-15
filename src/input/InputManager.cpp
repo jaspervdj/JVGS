@@ -46,7 +46,11 @@ namespace jvgs
                 switch(event.type) {
                     /* Key down - alert all listeners. */
                     case SDL_KEYDOWN:
-                        tickedKeys[event.key.keysym.sym] = true;
+                        if(event.key.keysym.sym == SDLK_ESCAPE) {
+                            quitEvent = true;
+                        } else {
+                            tickedKeys[event.key.keysym.sym] = true;
+                        }
                         break;
                     case SDL_QUIT:
                         quitEvent = true;
