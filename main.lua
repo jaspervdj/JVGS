@@ -3,9 +3,18 @@ require("resources/modules/jlib")
 require("resources/modules/events")
 require("resources/modules/effects")
 
+-- Parse options and set video mode from that.
+local options = jlib.parseOptions()
 local videoManager = jvgslua.VideoManager_getInstance()
---videoManager:setVideoMode(jvgslua.Vector2D(800, 500), "jvgs")
-videoManager:setVideoMode("jvgs")
+if options.width and options.height then
+    videoManager:setVideoMode(jvgslua.Vector2D(options.width, options.height),
+            "jvgs")
+elseif options.fullscreen == "no" then
+    videoManager:setVideoMode(jvgslua.Vector2D(640, 480), "jvgs")
+else
+    videoManager:setVideoMode("jvgs")
+end
+    
 
 -- Warn when using global variables.
 setmetatable(_G, {
