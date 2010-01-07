@@ -22,7 +22,9 @@ function main()
             and persistenceManager:get("width") or nil
     local height = persistenceManager:isSet("height")
             and persistenceManager:get("height") or nil
-    if width and height then
+    local fullscreen = persistenceManager:isSet("height")
+            and persistenceManager:get("fullscreen") or nil
+    if width and height and not (fullscreen == "yes") then
         videoManager:setVideoMode(jvgslua.Vector2D(width, height), "jvgs")
     else
         videoManager:setVideoMode("jvgs")
