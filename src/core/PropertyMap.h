@@ -62,7 +62,7 @@ namespace jvgs
                  *  @param key Key to get the value for.
                  *  @return The boolean value for key.
                  */
-                virtual bool getBool(const std::string &keu);
+                virtual bool getBool(const std::string &key);
 
                 /** Set the value of a key.
                  *  @param key Key to set the value for.

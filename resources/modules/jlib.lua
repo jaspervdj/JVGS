@@ -11,9 +11,12 @@ function map(list, f)
 end
 
 -- Parses command line options into a table. For example, {"--width", "600"}
--- would result into a {["width"] = "600"} table.
+-- would result into a {["width"] = "600"} table. The result is then stored in
+-- the PersistenceManager.
 function parseOptions()
     local scriptManager = jvgslua.ScriptManager_getInstance()
+    local persistenceManager = jvgslua.PersistenceManager_getInstance()
+
     local i = 0
     local options = {}
     while i + 1 < scriptManager:getNumberOfArguments() do
@@ -27,5 +30,8 @@ function parseOptions()
             i = i + 1
         end
     end
-    return options
+
+    for key, value in pairs(options) do
+        persistenceManager:set(key, value)
+    end
 end

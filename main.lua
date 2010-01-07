@@ -4,47 +4,56 @@ require("resources/modules/events")
 require("resources/modules/effects")
 
 -- Parse options and set video mode from that.
-local options = jlib.parseOptions()
-local videoManager = jvgslua.VideoManager_getInstance()
-if options.width and options.height then
-    videoManager:setVideoMode(jvgslua.Vector2D(options.width, options.height),
-            "jvgs")
-elseif options.fullscreen == "no" then
-    videoManager:setVideoMode(jvgslua.Vector2D(640, 480), "jvgs")
-else
-    videoManager:setVideoMode("jvgs")
-end
-    
+function main()
+    -- Get access to some managers.
+    local persistenceManager = jvgslua.PersistenceManager_getInstance()
+    local videoManager = jvgslua.VideoManager_getInstance()
+    local inputConfiguration = jvgslua.InputConfiguration_getConfiguration()
+    local fontManager = jvgslua.FontManager_getInstance()
+    local levelManager = jvgslua.LevelManager_getInstance()
 
--- Warn when using global variables.
-setmetatable(_G, {
-    __newindex = function(table, key, value)
-        print("Warning - setting global " .. key .. " to a " .. type(value))
-        rawset(table, key, value)
+    -- First load configration from file, then set values from command line
+    -- options.
+    persistenceManager:load("data.xml")
+    jlib.parseOptions()
+
+    -- Parse and set video options.
+    local width = persistenceManager:isSet("width")
+            and persistenceManager:get("width") or nil
+    local height = persistenceManager:isSet("height")
+            and persistenceManager:get("height") or nil
+    if width and height then
+        videoManager:setVideoMode(jvgslua.Vector2D(width, height), "jvgs")
+    else
+        videoManager:setVideoMode("jvgs")
     end
-})
+        
 
--- Set key configuration.
-local ic = jvgslua.InputConfiguration_getConfiguration()
-ic:setKey("jump", jvgslua.KEY_SPACE)
-ic:setKey("action", jvgslua.KEY_LCTRL)
-ic:setKey("left", jvgslua.KEY_LEFT)
-ic:setKey("right", jvgslua.KEY_RIGHT)
-ic:setKey("up", jvgslua.KEY_UP)
-ic:setKey("down", jvgslua.KEY_DOWN)
+    -- Warn when using global variables.
+    setmetatable(_G, {
+        __newindex = function(table, key, value)
+            print("Warning - setting global " .. key .. " to a " .. type(value))
+            rawset(table, key, value)
+        end
+    })
 
--- Ensure persistence.
-local pm = jvgslua.PersistenceManager_getInstance()
-pm:load("data.xml")
+    -- Set key configuration.
+    inputConfiguration:setKey("jump", jvgslua.KEY_SPACE)
+    inputConfiguration:setKey("action", jvgslua.KEY_LCTRL)
+    inputConfiguration:setKey("left", jvgslua.KEY_LEFT)
+    inputConfiguration:setKey("right", jvgslua.KEY_RIGHT)
+    inputConfiguration:setKey("up", jvgslua.KEY_UP)
+    inputConfiguration:setKey("down", jvgslua.KEY_DOWN)
 
--- Load a font
-local font = jvgslua.Font("resources/font.ttf", 36)
-local fontManager = jvgslua.FontManager_getInstance()
-fontManager:addFont("regular", font)
+    -- Load a font
+    local font = jvgslua.Font("resources/font.ttf", 36)
+    fontManager:addFont("regular", font)
 
-local levelManager = jvgslua.LevelManager_getInstance()
-levelManager:queueLevel("resources/level-main-menu/main-menu.xml")
+    levelManager:queueLevel("resources/level-main-menu/main-menu.xml")
+    levelManager:run()
 
-levelManager:run()
+    -- Make sure everything is saved.
+    persistenceManager:write("data.xml")
+end
 
-pm:write("data.xml")
+main()
