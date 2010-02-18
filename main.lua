@@ -14,7 +14,8 @@ function main()
 
     -- First load configration from file, then set values from command line
     -- options.
-    persistenceManager:load("data.xml")
+    local saveFile = (os.getenv("HOME") or ".") .. "/.jvgs.xml"
+    persistenceManager:load(saveFile)
     jlib.parseOptions()
 
     -- Parse and set video options.
@@ -30,7 +31,6 @@ function main()
         videoManager:setVideoMode("jvgs")
     end
         
-
     -- Warn when using global variables.
     setmetatable(_G, {
         __newindex = function(table, key, value)
@@ -55,7 +55,7 @@ function main()
     levelManager:run()
 
     -- Make sure everything is saved.
-    persistenceManager:write("data.xml")
+    persistenceManager:write(saveFile)
 end
 
 main()
