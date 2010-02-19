@@ -2,6 +2,7 @@
 #include "PathComponent.h"
 #include "Path.h"
 #include "PathDataParser.h"
+#include "LPathCommandParser.h"
 
 #include "../math/Vector2D.h"
 using namespace jvgs::math;
@@ -35,8 +36,21 @@ namespace jvgs
             path->addComponent(component);
             dataParser->setCurrentComponent(component);
 
-            /* TODO: other arguments should be treated as implicit
-             * L commands. */
+            /* Other arguments should be treated as implicit L commands. */
+            LPathCommandParser *lCommandParser = new LPathCommandParser();
+
+            for(vector<float>::size_type i = 2; i < arguments.size(); i += 2) {
+                vector<float> lArguments;
+                lArguments.push_back(arguments[i]);
+                lArguments.push_back(arguments[i + 1]);
+
+                char lCommand = dataParser->isRelativeCommand(command) ?
+                        'l' : 'L';
+
+                lCommandParser->parse(path, lCommand, dataParser, lArguments);
+            }
+
+            delete lCommandParser;
         }
     }
 }
