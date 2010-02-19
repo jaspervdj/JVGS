@@ -5,6 +5,7 @@
 3. Dependencies
 4. Compiling
 5. Running
+6. License
 
 # 2. Notes
 
@@ -43,3 +44,7 @@ JVGS will remember the most recent video mode. To put it in fullscreen mode
 again, use:
 
     ./src/jvgs main.lua --fullscreen yes
+
+# 6. License
+
+JVGS is released under the [WTFPL](http://sam.zoy.org/wtfpl/).
