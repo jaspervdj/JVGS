@@ -17,7 +17,10 @@ namespace jvgs
             /* Initialize bounding box. */
             Vector2D topLeft, bottomRight;
             vector<BoundedObject*>::iterator iterator = objects->begin();
-            if(objects->begin() != objects->end()) {
+            while(iterator != objects->end() && !(*iterator)->getBoundingBox())
+                iterator++;
+
+            if(iterator != objects->end()) {
 
                 topLeft = (*iterator)->getBoundingBox()->getTopLeft();
                 bottomRight = (*iterator)->getBoundingBox()->getBottomRight();
