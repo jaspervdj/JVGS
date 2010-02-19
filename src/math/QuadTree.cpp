@@ -24,26 +24,30 @@ namespace jvgs
                 
                 /* Expand bounding box. */
                 for(iterator++; iterator != objects->end(); iterator++) {
-                    BoundingBox *boundingBox = (*iterator)->getBoundingBox();
+                    BoundingBox *bb = (*iterator)->getBoundingBox();
 
-                    if(boundingBox->getTopLeft().getX() < topLeft.getX())
-                        topLeft.setX(boundingBox->getTopLeft().getX());
-                    if(boundingBox->getBottomRight().getX() >
-                            bottomRight.getX())
-                        bottomRight.setX(boundingBox->getBottomRight().getX());
+                    /* Note that our bounding box could be 0, when we are
+                     * dealing with a very small object. */
+                    if(bb) {
+                        if(bb->getTopLeft().getX() < topLeft.getX())
+                            topLeft.setX(bb->getTopLeft().getX());
+                        if(bb->getBottomRight().getX() > bottomRight.getX())
+                            bottomRight.setX(bb->getBottomRight().getX());
 
-                    if(boundingBox->getTopLeft().getY() < topLeft.getY())
-                        topLeft.setY(boundingBox->getTopLeft().getY());
-                    if(boundingBox->getBottomRight().getY() >
-                            bottomRight.getY())
-                        bottomRight.setY(boundingBox->getBottomRight().getY());
+                        if(bb->getTopLeft().getY() < topLeft.getY())
+                            topLeft.setY(bb->getTopLeft().getY());
+                        if(bb->getBottomRight().getY() > bottomRight.getY())
+                            bottomRight.setY(bb->getBottomRight().getY());
+                    }
                 }
 
                 root = new QuadTreeNode(this, 
                         new BoundingBox(topLeft, bottomRight));
                 for(iterator = objects->begin(); iterator != objects->end();
                         iterator++) {
-                    root->addObject(*iterator);
+                    /* Only add objects with an actual bounding box. */
+                    if((*iterator)->getBoundingBox())
+                        root->addObject(*iterator);
                 }
 
             /* No objects. */
