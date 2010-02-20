@@ -68,12 +68,14 @@ namespace jvgs
                 float ms = (float)(ticks - lastUpdate);
                 lastUpdate = ticks;
 
+                /* Cap FPS by sleeping a little. */
+                if(ms <= 1.0f) timeManager->sleep(1);
+
                 /* Update the input state. */
                 inputManager->update(ms);
 
                 /* Update the level. */
-                if(level && ms > 0.0f)
-                    level->update(timeFactor * ms);
+                if(level && ms > 0.0f) level->update(timeFactor * ms);
 
                 /* Update other things. */
                 effectManager->update(timeFactor * ms);
@@ -86,8 +88,7 @@ namespace jvgs
                 /* Render the level first, this will also apply our camera
                  * transformation, which is good, since the effect manager
                  * wants the same transformation. */
-                if(level)
-                    level->render();
+                if(level) level->render();
                 effectManager->render();
                 fps.render();
 
