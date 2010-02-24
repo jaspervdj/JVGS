@@ -22,6 +22,11 @@ release.
 - FreeType (recent version)
 - Swig (recent version)
 
+On [Ubuntu](http://www.ubuntu.com/), these dependencies can be installed using
+the command
+
+    sudo apt-get install build-essential cmake swig libfreetype6-dev zlib1g-dev liblua5.1-0-dev libsdl-mixer1.2-dev libsdl1.2-dev
+
 # 4. Compiling
 
 cd into the jvgs folder, and then:
