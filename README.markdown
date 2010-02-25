@@ -21,6 +21,7 @@ release.
 - SDL_mixer (>= 1.2)
 - FreeType (recent version)
 - Swig (recent version)
+- Lua (>= 5.1)
 
 On [Ubuntu](http://www.ubuntu.com/), these dependencies can be installed using
 the command
