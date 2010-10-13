@@ -59,8 +59,6 @@ namespace jvgs
             SketchManager *sketchManager = SketchManager::getInstance();
 
             FPSLogger fps;
- 
-            float freq_to_update = 1000.0f / 60.0f;
 
             long lastUpdate = timeManager->getTicks();
             while(!inputManager->hasQuitEvent()) {
@@ -68,12 +66,12 @@ namespace jvgs
                 /* Calculate the ticks that have passed. */
                 long ticks = timeManager->getTicks();
                 float ms = (float)(ticks - lastUpdate);
+                const float treshold = 1000.0f / 60.0f;
                 lastUpdate = ticks;
 
                 /* Cap FPS by sleeping a little. */
-                if(ms <= freq_to_update) {
-                    float wait = freq_to_update - ms;
-                    timeManager->sleep(wait);
+                if(ms <= treshold) {
+                    timeManager->sleep(treshold - ms);
                 }
 
                 /* Update the input state. */
