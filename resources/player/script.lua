@@ -62,7 +62,7 @@ events.trigger{
     end,
 
     action = function(self, event)
-        print(string.format("<point x=\"%.0f\" y=\"%.0f\" \/>",
+        print(string.format('<point x="%.0f" y="%.0f" />',
                 self:getPosition():getX(), self:getPosition():getY()))
 
         if self:isSet("weapon") and self:getBool("ready") then

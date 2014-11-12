@@ -20,7 +20,7 @@ namespace jvgs
         ScriptManager::ScriptManager()
         {
             /* Create a new lua state. */
-            luaState = lua_open();
+            luaState = luaL_newstate();
 
             /* Open the standard libs and our own module. */
             luaL_openlibs(luaState);
